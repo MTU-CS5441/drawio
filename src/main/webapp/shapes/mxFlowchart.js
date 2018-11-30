@@ -31,7 +31,7 @@ mxShapeFlowchartDocument2.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeFlowchartDocument2.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -41,7 +41,7 @@ mxShapeFlowchartDocument2.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dy = h * Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.style, 'size', this.size))));
 	var fy = 1.4;
 	var r = 5;
-	
+
 	c.begin();
 	c.moveTo(w - r, 0);
 	c.arcTo(r, r, 0, 0, 1, w, r);
@@ -72,6 +72,6 @@ Graph.handleFactory[mxShapeFlowchartDocument2.prototype.cst.DOCUMENT2] = functio
 	{
 		this.state.style['size'] = Math.max(0, Math.min(1, (bounds.y + bounds.height - pt.y) / bounds.height));
 	})];
-			
+
 	return handles;
 };

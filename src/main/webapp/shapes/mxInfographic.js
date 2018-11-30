@@ -31,7 +31,7 @@ mxShapeInfographicNumEntryVert.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicNumEntryVert.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -43,10 +43,10 @@ mxShapeInfographicNumEntryVert.prototype.paintVertexShape = function(c, x, y, w,
 	var inset = 5;
 
 	var d = Math.min(dy, w - 2 * inset, h - inset);
-	
+
 	c.ellipse(w * 0.5 - d * 0.5, 0, d, d);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(0, d * 0.5);
 	c.lineTo(w * 0.5 - d * 0.5 - inset, d * 0.5);
@@ -73,7 +73,7 @@ Graph.handleFactory[mxShapeInfographicNumEntryVert.prototype.cst.NUM_ENTRY_VERT]
 	{
 		this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height, bounds.width, pt.y - bounds.y))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -110,7 +110,7 @@ mxShapeInfographicBendingArch.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicBendingArch.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -124,7 +124,7 @@ mxShapeInfographicBendingArch.prototype.paintVertexShape = function(c, x, y, w, 
 	var ry = h * 0.5;
 	var rx2 = rx * arcWidth;
 	var ry2 = ry * arcWidth;
-	
+
 	var startX = rx + Math.sin(startAngle) * rx;
 	var startY = ry - Math.cos(startAngle) * ry;
 	var innerStartX = rx + Math.sin(startAngle) * rx2;
@@ -133,16 +133,16 @@ mxShapeInfographicBendingArch.prototype.paintVertexShape = function(c, x, y, w, 
 	var endY = ry - Math.cos(endAngle) * ry;
 	var innerEndX = rx + Math.sin(endAngle) * rx2;
 	var innerEndY = ry - Math.cos(endAngle) * ry2;
-	
+
 	var angDiff = endAngle - startAngle;
-	
+
 	if (angDiff < 0)
 	{
 		angDiff = angDiff + Math.PI * 2;
 	}
-		
+
 	var bigArc = 0;
-	
+
 	if (angDiff > Math.PI)
 	{
 		bigArc = 1;
@@ -153,7 +153,7 @@ mxShapeInfographicBendingArch.prototype.paintVertexShape = function(c, x, y, w, 
 
 	c.ellipse(w * 0.5 - rx3, h * 0.5 - ry3, 2 * rx3, 2 * ry3);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(startX, startY);
 	c.arcTo(rx, ry, 0, bigArc, 1, endX, endY);
@@ -178,16 +178,16 @@ Graph.handleFactory[mxShapeInfographicBendingArch.prototype.cst.BENDING_ARCH] = 
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
 
 		this.state.style['startAngle'] = res;
-		
+
 	})];
 
 	var handle2 = Graph.createHandle(state, ['endAngle'], function(bounds)
@@ -199,19 +199,19 @@ Graph.handleFactory[mxShapeInfographicBendingArch.prototype.cst.BENDING_ARCH] = 
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
-		
+
 		this.state.style['endAngle'] = res;
 	});
-	
+
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['arcWidth'], function(bounds)
 	{
 		var arcWidth = Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.state.style, 'arcWidth', this.arcWidth))));
@@ -221,9 +221,9 @@ Graph.handleFactory[mxShapeInfographicBendingArch.prototype.cst.BENDING_ARCH] = 
 	{
 		this.state.style['arcWidth'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, (pt.y - bounds.y) / (bounds.height * 0.5)))) / 100;
 	});
-			
+
 	handles.push(handle3);
-	
+
 	return handles;
 };
 
@@ -256,7 +256,7 @@ mxShapeInfographicParallelogram.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicParallelogram.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -289,7 +289,7 @@ Graph.handleFactory[mxShapeInfographicParallelogram.prototype.cst.PARALLELOGRAM]
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width / 2, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -324,7 +324,7 @@ mxShapeInfographicRibbonRolled.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicRibbonRolled.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -345,7 +345,7 @@ mxShapeInfographicRibbonRolled.prototype.paintVertexShape = function(c, x, y, w,
 	c.lineTo(0, h - dy);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setFillAlpha('0.2');
 	c.setFillColor('#000000');
@@ -359,7 +359,7 @@ mxShapeInfographicRibbonRolled.prototype.paintVertexShape = function(c, x, y, w,
 	c.lineTo(w - dx, h - dy);
 	c.close();
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(0, dy);
 	c.lineTo(dx, 0);
@@ -371,7 +371,7 @@ mxShapeInfographicRibbonRolled.prototype.paintVertexShape = function(c, x, y, w,
 	c.lineTo(0, h - dy);
 	c.close();
 	c.stroke();
-	
+
 };
 
 mxCellRenderer.registerShape(mxShapeInfographicRibbonRolled.prototype.cst.RIBBON_ROLLED, mxShapeInfographicRibbonRolled);
@@ -391,7 +391,7 @@ Graph.handleFactory[mxShapeInfographicRibbonRolled.prototype.cst.RIBBON_ROLLED] 
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width, pt.x - bounds.x))) / 100;
 		this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, pt.y - bounds.y))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -426,7 +426,7 @@ mxShapeInfographicRibbonDoubleFolded.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicRibbonDoubleFolded.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -447,7 +447,7 @@ mxShapeInfographicRibbonDoubleFolded.prototype.paintVertexShape = function(c, x,
 	c.lineTo(0, h - dy);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setFillAlpha('0.2');
 	c.setFillColor('#000000');
@@ -462,7 +462,7 @@ mxShapeInfographicRibbonDoubleFolded.prototype.paintVertexShape = function(c, x,
 	c.lineTo(w - dx, h - dy);
 	c.close();
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(0, dy);
 	c.lineTo(dx, 0);
@@ -493,7 +493,7 @@ Graph.handleFactory[mxShapeInfographicRibbonDoubleFolded.prototype.cst.RIBBON_DO
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width, pt.x - bounds.x))) / 100;
 		this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, pt.y - bounds.y))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -530,7 +530,7 @@ mxShapeInfographicRibbonFrontFolded.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicRibbonFrontFolded.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -551,7 +551,7 @@ mxShapeInfographicRibbonFrontFolded.prototype.paintVertexShape = function(c, x, 
 	c.lineTo(0, h);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setFillAlpha('0.2');
 	c.setFillColor('#000000');
@@ -562,7 +562,7 @@ mxShapeInfographicRibbonFrontFolded.prototype.paintVertexShape = function(c, x, 
 	c.lineTo(0, h);
 	c.close();
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(0, dy);
 	c.lineTo(dx, 0);
@@ -603,7 +603,7 @@ Graph.handleFactory[mxShapeInfographicRibbonFrontFolded.prototype.cst.RIBBON_FRO
 	{
 		this.state.style['notch'] = Math.round(100 * Math.max(0, Math.min(bounds.width, (bounds.width + bounds.x - pt.x)))) / 100;
 	});
-			
+
 	handles.push(handle2);
 
 	return handles;
@@ -642,7 +642,7 @@ mxShapeInfographicRibbonBackFolded.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicRibbonBackFolded.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -663,7 +663,7 @@ mxShapeInfographicRibbonBackFolded.prototype.paintVertexShape = function(c, x, y
 	c.lineTo(0, h);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setFillAlpha('0.2');
 	c.setFillColor('#000000');
@@ -673,7 +673,7 @@ mxShapeInfographicRibbonBackFolded.prototype.paintVertexShape = function(c, x, y
 	c.lineTo(dx, dy);
 	c.close();
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(0, dy);
 	c.lineTo(dx, 0);
@@ -714,9 +714,9 @@ Graph.handleFactory[mxShapeInfographicRibbonBackFolded.prototype.cst.RIBBON_BACK
 	{
 		this.state.style['notch'] = Math.round(100 * Math.max(0, Math.min(bounds.width, (bounds.width + bounds.x - pt.x)))) / 100;
 	});
-			
+
 	handles.push(handle2);
-	
+
 	return handles;
 };
 
@@ -753,7 +753,7 @@ mxShapeInfographicBanner.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicBanner.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -765,9 +765,9 @@ mxShapeInfographicBanner.prototype.paintVertexShape = function(c, x, y, w, h)
 	var notch = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'notch', this.notch))));
 
 	dx = Math.min(w / 2 - 2 * dy, dx);
-	
+
 	notch = Math.min(dx, notch);
-	
+
 	c.begin();
 	c.moveTo(0, dy);
 	c.lineTo(dx, dy);
@@ -785,7 +785,7 @@ mxShapeInfographicBanner.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(notch, (h - dy) * 0.5 + dy);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setFillAlpha('0.2');
 	c.setFillColor('#000000');
@@ -805,7 +805,7 @@ mxShapeInfographicBanner.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w - notch, (h - dy) * 0.5 + dy);
 	c.close();
 	c.fill();
-	
+
 	c.setFillAlpha('0.4');
 	c.begin();
 	c.moveTo(dx, h - dy);
@@ -836,7 +836,7 @@ Graph.handleFactory[mxShapeInfographicBanner.prototype.cst.BANNER] = function(st
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width / 2, bounds.x + bounds.width - pt.x))) / 100;
 		this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, pt.y - bounds.y))) / 100;
 	})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 	{
 		var dy = Math.max(0, Math.min(bounds.height / 2, parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy))));
@@ -848,9 +848,9 @@ Graph.handleFactory[mxShapeInfographicBanner.prototype.cst.BANNER] = function(st
 	{
 		this.state.style['notch'] = Math.round(100 * Math.max(0, Math.min(bounds.width, (bounds.width + bounds.x - pt.x)))) / 100;
 	});
-			
+
 	handles.push(handle2);
-	
+
 	return handles;
 };
 
@@ -883,7 +883,7 @@ mxShapeInfographicCircularCallout.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicCircularCallout.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -891,10 +891,10 @@ mxShapeInfographicCircularCallout.prototype.paintVertexShape = function(c, x, y,
 	c.translate(x, y);
 
 	var dy = Math.max(0, Math.min(h * 0.5, parseFloat(mxUtils.getValue(this.style, 'dy', this.dy))));
-	
+
 	var rx = Math.max(0, Math.min(w * 0.5, w * 0.5 - dy));
 	var ry = Math.max(0, Math.min(h * 0.5, h * 0.5 - dy));
-	
+
 	c.begin();
 	c.moveTo(w, h * 0.5);
 	c.arcTo(w * 0.5, h * 0.5, 0, 0, 1, w * 0.5, h);
@@ -926,7 +926,7 @@ Graph.handleFactory[mxShapeInfographicCircularCallout.prototype.cst.CIRCULAR_CAL
 	{
 		this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, pt.y - bounds.y))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -954,7 +954,7 @@ mxShapeInfographicShadedTriangle.prototype.cst = {SHADED_TRIANGLE : 'mxgraph.inf
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicShadedTriangle.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -967,19 +967,19 @@ mxShapeInfographicShadedTriangle.prototype.paintVertexShape = function(c, x, y, 
 	c.lineTo(w, h);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	c.setFillColor('#ffffff');
 	c.setFillAlpha('0.2');
-	
+
 	c.begin();
 	c.moveTo(0, h);
 	c.lineTo(w * 0.5, 0);
 	c.lineTo(w * 0.5, h * 0.67);
 	c.close();
 	c.fill();
-	
+
 	c.setFillColor('#000000');
 
 	c.begin();
@@ -988,7 +988,7 @@ mxShapeInfographicShadedTriangle.prototype.paintVertexShape = function(c, x, y, 
 	c.lineTo(w * 0.5, 0);
 	c.close();
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(0, h);
 	c.lineTo(w * 0.5, 0);
@@ -1025,7 +1025,7 @@ mxShapeInfographicShadedPyramid.prototype.cst = {SHADED_PYRAMID : 'mxgraph.infog
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicShadedPyramid.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1040,19 +1040,19 @@ mxShapeInfographicShadedPyramid.prototype.paintVertexShape = function(c, x, y, w
 	c.lineTo(w * 0.5, h);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	c.setFillColor('#ffffff');
 	c.setFillAlpha('0.2');
-	
+
 	c.begin();
 	c.moveTo(0, h1);
 	c.lineTo(w * 0.5, 0);
 	c.lineTo(w * 0.5, h);
 	c.close();
 	c.fill();
-	
+
 	c.setFillColor('#000000');
 
 	c.begin();
@@ -1061,7 +1061,7 @@ mxShapeInfographicShadedPyramid.prototype.paintVertexShape = function(c, x, y, w
 	c.lineTo(w * 0.5, 0);
 	c.close();
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(0, h1);
 	c.lineTo(w * 0.5, 0);
@@ -1099,7 +1099,7 @@ mxShapeInfographicPyramidStep.prototype.cst = {PYRAMID_STEP : 'mxgraph.infograph
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicPyramidStep.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1115,12 +1115,12 @@ mxShapeInfographicPyramidStep.prototype.paintVertexShape = function(c, x, y, w, 
 	c.lineTo(0, h);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	c.setFillColor('#ffffff');
 	c.setFillAlpha('0.2');
-	
+
 	c.begin();
 	c.moveTo(0, h1);
 	c.lineTo(w * 0.5, 0);
@@ -1128,7 +1128,7 @@ mxShapeInfographicPyramidStep.prototype.paintVertexShape = function(c, x, y, w, 
 	c.lineTo(0, h);
 	c.close();
 	c.fill();
-	
+
 	c.setFillColor('#000000');
 
 	c.begin();
@@ -1138,7 +1138,7 @@ mxShapeInfographicPyramidStep.prototype.paintVertexShape = function(c, x, y, w, 
 	c.lineTo(w * 0.5, 0);
 	c.close();
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(0, h1);
 	c.lineTo(w * 0.5, 0);
@@ -1177,17 +1177,17 @@ mxShapeInfographicCylinder.prototype.cst = {CYLINDER : 'mxgraph.infographic.cyli
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicCylinder.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	var dy = 20;
 	var rx = w * 0.5;
 	var ry = dy * 0.5;
-	
+
 	c.begin();
 	c.moveTo(0, dy * 0.5);
 	c.arcTo(rx, ry, 0, 0, 1, w, ry);
@@ -1195,10 +1195,10 @@ mxShapeInfographicCylinder.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.arcTo(rx, ry, 0, 0, 1, 0, h - ry);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setGradient('#000000', '#ffffff', 0, 0, w, h, mxConstants.DIRECTION_EAST, 0.4, 0.4);
-	
+
 	c.begin();
 	c.moveTo(0, dy * 0.5);
 	c.arcTo(rx, ry, 0, 0, 0, w, ry);
@@ -1245,7 +1245,7 @@ mxShapeInfographicCircularCallout2.prototype.cst = {CIRCULAR_CALLOUT_2 : 'mxgrap
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicCircularCallout2.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1268,7 +1268,7 @@ mxShapeInfographicCircularCallout2.prototype.paintVertexShape = function(c, x, y
 	c.arcTo(rx * 0.23, rx * 0.23, 0, 0, 0, w * 0.5 + 2, 2.15 * rx);
 
 	var rxMin = Math.max(rx * 0.1, 6);
-	
+
 	if (rx * 0.04 > 4)
 	{
 		c.lineTo(w * 0.5 + 2, h - rx * 0.22);
@@ -1278,7 +1278,7 @@ mxShapeInfographicCircularCallout2.prototype.paintVertexShape = function(c, x, y
 	{
 		c.lineTo(w * 0.5 + 2, h - 2 * rxMin);
 	}
-	
+
 	c.arcTo(rxMin, rxMin, 0, 0, 1, w * 0.5 + rxMin, h - rxMin);
 	c.arcTo(rxMin, rxMin, 0, 0, 1, w * 0.5, h);
 	c.arcTo(rxMin, rxMin, 0, 0, 1, w * 0.5 - rxMin, h - rxMin);
@@ -1292,7 +1292,7 @@ mxShapeInfographicCircularCallout2.prototype.paintVertexShape = function(c, x, y
 	{
 		c.arcTo(rxMin, rxMin, 0, 0, 1, w * 0.5 - 2, h - 2 * rxMin);
 	}
-	
+
 	c.close();
 	c.moveTo(w * 0.5, rx * 0.2);
 	c.arcTo(rx * 0.8, rx * 0.8, 0, 0, 0, w * 0.5 - rx * 0.8, rx * 0.8);
@@ -1307,10 +1307,10 @@ mxShapeInfographicCircularCallout2.prototype.paintVertexShape = function(c, x, y
 	c.arcTo(rxMin * 0.75, rxMin * 0.75, 0, 0, 0, w * 0.5, h - rxMin * 1.75);
 	c.close();
 	c.fill();
-	
+
 	c.setFillColor(fillColor);
 	c.setShadow(false);
-	
+
 	c.begin();
 	c.moveTo(w * 0.5, rx * 0.2);
 	c.arcTo(rx * 0.8, rx * 0.8, 0, 0, 0, w * 0.5 - rx * 0.8, rx * 0.8);
@@ -1365,7 +1365,7 @@ mxShapeInfographicBannerSingleFold.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicBannerSingleFold.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1381,7 +1381,7 @@ mxShapeInfographicBannerSingleFold.prototype.paintVertexShape = function(c, x, y
 	var dx2 = Math.max(0, Math.min(w - dx - 2 * dy, parseFloat(mxUtils.getValue(this.style, 'dx2', this.dx2))));
 
 	notch = Math.min(dx, notch);
-	
+
 	c.begin();
 	c.moveTo(dx2, 0);
 	c.lineTo(w - dx, 0);
@@ -1395,7 +1395,7 @@ mxShapeInfographicBannerSingleFold.prototype.paintVertexShape = function(c, x, y
 	c.lineTo(0, (h - dy) * 0.5);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setFillAlpha('0.05');
 	c.setFillColor('#000000');
@@ -1408,7 +1408,7 @@ mxShapeInfographicBannerSingleFold.prototype.paintVertexShape = function(c, x, y
 	c.lineTo(w - notch, (h - dy) * 0.5 + dy);
 	c.close();
 	c.fill();
-	
+
 	c.setFillAlpha('0.4');
 	c.begin();
 	c.moveTo(w - dx, h - dy);
@@ -1416,7 +1416,7 @@ mxShapeInfographicBannerSingleFold.prototype.paintVertexShape = function(c, x, y
 	c.lineTo(w - dx - 2 * dy, h);
 	c.close();
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(dx2, 0);
 	c.lineTo(w - dx, 0);
@@ -1449,7 +1449,7 @@ Graph.handleFactory[mxShapeInfographicBannerSingleFold.prototype.cst.BANNER_SING
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width, bounds.x + bounds.width - pt.x))) / 100;
 		this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, pt.y - bounds.y))) / 100;
 	})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 	{
 		var dy = Math.max(0, Math.min(bounds.height / 2, parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy))));
@@ -1461,7 +1461,7 @@ Graph.handleFactory[mxShapeInfographicBannerSingleFold.prototype.cst.BANNER_SING
 	{
 		this.state.style['notch'] = Math.round(100 * Math.max(0, Math.min(bounds.width, (bounds.width + bounds.x - pt.x)))) / 100;
 	});
-			
+
 	handles.push(handle2);
 
 	var handle3 = Graph.createHandle(state, ['dx2'], function(bounds)
@@ -1475,12 +1475,12 @@ Graph.handleFactory[mxShapeInfographicBannerSingleFold.prototype.cst.BANNER_SING
 	{
 		var dx = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
 		var dy = Math.max(0, Math.min(bounds.height, parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy))));
-		
+
 		this.state.style['dx2'] = Math.round(100 * Math.max(0, Math.min(bounds.width - dx - 2 * dy, pt.x - bounds.x))) / 100;
 	});
-			
+
 	handles.push(handle3);
-	
+
 
 	return handles;
 };
@@ -1514,7 +1514,7 @@ mxShapeBasicShadedCube.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicShadedCube.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1523,7 +1523,7 @@ mxShapeBasicShadedCube.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	var isoAngle = Math.max(0.01, Math.min(94, parseFloat(mxUtils.getValue(this.style, 'isoAngle', this.isoAngle)))) * Math.PI / 200 ;
 	var isoH = Math.min(w * Math.tan(isoAngle), h * 0.5);
-	
+
 	c.begin();
 	c.moveTo(w * 0.5, 0);
 	c.lineTo(w, isoH);
@@ -1537,7 +1537,7 @@ mxShapeBasicShadedCube.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.setShadow(false);
 	c.setFillAlpha('0.2');
 	c.setFillColor('#000000');
-	
+
 	c.begin();
 	c.moveTo(w * 0.5, 2 * isoH);
 	c.lineTo(w, isoH);
@@ -1572,7 +1572,7 @@ Graph.handleFactory[mxShapeBasicShadedCube.prototype.cst.SHADED_CUBE] = function
 	{
 		this.state.style['isoAngle'] = Math.round(100 * Math.max(0, Math.min(100, pt.y - bounds.y))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1609,7 +1609,7 @@ mxShapeBasicPartConcEllipse.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicPartConcEllipse.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1623,9 +1623,9 @@ mxShapeBasicPartConcEllipse.prototype.paintVertexShape = function(c, x, y, w, h)
 	var ry = h * 0.5;
 	var rx2 = rx * arcWidth;
 	var ry2 = ry * arcWidth;
-	
+
 	var angDiff = endAngle - startAngle;
-	
+
 	if (angDiff < 0)
 	{
 		angDiff = angDiff + Math.PI * 2;
@@ -1634,7 +1634,7 @@ mxShapeBasicPartConcEllipse.prototype.paintVertexShape = function(c, x, y, w, h)
 	{
 		endAngle = endAngle + 0.00001;
 	}
-		
+
 	var startX = rx + Math.sin(startAngle) * rx;
 	var startY = ry - Math.cos(startAngle) * ry;
 	var innerStartX = rx + Math.sin(startAngle) * rx2;
@@ -1643,14 +1643,14 @@ mxShapeBasicPartConcEllipse.prototype.paintVertexShape = function(c, x, y, w, h)
 	var endY = ry - Math.cos(endAngle) * ry;
 	var innerEndX = rx + Math.sin(endAngle) * rx2;
 	var innerEndY = ry - Math.cos(endAngle) * ry2;
-	
+
 	var bigArc = 0;
-	
+
 	if (angDiff <= Math.PI)
 	{
 		bigArc = 1;
 	}
-		
+
 	c.begin();
 	c.moveTo(rx, 0);
 	c.arcTo(rx, ry, 0, 0, 1, w, ry);
@@ -1665,11 +1665,11 @@ mxShapeBasicPartConcEllipse.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.arcTo(rx2, ry2, 0, 0, 0, rx, h * 0.5 - ry2);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setFillAlpha('0.2');
 	c.setFillColor('#ffffff');
-	
+
 	c.begin();
 	c.moveTo(startX, startY);
 	c.arcTo(rx, ry, 0, bigArc, 0, endX, endY);
@@ -1677,7 +1677,7 @@ mxShapeBasicPartConcEllipse.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.arcTo(rx2, ry2, 0, bigArc, 1, innerStartX, innerStartY);
 	c.close();
 	c.fill();
-	
+
 	var rx = w * 0.5;
 	var ry = h * 0.5;
 	var rx2 = rx * arcWidth;
@@ -1687,7 +1687,7 @@ mxShapeBasicPartConcEllipse.prototype.paintVertexShape = function(c, x, y, w, h)
 	var ry3 = ry2 + (ry - ry2) * 0.25;
 
 	c.setFillColor('#000000');
-	
+
 	c.begin();
 	c.moveTo(rx, h * 0.5 - ry2);
 	c.arcTo(rx2, ry2, 0, 0, 1, w * 0.5 + rx2, ry);
@@ -1719,16 +1719,16 @@ Graph.handleFactory[mxShapeBasicPartConcEllipse.prototype.cst.PART_CONC_ELLIPSE]
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
 
 		this.state.style['startAngle'] = res;
-		
+
 	})];
 
 	var handle2 = Graph.createHandle(state, ['endAngle'], function(bounds)
@@ -1740,19 +1740,19 @@ Graph.handleFactory[mxShapeBasicPartConcEllipse.prototype.cst.PART_CONC_ELLIPSE]
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
-		
+
 		this.state.style['endAngle'] = res;
 	});
-	
+
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['arcWidth'], function(bounds)
 	{
 		var arcWidth = Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.state.style, 'arcWidth', this.arcWidth))));
@@ -1762,9 +1762,9 @@ Graph.handleFactory[mxShapeBasicPartConcEllipse.prototype.cst.PART_CONC_ELLIPSE]
 	{
 		this.state.style['arcWidth'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, (pt.y - bounds.y) / (bounds.height * 0.5)))) / 100;
 	});
-			
+
 	handles.push(handle3);
-	
+
 	return handles;
 };
 
@@ -1801,7 +1801,7 @@ mxShapeInfographicBannerHalfFold.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicBannerHalfFold.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1824,7 +1824,7 @@ mxShapeInfographicBannerHalfFold.prototype.paintVertexShape = function(c, x, y, 
 	c.lineTo(0, dx * 0.5);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setFillAlpha('0.2');
 	c.setFillColor('#000000');
@@ -1838,7 +1838,7 @@ mxShapeInfographicBannerHalfFold.prototype.paintVertexShape = function(c, x, y, 
 	c.lineTo(0, dx);
 	c.close();
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(dx2, 0);
 	c.lineTo(w - dx, 0);
@@ -1868,7 +1868,7 @@ Graph.handleFactory[mxShapeInfographicBannerHalfFold.prototype.cst.BANNER_HALF_F
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width, bounds.x + bounds.width - pt.x))) / 100;
 	})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 	{
 		var dx = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
@@ -1879,9 +1879,9 @@ Graph.handleFactory[mxShapeInfographicBannerHalfFold.prototype.cst.BANNER_HALF_F
 	{
 		this.state.style['notch'] = Math.round(100 * Math.max(0, Math.min(bounds.height, (bounds.height + bounds.y - pt.y)))) / 100;
 	});
-			
+
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['dx2'], function(bounds)
 	{
 		var dx = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
@@ -1891,12 +1891,12 @@ Graph.handleFactory[mxShapeInfographicBannerHalfFold.prototype.cst.BANNER_HALF_F
 	}, function(bounds, pt)
 	{
 		var dx = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
-		
+
 		this.state.style['dx2'] = Math.round(100 * Math.max(0, Math.min(bounds.width - dx, pt.x - bounds.x))) / 100;
 	});
-			
+
 	handles.push(handle3);
-	
+
 	return handles;
 };
 
@@ -1929,7 +1929,7 @@ mxShapeInfographicCircularDial.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicCircularDial.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1937,10 +1937,10 @@ mxShapeInfographicCircularDial.prototype.paintVertexShape = function(c, x, y, w,
 	c.translate(x, y);
 
 	var dy = Math.max(0, Math.min(h * 0.5 - 10, w * 0.5, parseFloat(mxUtils.getValue(this.style, 'dy', this.dy))));
-	
+
 	var rx = Math.max(0, Math.min(w * 0.5, h * 0.5 - 10));
 	var rx2 = rx - dy;
-	
+
 	c.begin();
 	c.moveTo(w * 0.5 - rx, h);
 	c.lineTo(w * 0.5 - rx, rx);
@@ -1955,7 +1955,7 @@ mxShapeInfographicCircularDial.prototype.paintVertexShape = function(c, x, y, w,
 	c.arcTo(rx2, rx2, 0, 0, 0, w * 0.5, dy);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setFillAlpha('0.2');
 	c.setFillColor('#000000');
@@ -1984,7 +1984,7 @@ Graph.handleFactory[mxShapeInfographicCircularDial.prototype.cst.CIRCULAR_DIAL] 
 	{
 		this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, pt.y - bounds.y))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -2019,7 +2019,7 @@ mxShapeInfographicRibbonSimple.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicRibbonSimple.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2065,7 +2065,7 @@ Graph.handleFactory[mxShapeInfographicRibbonSimple.prototype.cst.RIBBON_SIMPLE] 
 	{
 		this.state.style['notch2'] = Math.round(100 * Math.max(0, Math.min(bounds.width, (bounds.width + bounds.x - pt.x)))) / 100;
 	});
-			
+
 	handles.push(handle2);
 
 	return handles;
@@ -2102,7 +2102,7 @@ mxShapeInfographicBarCallout.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicBarCallout.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2114,7 +2114,7 @@ mxShapeInfographicBarCallout.prototype.paintVertexShape = function(c, x, y, w, h
 
 	var x1 = Math.max(dx - dy * 0.35, 0);
 	var x2 = Math.min(dx + dy * 0.35, w);
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w, 0);
@@ -2144,7 +2144,7 @@ Graph.handleFactory[mxShapeInfographicBarCallout.prototype.cst.BAR_CALLOUT] = fu
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width, pt.x - bounds.x))) / 100;
 		this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height, bounds.y + bounds.height - pt.y))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -2179,7 +2179,7 @@ mxShapeInfographicFlag.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeInfographicFlag.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2198,7 +2198,7 @@ mxShapeInfographicFlag.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(0, h - dy);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setFillAlpha('0.2');
 	c.setFillColor('#ffffff');
@@ -2229,7 +2229,7 @@ Graph.handleFactory[mxShapeInfographicFlag.prototype.cst.FLAG] = function(state)
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width, pt.x - bounds.x))) / 100;
 		this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height, bounds.y + bounds.height - pt.y))) / 100;
 	})];
-			
+
 	return handles;
 };
 

@@ -29,7 +29,7 @@ mxShapeElectricalTestPoint.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeElectricalTestPoint.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -37,13 +37,13 @@ mxShapeElectricalTestPoint.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.translate(x, y);
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 
-	var size = Math.min(w, h); 
-	
+	var size = Math.min(w, h);
+
 	c.setFillColor(strokeColor);
 	c.begin();
 	c.ellipse(w * 0.5 - size / 2, 0, size, size);
 	c.fillAndStroke();
-	
+
 	if (h > w)
 	{
 		c.begin();
@@ -88,17 +88,17 @@ mxShapeElectricalStraightBus.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeElectricalStraightBus.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
 
-	var size = Math.min(w, h); 
+	var size = Math.min(w, h);
 	var x1 = w * 0.2;
 	var y1 = 0;
-	
+
 	if (w > h)
 	{
 		y1 = h * 0.5;
@@ -107,7 +107,7 @@ mxShapeElectricalStraightBus.prototype.paintVertexShape = function(c, x, y, w, h
 	{
 		y1 = w / 2;
 	}
-	
+
 	c.begin();
 	c.moveTo(w - x1, 0);
 	c.lineTo(w - x1, h - y1);
@@ -157,7 +157,7 @@ mxShapeElectricalTwoLineBusElbow.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeElectricalTwoLineBusElbow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -171,10 +171,10 @@ mxShapeElectricalTwoLineBusElbow.prototype.paintVertexShape = function(c, x, y, 
 	c.lineTo(w, h);
 	c.lineTo(w, 0);
 	c.stroke();
-	
+
 	var wn = Math.min(w, notch);
 	var hn = Math.min(h, notch);
-	
+
 	c.begin();
 	c.moveTo(0, h - hn);
 	c.lineTo(w - wn, h - hn);
@@ -197,7 +197,7 @@ Graph.handleFactory[mxShapeElectricalTwoLineBusElbow.prototype.cst.SHAPE_TWO_LIN
 	{
 		this.state.style['notch'] = Math.round(0.2 * Math.max(0, bounds.width - pt.y + bounds.y)) / 0.2;
 	})];
-			
+
 	return handles;
 
 }
@@ -233,7 +233,7 @@ mxShapeElectricalThreeLineBusElbow.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeElectricalThreeLineBusElbow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -247,16 +247,16 @@ mxShapeElectricalThreeLineBusElbow.prototype.paintVertexShape = function(c, x, y
 	c.lineTo(w, h);
 	c.lineTo(w, 0);
 	c.stroke();
-	
+
 	var wn = Math.min(w, notch);
 	var hn = Math.min(h, notch);
-	
+
 	c.begin();
 	c.moveTo(0, h - hn);
 	c.lineTo(w - wn, h - hn);
 	c.lineTo(w - wn, 0);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h - hn / 2);
 	c.lineTo(w - wn / 2, h - hn / 2);
@@ -279,7 +279,7 @@ Graph.handleFactory[mxShapeElectricalThreeLineBusElbow.prototype.cst.SHAPE_THREE
 	{
 		this.state.style['notch'] = Math.round(0.2 * Math.max(0, bounds.width - pt.y + bounds.y)) / 0.2;
 	})];
-			
+
 	return handles;
 
 }
@@ -315,7 +315,7 @@ mxShapeElectricalFourLineBusElbow.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeElectricalFourLineBusElbow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -329,22 +329,22 @@ mxShapeElectricalFourLineBusElbow.prototype.paintVertexShape = function(c, x, y,
 	c.lineTo(w, h);
 	c.lineTo(w, 0);
 	c.stroke();
-	
+
 	var wn = Math.min(w, notch);
 	var hn = Math.min(h, notch);
-	
+
 	c.begin();
 	c.moveTo(0, h - hn);
 	c.lineTo(w - wn, h - hn);
 	c.lineTo(w - wn, 0);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h - hn / 3);
 	c.lineTo(w - wn / 3, h - hn / 3);
 	c.lineTo(w - wn / 3, 0);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h - hn * 2 / 3);
 	c.lineTo(w - wn * 2 / 3, h - hn * 2 / 3);
@@ -367,7 +367,7 @@ Graph.handleFactory[mxShapeElectricalFourLineBusElbow.prototype.cst.SHAPE_FOUR_L
 	{
 		this.state.style['notch'] = Math.round(0.2 * Math.max(0, bounds.width - pt.y + bounds.y)) / 0.2;
 	})];
-			
+
 	return handles;
 }
 
@@ -402,7 +402,7 @@ mxShapeElectricalEightLineBusElbow.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeElectricalEightLineBusElbow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -416,52 +416,52 @@ mxShapeElectricalEightLineBusElbow.prototype.paintVertexShape = function(c, x, y
 	c.lineTo(w, h);
 	c.lineTo(w, 0);
 	c.stroke();
-	
+
 	var wn = Math.min(w, notch);
 	var hn = Math.min(h, notch);
-	
+
 	c.begin();
 	c.moveTo(0, h - hn);
 	c.lineTo(w - wn, h - hn);
 	c.lineTo(w - wn, 0);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h - hn / 7);
 	c.lineTo(w - wn / 7, h - hn / 7);
 	c.lineTo(w - wn / 7, 0);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h - hn * 2 / 7);
 	c.lineTo(w - wn * 2 / 7, h - hn * 2 / 7);
 	c.lineTo(w - wn * 2 / 7, 0);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h - hn * 3 / 7);
 	c.lineTo(w - wn * 3 / 7, h - hn * 3 / 7);
 	c.lineTo(w - wn * 3 / 7, 0);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h - hn * 4 / 7);
 	c.lineTo(w - wn * 4 / 7, h - hn * 4 / 7);
 	c.lineTo(w - wn * 4 / 7, 0);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h - hn * 5 / 7);
 	c.lineTo(w - wn * 5 / 7, h - hn * 5 / 7);
 	c.lineTo(w - wn * 5 / 7, 0);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h - hn * 6 / 7);
 	c.lineTo(w - wn * 6 / 7, h - hn * 6 / 7);
 	c.lineTo(w - wn * 6 / 7, 0);
 	c.stroke();
-	
+
 };
 
 mxCellRenderer.registerShape(mxShapeElectricalEightLineBusElbow.prototype.cst.SHAPE_EIGHT_LINE_BUS_ELBOW, mxShapeElectricalEightLineBusElbow);
@@ -479,7 +479,7 @@ Graph.handleFactory[mxShapeElectricalEightLineBusElbow.prototype.cst.SHAPE_EIGHT
 	{
 		this.state.style['notch'] = Math.round(0.2 * Math.max(0, bounds.width - pt.y + bounds.y)) / 0.2;
 	})];
-			
+
 	return handles;
 }
 

@@ -34,7 +34,7 @@ mxShapeBootstrapRRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapRRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -79,7 +79,7 @@ mxShapeBootstrapTopButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapTopButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -132,7 +132,7 @@ mxShapeBootstrapBottomButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapBottomButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -185,7 +185,7 @@ mxShapeBootstrapRightButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapRightButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -238,7 +238,7 @@ mxShapeBootstrapLeftButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapLeftButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -288,7 +288,7 @@ mxShapeBootstrapLeftButtonStriped.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapLeftButtonStriped.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -306,7 +306,7 @@ mxShapeBootstrapLeftButtonStriped.prototype.paintVertexShape = function(c, x, y,
 	c.close();
 	c.fill();
 
-	
+
 	var fillColor = '#ffffff';
 	c.setAlpha('0.2');
 	var stripeW = h * 0.5;
@@ -319,15 +319,15 @@ mxShapeBootstrapLeftButtonStriped.prototype.paintVertexShape = function(c, x, y,
 	c.lineTo(h * 0.25, h);
 	c.close();
 	c.fill();
-	
+
 	var end = false;
 	var startX = stripeW * 0.5;
-	
+
 	while (!end)
 	{
 		c.begin();
 		c.moveTo(startX, 0);
-		
+
 		if (startX + stripeW >= w)
 		{
 			c.lineTo(w, 0);
@@ -336,11 +336,11 @@ mxShapeBootstrapLeftButtonStriped.prototype.paintVertexShape = function(c, x, y,
 		else
 		{
 			c.lineTo(startX + stripeW, 0);
-			
+
 			if (startX + stripeW + h > w)
 			{
 				c.lineTo(w, w - startX - stripeW);
-				
+
 				if (w - startX > h)
 				{
 					c.lineTo(w, h);
@@ -360,9 +360,9 @@ mxShapeBootstrapLeftButtonStriped.prototype.paintVertexShape = function(c, x, y,
 
 		c.close();
 		c.fill();
-		
+
 		startX = startX + 2 * stripeW;
-		
+
 		if (startX > w)
 		{
 			end = true;
@@ -400,7 +400,7 @@ mxShapeBootstrapRoundedButton.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapRoundedButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -410,7 +410,7 @@ mxShapeBootstrapRoundedButton.prototype.paintVertexShape = function(c, x, y, w, 
 	if (w > h)
 	{
 		var r = h * 0.5;
-	
+
 		c.begin();
 		c.moveTo(w - r, 0);
 		c.arcTo(r, r, 0, 0, 1, w - r, h);
@@ -422,7 +422,7 @@ mxShapeBootstrapRoundedButton.prototype.paintVertexShape = function(c, x, y, w, 
 	else
 	{
 		var r = w * 0.5;
-		
+
 		c.begin();
 		c.moveTo(0, h - r);
 		c.arcTo(r, r, 0, 0, 0, w, h - r);
@@ -463,7 +463,7 @@ mxShapeBootstrapArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -512,7 +512,7 @@ mxShapeBootstrapTabTop.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapTabTop.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -577,7 +577,7 @@ mxShapeBootstrapImage.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapImage.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -603,7 +603,7 @@ mxShapeBootstrapImage.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.translate(rsHalf, rsHalf);
 	w = Math.max(0, w - rSize);
 	h = Math.max(0, h - rSize);
-	
+
 	c.begin();
 	c.moveTo(0, rsHalf);
 	c.arcTo(rsHalf, rsHalf, 0, 0, 1, rsHalf, 0);
@@ -647,7 +647,7 @@ mxShapeBootstrapCheckbox.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapCheckbox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -656,7 +656,7 @@ mxShapeBootstrapCheckbox.prototype.paintVertexShape = function(c, x, y, w, h)
 	var rSize = 3;
 	c.roundrect(0, 0, w, h, rSize, rSize);
 	c.fillAndStroke();
-	
+
 	c.setStrokeWidth('3');
 	c.begin();
 	c.moveTo(w * 0.8, h * 0.2);
@@ -695,17 +695,17 @@ mxShapeBootstrapRadioButton.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapRadioButton.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 	c.ellipse(0, 0, w, h);
 	c.fillAndStroke();
-	
+
 	c.setFillColor(strokeColor);
 	c.ellipse(w * 0.25, h * 0.25, w * 0.5, h * 0.5);
 	c.fill();
@@ -741,7 +741,7 @@ mxShapeBootstrapHorLines.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapHorLines.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -750,7 +750,7 @@ mxShapeBootstrapHorLines.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	c.rect(0, 0, w, h);
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w, 0);
@@ -789,7 +789,7 @@ mxShapeBootstrapUserTwo.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapUserTwo.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -850,18 +850,18 @@ mxShapeBootstrapRating.prototype.cst = {
 };
 
 mxShapeBootstrapRating.prototype.customProperties = [
-	{name: 'ratingStyle', dispName: 'Rating Style', type: 'enum', 
-		enumList: [{val: 'heart', dispName: 'Heart'}, 
+	{name: 'ratingStyle', dispName: 'Rating Style', type: 'enum',
+		enumList: [{val: 'heart', dispName: 'Heart'},
 		   {val: 'star', dispName: 'Star'}]
 	},
-	{name: 'ratingScale', dispName: 'Rating Scale', type: 'int', min:1, defVal:5}, 
+	{name: 'ratingScale', dispName: 'Rating Scale', type: 'int', min:1, defVal:5},
 	{name: 'emptyFillColor', dispName: 'Inactive Color', type: 'color', defVal:'none'},
-	{name: 'grade', dispName: 'Grade', type: 'int', min:1, defVal:3} 
+	{name: 'grade', dispName: 'Grade', type: 'int', min:1, defVal:3}
 ];
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBootstrapRating.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -897,20 +897,20 @@ mxShapeBootstrapRating.prototype.paintVertexShape = function(c, x, y, w, h)
 		{
 			c.begin();
 			c.moveTo(i * h * 1.2 + h * 0.519, h * 0.947);
-			c.curveTo(i * h * 1.2 + h * 0.558, h * 0.908, 
-					  i * h * 1.2 + h * 0.778, h * 0.682, 
+			c.curveTo(i * h * 1.2 + h * 0.558, h * 0.908,
+					  i * h * 1.2 + h * 0.778, h * 0.682,
 					  i * h * 1.2 + h * 0.916, h * 0.54);
-			c.curveTo(i * h * 1.2 + h * 1.039, h * 0.414, 
-					  i * h * 1.2 + h * 1.036, h * 0.229, 
+			c.curveTo(i * h * 1.2 + h * 1.039, h * 0.414,
+					  i * h * 1.2 + h * 1.036, h * 0.229,
 					  i * h * 1.2 + h * 0.924, h * 0.115);
-			c.curveTo(i * h * 1.2 + h * 0.812, 0, 
-					  i * h * 1.2 + h * 0.631, 0, 
+			c.curveTo(i * h * 1.2 + h * 0.812, 0,
+					  i * h * 1.2 + h * 0.631, 0,
 					  i * h * 1.2 + h * 0.519, h * 0.115);
-			c.curveTo(i * h * 1.2 + h * 0.408, 0, 
-					  i * h * 1.2 + h * 0.227, 0, 
+			c.curveTo(i * h * 1.2 + h * 0.408, 0,
+					  i * h * 1.2 + h * 0.227, 0,
 					  i * h * 1.2 + h * 0.115, h * 0.115);
-			c.curveTo(i * h * 1.2 + h * 0.03, h * 0.229, 
-					  i * h * 1.2, h * 0.414, 
+			c.curveTo(i * h * 1.2 + h * 0.03, h * 0.229,
+					  i * h * 1.2, h * 0.414,
 					  i * h * 1.2 + h * 0.123, h * 0.54);
 			c.close();
 			c.fillAndStroke();
@@ -945,20 +945,20 @@ mxShapeBootstrapRating.prototype.paintVertexShape = function(c, x, y, w, h)
 		{
 			c.begin();
 			c.moveTo(i * h * 1.2 + h * 0.519, h * 0.947);
-			c.curveTo(i * h * 1.2 + h * 0.558, h * 0.908, 
-					  i * h * 1.2 + h * 0.778, h * 0.682, 
+			c.curveTo(i * h * 1.2 + h * 0.558, h * 0.908,
+					  i * h * 1.2 + h * 0.778, h * 0.682,
 					  i * h * 1.2 + h * 0.916, h * 0.54);
-			c.curveTo(i * h * 1.2 + h * 1.039, h * 0.414, 
-					  i * h * 1.2 + h * 1.036, h * 0.229, 
+			c.curveTo(i * h * 1.2 + h * 1.039, h * 0.414,
+					  i * h * 1.2 + h * 1.036, h * 0.229,
 					  i * h * 1.2 + h * 0.924, h * 0.115);
-			c.curveTo(i * h * 1.2 + h * 0.812, 0, 
-					  i * h * 1.2 + h * 0.631, 0, 
+			c.curveTo(i * h * 1.2 + h * 0.812, 0,
+					  i * h * 1.2 + h * 0.631, 0,
 					  i * h * 1.2 + h * 0.519, h * 0.115);
-			c.curveTo(i * h * 1.2 + h * 0.408, 0, 
-					  i * h * 1.2 + h * 0.227, 0, 
+			c.curveTo(i * h * 1.2 + h * 0.408, 0,
+					  i * h * 1.2 + h * 0.227, 0,
 					  i * h * 1.2 + h * 0.115, h * 0.115);
-			c.curveTo(i * h * 1.2 + h * 0.03, h * 0.229, 
-					  i * h * 1.2, h * 0.414, 
+			c.curveTo(i * h * 1.2 + h * 0.03, h * 0.229,
+					  i * h * 1.2, h * 0.414,
 					  i * h * 1.2 + h * 0.123, h * 0.54);
 			c.close();
 			c.fillAndStroke();
@@ -992,7 +992,7 @@ mxShapeBoostrapAnchor.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBoostrapAnchor.prototype.paintVertexShape = function(c, x, y, w, h)

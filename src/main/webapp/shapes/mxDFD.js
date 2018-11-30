@@ -26,14 +26,14 @@ mxShapeDFDStart.prototype.cst = {START : 'mxgraph.dfd.start'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeDFDStart.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
 	var r = Math.min(h * 0.5, w * 0.5);
-	
+
 	c.begin();
 	c.moveTo(w - r, 0);
 	c.arcTo(r, r, 0, 0, 1, w, h * 0.5);
@@ -73,23 +73,23 @@ mxShapeDFDArchive.prototype.cst = {ARCHIVE : 'mxgraph.dfd.archive'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeDFDArchive.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
 	var r = Math.min(h * 0.5, w * 0.5);
-	
+
 	c.begin();
 	c.moveTo(0,0);
 	c.lineTo(w, 0);
 	c.lineTo(w * 0.5, h);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	c.begin();
 	c.moveTo(w * 0.1, h * 0.2);
 	c.lineTo(w * 0.9, h * 0.2);
@@ -124,14 +124,14 @@ mxShapeDFDCheck2.prototype.cst = {CHECK2 : 'mxgraph.dfd.check2'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeDFDCheck2.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
 	var size = Math.min(h * 0.5, w * 0.5);
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(size, 0);
@@ -142,9 +142,9 @@ mxShapeDFDCheck2.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(0, h * 0.5);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	c.begin();
 	c.moveTo(w - size, 0);
 	c.lineTo(w - 2 * size, h * 0.5);
@@ -180,25 +180,25 @@ mxShapeDFDDataStoreID.prototype.cst = {DATA_STORE_ID : 'mxgraph.dfd.dataStoreID'
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeDFDDataStoreID.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
 	var size = Math.min(h * 0.5, w * 0.5);
-	
+
 	c.begin();
 	c.moveTo(w, h);
 	c.lineTo(0, h);
 	c.lineTo(0, 0);
 	c.lineTo(w, 0);
 	c.stroke();
-	
+
 	c.setShadow(false);
-	
+
 	var s = Math.min(30, w);
-	
+
 	c.begin();
 	c.moveTo(s, 0);
 	c.lineTo(s, h);
@@ -233,14 +233,14 @@ mxShapeDFDExternalEntity.prototype.cst = {EXTERNAL_ENTITY : 'mxgraph.dfd.externa
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeDFDExternalEntity.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
 	var size = 10;
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w - size, 0);
@@ -250,13 +250,13 @@ mxShapeDFDExternalEntity.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(0, h - size);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 
 
 	c.setFillColor('#000000');
 	c.setAlpha(0.5);
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w - size, 0);
@@ -270,7 +270,7 @@ mxShapeDFDExternalEntity.prototype.paintVertexShape = function(c, x, y, w, h)
 	var opacity = parseFloat(mxUtils.getValue(this.style, 'opacity', '100'));
 
 	c.setAlpha(opacity / 100);
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w - size, 0);
@@ -315,14 +315,14 @@ mxShapeDFDLoop.prototype.cst = {LOOP : 'mxgraph.dfd.loop'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeDFDLoop.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
 	var r = Math.min(h * 0.8, w * 0.8);
-	
+
 	c.begin();
 	c.moveTo(w - r * 0.25, 0);
 	c.arcTo(r, r, 0, 0, 1, w - r * 0.25, h);

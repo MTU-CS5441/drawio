@@ -27,7 +27,7 @@ var mxMockupC =
 		STATE_ON : 'on',
 		STATE_OFF : 'off',
 		SUB_TEXT : 'subText',
-		
+
 		SHAPE_IADD_ICON : 'mxgraph.ios.iAddIcon',
 		SHAPE_IALERT_BOX : 'mxgraph.ios.iAlertBox',
 		SHAPE_IALPHA_LIST : 'mxgraph.ios.iAlphaList',
@@ -79,7 +79,7 @@ var mxMockupC =
 		SHAPE_IURL_BAR : 'mxgraph.ios.iURLBar',
 		SHAPE_IVIDEO_CONTROLS : 'mxgraph.ios.iVideoControls',
 		SHAPE_ISCREEN_NAME_BAR: 'mxgraph.ios.iScreenNameBar',
-			
+
 		STYLE_FILLCOLOR2 : 'fillColor2',
 		STYLE_FILLCOLOR3 : 'fillColor3',
 		STYLE_TEXTCOLOR : 'textColor',
@@ -109,18 +109,18 @@ function mxShapeMockupiPhone(bounds, fill, stroke, strokewidth)
 mxUtils.extend(mxShapeMockupiPhone, mxShape);
 
 mxShapeMockupiPhone.prototype.customProperties = [
-	{name: 'bgStyle', dispName: 'Background', type: 'enum', 
-		enumList: [{val: 'bgGreen', dispName: 'Green'}, 
-			       {val: 'bgWhite', dispName: 'White'}, 
-			       {val: 'bgGray', dispName: 'Gray'}, 
-			       {val: 'bgFlat', dispName: 'Flat'}, 
-			       {val: 'bgMap', dispName: 'Map'}, 
+	{name: 'bgStyle', dispName: 'Background', type: 'enum',
+		enumList: [{val: 'bgGreen', dispName: 'Green'},
+			       {val: 'bgWhite', dispName: 'White'},
+			       {val: 'bgGray', dispName: 'Gray'},
+			       {val: 'bgFlat', dispName: 'Flat'},
+			       {val: 'bgMap', dispName: 'Map'},
 			       {val: 'bgStriped', dispName: 'Striped'}]}
 ];
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiPhone.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -670,7 +670,7 @@ mxUtils.extend(mxShapeMockupiBgFlat, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiBgFlat.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -710,7 +710,7 @@ mxUtils.extend(mxShapeMockupiBgStriped, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiBgStriped.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -777,7 +777,7 @@ mxUtils.extend(mxShapeMockupiBgMap, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiBgMap.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1182,7 +1182,7 @@ mxShapeMockupiButtonBar.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiButtonBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1398,7 +1398,7 @@ mxUtils.extend(mxShapeMockupiAppBar, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiAppBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1542,7 +1542,7 @@ mxUtils.extend(mxShapeMockupiTopBar, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiTopBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1639,7 +1639,7 @@ mxShapeMockupiTopBar2.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupiTopBar2.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1724,7 +1724,7 @@ mxUtils.extend(mxShapeMockupiTopBarLocked, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiTopBarLocked.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1820,7 +1820,7 @@ mxUtils.extend(mxShapeMockupiButton, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1876,7 +1876,7 @@ mxUtils.extend(mxShapeMockupiButtonBack, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiButtonBack.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1906,7 +1906,7 @@ mxShapeMockupiButtonBack.prototype.background = function(c, x, y, w, h)
 	c.lineTo(10, h);
 	c.lineTo(w - rSize, h);
 	c.arcTo(rSize, rSize, 0, 0, 0, w, h - rSize);
-	c.close();	
+	c.close();
 	c.fill();
 };
 
@@ -1942,7 +1942,7 @@ mxUtils.extend(mxShapeMockupiButtonForward, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiButtonForward.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1972,7 +1972,7 @@ mxShapeMockupiButtonForward.prototype.background = function(c, x, y, w, h)
 	c.lineTo(w - 10, h);
 	c.lineTo(rSize, h);
 	c.arcTo(rSize, rSize, 0, 0, 1, 0, h - rSize);
-	c.close();	
+	c.close();
 	c.fill();
 };
 
@@ -2008,7 +2008,7 @@ mxUtils.extend(mxShapeMockupiPrevNextButton, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiPrevNextButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2079,7 +2079,7 @@ mxUtils.extend(mxShapeMockupiTextInput, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiTextInput.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2131,7 +2131,7 @@ mxUtils.extend(mxShapeMockupiRadioGroup, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiRadioGroup.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2150,7 +2150,7 @@ mxShapeMockupiRadioGroup.prototype.paintVertexShape = function(c, x, y, w, h)
 	var minH = optionNum * lineH;
 	var trueH = Math.max(h, minH);
 
-	//get min width and selected option 
+	//get min width and selected option
 	for (var i = 0; i < optionNum; i++)
 	{
 		var currText = optionText[i];
@@ -2242,7 +2242,7 @@ mxUtils.extend(mxShapeMockupiCheckboxGroup, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiCheckboxGroup.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2261,7 +2261,7 @@ mxShapeMockupiCheckboxGroup.prototype.paintVertexShape = function(c, x, y, w, h)
 	var minH = optionNum * lineH;
 	var trueH = Math.max(h, minH);
 
-	//get min width and selected option 
+	//get min width and selected option
 	for (var i = 0; i < optionNum; i++)
 	{
 		var currText = optionText[i];
@@ -2357,7 +2357,7 @@ mxUtils.extend(mxShapeMockupiComboBox, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiComboBox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2439,7 +2439,7 @@ mxShapeMockupiOnOffButton.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiOnOffButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2490,7 +2490,7 @@ mxShapeMockupiOnOffButton.prototype.mainText = function(c, x, y, w, h, state)
 	var mainText = mxUtils.getValue(this.style, 'mainText', null);
 	c.setFontColor('#ffffff');
 	c.setFontSize(8.5);
-	
+
 	if (mainText != '')
 	{
 		if(state === mxMockupC.STATE_ON)
@@ -2528,7 +2528,7 @@ mxUtils.extend(mxShapeMockupiAlertBox, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiAlertBox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2615,7 +2615,7 @@ mxUtils.extend(mxShapeMockupiDialogBox, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiDialogBox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2706,7 +2706,7 @@ mxUtils.extend(mxShapeMockupiLockButton, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiLockButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2743,9 +2743,9 @@ mxShapeMockupiLockButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(20, h * 0.5 + 3.5);
 	c.close();
 	c.fillAndStroke();
-	
+
 	var mainText = mxUtils.getValue(this.style, 'mainText', null);
-	
+
 	if (mainText != '')
 	{
 		c.setFontSize(12.5);
@@ -2778,7 +2778,7 @@ mxUtils.extend(mxShapeMockupiArrowIcon, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiArrowIcon.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2837,7 +2837,7 @@ mxUtils.extend(mxShapeMockupiDeleteIcon, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiDeleteIcon.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2895,7 +2895,7 @@ mxUtils.extend(mxShapeMockupiAddIcon, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiAddIcon.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2955,7 +2955,7 @@ mxUtils.extend(mxShapeMockupiInfoIcon, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiInfoIcon.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -3034,7 +3034,7 @@ mxUtils.extend(mxShapeMockupiSortFindIcon, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiSortFindIcon.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -3108,7 +3108,7 @@ mxUtils.extend(mxShapeMockupiCheckIcon, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiCheckIcon.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -3167,7 +3167,7 @@ mxUtils.extend(mxShapeMockupiKeybLetters, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiKeybLetters.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -3381,7 +3381,7 @@ mxUtils.extend(mxShapeMockupiKeybNumbers, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiKeybNumbers.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -3577,7 +3577,7 @@ mxUtils.extend(mxShapeMockupiKeybSymbols, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiKeybSymbols.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -3772,7 +3772,7 @@ mxUtils.extend(mxShapeMockupiDeleteApp, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiDeleteApp.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -3832,7 +3832,7 @@ mxUtils.extend(mxShapeMockupiDirection, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiDirection.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -3905,7 +3905,7 @@ mxShapeMockupiLocationBar.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiLocationBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -3923,7 +3923,7 @@ mxShapeMockupiLocationBar.prototype.background = function(c, x, y, w, h)
 	barPos = Math.max(barPos, 0);
 	var pointerPos = mxUtils.getValue(this.style, mxMockupC.POINTER_POS, mxMockupC.POINTER_BOTTOM);
 	var rSize = 2.5;
-	var deadzone = rSize + 7.5; // rounding + pointer width / 2 
+	var deadzone = rSize + 7.5; // rounding + pointer width / 2
 	var virRange = w - 2 * deadzone;
 	var truePos = deadzone + virRange * barPos / 100;
 	c.setStrokeWidth(0.5);
@@ -3983,7 +3983,7 @@ mxShapeMockupiLocationBar.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.text(5, (h + 7.5) * 0.5, 0, 0, locText, mxConstants.ALIGN_LEFT, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
 		c.translate(w - 20, (h + 7.5) * 0.5 - 7.5);
-	}		
+	}
 
 	w = 15;
 	h = 15;
@@ -4027,7 +4027,7 @@ mxUtils.extend(mxShapeMockupiCallDialog, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiCallDialog.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -4219,7 +4219,7 @@ mxUtils.extend(mxShapeMockupiCallButtons, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiCallButtons.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -4374,7 +4374,7 @@ mxShapeMockupiOption.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiOption.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -4392,7 +4392,7 @@ mxShapeMockupiOption.prototype.background = function(c, x, y, w, h)
 	barPos = Math.max(barPos, 0);
 	var pointerPos = mxUtils.getValue(this.style, mxMockupC.POINTER_POS, mxMockupC.POINTER_BOTTOM);
 	var rSize = 2.5;
-	var deadzone = rSize + 7.5; // rounding + pointer width / 2 
+	var deadzone = rSize + 7.5; // rounding + pointer width / 2
 	var virRange = w - 2 * deadzone;
 	var truePos = deadzone + virRange * barPos / 100;
 	c.setStrokeWidth(0.5);
@@ -4442,7 +4442,7 @@ mxShapeMockupiOption.prototype.foreground = function(c, x, y, w, h)
 	c.setAlpha(1);
 	c.setFontColor('#ffffff');
 	c.setFontSize(9.5);
-	
+
 	if (pointerPos === mxMockupC.POINTER_BOTTOM)
 	{
 		c.text(w * 0.5, (h - 7.5) * 0.5, 0, 0, locText, mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
@@ -4477,7 +4477,7 @@ mxUtils.extend(mxShapeMockupiAlphaList, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiAlphaList.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -4557,7 +4557,7 @@ mxShapeMockupiHorButtonBar.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiHorButtonBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -4770,7 +4770,7 @@ mxShapeMockupiPin.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiPin.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -4829,7 +4829,7 @@ mxShapeMockupiVideoControls.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiVideoControls.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -4948,7 +4948,7 @@ mxShapeMockupiVideoControls.prototype.foreground = function(c, w, h, rSize)
 	var barPos = mxUtils.getValue(this.style, mxMockupC.BAR_POS, '80');
 	barPos = Math.min(barPos, 100);
 	barPos = Math.max(barPos, 0);
-	var deadzone = w * 0.1; 
+	var deadzone = w * 0.1;
 	var virRange = w - 2 * deadzone;
 	var truePos = deadzone + virRange * barPos / 100;
 
@@ -4984,7 +4984,7 @@ Graph.handleFactory[mxMockupC.SHAPE_IVIDEO_CONTROLS] = function(state)
 			{
 				this.state.style['barPos'] = Math.round(100 * Math.max(0, Math.min(100, (pt.x - bounds.width * 0.1 - bounds.x) * 100 / (bounds.width * 0.8)))) / 100;
 			})];
-			
+
 	return handles;
 };
 
@@ -5010,7 +5010,7 @@ mxUtils.extend(mxShapeMockupiURLBar, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiURLBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -5090,7 +5090,7 @@ mxShapeMockupiSlider.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiSlider.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -5111,7 +5111,7 @@ mxShapeMockupiSlider.prototype.foreground = function(c, w, h)
 	var barPos = mxUtils.getValue(this.style, mxMockupC.BAR_POS, '80');
 	barPos = Math.min(barPos, 100);
 	barPos = Math.max(barPos, 0);
-	var deadzone = 0; 
+	var deadzone = 0;
 	var virRange = w - 2 * deadzone;
 	var truePos = deadzone + virRange * barPos / 100;
 
@@ -5143,7 +5143,7 @@ Graph.handleFactory[mxMockupC.SHAPE_ISLIDER] = function(state)
 			{
 				this.state.style['barPos'] = Math.round(100 * Math.max(0, Math.min(100, (pt.x - bounds.x) * 100 / bounds.width))) / 100;
 			})];
-			
+
 	return handles;
 };
 
@@ -5174,7 +5174,7 @@ mxShapeMockupiProgressBar.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiProgressBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -5195,7 +5195,7 @@ mxShapeMockupiProgressBar.prototype.foreground = function(c, w, h)
 	var barPos = mxUtils.getValue(this.style, mxMockupC.BAR_POS, '80');
 	barPos = Math.min(barPos, 100);
 	barPos = Math.max(barPos, 0);
-	var deadzone = 0; 
+	var deadzone = 0;
 	var virRange = w - 2 * deadzone;
 	var truePos = deadzone + virRange * barPos / 100;
 
@@ -5222,7 +5222,7 @@ Graph.handleFactory[mxMockupC.SHAPE_IPROGRESS_BAR] = function(state)
 			{
 				this.state.style['barPos'] = Math.round(100 * Math.max(0, Math.min(100, (pt.x - bounds.x) * 100 / bounds.width))) / 100;
 			})];
-			
+
 	return handles;
 };
 
@@ -5252,7 +5252,7 @@ mxShapeMockupiCloudProgressBar.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiCloudProgressBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -5273,7 +5273,7 @@ mxShapeMockupiCloudProgressBar.prototype.foreground = function(c, w, h)
 	var barPos = mxUtils.getValue(this.style, mxMockupC.BAR_POS, '80');
 	barPos = Math.min(barPos, 100);
 	barPos = Math.max(barPos, 0);
-	var deadzone = 0; 
+	var deadzone = 0;
 	var virRange = w - 2 * deadzone;
 	var truePos = deadzone + virRange * barPos / 100;
 
@@ -5295,7 +5295,7 @@ Graph.handleFactory[mxMockupC.SHAPE_ICLOUD_PROGRESS_BAR] = function(state)
 			{
 				this.state.style['barPos'] = Math.round(100 * Math.max(0, Math.min(100, (pt.x - bounds.x) * 100 / bounds.width))) / 100;
 			})];
-			
+
 	return handles;
 };
 
@@ -5325,7 +5325,7 @@ mxShapeMockupiDownloadBar.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiDownloadBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -5351,7 +5351,7 @@ mxShapeMockupiDownloadBar.prototype.foreground = function(c, w, h)
 	var barPos = mxUtils.getValue(this.style, mxMockupC.BAR_POS, '80');
 	barPos = Math.min(barPos, 100);
 	barPos = Math.max(barPos, 0);
-	var deadzone = w * 0.1; 
+	var deadzone = w * 0.1;
 	var virRange = w - 2 * deadzone;
 	var truePos = deadzone + virRange * barPos / 100;
 
@@ -5383,7 +5383,7 @@ Graph.handleFactory[mxMockupC.SHAPE_IDOWNLOAD_BAR] = function(state)
 			{
 				this.state.style['barPos'] = Math.round(100 * Math.max(0, Math.min(100, (pt.x - bounds.width * 0.1 - bounds.x) * 100 / (bounds.width * 0.8)))) / 100;
 			})];
-			
+
 	return handles;
 };
 
@@ -5409,7 +5409,7 @@ mxUtils.extend(mxShapeMockupiScreenNameBar, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiScreenNameBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -5468,7 +5468,7 @@ mxShapeMockupiIconGrid.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiIconGrid.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -5544,7 +5544,7 @@ mxUtils.extend(mxShapeMockupiCopy, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiCopy.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -5620,7 +5620,7 @@ mxUtils.extend(mxShapeMockupiCopyArea, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiCopyArea.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -5740,7 +5740,7 @@ mxUtils.extend(mxShapeMockupiHomePageControl, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiHomePageControl.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -5793,7 +5793,7 @@ mxUtils.extend(mxShapeMockupiPageControl, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiPageControl.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -5840,14 +5840,14 @@ function mxShapeMockupiPad(bounds, fill, stroke, strokewidth)
 mxUtils.extend(mxShapeMockupiPad, mxShape);
 
 mxShapeMockupiPad.prototype.customProperties = [
-	{name: 'bgStyle', dispName: 'Background', type: 'enum', 
+	{name: 'bgStyle', dispName: 'Background', type: 'enum',
 		enumList: [{val: 'bgGreen', dispName: 'Green'}, {val: 'bgWhite', dispName: 'White'}, {val: 'bgGray', dispName: 'Gray'}, {val: 'bgFlat', dispName: 'Flat'}, {val: 'bgMap', dispName: 'Map'}, {val: 'bgStriped', dispName: 'Striped'}]
 	}
 ];
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupiPad.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -6340,7 +6340,7 @@ mxShapeMockupiPad.prototype.foreground = function(c, x, y, w, h, rSize)
 	c.arcTo(rSize, rSize, 0, 0, 1, w - rSize, h);
 	c.lineTo(rSize, h);
 	c.arcTo(rSize, rSize, 0, 0, 1, 0, h - rSize);
-	c.close();	
+	c.close();
 	c.stroke();
 
 	rSize = 22.5;
@@ -6355,7 +6355,7 @@ mxShapeMockupiPad.prototype.foreground = function(c, x, y, w, h, rSize)
 	c.arcTo(rSize, rSize, 0, 0, 1, w - rSize - 2.5, h - 2.5);
 	c.lineTo(rSize + 2.5, h - 2.5);
 	c.arcTo(rSize, rSize, 0, 0, 1, 2.5, h - rSize - 2.5);
-	c.close();	
+	c.close();
 	c.stroke();
 
 	c.setAlpha(1);
@@ -6424,7 +6424,7 @@ mxShapeMockupRRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupRRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -6469,7 +6469,7 @@ mxShapeIosTopButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIosTopButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -6522,7 +6522,7 @@ mxShapeIosBottomButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIosBottomButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -6567,7 +6567,7 @@ mxShapeIosAnchor.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIosAnchor.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -6602,7 +6602,7 @@ mxShapeIosCheckbox.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIosCheckbox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -6610,7 +6610,7 @@ mxShapeIosCheckbox.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.translate(x, y);
 	c.rect(0, 0, w, h);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w * 0.8, h * 0.2);
 	c.lineTo(w * 0.4, h * 0.8);
@@ -6651,7 +6651,7 @@ mxShapeMockupFancyRRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupFancyRRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -6665,9 +6665,9 @@ mxShapeMockupFancyRRect.prototype.paintVertexShape = function(c, x, y, w, h)
 //	c.setAlpha(0.8);
 	c.roundrect(0, 0, w, h, rSize);
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	c.setStrokeColor(fillColor);
 	c.setGradient(fillColor, '#ffffff', 0, 0, w, 22.5, mxConstants.DIRECTION_SOUTH, 1, 1);
 	c.setAlpha(0.3);

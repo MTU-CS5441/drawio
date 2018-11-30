@@ -43,17 +43,17 @@ GitHubClient.prototype.maxFileSize = 1000000 /*1MB*/;
 GitHubClient.prototype.updateUser = function(success, error, failOnAuth)
 {
 	var acceptResponse = true;
-	
+
 	var timeoutThread = window.setTimeout(mxUtils.bind(this, function()
 	{
 		acceptResponse = false;
 		error({code: App.ERROR_TIMEOUT});
 	}), this.ui.timeout);
-	
+
 	mxUtils.get(this.baseUrl + '/user?access_token=' + this.token, mxUtils.bind(this, function(userReq)
 	{
 		window.clearTimeout(timeoutThread);
-		
+
 		if (acceptResponse)
 		{
 			if (userReq.getStatus() === 401)
@@ -61,7 +61,7 @@ GitHubClient.prototype.updateUser = function(success, error, failOnAuth)
 				if (!failOnAuth)
 				{
 					this.logout();
-					
+
 					this.authenticate(mxUtils.bind(this, function()
 					{
 						this.updateUser(success, error, true);
@@ -96,12 +96,12 @@ GitHubClient.prototype.authenticate = function(success, error)
 		var auth = mxUtils.bind(this, function()
 		{
 			var acceptAuthResponse = true;
-			
+
 			this.ui.showAuthDialog(this, true, mxUtils.bind(this, function(remember, authSuccess)
 			{
 				var win = window.open('https://github.com/login/oauth/authorize?client_id=' +
 					this.clientId + '&scope=' + this.scope, 'ghauth');
-				
+
 				if (win != null)
 				{
 					window.onGitHubCallback = mxUtils.bind(this, function(code, authWindow)
@@ -110,7 +110,7 @@ GitHubClient.prototype.authenticate = function(success, error)
 						{
 							window.onGitHubCallback = null;
 							acceptAuthResponse = false;
-							
+
 							if (code == null)
 							{
 								error({message: mxResources.get('accessDenied'), retry: auth});
@@ -121,17 +121,17 @@ GitHubClient.prototype.authenticate = function(success, error)
 								var fn = mxUtils.bind(this, function()
 								{
 									var acceptResponse = true;
-									
+
 									var timeoutThread = window.setTimeout(mxUtils.bind(this, function()
 									{
 										acceptResponse = false;
 										error({code: App.ERROR_TIMEOUT, retry: fn});
 									}), this.ui.timeout);
-									
+
 									mxUtils.get('/github?client_id=' + this.clientId + '&code=' + code, mxUtils.bind(this, function(authReq)
 									{
 										window.clearTimeout(timeoutThread);
-										
+
 										if (acceptResponse)
 										{
 											try
@@ -146,16 +146,16 @@ GitHubClient.prototype.authenticate = function(success, error)
 													{
 														authSuccess();
 													}
-													
+
 													var res = authReq.getText();
 													this.token = res.substring(res.indexOf('=') + 1, res.indexOf('&'));
 													this.setUser(null);
-													
+
 													if (remember)
 													{
 														this.setPersistentToken(this.token);
 													}
-													
+
 													success();
 												}
 											}
@@ -173,7 +173,7 @@ GitHubClient.prototype.authenticate = function(success, error)
 										}
 									}));
 								});
-	
+
 								fn();
 							}
 						}
@@ -197,7 +197,7 @@ GitHubClient.prototype.authenticate = function(success, error)
 				}
 			}));
 		});
-		
+
 		auth();
 	}
 	else
@@ -214,24 +214,24 @@ GitHubClient.prototype.executeRequest = function(req, success, error)
 	var doExecute = mxUtils.bind(this, function(failOnAuth)
 	{
 		var acceptResponse = true;
-		
+
 		var timeoutThread = window.setTimeout(mxUtils.bind(this, function()
 		{
 			acceptResponse = false;
 			error({code: App.ERROR_TIMEOUT, retry: fn});
 		}), this.ui.timeout);
-		
+
 		var temp = this.token;
-		
+
 		req.setRequestHeaders = function(request, params)
 		{
 			request.setRequestHeader('Authorization', 'token ' + temp);
 		};
-		
+
 		req.send(mxUtils.bind(this, function()
 		{
 			window.clearTimeout(timeoutThread);
-			
+
 			if (acceptResponse)
 			{
 				if (req.getStatus() >= 200 && req.getStatus() <= 299)
@@ -261,11 +261,11 @@ GitHubClient.prototype.executeRequest = function(req, success, error)
 				else if (req.getStatus() === 403)
 				{
 					var tooLarge = false;
-					
+
 					try
 					{
 						var temp = JSON.parse(req.getText());
-						
+
 						if (temp != null && temp.errors != null && temp.errors.length > 0)
 						{
 							tooLarge = temp.errors[0].code == 'too_large';
@@ -275,7 +275,7 @@ GitHubClient.prototype.executeRequest = function(req, success, error)
 					{
 						// ignore
 					}
-					
+
 					error({message: mxResources.get((tooLarge) ? 'drawingTooLarge' : 'forbidden')});
 				}
 				else if (req.getStatus() === 404)
@@ -337,14 +337,14 @@ GitHubClient.prototype.getLibrary = function(path, success, error)
 GitHubClient.prototype.getFile = function(path, success, error, asLibrary, checkExists)
 {
 	asLibrary = (asLibrary != null) ? asLibrary : false;
-	
+
 	var tokens = path.split('/');
 	var org = tokens[0];
 	var repo = tokens[1];
 	var ref = tokens[2];
 	var path = tokens.slice(3, tokens.length).join('/');
 	var binary = /\.png$/i.test(path);
-	
+
 	// Handles .vsdx, Gliffy and PNG+XML files by creating a temporary file
 	if (!checkExists && (/\.v(dx|sdx?)$/i.test(path) || /\.gliffy$/i.test(path) ||
 		(!this.ui.useCanvasForExport && binary)))
@@ -356,7 +356,7 @@ GitHubClient.prototype.getFile = function(path, success, error, asLibrary, check
 				path + '?ref=' + ref + '&token=' + this.token;
 			var tokens = path.split('/');
 			var name = (tokens.length > 0) ? tokens[tokens.length - 1] : path;
-	
+
 			this.ui.convertFile(url, name, null, this.extension, success, error);
 		}
 		else
@@ -368,7 +368,7 @@ GitHubClient.prototype.getFile = function(path, success, error, asLibrary, check
 	{
 		var req = new mxXmlRequest(this.baseUrl + '/repos/' + org + '/' + repo +
 			'/contents/' + path + '?ref=' + ref, null, 'GET');
-		
+
 		this.executeRequest(req, mxUtils.bind(this, function(req)
 		{
 			try
@@ -385,7 +385,7 @@ GitHubClient.prototype.getFile = function(path, success, error, asLibrary, check
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -395,7 +395,7 @@ GitHubClient.prototype.createGitHubFile = function(org, repo, ref, data, asLibra
 		'path': data.path, 'sha': data.sha, 'html_url': data.html_url,
 		'download_url': data.download_url};
 	var content = data.content;
-	
+
 	if (data.encoding === 'base64')
 	{
 		if (/\.jpe?g$/i.test(data.name))
@@ -411,7 +411,7 @@ GitHubClient.prototype.createGitHubFile = function(org, repo, ref, data, asLibra
 			if (/\.png$/i.test(data.name))
 			{
 				var xml = this.ui.extractGraphModelFromPng(content);
-				
+
 				if (xml != null && xml.length > 0)
 				{
 					content = xml;
@@ -427,13 +427,13 @@ GitHubClient.prototype.createGitHubFile = function(org, repo, ref, data, asLibra
 			}
 		}
 	}
-	
+
 	return (asLibrary) ? new GitHubLibrary(this.ui, content, meta) : new GitHubFile(this.ui, content, meta);
 };
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -444,7 +444,7 @@ GitHubClient.prototype.insertLibrary = function(filename, data, success, error, 
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -462,7 +462,7 @@ GitHubClient.prototype.insertFile = function(filename, data, success, error, asL
 	{
 		path = path + '/';
 	}
-	
+
 	path = path + filename;
 
 	this.checkExists(org + '/' + repo + '/' + ref + '/' + path, true, mxUtils.bind(this, function(checked, sha)
@@ -481,7 +481,7 @@ GitHubClient.prototype.insertFile = function(filename, data, success, error, asL
 				{
 					data = Base64.encode(data);
 				}
-				
+
 				this.showCommitDialog(filename, true, mxUtils.bind(this, function(message)
 				{
 					this.writeFile(org, repo, ref, path, message, data, sha, mxUtils.bind(this, function(req)
@@ -507,13 +507,13 @@ GitHubClient.prototype.insertFile = function(filename, data, success, error, asL
 };
 
 /**
- * 
+ *
  */
 GitHubClient.prototype.showCommitDialog = function(filename, isNew, success, cancel)
 {
 	// Pauses spinner while commit message dialog is shown
 	var resume = this.ui.spinner.pause();
-	
+
 	var dlg = new FilenameDialog(this.ui, mxResources.get((isNew) ? 'addedFile' : 'updateFile',
 		[filename]), mxResources.get('ok'), mxUtils.bind(this, function(message)
 	{
@@ -528,7 +528,7 @@ GitHubClient.prototype.showCommitDialog = function(filename, isNew, success, can
 };
 
 /**
- * 
+ *
  */
 GitHubClient.prototype.writeFile = function(org, repo, ref, path, message, data, sha, success, error)
 {
@@ -546,15 +546,15 @@ GitHubClient.prototype.writeFile = function(org, repo, ref, path, message, data,
 			message: message,
 			content: data
 		};
-		
+
 		if (sha != null)
 		{
 			entity.sha = sha;
 		}
-		
+
 		var req = new mxXmlRequest(this.baseUrl + '/repos/' + org + '/' + repo +
 			'/contents/' + path, JSON.stringify(entity), 'PUT');
-		
+
 		this.executeRequest(req, mxUtils.bind(this, function(req)
 		{
 			success(req);
@@ -564,7 +564,7 @@ GitHubClient.prototype.writeFile = function(org, repo, ref, path, message, data,
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -575,7 +575,7 @@ GitHubClient.prototype.checkExists = function(path, askReplace, fn)
 		if (askReplace && file.meta != null)
 		{
 			var resume = this.ui.spinner.pause();
-			
+
 			this.ui.confirm(mxResources.get('replaceIt', [path]), function()
 			{
 				resume();
@@ -589,10 +589,10 @@ GitHubClient.prototype.checkExists = function(path, askReplace, fn)
 		else
 		{
 			this.ui.spinner.stop();
-			
+
 			this.ui.showError(mxResources.get('error'), mxResources.get('fileExists'), mxResources.get('ok'), function()
 			{
-				fn(false);						
+				fn(false);
 			});
 		}
 	}), mxUtils.bind(this, function(err)
@@ -603,7 +603,7 @@ GitHubClient.prototype.checkExists = function(path, askReplace, fn)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -613,7 +613,7 @@ GitHubClient.prototype.saveFile = function(file, success, error)
 	var repo = file.meta.repo;
 	var ref = file.meta.ref;
 	var path = file.meta.path;
-	
+
 	this.showCommitDialog(file.meta.name, file.meta.sha == null || file.meta.isNew, mxUtils.bind(this, function(message)
 	{
 		var fn = mxUtils.bind(this, function(sha, data)
@@ -628,7 +628,7 @@ GitHubClient.prototype.saveFile = function(file, success, error)
 				if (err != null && err.status == 409)
 				{
 					resume = this.ui.spinner.pause();
-					
+
 					var dlg = new ErrorDialog(this.ui, mxResources.get('externalChanges'),
 						mxResources.get('fileChangedOverwrite'), mxResources.get('cancel'), mxUtils.bind(this, function()
 						{
@@ -636,7 +636,7 @@ GitHubClient.prototype.saveFile = function(file, success, error)
 						}), null, mxResources.get('overwrite'), mxUtils.bind(this, function()
 						{
 							resume();
-							
+
 							// Gets the latest sha and tries again
 							this.getFile(org + '/' + repo + '/' + ref + '/' + path, mxUtils.bind(this, function(tempFile)
 							{
@@ -655,7 +655,7 @@ GitHubClient.prototype.saveFile = function(file, success, error)
 				}
 			}));
 		});
-		
+
 		if (this.ui.useCanvasForExport && /(\.png)$/i.test(path))
 		{
 			this.ui.getEmbeddedPng(mxUtils.bind(this, function(data)
@@ -698,12 +698,12 @@ GitHubClient.prototype.pickFile = function(fn)
 	{
 		this.ui.loadFile('H' + encodeURIComponent(path));
 	});
-	
+
 	this.showGitHubDialog(true, fn);
 };
 
 /**
- * 
+ *
  */
 GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 {
@@ -711,7 +711,7 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 	var repo = null;
 	var ref = null;
 	var path = null;
-	
+
 	var content = document.createElement('div');
 	content.style.whiteSpace = 'nowrap';
 	content.style.overflow = 'hidden';
@@ -733,33 +733,33 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 		fn(org + '/' + repo + '/' + encodeURIComponent(ref) + '/' + path);
 	}));
 	this.ui.showDialog(dlg.container, 340, 270, true, true);
-	
+
 	if (showFiles)
 	{
 		dlg.okButton.parentNode.removeChild(dlg.okButton);
 	}
-	
+
 	var createLink = mxUtils.bind(this, function(label, fn)
 	{
 		var link = document.createElement('a');
 		link.setAttribute('href', 'javascript:void(0);');
 		mxUtils.write(link,  label);
 		mxEvent.addListener(link, 'click', fn);
-		
+
 		return link;
 	});
-	
+
 	var updatePathInfo = mxUtils.bind(this, function(hideRef)
 	{
 		var pathInfo = document.createElement('div');
 		pathInfo.style.marginBottom = '8px';
-		
+
 		pathInfo.appendChild(createLink(org + '/' + repo, mxUtils.bind(this, function()
 		{
 			path = null;
 			selectRepo();
 		})));
-		
+
 		if (!hideRef)
 		{
 			mxUtils.write(pathInfo, ' / ');
@@ -769,11 +769,11 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 				selectRef();
 			})));
 		}
-		
+
 		if (path != null && path.length > 0)
 		{
 			var tokens = path.split('/');
-			
+
 			for (var i = 0; i < tokens.length; i++)
 			{
 				(function(index)
@@ -787,23 +787,23 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 				})(i);
 			}
 		}
-		
+
 		div.appendChild(pathInfo);
 	});
-	
+
 	var error = mxUtils.bind(this, function(err)
 	{
 		this.ui.handleError(err, null, mxUtils.bind(this, function()
 		{
 			this.ui.spinner.stop();
-			
+
 			if (this.getUser() != null)
 			{
 				org = null;
 				repo = null;
 				ref = null;
 				path = null;
-				
+
 				selectRepo();
 			}
 			else
@@ -812,7 +812,7 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 			}
 		}));
 	});
-	
+
 	var selectFile = mxUtils.bind(this, function()
 	{
 		var req = new mxXmlRequest(this.baseUrl + '/repos/' + org + '/' + repo +
@@ -820,7 +820,7 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 		dlg.okButton.removeAttribute('disabled');
 		div.innerHTML = '';
 		this.ui.spinner.spin(div, mxResources.get('loading'));
-		
+
 		this.executeRequest(req, mxUtils.bind(this, function(req)
 		{
 			updatePathInfo();
@@ -874,9 +874,9 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 						}))(files[i]);
 					}
 				});
-				
+
 				listFiles(true);
-				
+
 				if (showFiles)
 				{
 					listFiles(false);
@@ -884,7 +884,7 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 			}
 		}), error);
 	});
-	
+
 	// Adds paging for repos and branches (files limited to 1000 by API)
 	var pageSize = 100;
 	var nextPageDiv = null;
@@ -897,49 +897,49 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 			div.innerHTML = '';
 			page = 1;
 		}
-		
+
 		var req = new mxXmlRequest(this.baseUrl + '/repos/' + org + '/' + repo +
 			'/branches?per_page=' + pageSize + '&page=' + page, null, 'GET');
 		dlg.okButton.setAttribute('disabled', 'disabled');
 		this.ui.spinner.spin(div, mxResources.get('loading'));
-		
+
 		if (nextPageDiv != null && nextPageDiv.parentNode != null)
 		{
 			nextPageDiv.parentNode.removeChild(nextPageDiv);
 		}
-		
+
 		nextPageDiv = document.createElement('a');
 		nextPageDiv.style.display = 'block';
 		nextPageDiv.setAttribute('href', 'javascript:void(0);');
 		mxUtils.write(nextPageDiv, mxResources.get('more') + '...');
-		
+
 		var nextPage = mxUtils.bind(this, function()
 		{
 			mxEvent.removeListener(div, 'scroll', scrollFn);
 			selectRef(page + 1);
 		});
-		
+
 		mxEvent.addListener(nextPageDiv, 'click', nextPage);
-		
+
 		this.executeRequest(req, mxUtils.bind(this, function(req)
 		{
 			this.ui.spinner.stop();
-			
+
 			if (page == 1)
 			{
 				updatePathInfo(true);
-				
+
 				div.appendChild(createLink('../ [Up]', mxUtils.bind(this, function()
 				{
 					path = null;
 					selectRepo();
 				})));
-				
+
 				mxUtils.br(div);
 			}
 
 			var branches = JSON.parse(req.getText());
-			
+
 			if (branches == null || branches.length == 0)
 			{
 				mxUtils.write(div, mxResources.get('noFiles'));
@@ -959,11 +959,11 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 						mxUtils.br(div);
 					}))(branches[i]);
 				}
-				
+
 				if (branches.length == pageSize)
 				{
 					div.appendChild(nextPageDiv);
-					
+
 					scrollFn = function()
 					{
 						if (div.scrollTop >= div.scrollHeight - div.offsetHeight)
@@ -971,7 +971,7 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 							nextPage();
 						}
 					};
-					
+
 					mxEvent.addListener(div, 'scroll', scrollFn);
 				}
 			}
@@ -985,35 +985,35 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 			div.innerHTML = '';
 			page = 1;
 		}
-		
+
 		var req = new mxXmlRequest(this.baseUrl + '/user/repos?per_page=' +
 			pageSize + '&page=' + page, null, 'GET');
 		dlg.okButton.setAttribute('disabled', 'disabled');
 		this.ui.spinner.spin(div, mxResources.get('loading'));
-		
+
 		if (nextPageDiv != null && nextPageDiv.parentNode != null)
 		{
 			nextPageDiv.parentNode.removeChild(nextPageDiv);
 		}
-		
+
 		nextPageDiv = document.createElement('a');
 		nextPageDiv.style.display = 'block';
 		nextPageDiv.setAttribute('href', 'javascript:void(0);');
 		mxUtils.write(nextPageDiv, mxResources.get('more') + '...');
-		
+
 		var nextPage = mxUtils.bind(this, function()
 		{
 			mxEvent.removeListener(div, 'scroll', scrollFn);
 			selectRepo(page + 1);
 		});
-		
+
 		mxEvent.addListener(nextPageDiv, 'click', nextPage);
-		
+
 		this.executeRequest(req, mxUtils.bind(this, function(req)
 		{
 			this.ui.spinner.stop();
 			var repos = JSON.parse(req.getText());
-			
+
 			if (repos == null || repos.length == 0)
 			{
 				mxUtils.write(div, mxResources.get('noFiles'));
@@ -1029,25 +1029,25 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 							if (value != null)
 							{
 								var tokens = value.split('/');
-								
+
 								if (tokens.length > 1)
 								{
 									var tmpOrg = tokens[0];
 									var tmpRepo = tokens[1];
-	
+
 									if (tokens.length < 3)
 									{
 										org = tmpOrg;
 										repo = tmpRepo;
 										ref = null;
 										path = null;
-										
+
 										selectRef();
 									}
 									else if (this.ui.spinner.spin(div, mxResources.get('loading')))
 									{
 										var tmpRef = encodeURIComponent(tokens.slice(2, tokens.length).join('/'));
-										
+
 										this.getFile(tmpOrg + '/' + tmpRepo + '/' + tmpRef, mxUtils.bind(this, function(file)
 										{
 											this.ui.spinner.stop();
@@ -1055,7 +1055,7 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 											repo = file.meta.repo;
 											ref = decodeURIComponent(file.meta.ref);
 											path = '';
-											
+
 											selectFile();
 										}), mxUtils.bind(this, function(err)
 										{
@@ -1074,11 +1074,11 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 						this.ui.showDialog(dlg.container, 300, 80, true, false);
 						dlg.init();
 					})));
-					
+
 					mxUtils.br(div);
 					mxUtils.br(div);
 				}
-				
+
 				for (var i = 0; i < repos.length; i++)
 				{
 					(mxUtils.bind(this, function(repository)
@@ -1089,7 +1089,7 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 							repo = repository.name;
 							ref = repository.default_branch;
 							path = '';
-	
+
 							selectFile();
 						})));
 						mxUtils.br(div);
@@ -1100,7 +1100,7 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 			if (repos.length == pageSize)
 			{
 				div.appendChild(nextPageDiv);
-				
+
 				scrollFn = function()
 				{
 					if (div.scrollTop >= div.scrollHeight - div.offsetHeight)
@@ -1108,12 +1108,12 @@ GitHubClient.prototype.showGitHubDialog = function(showFiles, fn)
 						nextPage();
 					}
 				};
-				
+
 				mxEvent.addListener(div, 'scroll', scrollFn);
 			}
 		}), error);
 	});
-	
+
 	selectRepo();
 };
 

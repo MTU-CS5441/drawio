@@ -11,7 +11,7 @@
 LocalFile = function(ui, data, title, temp)
 {
 	DrawioFile.call(this, ui, data);
-	
+
 	this.title = title;
 	this.mode = (temp) ? null : App.MODE_DEVICE;
 };
@@ -21,7 +21,7 @@ mxUtils.extend(LocalFile, DrawioFile);
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -32,7 +32,7 @@ LocalFile.prototype.isAutosave = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -43,7 +43,7 @@ LocalFile.prototype.getMode = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -54,7 +54,7 @@ LocalFile.prototype.getTitle = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -65,7 +65,7 @@ LocalFile.prototype.isRenamable = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -76,7 +76,7 @@ LocalFile.prototype.save = function(revision, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -87,7 +87,7 @@ LocalFile.prototype.saveAs = function(title, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -99,7 +99,7 @@ LocalFile.prototype.saveFile = function(title, revision, success, error)
 	this.updateFileData();
 	var data = this.getData();
 	var binary = this.ui.useCanvasForExport && /(\.png)$/i.test(this.getTitle());
-	
+
 	var doSave = mxUtils.bind(this, function(data)
 	{
 		if (this.ui.isOfflineApp() || this.ui.isLocalFileSave())
@@ -129,16 +129,16 @@ LocalFile.prototype.saveFile = function(title, revision, success, error)
 				}));
 			}
 		}
-		
+
 		this.setModified(false);
 		this.contentChanged();
-		
+
 		if (success != null)
 		{
 			success();
 		}
 	});
-	
+
 	if (binary)
 	{
 		this.ui.getEmbeddedPng(mxUtils.bind(this, function(imageData)
@@ -154,7 +154,7 @@ LocalFile.prototype.saveFile = function(title, revision, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -162,7 +162,7 @@ LocalFile.prototype.rename = function(title, success, error)
 {
 	this.title = title;
 	this.descriptorChanged();
-	
+
 	if (success != null)
 	{
 		success();
@@ -176,13 +176,13 @@ LocalFile.prototype.rename = function(title, success, error)
 LocalFile.prototype.open = function()
 {
 	this.ui.setFileData(this.getData());
-	
+
 	// Only used to update the status when the file changes
 	this.changeListener = mxUtils.bind(this, function(sender, eventObject)
 	{
 		this.setModified(true);
 		this.addUnsavedStatus();
 	});
-	
+
 	this.ui.editor.graph.model.addListener(mxEvent.CHANGE, this.changeListener);
 };

@@ -11,7 +11,7 @@ const log = require('electron-log')
 const program = require('commander')
 
 const __DEV__ = process.env.NODE_ENV === 'development'
-		
+
 let windowsRegistry = []
 
 function createWindow (opt = {})
@@ -86,7 +86,7 @@ function createWindow (opt = {})
 								title: 'Confirm',
 								message: 'The document has unsaved changes. Do you really want to quit without saving?' //mxResources.get('allChangesLost')
 							})
-							
+
 						if (choice === 1)
 						{
 							win.destroy()
@@ -109,7 +109,7 @@ function createWindow (opt = {})
 		console.log('Window closed idx:%d', index)
 		windowsRegistry.splice(index, 1)
 	})
-	
+
 	mainWindow.webContents.on('did-fail-load', function(err)
     {
         let ourl = url.format(
@@ -134,7 +134,7 @@ function createWindow (opt = {})
 			},
 			slashes: true,
 		})
-		
+
 		mainWindow.loadURL(ourl)
     })
 
@@ -156,17 +156,17 @@ app.on('ready', e =>
 	ipcMain.on('winman', (event, arg) =>
 	{
 		console.log('ipcMain.on winman', arg)
-		
+
 		if (arg.action === 'newfile')
 		{
 			event.returnValue = createWindow(arg.opt).id
-			
+
 			return
 		}
-		
+
 		event.returnValue = 'pong'
 	})
-	
+
     let argv = process.argv
     // https://github.com/electron/electron/issues/4690#issuecomment-217435222
     if (process.defaultApp != true)
@@ -179,18 +179,18 @@ app.on('ready', e =>
         .usage('[options] [file]')
         .option('-c, --create', 'creates a new empty file if no file is passed')
         .parse(argv)
-        
+
     let win = createWindow()
-    
+
     win.webContents.on('did-finish-load', function()
     {
         win.webContents.send('args-obj', program);
-        
+
         win.webContents.setZoomFactor(1);
         win.webContents.setVisualZoomLevelLimits(1, 1);
         win.webContents.setLayoutZoomLevelLimits(0, 0);
     });
-	
+
 	let template = [{
 	    label: app.getName(),
 	    submenu: [
@@ -211,7 +211,7 @@ app.on('ready', e =>
 	        click() { app.quit(); }
 	      }]
 	}]
-	
+
 	if (process.platform === 'darwin')
 	{
 	    template = [{
@@ -251,7 +251,7 @@ app.on('ready', e =>
 	      }]
 	    }]
 	}
-	
+
 	const menuBar = menu.buildFromTemplate(template)
 	menu.setApplicationMenu(menuBar)
 })

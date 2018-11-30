@@ -42,7 +42,7 @@ DrawioClient.prototype.getUser = function()
 };
 
 /**
- * 
+ *
  */
 DrawioClient.prototype.clearPersistentToken = function()
 {
@@ -64,23 +64,23 @@ DrawioClient.prototype.clearPersistentToken = function()
 DrawioClient.prototype.getPersistentToken = function()
 {
 	var token = null;
-	
+
 	if (isLocalStorage)
 	{
 		token = localStorage.getItem('.' + this.cookieName);
 	}
-	
+
 	if (token == null && typeof(Storage) != 'undefined')
 	{
 		var cookies = document.cookie;
 		var name = this.cookieName + '=';
 		var start = cookies.indexOf(name);
-	
+
 		if (start >= 0)
 		{
 			start += name.length;
 			var end = cookies.indexOf(';', start);
-		    
+
 			if (end < 0)
 			{
 				end = cookies.length;
@@ -89,10 +89,10 @@ DrawioClient.prototype.getPersistentToken = function()
 			{
 				postCookie = cookies.substring(end);
 		    }
-	
+
 			var value = cookies.substring(start, end);
 			token = (value.length > 0) ? value : null;
-			
+
 			if (token != null && isLocalStorage)
 			{
 				// Moves to local storage
@@ -103,7 +103,7 @@ DrawioClient.prototype.getPersistentToken = function()
 			}
 		}
 	}
-	
+
 	return token;
 };
 
@@ -123,12 +123,12 @@ DrawioClient.prototype.setPersistentToken = function(token)
 			var expiration = new Date();
 			expiration.setYear(expiration.getFullYear() + 10);
 			var cookie = this.cookieName + '=' + token +'; path=/; expires=' + expiration.toUTCString();
-	
+
 			if (document.location.protocol.toLowerCase() == 'https')
 			{
 				cookie = cookie + ';secure';
 			}
-	
+
 			document.cookie = cookie;
 		}
 	}

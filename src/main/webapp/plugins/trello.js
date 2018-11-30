@@ -11,9 +11,9 @@ Draw.loadPlugin(function(editorUi)
 			var parent = window.opener || window.parent;
 			parent.postMessage(JSON.stringify({event: 'exit'}), '*');
 		}
-		
+
 		var file = editorUi.getCurrentFile();
-		
+
 		if (file == null || !file.isModified())
 		{
 			fn();
@@ -24,12 +24,12 @@ Draw.loadPlugin(function(editorUi)
 				mxResources.get('cancel'), mxResources.get('discardChanges'));
 		}
 	};
-	
+
 	editorUi.showSplash = function()
 	{
 		this.actions.get('exit').funct();
 	};
-	
+
 	function main()
 	{
 		var name = (urlParams['filename'] != null) ? decodeURIComponent(urlParams['filename']) : null;
@@ -46,7 +46,7 @@ Draw.loadPlugin(function(editorUi)
 					/(\.html)$/i.test(name)), null, 'trello',
 					null, true, card);
 			};
-			
+
 			if (template != null)
 			{
 				editorUi.trello.getFile(card + editorUi.trello.SEPARATOR +
@@ -82,7 +82,7 @@ Draw.loadPlugin(function(editorUi)
 				main();
 			}
 		};
-		
+
 		// Waits for Trello client to load
 		editorUi.addListener('clientLoaded', waitForTrello);
 	}

@@ -2,7 +2,7 @@
  * Sample plugin.
  */
 Draw.loadPlugin(function(ui) {
-	
+
 	var div = document.createElement('div');
 	div.style.background = '#ffffff';
 	div.style.border = '1px solid gray';
@@ -14,19 +14,19 @@ Draw.loadPlugin(function(ui) {
 	div.style.minWidth = '200px';
 	div.style.top = '40px';
 	div.style.right = '20px';
-	
+
 	var graph = ui.editor.graph;
-	
+
 	// Made for chromeless mode
 	if (!ui.editor.isChromelessView())
 	{
 		div.style.top = '100px';
 		div.style.right = '260px';
 	}
-	
+
 	div.innerHTML = '<p><i>Select a shape.</i></p>';
 	document.body.appendChild(div);
-	
+
 	// Highlights current cell
 	var highlight = new mxCellHighlight(graph, '#00ff00', 8);
 
@@ -47,13 +47,13 @@ Draw.loadPlugin(function(ui) {
 		else
 		{
 			var attrs = (cell.value != null) ? cell.value.attributes : null;
-	
+
 			if (attrs != null)
 			{
 				var ignored = ['label', 'tooltip', 'placeholders'];
 				highlight.highlight(graph.view.getState(cell));
 				var label = graph.sanitizeHtml(graph.getLabel(cell));
-				
+
 				if (label != null && label.length > 0)
 				{
 					div.innerHTML = '<h1>' + label + '</h1>';
@@ -62,7 +62,7 @@ Draw.loadPlugin(function(ui) {
 				{
 					div.innerHTML = '';
 				}
-				
+
 				for (var i = 0; i < attrs.length; i++)
 				{
 					if (mxUtils.indexOf(ignored, attrs[i].nodeName) < 0 &&
@@ -91,7 +91,7 @@ Draw.loadPlugin(function(ui) {
 			if (newValue != oldValue)
 			{
 				graph.getModel().beginUpdate();
-                
+
                 try
                 {
                 	var edit = new mxCellAttributeChange(
@@ -105,7 +105,7 @@ Draw.loadPlugin(function(ui) {
                     graph.getModel().endUpdate();
                 }
 			}
-		}; 
+		};
 
 		mxEvent.addListener(input, 'keypress', function (evt)
 		{
@@ -132,7 +132,7 @@ Draw.loadPlugin(function(ui) {
 			mxEvent.addListener(input, 'blur', applyHandler);
 		}
 	};
-	
+
 	graph.click = function(me)
 	{
 		// Async required to enable hyperlinks in labels

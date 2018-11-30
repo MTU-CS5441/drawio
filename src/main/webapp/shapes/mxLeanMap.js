@@ -25,7 +25,7 @@ mxUtils.extend(mxLeanBoatShipment, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxLeanBoatShipment.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -79,7 +79,7 @@ mxUtils.extend(mxLeanSafetyStock, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxLeanSafetyStock.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -150,7 +150,7 @@ mxUtils.extend(mxLeanDataBox, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxLeanDataBox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -229,7 +229,7 @@ mxUtils.extend(mxLeanCustomerSupplier, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxLeanCustomerSupplier.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -296,7 +296,7 @@ mxUtils.extend(mxLeanDedicatedProcess, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxLeanDedicatedProcess.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -367,7 +367,7 @@ mxUtils.extend(mxLeanSharedProcess, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxLeanSharedProcess.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -407,14 +407,14 @@ mxLeanSharedProcess.prototype.foreground = function(c, w, h, fontSize)
 		start = start + s;
 		if (start > lineH)
 		{
-			var startX = Math.max(0, start - h); 
-			var startY = Math.min(start, h); 
+			var startX = Math.max(0, start - h);
+			var startY = Math.min(start, h);
 
 			var endX = Math.min(start - lineH, w);
 
 			var endY = lineH;
 			var endY = Math.max(start - w, lineH);
-			
+
 			if (startX < w)
 			{
 				c.moveTo(startX, startY);
@@ -469,13 +469,13 @@ mxUtils.extend(mxLeanWorkcell, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanWorkcell.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w, 0);
@@ -531,7 +531,7 @@ mxUtils.extend(mxLeanInventoryBox, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanInventoryBox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -594,7 +594,7 @@ mxUtils.extend(mxLeanPushArrow, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanPushArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -629,7 +629,7 @@ mxLeanPushArrow.prototype.foreground = function(c, w, h, fontSize)
 	c.fill();
 	c.rect(w * 0.48, h * 0.17, w * 0.12, h * 0.66);
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(w * 0.72, h * 0.17);
 	c.lineTo(w * 0.75, h * 0.17);
@@ -679,13 +679,13 @@ mxUtils.extend(mxLeanSupermarket, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanSupermarket.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w, 0);
@@ -741,18 +741,18 @@ mxUtils.extend(mxLeanMaterialPull, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanMaterialPull.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	c.begin();
 	c.moveTo(w * 0.732, h * 0.0736);
 	c.arcTo(w * 0.4827, h * 0.4959, 0, 1, 0, w * 0.9553, h * 0.6191);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(w * 0.9071, h * 0.6191);
 	c.lineTo(w * 0.9794, h * 0.4951);
@@ -795,7 +795,7 @@ mxUtils.extend(mxLeanFifoLane, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanFifoLane.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -819,10 +819,10 @@ mxLeanFifoLane.prototype.background = function(c, w, h, fontSize)
 
 	c.rect(w * 0.02, lineH + 4, w * 0.26, h - lineH - 8);
 	c.fillAndStroke();
-	
+
 	c.ellipse(w * 0.35, lineH + 4, w * 0.26, h - lineH - 8);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w * 0.69, lineH + 4);
 	c.lineTo(w * 0.98, lineH + 4);
@@ -870,7 +870,7 @@ mxUtils.extend(mxLeanTruckShipment, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanTruckShipment.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -885,15 +885,15 @@ mxLeanTruckShipment.prototype.background = function(c, w, h)
 {
 	c.rect(0, 0, w * 0.6, h * 0.8);
 	c.fillAndStroke();
-	
+
 	c.rect(w * 0.6, h * 0.35, w * 0.4, h * 0.45);
 	c.fillAndStroke();
-	
+
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 	c.setFillColor(strokeColor);
 	c.ellipse(w * 0.15, h * 0.8, w * 0.2, h * 0.2);
 	c.fillAndStroke();
-	
+
 	c.ellipse(w * 0.65, h * 0.8, w * 0.2, h * 0.2);
 	c.fillAndStroke();
 };
@@ -937,7 +937,7 @@ mxUtils.extend(mxLeanProductionControl, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanProductionControl.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -991,7 +991,7 @@ mxUtils.extend(mxLeanFifoSequence, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanFifoSequence.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1007,7 +1007,7 @@ mxLeanFifoSequence.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.moveTo(w * 0.75, h * 0.5);
 	c.lineTo(w * 0.88, h * 0.5);
 	c.stroke();
-	
+
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 	c.setFillColor(strokeColor);
 	c.begin();
@@ -1015,7 +1015,7 @@ mxLeanFifoSequence.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w * 0.98, h * 0.5);
 	c.lineTo(w * 0.88, h * 0.61);
 	c.fillAndStroke();
-	
+
 //	c.setFontSize(Math.min(h * 0.5, w * 0.2));
 //	c.setFontColor(strokeColor);
 //	c.text(w * 0.5, h * 0.5, 0, 0, 'FIFO', mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
@@ -1060,13 +1060,13 @@ mxUtils.extend(mxLeanProductionKanban, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanProductionKanban.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	c.setDashed(true);
 	c.begin();
 	c.moveTo(4, h - 10);
@@ -1083,7 +1083,7 @@ mxLeanProductionKanban.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w - 75, 50);
 	c.close();
 	c.fillAndStroke();
-	
+
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 	c.setFillColor(strokeColor);
 	c.begin();
@@ -1118,13 +1118,13 @@ mxUtils.extend(mxLeanWithdrawalKanban, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanWithdrawalKanban.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	c.setDashed(true);
 	c.begin();
 	c.moveTo(4, h - 10);
@@ -1141,7 +1141,7 @@ mxLeanWithdrawalKanban.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w - 75, 50);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w - 75, 45);
 	c.lineTo(w - 70, 50);
@@ -1162,7 +1162,7 @@ mxLeanWithdrawalKanban.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.moveTo(w - 40, 0);
 	c.lineTo(w - 15, 25);
 	c.stroke();
-	
+
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 	c.setFillColor(strokeColor);
 	c.begin();
@@ -1197,13 +1197,13 @@ mxUtils.extend(mxLeanSignalKanban, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanSignalKanban.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	c.setDashed(true);
 	c.begin();
 	c.moveTo(4, h - 10);
@@ -1218,7 +1218,7 @@ mxLeanSignalKanban.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w - 45, 45);
 	c.close();
 	c.fillAndStroke();
-	
+
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 	c.setFillColor(strokeColor);
 	c.begin();
@@ -1253,7 +1253,7 @@ mxUtils.extend(mxLeanSequencedPullBall, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanSequencedPullBall.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1261,11 +1261,11 @@ mxLeanSequencedPullBall.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.translate(x, y);
 	c.ellipse(0, 0, w, h);
 	c.fillAndStroke();
-	
+
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 	c.setFillColor(strokeColor);
 	c.setShadow(false);
-	
+
 	c.ellipse(w * 0.15, h * 0.15, w * 0.7, h * 0.7);
 	c.fillAndStroke();
 };
@@ -1305,25 +1305,25 @@ mxUtils.extend(mxLeanRailShipment, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanRailShipment.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	c.rect(w * 0.1, 0, w * 0.35, h * 0.8);
 	c.fillAndStroke();
 	c.rect(w * 0.55, 0, w * 0.35, h * 0.8);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(0, h);
 	c.lineTo(w, h);
 	c.moveTo(w * 0.45, h * 0.7);
 	c.lineTo(w * 0.55, h * 0.7);
 	c.stroke();
-	
+
 	c.ellipse(w * 0.15, h * 0.8, w * 0.06, h * 0.2);
 	c.fillAndStroke();
 	c.ellipse(w * 0.34, h * 0.8, w * 0.06, h * 0.2);
@@ -1375,7 +1375,7 @@ mxUtils.extend(mxLeanWarehouse, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanWarehouse.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1384,9 +1384,9 @@ mxLeanWarehouse.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	c.rect(0, 0, w, h);
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.4);
 	c.lineTo(w, h * 0.4);
@@ -1443,42 +1443,42 @@ mxUtils.extend(mxLeanTimeline, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanTimeline.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	var shapeInfo = mxUtils.getValue(this.style, 'mainText', '20,Time 1,50,Time 2,30,Time 3,40,Time 4,30,Time 5,50,Time 6,20,Time 7').toString().split(',');
 	var fontSize = mxUtils.getValue(this.style, mxConstants.STYLE_FONTSIZE, '12');
 	var times = new Array();
 	var totalTime = 0;
-	
+
 	for (var i = 0; i < shapeInfo.length; i = i + 2)
 	{
-		var currTime = parseFloat(shapeInfo[i]); 
+		var currTime = parseFloat(shapeInfo[i]);
 		times.push(currTime);
 		totalTime = totalTime + currTime;
 	};
-	
+
 	var scaleX = w / totalTime;
 	var names = new Array();
-	
+
 	for (var i = 1; i < shapeInfo.length; i = i + 2)
 	{
 		names.push(shapeInfo[i]);
 	};
-	
+
 	c.begin();
 	var currX = 0;
 	c.moveTo(0, h);
-	
+
 	for (var i = 0; i < names.length; i++)
 	{
 		var currTime = times[i] * scaleX;
 		currX = currX + currTime;
-		
+
 		if (i % 2 === 0)
 		{
 			c.lineTo(currX, h);
@@ -1492,7 +1492,7 @@ mxLeanTimeline.prototype.paintVertexShape = function(c, x, y, w, h)
 			c.text(currX - currTime * 0.5, fontSize * 0.75, 0, 0, names[i], mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
 		}
 	};
-	
+
 	c.stroke();
 };
 
@@ -1520,7 +1520,7 @@ mxUtils.extend(mxLeanCrossDock, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanCrossDock.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1529,13 +1529,13 @@ mxLeanCrossDock.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	c.rect(0, 0, w, h);
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.25);
 	c.lineTo(w, h * 0.25);
-	
+
 	c.moveTo(w * 0.1, h * 0.4);
 	c.lineTo(w * 0.35, h * 0.4);
 	c.arcTo(w * 0.15, h * 0.15, 0, 0, 1, w * 0.5, h * 0.5);
@@ -1615,7 +1615,7 @@ mxUtils.extend(mxLeanOrders, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanOrders.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1624,10 +1624,10 @@ mxLeanOrders.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	c.rect(0, h * 0.56, w, h * 0.44);
 	c.fillAndStroke();
-	
+
 	var strokeWidth = parseFloat(mxUtils.getValue(this.style, mxConstants.STYLE_STROKEWIDTH, '2'));
 	c.setStrokeWidth(strokeWidth * 0.5);
-	
+
 	c.begin();
 	c.moveTo(w * 0.04, h * 0.5418);
 	c.lineTo(w * 0.94, h * 0.5418);
@@ -1711,15 +1711,15 @@ mxUtils.extend(mxLeanBatchedKanban, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanBatchedKanban.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	w = Math.max(110, w);
-	
+
 	c.translate(x, y);
-	
+
 	c.begin();
 	c.moveTo(4, h * 0.5);
 	c.lineTo(w, h * 0.5);
@@ -1733,7 +1733,7 @@ mxLeanBatchedKanban.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w * 0.5 - 20, h * 0.5 + 15);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w * 0.5 - 30, h * 0.5 - 25);
 	c.lineTo(w * 0.5 + 15, h * 0.5 - 25);
@@ -1742,7 +1742,7 @@ mxLeanBatchedKanban.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w * 0.5 - 30, h * 0.5 + 25);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w * 0.5 - 40, h * 0.5 - 15);
 	c.lineTo(w * 0.5 + 5, h * 0.5 - 15);
@@ -1751,7 +1751,7 @@ mxLeanBatchedKanban.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w * 0.5 - 40, h * 0.5 + 35);
 	c.close();
 	c.fillAndStroke();
-	
+
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 	c.setFillColor(strokeColor);
 	c.begin();
@@ -1791,7 +1791,7 @@ mxUtils.extend(mxLeanControlCenter, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxLeanControlCenter.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1837,23 +1837,23 @@ mxLeanElectronicInfoShape.prototype.paintEdgeShape = function(c, pts)
 	// Base vector (between end points)
 	var p0 = pts[0];
 	var pe = pts[pts.length - 1];
-	
+
 	var dx = pe.x - p0.x;
 	var dy = pe.y - p0.y;
-	
+
 	p0.x = p0.x + dx * 0.05;
 	p0.y = p0.y + dy * 0.05;
 	pe.x = pe.x - dx * 0.05;
 	pe.y = pe.y - dy * 0.05;
 	dx = pe.x - p0.x;
 	dy = pe.y - p0.y;
-	
+
 	var dist = Math.sqrt(dx * dx + dy * dy);
 	var nx = dx / dist;
 	var ny = dy / dist;
-	var midX = p0.x + dx * 0.5; 
+	var midX = p0.x + dx * 0.5;
 	var midY = p0.y + dy * 0.5;
-	
+
 	var p1x = midX - nx * dist * 0.1 - ny / 3 * dist * 0.1;
 	var p1y = midY - ny * dist * 0.1 + nx / 3 * dist * 0.1;
 	var p4x = midX + nx * dist * 0.1 + ny / 3 * dist * 0.1;
@@ -1871,7 +1871,7 @@ mxLeanElectronicInfoShape.prototype.paintEdgeShape = function(c, pts)
 	var dist = Math.sqrt(dx * dx + dy * dy);
 	var nx = dx / dist;
 	var ny = dy / dist;
-	
+
 	c.setFillColor(mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000'));
 	c.begin();
 	c.moveTo(pe.x - nx * 10 - ny * 5, pe.y - ny * 10 + nx * 5);
@@ -1898,21 +1898,21 @@ mxLeanManualInfoShape.prototype.paintEdgeShape = function(c, pts)
 	// Base vector (between end points)
 	var p0 = pts[0];
 	var pe = pts[pts.length - 1];
-	
+
 	var dx = pe.x - p0.x;
 	var dy = pe.y - p0.y;
-	
+
 	p0.x = p0.x + dx * 0.05;
 	p0.y = p0.y + dy * 0.05;
 	pe.x = pe.x - dx * 0.05;
 	pe.y = pe.y - dy * 0.05;
 	dx = pe.x - p0.x;
 	dy = pe.y - p0.y;
-	
+
 	var dist = Math.sqrt(dx * dx + dy * dy);
 	var nx = dx / dist;
 	var ny = dy / dist;
-	
+
 	c.begin();
 	c.moveTo(p0.x, p0.y);
 	c.lineTo(pe.x, pe.y);
@@ -1955,7 +1955,7 @@ mxShapeLeanTimeline.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeLeanTimeline.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1972,7 +1972,7 @@ mxShapeLeanTimeline.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx5 = mxUtils.getValue(this.style, 'dx5', '0');
 	var dy5 = mxUtils.getValue(this.style, 'dy5', '0');
 	var dy6 = mxUtils.getValue(this.style, 'dy6', '0');
-	
+
 	var lastUp = true;
 
 	c.begin();
@@ -2011,7 +2011,7 @@ mxShapeLeanTimeline.prototype.paintVertexShape = function(c, x, y, w, h)
 		c.lineTo(dx2, h);
 		lastUp = false;
 	}
-		
+
 	//3
 	if (dy3 <= 0.5 && lastUp)
 	{
@@ -2035,7 +2035,7 @@ mxShapeLeanTimeline.prototype.paintVertexShape = function(c, x, y, w, h)
 		c.lineTo(dx3, h);
 		lastUp = false;
 	}
-		
+
 	//4
 	if (dy4 <= 0.5 && lastUp)
 	{
@@ -2059,7 +2059,7 @@ mxShapeLeanTimeline.prototype.paintVertexShape = function(c, x, y, w, h)
 		c.lineTo(dx4, h);
 		lastUp = false;
 	}
-		
+
 	//5
 	if (dy5 <= 0.5 && lastUp)
 	{
@@ -2083,7 +2083,7 @@ mxShapeLeanTimeline.prototype.paintVertexShape = function(c, x, y, w, h)
 		c.lineTo(dx5, h);
 		lastUp = false;
 	}
-		
+
 	//6
 	if (dy6 <= 0.5 && lastUp)
 	{
@@ -2107,7 +2107,7 @@ mxShapeLeanTimeline.prototype.paintVertexShape = function(c, x, y, w, h)
 		c.lineTo(w, h);
 		lastUp = false;
 	}
-		
+
 	//end
 	c.stroke();
 };
@@ -2138,7 +2138,7 @@ Graph.handleFactory[mxShapeLeanTimeline.prototype.cst.SHAPE_TIMELINE] = function
 				this.state.style['dx2'] = Math.round(1000 * Math.max(0, Math.min(parseFloat(mxUtils.getValue(this.state.style, 'dx3', 0)), (pt.x - bounds.x)))) / 1000;
 				this.state.style['dy2'] = Math.round(1000 * Math.max(0, Math.min(1, (pt.y - bounds.y) / bounds.height))) / 1000;
 			});
-	
+
 	handles.push(handle2);
 
 	var handle3 = Graph.createHandle(state, ['dx3', 'dy3'], function(bounds)
@@ -2152,7 +2152,7 @@ Graph.handleFactory[mxShapeLeanTimeline.prototype.cst.SHAPE_TIMELINE] = function
 				this.state.style['dx3'] = Math.round(1000 * Math.max(parseFloat(mxUtils.getValue(this.state.style, 'dx2', 0)), Math.min(parseFloat(mxUtils.getValue(this.state.style, 'dx4', 0)), (pt.x - bounds.x)))) / 1000;
 				this.state.style['dy3'] = Math.round(1000 * Math.max(0, Math.min(1, (pt.y - bounds.y) / bounds.height))) / 1000;
 			});
-	
+
 	handles.push(handle3);
 
 	var handle4 = Graph.createHandle(state, ['dx4', 'dy4'], function(bounds)
@@ -2166,7 +2166,7 @@ Graph.handleFactory[mxShapeLeanTimeline.prototype.cst.SHAPE_TIMELINE] = function
 				this.state.style['dx4'] = Math.round(1000 * Math.max(parseFloat(mxUtils.getValue(this.state.style, 'dx3', 0)), Math.min(parseFloat(mxUtils.getValue(this.state.style, 'dx5', 0)), (pt.x - bounds.x)))) / 1000;
 				this.state.style['dy4'] = Math.round(1000 * Math.max(0, Math.min(1, (pt.y - bounds.y) / bounds.height))) / 1000;
 			});
-	
+
 	handles.push(handle4);
 
 	var handle5 = Graph.createHandle(state, ['dx5', 'dy5'], function(bounds)
@@ -2180,7 +2180,7 @@ Graph.handleFactory[mxShapeLeanTimeline.prototype.cst.SHAPE_TIMELINE] = function
 				this.state.style['dx5'] = Math.round(1000 * Math.max(parseFloat(mxUtils.getValue(this.state.style, 'dx4', 0)), Math.min(bounds.width, (pt.x - bounds.x)))) / 1000;
 				this.state.style['dy5'] = Math.round(1000 * Math.max(0, Math.min(1, (pt.y - bounds.y) / bounds.height))) / 1000;
 			});
-	
+
 	handles.push(handle5);
 
 	var handle6 = Graph.createHandle(state, ['dy6'], function(bounds)

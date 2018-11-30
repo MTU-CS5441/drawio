@@ -14,7 +14,7 @@
 		this.addOfficeSitesPalette();
 		this.addOfficeUsersPalette();
 	};
-	
+
 	Sidebar.prototype.addOfficeCloudsPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;outlineConnect=0;verticalAlign=top;align=center;shape=mxgraph.office.clouds.';
@@ -24,10 +24,10 @@
 		var sb = this;
 		var gn = 'mxgraph.office.clouds';
 		var dt = 'office cloud ';
-		
+
 		var w = 1.0;
 		var h = 1.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'azure;',
@@ -57,7 +57,7 @@
 			this.createVertexTemplateEntry(s + 'public_im_cloud_service;',
 					w * 102, h * 99, '', 'Public IM Cloud Service', null, null, this.getTagsForStencil(gn, 'public im instant message cloud service', dt).join(' '))
 		];
-			
+
 		this.addPalette('officeClouds', 'Office / Clouds', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -76,10 +76,10 @@
 		var sb = this;
 		var gn = 'mxgraph.office.communications';
 		var dt = 'office communication ';
-		
+
 		var w = 1.0;
 		var h = 1.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + '3rd_party_call_center_solution;',
@@ -223,7 +223,7 @@
 			this.createVertexTemplateEntry(s + 'xmpp_service;',
 					w * 58, h * 52, '', 'XMPP Service', null, null, this.getTagsForStencil(gn, 'xmpp service', dt).join(' '))
 		];
-			
+
 		this.addPalette('officeCommunications', 'Office / Communications', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -242,10 +242,10 @@
 		var sb = this;
 		var gn = 'mxgraph.office.concepts';
 		var dt = 'office concept ';
-		
+
 		var w = 1.0;
 		var h = 1.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'address_book;',
@@ -529,7 +529,7 @@
 			this.createVertexTemplateEntry(s + 'writing_pencil;',
 					w * 50, h * 50, '', 'Writing, Pencil', null, null, this.getTagsForStencil(gn, 'writing pencil', dt).join(' '))
 		];
-			
+
 		this.addPalette('officeConcepts', 'Office / Concepts', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -548,10 +548,10 @@
 		var sb = this;
 		var gn = 'mxgraph.office.databases';
 		var dt = 'office database db ';
-		
+
 		var w = 1.0;
 		var h = 1.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'address_book_store;',
@@ -645,7 +645,7 @@
 			this.createVertexTemplateEntry(s + 'web_store;',
 					w * 50, h * 54, '', 'Web Store', null, null, this.getTagsForStencil(gn, 'web store', dt).join(' '))
 		];
-			
+
 		this.addPalette('officeDatabases', 'Office / Databases', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -654,7 +654,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addOfficeDevicesPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.devices.';
@@ -664,10 +664,10 @@
 		var sb = this;
 		var gn = 'mxgraph.office.devices';
 		var dt = 'office device ';
-		
+
 		var w = 1.0;
 		var h = 1.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'bluetooth;',
@@ -771,7 +771,7 @@
 			this.createVertexTemplateEntry(s + 'workstation_visual_studio;',
 					w * 53, h * 59, '', 'Workstation, Visual Studio', null, null, this.getTagsForStencil(gn, 'workstation visual studio', dt).join(' '))
 		];
-			
+
 		this.addPalette('officeDevices', 'Office / Devices', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -780,7 +780,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addOfficeSecurityPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.security.';
@@ -790,10 +790,10 @@
 		var sb = this;
 		var gn = 'mxgraph.office.security';
 		var dt = 'office security ';
-		
+
 		var w = 1.0;
 		var h = 1.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'active_directory;',
@@ -901,7 +901,7 @@
 			this.createVertexTemplateEntry(s + 'universal_security_group;',
 					w * 58, h * 58, '', 'Universal Security Group', null, null, this.getTagsForStencil(gn, 'universal security group', dt).join(' '))
 		];
-			
+
 		this.addPalette('officeSecurity', 'Office / Security', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -910,7 +910,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addOfficeServersPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.servers.';
@@ -920,10 +920,10 @@
 		var sb = this;
 		var gn = 'mxgraph.office.servers';
 		var dt = 'office server ';
-		
+
 		var w = 1.0;
 		var h = 1.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + '3rd_party_mail_server;',
@@ -1121,7 +1121,7 @@
 			this.createVertexTemplateEntry(s + 'windows_server;',
 					w * 52, h * 55, '', 'Windows Server', null, null, this.getTagsForStencil(gn, 'windows server', dt).join(' '))
 		];
-			
+
 		this.addPalette('officeServers', 'Office / Servers', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -1130,7 +1130,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addOfficeServicesPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.services.';
@@ -1140,10 +1140,10 @@
 		var sb = this;
 		var gn = 'mxgraph.office.services';
 		var dt = 'office service ';
-		
+
 		var w = 1.0;
 		var h = 1.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + '3rd_party_service;',
@@ -1199,7 +1199,7 @@
 			this.createVertexTemplateEntry(s + 'xmpp_service;',
 					w * 58, h * 52, '', 'XMPP Service', null, null, this.getTagsForStencil(gn, 'xmpp service', dt).join(' '))
 		];
-			
+
 		this.addPalette('officeServices', 'Office / Services', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -1208,7 +1208,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addOfficeSitesPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.sites.';
@@ -1218,10 +1218,10 @@
 		var sb = this;
 		var gn = 'mxgraph.office.sites';
 		var dt = 'office site ';
-		
+
 		var w = 1.0;
 		var h = 1.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'access_services;',
@@ -1269,7 +1269,7 @@
 			this.createVertexTemplateEntry(s + 'word_automation_services;',
 					w * 60, h * 49, '', 'Word Automation Services', null, null, this.getTagsForStencil(gn, 'word automation services', dt).join(' '))
 		];
-			
+
 		this.addPalette('officeSites', 'Office / Sites', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -1278,7 +1278,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addOfficeUsersPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#505050;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;outlineConnect=0;align=center;shape=mxgraph.office.users.';
@@ -1288,10 +1288,10 @@
 		var sb = this;
 		var gn = 'mxgraph.office.users';
 		var dt = 'office user ';
-		
+
 		var w = 1.0;
 		var h = 1.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'administrator;',
@@ -1381,7 +1381,7 @@
 			this.createVertexTemplateEntry(s + 'writer;',
 					w * 54, h * 59, '', 'Writer', null, null, this.getTagsForStencil(gn, 'writer', dt).join(' '))
 		];
-			
+
 		this.addPalette('officeUsers', 'Office / Users', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -1390,11 +1390,11 @@
 					}
 		}));
 	};
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
 })();

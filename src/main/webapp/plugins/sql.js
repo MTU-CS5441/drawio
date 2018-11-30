@@ -136,7 +136,7 @@ Draw.loadPlugin(function(ui) {
         //Get Referenced Key
         var referencedPropertyName = referencesSQL.substring(referencedTableIndex + 1, referencedPropertyIndex);
 
-        //Get ForeignKey 
+        //Get ForeignKey
         var foreignKey = foreignKeySQL.replace("FOREIGN KEY (", '').replace(")", '').replace(" ", '');
 
         //Create ForeignKey
@@ -185,7 +185,7 @@ Draw.loadPlugin(function(ui) {
             //Parse Name
             referencedPropertyName = ParseSQLServerName(referencedPropertyName);
 
-            //Get ForeignKey 
+            //Get ForeignKey
             var foreignKey = foreignKeySQL.replace("FOREIGN KEY (", '').replace(")", '');
 
             //Parse Name
@@ -381,7 +381,7 @@ Draw.loadPlugin(function(ui) {
                 //Create Table
                 currentTableModel = CreateTable(name);
             }
-            // Parse Properties 
+            // Parse Properties
             else if (tmp !== '(' && currentTableModel != null && propertyRow !== 'alter table ') {
 
                 //Parse the row

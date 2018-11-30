@@ -29,7 +29,7 @@ mxArchiMateLocation.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxArchiMateLocation.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -50,7 +50,7 @@ mxArchiMateLocation.prototype.background = function(c, x, y, w, h)
 mxArchiMateLocation.prototype.foreground = function(c, x, y, w, h)
 {
 	c.setDashed(false);
-	
+
 	c.translate(3 ,0);
 	w = w - 6;
 	c.begin();
@@ -95,18 +95,18 @@ mxArchiMateBusiness.prototype.cst = {
 };
 
 mxArchiMateBusiness.prototype.customProperties = [
-	{name: 'busType', dispName: 'Business Type', type: 'enum', 
-		enumList: [{val: 'process', dispName: 'Process'}, 
-				   {val: 'function', dispName: 'Function'}, 
-				   {val: 'interaction', dispName: 'Interaction'}, 
-				   {val: 'event', dispName: 'Event'}, 
+	{name: 'busType', dispName: 'Business Type', type: 'enum',
+		enumList: [{val: 'process', dispName: 'Process'},
+				   {val: 'function', dispName: 'Function'},
+				   {val: 'interaction', dispName: 'Interaction'},
+				   {val: 'event', dispName: 'Event'},
 				   {val: 'service', dispName: 'Service'}]
 	}
 ];
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxArchiMateBusiness.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -127,14 +127,14 @@ mxArchiMateBusiness.prototype.background = function(c, x, y, w, h)
 mxArchiMateBusiness.prototype.foreground = function(c, x, y, w, h)
 {
 	var type = mxUtils.getValue(this.style, mxArchiMateBusiness.prototype.cst.TYPE, mxArchiMateBusiness.prototype.cst.PROCESS);
-	
+
 	c.setDashed(false);
-	
+
 	if (type === mxArchiMateBusiness.prototype.cst.PROCESS)
 	{
 		c.translate(0, 2);
 		h = h - 4;
-	
+
 		c.begin();
 		c.moveTo(0, h * 0.15);
 		c.lineTo(w * 0.65, h * 0.15);
@@ -150,7 +150,7 @@ mxArchiMateBusiness.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.translate(2, 0);
 		w = w - 4;
-		
+
 		c.begin();
 		c.moveTo(0, h * 0.15);
 		c.lineTo(w * 0.5, 0);
@@ -176,7 +176,7 @@ mxArchiMateBusiness.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.translate(0, 3);
 		h = h - 6;
-		
+
 		c.begin();
 		c.moveTo(w - h * 0.5, 0);
 		c.arcTo(h * 0.5, h * 0.5, 0, 0, 1, w - h * 0.5, h);
@@ -189,7 +189,7 @@ mxArchiMateBusiness.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.translate(0, 3);
 		h = h - 6;
-		
+
 		c.begin();
 		c.moveTo(w - h * 0.5, 0);
 		c.arcTo(h * 0.5, h * 0.5, 0, 0, 1, w - h * 0.5, h);
@@ -228,7 +228,7 @@ mxArchiMateBusinessObject.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxArchiMateBusinessObject.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -284,7 +284,7 @@ mxArchiMateRepresentation.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxArchiMateRepresentation.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -333,7 +333,7 @@ mxArchiMateProduct.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxArchiMateProduct.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -404,28 +404,28 @@ mxArchiMateApplication.prototype.cst = {
 };
 
 mxArchiMateApplication.prototype.customProperties = [
-	{name: 'appType', dispName: 'App Type', type: 'enum', 
-		enumList: [{val: 'comp', dispName: 'Component'}, 
-				   {val: 'interface', dispName: 'Interface'}, 
-				   {val: 'interface2', dispName: 'Interface2'}, 
-				   {val: 'function', dispName: 'Function'}, 
-				   {val: 'interaction', dispName: 'Interaction'}, 
-				   {val: 'service', dispName: 'Service'}, 
-				   {val: 'node', dispName: 'Node'}, 
-				   {val: 'network', dispName: 'Network'}, 
-				   {val: 'commPath', dispName: 'Comm Path'}, 
-				   {val: 'artifact', dispName: 'Artifact'}, 
-				   {val: 'sysSw', dispName: 'System Sw'}, 
+	{name: 'appType', dispName: 'App Type', type: 'enum',
+		enumList: [{val: 'comp', dispName: 'Component'},
+				   {val: 'interface', dispName: 'Interface'},
+				   {val: 'interface2', dispName: 'Interface2'},
+				   {val: 'function', dispName: 'Function'},
+				   {val: 'interaction', dispName: 'Interaction'},
+				   {val: 'service', dispName: 'Service'},
+				   {val: 'node', dispName: 'Node'},
+				   {val: 'network', dispName: 'Network'},
+				   {val: 'commPath', dispName: 'Comm Path'},
+				   {val: 'artifact', dispName: 'Artifact'},
+				   {val: 'sysSw', dispName: 'System Sw'},
 				   {val: 'path', dispName: 'Path'},
-				   {val: 'actor', dispName: 'Actor'}, 
-				   {val: 'role', dispName: 'Role'}, 
+				   {val: 'actor', dispName: 'Actor'},
+				   {val: 'role', dispName: 'Role'},
 				   {val: 'collab', dispName: 'Collaboration'}]
 	}
 ];
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxArchiMateApplication.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -446,9 +446,9 @@ mxArchiMateApplication.prototype.background = function(c, x, y, w, h)
 mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 {
 	var type = mxUtils.getValue(this.style, mxArchiMateApplication.prototype.cst.TYPE, mxArchiMateApplication.prototype.cst.COMPONENT);
-	
+
 	c.setDashed(false);
-	
+
 	if (type === mxArchiMateApplication.prototype.cst.COMPONENT)
 	{
 		c.translate(1, 0);
@@ -456,10 +456,10 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 
 		c.rect(w * 0.25, 0, w * 0.75, h);
 		c.stroke();
-		
+
 		c.rect(0, h * 0.25, w * 0.5, h * 0.15);
 		c.fillAndStroke();
-		
+
 		c.rect(0, h * 0.6, w * 0.5, h * 0.15);
 		c.fillAndStroke();
 	}
@@ -467,7 +467,7 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.translate(0, 3);
 		h = h - 6;
-		
+
 		c.ellipse(0, 0, w * 0.6, h);
 		c.stroke();
 		c.ellipse(w * 0.4, 0, w * 0.6, h);
@@ -477,10 +477,10 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.translate(0, 4);
 		h = h - 8;
-		
+
 		c.ellipse(w * 0.5, 0, w * 0.5, h);
 		c.stroke();
-		
+
 		c.begin();
 		c.moveTo(0, h * 0.5);
 		c.lineTo(w * 0.5, h * 0.5);
@@ -490,7 +490,7 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.translate(0, 1);
 		h = h - 2;
-		
+
 		c.begin();
 		c.moveTo(0, h * 0.5);
 		c.lineTo(w * 0.6, h * 0.5);
@@ -525,7 +525,7 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.translate(0, 3);
 		h = h - 6;
-		
+
 		c.begin();
 		c.moveTo(w - h * 0.5, 0);
 		c.arcTo(h * 0.5, h * 0.5, 0, 0, 1, w - h * 0.5, h);
@@ -555,7 +555,7 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.translate(0, 2);
 		h = h - 4;
-		
+
 		c.begin();
 		c.moveTo(w * 0.4, h * 0.2);
 		c.lineTo(w * 0.85, h * 0.2);
@@ -563,19 +563,19 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 		c.lineTo(w * 0.15, h * 0.8);
 		c.close();
 		c.stroke();
-		
+
 		var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 		c.setFillColor(strokeColor);
-		
+
 		c.ellipse(w * 0.25, 0, w * 0.3, h * 0.4);
 		c.fill();
-		
+
 		c.ellipse(w * 0.7, 0, w * 0.3, h * 0.4);
 		c.fill();
-		
+
 		c.ellipse(0, h * 0.6, w * 0.3, h * 0.4);
 		c.fill();
-		
+
 		c.ellipse(w * 0.45, h * 0.6, w * 0.3, h * 0.4);
 		c.fill();
 	}
@@ -583,7 +583,7 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.translate(0, 5);
 		h = h - 10;
-		
+
 		c.begin();
 		c.moveTo(w * 0.1, 0);
 		c.lineTo(0, h * 0.5);
@@ -592,7 +592,7 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 		c.lineTo(w, h * 0.5);
 		c.lineTo(w * 0.9, h);
 		c.stroke();
-		
+
 		c.setDashed(true);
 		c.begin();
 		c.moveTo(0, h * 0.5);
@@ -603,7 +603,7 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.ellipse(w * 0.3, 0, w * 0.7, h * 0.7);
 		c.stroke();
-		
+
 		c.ellipse(0, h * 0.02, w * 0.98, h * 0.98);
 		c.fillAndStroke();
 	}
@@ -630,7 +630,7 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 		w = w - 6;
 		c.ellipse(w * 0.2, 0, w * 0.6, h * 0.3);
 		c.stroke();
-		
+
 		c.begin();
 		c.moveTo(w * 0.5, h * 0.3);
 		c.lineTo(w * 0.5, h * 0.75);
@@ -652,7 +652,7 @@ mxArchiMateApplication.prototype.foreground = function(c, x, y, w, h)
 		c.arcTo(w * 0.2, h * 0.5, 0, 0, 0, w * 0.2, h);
 		c.lineTo(w * 0.8, h);
 		c.stroke();
-		
+
 		c.ellipse(w * 0.6, 0, w * 0.4, h);
 		c.stroke();
 	}
@@ -688,15 +688,15 @@ mxArchiMateTech.prototype.cst = {
 };
 
 mxArchiMateTech.prototype.customProperties = [
-	{name: 'techType', dispName: 'Tech Type', type: 'enum', 
-		enumList: [{val: 'device', dispName: 'Device'}, 
+	{name: 'techType', dispName: 'Tech Type', type: 'enum',
+		enumList: [{val: 'device', dispName: 'Device'},
 				   {val: 'plateau', dispName: 'Plateau'}]
 	}
 ];
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxArchiMateTech.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -729,9 +729,9 @@ mxArchiMateTech.prototype.background = function(c, x, y, w, h)
 mxArchiMateTech.prototype.foreground = function(c, x, y, w, h)
 {
 	var type = mxUtils.getValue(this.style, mxArchiMateTech.prototype.cst.TYPE, mxArchiMateTech.prototype.cst.DEVICE);
-	
+
 	c.setDashed(false);
-	
+
 	if (type === mxArchiMateTech.prototype.cst.DEVICE)
 	{
 		c.roundrect(0, 0, w, h * 0.88, w * 0.05, h * 0.05);
@@ -747,13 +747,13 @@ mxArchiMateTech.prototype.foreground = function(c, x, y, w, h)
 	{
 		var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 		c.setFillColor(strokeColor);
-		
+
 		c.rect(w * 0.4, 0, w * 0.6, h * 0.2);
 		c.fill();
-		
+
 		c.rect(w * 0.2, h * 0.4, w * 0.6, h * 0.2);
 		c.fill();
-		
+
 		c.rect(0, h * 0.8, w * 0.6, h * 0.2);
 		c.fill();
 	}
@@ -794,8 +794,8 @@ mxArchiMateMotivational.prototype.cst = {
 };
 
 mxArchiMateMotivational.prototype.customProperties = [
-	{name: 'motivType', dispName: 'Motivational Type', type: 'enum', 
-		enumList: [{val: 'stake', dispName: 'Stake'}, 
+	{name: 'motivType', dispName: 'Motivational Type', type: 'enum',
+		enumList: [{val: 'stake', dispName: 'Stake'},
 				   {val: 'driver', dispName: 'Driver'},
 				   {val: 'assess', dispName: 'Assessment'},
 				   {val: 'goal', dispName: 'Goal'},
@@ -807,7 +807,7 @@ mxArchiMateMotivational.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxArchiMateMotivational.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -837,9 +837,9 @@ mxArchiMateMotivational.prototype.background = function(c, x, y, w, h)
 mxArchiMateMotivational.prototype.foreground = function(c, x, y, w, h)
 {
 	var type = mxUtils.getValue(this.style, mxArchiMateMotivational.prototype.cst.TYPE, mxArchiMateMotivational.prototype.cst.STAKE);
-	
+
 	c.setDashed(false);
-	
+
 	if (type === mxArchiMateMotivational.prototype.cst.STAKE)
 	{
 		c.translate(0, 4);
@@ -851,7 +851,7 @@ mxArchiMateMotivational.prototype.foreground = function(c, x, y, w, h)
 		c.arcTo(w * 0.2, h * 0.5, 0, 0, 0, w * 0.2, h);
 		c.lineTo(w * 0.8, h);
 		c.stroke();
-		
+
 		c.ellipse(w * 0.6, 0, w * 0.4, h);
 		c.stroke();
 	}
@@ -859,7 +859,7 @@ mxArchiMateMotivational.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.ellipse(w * 0.1, h * 0.1, w * 0.8, h * 0.8);
 		c.stroke();
-		
+
 		c.begin();
 		c.moveTo(0, h * 0.5);
 		c.lineTo(w, h * 0.5);
@@ -870,10 +870,10 @@ mxArchiMateMotivational.prototype.foreground = function(c, x, y, w, h)
 		c.moveTo(w * 0.145, h * 0.855);
 		c.lineTo(w * 0.855, h * 0.145);
 		c.stroke();
-		
+
 		var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 		c.setFillColor(strokeColor);
-		
+
 		c.ellipse(w * 0.35, h * 0.35, w * 0.3, h * 0.3);
 		c.fillAndStroke();
 	}
@@ -881,7 +881,7 @@ mxArchiMateMotivational.prototype.foreground = function(c, x, y, w, h)
 	{
 		c.ellipse(w * 0.2, 0, w * 0.8, h * 0.8);
 		c.stroke();
-		
+
 		c.begin();
 		c.moveTo(0, h);
 		c.lineTo(w * 0.32, h * 0.68);
@@ -936,10 +936,10 @@ mxArchiMateMotivational.prototype.foreground = function(c, x, y, w, h)
 		c.arcTo(w * 2.3, h * 2.3, 0, 0, 1, w * 0.05, h * 0.05);
 		c.close();
 		c.stroke();
-		
+
 		var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 		c.setFillColor(strokeColor);
-		
+
 		c.begin();
 		c.moveTo(w * 0.45, h * 0.7);
 		c.lineTo(w * 0.42, h * 0.15);
@@ -947,7 +947,7 @@ mxArchiMateMotivational.prototype.foreground = function(c, x, y, w, h)
 		c.lineTo(w * 0.55, h * 0.7);
 		c.close();
 		c.fill();
-		
+
 		c.rect(w * 0.45, h * 0.75, w * 0.1, h * 0.1);
 		c.fill();
 	}
@@ -983,7 +983,7 @@ mxArchiMateGap.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxArchiMateGap.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1010,13 +1010,13 @@ mxArchiMateGap.prototype.background = function(c, x, y, w, h)
 mxArchiMateGap.prototype.foreground = function(c, x, y, w, h)
 {
 	c.setDashed(false);
-	
+
 	c.translate(0, 2);
 	h = h - 4;
 
 	c.ellipse(w * 0.15, 0, w * 0.7, h);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.35);
 	c.lineTo(w, h * 0.35);

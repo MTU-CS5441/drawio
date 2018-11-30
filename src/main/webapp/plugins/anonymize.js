@@ -5,18 +5,18 @@ Draw.loadPlugin(function(editorUi)
 {
 	var div = document.createElement('div');
 	var keep = '\n\t`~!@#$%^&*()_+{}|:"<>?-=[]\;\'.\/,\n\t';
-	
+
 	// Adds resource for action
 	mxResources.parse('anonymizeCurrentPage=Anonymize Current Page');
-	
+
 	function anonymizeString(text)
 	{
 		var result = [];
-		
+
 		for (var i = 0; i < text.length; i++)
 		{
 			var c = text.charAt(i);
-			
+
 			if (keep.indexOf(c) >= 0)
 			{
 				result.push(c);
@@ -43,21 +43,21 @@ Draw.loadPlugin(function(editorUi)
 				result.push('�');
 			}
 		}
-		
+
 		return result.join('');
 	};
-	
+
 	function replaceTextContent(elt)
 	{
 		if (elt.nodeValue != null)
 		{
 			elt.nodeValue = anonymizeString(elt.nodeValue);
 		}
-		
+
 		if (elt.nodeType == mxConstants.NODETYPE_ELEMENT)
 		{
 			var tmp = elt.firstChild;
-			
+
 			while (tmp != null)
 			{
 				replaceTextContent(tmp);
@@ -66,13 +66,13 @@ Draw.loadPlugin(function(editorUi)
 		}
 	};
 
-	
+
 	function anonymizeHtml(html)
 	{
 		div.innerHTML = html;
-		
+
 		replaceTextContent(div);
-		
+
 		return div.innerHTML;
 	};
 
@@ -81,7 +81,7 @@ Draw.loadPlugin(function(editorUi)
 	{
 		var graph = editorUi.editor.graph;
 		var model = graph.model;
-		
+
 		model.beginUpdate();
 		try
 		{
@@ -92,7 +92,7 @@ Draw.loadPlugin(function(editorUi)
 			{
 				var cell = model.cells[id];
 				var label = graph.getLabel(cell);
-				
+
 				if (graph.isHtmlLabel(cell))
 				{
 					label = anonymizeHtml(label);
@@ -101,10 +101,10 @@ Draw.loadPlugin(function(editorUi)
 				{
 					label = anonymizeString(label);
 				}
-				
+
 				queue.push({cell: cell, label: label});
 			}
-			
+
 			for (var i = 0; i < queue.length; i++)
 			{
 				model.setValue(queue[i].cell, queue[i].label);
@@ -115,14 +115,14 @@ Draw.loadPlugin(function(editorUi)
 			model.endUpdate();
 		}
 	});
-	
+
 	var menu = editorUi.menus.get('extras');
 	var oldFunct = menu.funct;
-	
+
 	menu.funct = function(menu, parent)
 	{
 		oldFunct.apply(this, arguments);
-		
+
 		editorUi.menus.addMenuItems(menu, ['-', 'anonymizeCurrentPage'], parent);
 	};
 

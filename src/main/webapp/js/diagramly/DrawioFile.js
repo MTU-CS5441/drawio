@@ -5,14 +5,14 @@
 DrawioFile = function(ui, data)
 {
 	mxEventSource.call(this);
-	
+
 	/**
 	 * Holds the x-coordinate of the point.
 	 * @type number
 	 * @default 0
 	 */
 	this.ui = ui;
-	
+
 	/**
 	 * Holds the x-coordinate of the point.
 	 * @type number
@@ -70,7 +70,7 @@ DrawioFile.prototype.maxAutosaveRevisionDelay = 1800000;
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -81,7 +81,7 @@ DrawioFile.prototype.descriptorChanged = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -101,7 +101,7 @@ DrawioFile.prototype.save = function(revision, success, error, unloading)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -112,7 +112,7 @@ DrawioFile.prototype.updateFileData = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -120,7 +120,7 @@ DrawioFile.prototype.saveAs = function(filename, success, error) { };
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -144,7 +144,7 @@ DrawioFile.prototype.isRestricted = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -155,7 +155,7 @@ DrawioFile.prototype.isModified = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -175,7 +175,7 @@ DrawioFile.prototype.isAutosaveOptional = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -186,7 +186,7 @@ DrawioFile.prototype.isAutosave = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -197,7 +197,7 @@ DrawioFile.prototype.isRenamable = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -205,7 +205,7 @@ DrawioFile.prototype.rename = function(title, success, error) { };
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -216,7 +216,7 @@ DrawioFile.prototype.isMovable = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -224,7 +224,7 @@ DrawioFile.prototype.move = function(folderId, success, error) { };
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -235,7 +235,7 @@ DrawioFile.prototype.getHash = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -246,7 +246,7 @@ DrawioFile.prototype.getId = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -266,7 +266,7 @@ DrawioFile.prototype.getUi = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -277,7 +277,7 @@ DrawioFile.prototype.getTitle = function()
 
 /**
  * Sets the location of this point.
- * 
+ *
  * @param {number} x New X-coordinate of the point.
  * @param {number} y New Y-coordinate of the point.
  */
@@ -302,22 +302,22 @@ DrawioFile.prototype.getData = function()
 DrawioFile.prototype.open = function()
 {
 	var data = this.getData();
-	
+
 	if (data != null)
 	{
 		this.ui.setFileData(data);
 	}
-	
+
 	this.changeListener = mxUtils.bind(this, function(sender, eventObject)
 	{
 		var edit = (eventObject != null) ? eventObject.getProperty('edit') : null;
-		
+
 		if (this.changeListenerEnabled && this.isEditable() && (edit == null || !edit.ignoreEdit))
 		{
 			this.fileChanged();
 		}
 	});
-	
+
 	this.ui.editor.graph.model.addListener(mxEvent.CHANGE, this.changeListener);
 
 	// Some options trigger autosave
@@ -346,7 +346,7 @@ DrawioFile.prototype.addAllSavedStatus = function()
 			'" style="text-decoration:underline;cursor:pointer;">' +
 			mxUtils.htmlEntities(mxResources.get('allChangesSaved')) + '</div>');
 		var links = (this.ui.statusContainer != null) ? this.ui.statusContainer.getElementsByTagName('div') : null;
-		
+
 		if (links.length > 0)
 		{
 			mxEvent.addListener(links[0], 'click', mxUtils.bind(this, function()
@@ -367,11 +367,11 @@ DrawioFile.prototype.addAllSavedStatus = function()
 DrawioFile.prototype.fileChanged = function()
 {
 	this.setModified(true);
-	
+
 	if (this.isAutosave())
 	{
 		this.ui.editor.setStatus(mxUtils.htmlEntities(mxResources.get('saving')) + '...');
-		
+
 		this.autosave(this.autosaveDelay, this.maxAutosaveDelay, mxUtils.bind(this, function(resp)
 		{
 			// Does not update status if another autosave was scheduled
@@ -419,13 +419,13 @@ DrawioFile.prototype.addUnsavedStatus = function(err)
 //				// Keeps modified flag unchanged
 //			}
 //		}
-		
+
 		this.ui.editor.setStatus('<div class="geStatusAlert" style="cursor:pointer;overflow:hidden;">' +
 			mxUtils.htmlEntities(mxResources.get('unsavedChangesClickHereToSave')) + '</div>');
-		
+
 		// Installs click handler for saving
 		var links = (this.ui.statusContainer != null) ? this.ui.statusContainer.getElementsByTagName('div') : null;
-		
+
 		if (links != null && links.length > 0)
 		{
 			mxEvent.addListener(links[0], 'click', mxUtils.bind(this, function()
@@ -450,7 +450,7 @@ DrawioFile.prototype.autosave = function(delay, maxDelay, success, error)
 	{
 		this.lastAutosave = new Date().getTime();
 	}
-	
+
 	var tmp = (new Date().getTime() - this.lastAutosave < maxDelay) ? delay : 0;
 	this.clearAutosave();
 
@@ -458,27 +458,27 @@ DrawioFile.prototype.autosave = function(delay, maxDelay, success, error)
 	var thread = window.setTimeout(mxUtils.bind(this, function()
 	{
 		this.lastAutosave = null;
-		
+
 		if (this.autosaveThead == thread)
 		{
 			this.autosaveThread = null;
 		}
-		
+
 		// Workaround for duplicate save if UI is blocking
 		// after save while pending autosave triggers
 		if (this.isModified() && this.isAutosaveNow())
 		{
 			var rev = this.isAutosaveRevision();
-			
+
 			if (rev)
 			{
 				this.lastAutosaveRevision = new Date().getTime();
 			}
-			
+
 			this.save(rev, mxUtils.bind(this, function(resp)
 			{
 				this.autosaveCompleted();
-				
+
 				if (success != null)
 				{
 					success(resp);
@@ -497,14 +497,14 @@ DrawioFile.prototype.autosave = function(delay, maxDelay, success, error)
 			{
 				this.ui.editor.setStatus('');
 			}
-			
+
 			if (success != null)
 			{
 				success(null);
 			}
 		}
 	}), tmp);
-	
+
 	this.autosaveThread = thread;
 };
 
@@ -541,7 +541,7 @@ DrawioFile.prototype.clearAutosave = function()
 DrawioFile.prototype.isAutosaveRevision = function()
 {
 	var now = new Date().getTime();
-	
+
 	return (this.lastAutosaveRevision == null) || (now - this.lastAutosaveRevision) > this.maxAutosaveRevisionDelay;
 };
 
@@ -554,7 +554,7 @@ DrawioFile.prototype.close = function(unloading)
 	{
 		this.save(this.isAutosaveRevision(), null, null, unloading);
 	}
-	
+
 	this.destroy();
 };
 
@@ -571,7 +571,7 @@ DrawioFile.prototype.hasSameExtension = function(title, newTitle)
 
 		return ext === ((dot > 0) ? newTitle.substring(dot) : '');
 	}
-	
+
 	return title == newTitle;
 };
 
@@ -581,7 +581,7 @@ DrawioFile.prototype.hasSameExtension = function(title, newTitle)
 DrawioFile.prototype.destroy = function()
 {
 	this.clearAutosave();
-	
+
 	if (this.changeListener != null)
 	{
 		this.ui.editor.graph.model.removeListener(this.changeListener);

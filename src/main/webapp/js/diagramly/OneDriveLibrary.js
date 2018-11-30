@@ -12,7 +12,7 @@ mxUtils.extend(OneDriveLibrary, OneDriveFile);
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */

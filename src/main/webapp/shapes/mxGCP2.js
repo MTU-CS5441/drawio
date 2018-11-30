@@ -29,17 +29,17 @@ mxShapeGCP2DoubleRect.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGCP2DoubleRect.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	var dx = 8;
 	var dy = 8;
-	
+
 	w = w - dx;
 	h = h - dy;
-	
+
 	c.translate(x, y);
 	c.begin();
 	c.roundrect(dx, dy, w , h, 1, 1);

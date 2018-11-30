@@ -5,7 +5,7 @@
 DriveFile = function(ui, data, desc, doc, noSync)
 {
 	DrawioFile.call(this, ui, data);
-	
+
 	this.desc = desc;
 
 	if (doc != null && doc.getModel() != null && doc.getModel().getRoot() != null)
@@ -20,7 +20,7 @@ DriveFile = function(ui, data, desc, doc, noSync)
 
 /**
  * Global switch for realtime collaboration type to use:
- * 
+ *
  * - 'none' means to let the user overwrite/discard changes or create a copy of the file.
  * - 'sync' means to synchronize changes using a status message and merge remote changes.
  * - 'realtime' means merging changes in realtime.
@@ -54,7 +54,7 @@ DriveFile.prototype.isConflict = function(err)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -81,12 +81,12 @@ DriveFile.prototype.getPublicUrl = function(fn)
 					resp.items[i].id === 'anyone')
 				{
 					fn(this.desc.webContentLink);
-					
+
 					return;
 				}
 			}
 		}
-		
+
 		fn(null);
 	}));
 };
@@ -102,7 +102,7 @@ DriveFile.prototype.isAutosaveOptional = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -156,7 +156,7 @@ DriveFile.prototype.autosaveCompleted = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -167,7 +167,7 @@ DriveFile.prototype.isRenamable = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -178,20 +178,20 @@ DriveFile.prototype.isMovable = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
 DriveFile.prototype.save = function(revision, success, error, unloading, overwrite)
 {
 	DrawioFile.prototype.save.apply(this, arguments);
-	
+
 	this.saveFile(null, revision, success, error, unloading, overwrite);
 };
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -211,7 +211,7 @@ DriveFile.prototype.saveFile = function(title, revision, success, error, unloadi
 		var secret = Editor.s4() + Editor.s4() + Editor.s4() + Editor.s4() + Editor.s4();
 		var prevModified = this.isModified;
 		var modified = this.isModified();
-		
+
 		// Makes sure no changes get lost while the file is saved
 		this.setModified(false);
 
@@ -220,17 +220,17 @@ DriveFile.prototype.saveFile = function(title, revision, success, error, unloadi
 		{
 			return true;
 		};
-		
+
 		var doSave = mxUtils.bind(this, function(realOverwrite, realRevision)
 		{
 			this.savingFile = true;
 			var snapshot = this.data;
-			
+
 			this.ui.drive.saveFile(this, realRevision, mxUtils.bind(this, function(resp)
 			{
 				this.isModified = prevModified;
 				this.savingFile = false;
-				
+
 				// Handles special case where resp is false eg
 				// if the old file was converted to realtime
 				if (resp != false)
@@ -239,15 +239,15 @@ DriveFile.prototype.saveFile = function(title, revision, success, error, unloadi
 					{
 						this.lastAutosaveRevision = new Date().getTime();
 					}
-					
+
 					this.desc = resp;
 					this.contentChanged();
-					
+
 					if (this.sync != null)
 					{
 						this.sync.fileSaved(cacheId, secret, snapshot);
 					}
-					
+
 					if (success != null)
 					{
 						success(resp);
@@ -256,7 +256,7 @@ DriveFile.prototype.saveFile = function(title, revision, success, error, unloadi
 				else
 				{
 					this.setModified(modified || this.isModified());
-					
+
 					if (error != null)
 					{
 						error(resp);
@@ -269,7 +269,7 @@ DriveFile.prototype.saveFile = function(title, revision, success, error, unloadi
 					this.setModified(modified || this.isModified());
 					this.isModified = prevModified;
 					this.savingFile = false;
-					
+
 					if (this.sync != null && this.isConflict(err))
 					{
 						this.sync.fileConflict(success, error);
@@ -279,7 +279,7 @@ DriveFile.prototype.saveFile = function(title, revision, success, error, unloadi
 						error(err);
 					}
 				});
-				
+
 				if (DriveFile.SYNC_TYPE == 'none' && this.isConflict(err))
 				{
 					this.showConflictDialog(function()
@@ -299,7 +299,7 @@ DriveFile.prototype.saveFile = function(title, revision, success, error, unloadi
 			}), unloading, unloading, realOverwrite, (this.sync != null) ?
 				this.sync.createProperties(cacheId, secret) : null);
 		});
-		
+
 		doSave(overwrite, revision);
 	}
 };
@@ -324,7 +324,7 @@ DriveFile.prototype.makeCopy = function(success, error, timestamp)
 		}), mxUtils.bind(this, function()
 		{
 			this.ui.spinner.stop();
-			
+
 			if (error != null)
 			{
 				error();
@@ -335,7 +335,7 @@ DriveFile.prototype.makeCopy = function(success, error, timestamp)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -346,7 +346,7 @@ DriveFile.prototype.saveAs = function(filename, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -363,7 +363,7 @@ DriveFile.prototype.rename = function(title, success, error)
 		{
 			this.desc = resp;
 			this.descriptorChanged();
-			
+
 			if (success != null)
 			{
 				success(resp);
@@ -374,7 +374,7 @@ DriveFile.prototype.rename = function(title, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -384,7 +384,7 @@ DriveFile.prototype.move = function(folderId, success, error)
 	{
 		this.desc = resp;
 		this.descriptorChanged();
-		
+
 		if (success != null)
 		{
 			success(resp);
@@ -394,7 +394,7 @@ DriveFile.prototype.move = function(folderId, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -405,7 +405,7 @@ DriveFile.prototype.getTitle = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -416,7 +416,7 @@ DriveFile.prototype.getHash = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -427,14 +427,14 @@ DriveFile.prototype.getId = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
 DriveFile.prototype.isEditable = function()
 {
 	var editable = DrawioFile.prototype.isEditable.apply(this, arguments);
-	
+
 	if (this.realtime != null)
 	{
 		return editable && !this.realtime.rtModel.isReadOnly;
@@ -457,7 +457,7 @@ DriveFile.prototype.open = function()
 	else
 	{
 		DrawioFile.prototype.open.apply(this, arguments);
-		
+
 		if (this.sync != null)
 		{
 			this.sync.start();
@@ -472,7 +472,7 @@ DriveFile.prototype.close = function(unloading)
 {
 	unloading = (unloading != null) ? unloading : false;
 	DrawioFile.prototype.close.apply(this, arguments);
-	
+
 	if (this.realtime != null)
 	{
 		this.realtime.destroy(unloading);
@@ -498,7 +498,7 @@ DriveFile.prototype.showConflictDialog = function(retry, error)
 		var prev = this.changeListenerEnabled;
 		this.changeListenerEnabled = false;
 		this.showingConflictDialog = true;
-		
+
 		var logAction = mxUtils.bind(this, function(action)
 		{
 			try
@@ -511,13 +511,13 @@ DriveFile.prototype.showConflictDialog = function(retry, error)
 				// ignore
 			}
 		});
-		
+
 		this.ui.showError(mxResources.get('externalChanges'), mxResources.get('fileChangedOverwrite'),
 			mxResources.get('makeCopy'), mxUtils.bind(this, function()
 		{
 			this.showingConflictDialog = false;
 			this.changeListenerEnabled = prev;
-			
+
 			if (this.isRestricted())
 			{
 				this.ui.editor.editAsNew(this.ui.getFileData(true));
@@ -528,7 +528,7 @@ DriveFile.prototype.showConflictDialog = function(retry, error)
 			{
 				this.makeCopy(retry, error, true);
 			}
-			
+
 			logAction('makeCopy');
 		}), null, mxResources.get('overwrite'), mxUtils.bind(this, function()
 		{
@@ -546,7 +546,7 @@ DriveFile.prototype.showConflictDialog = function(retry, error)
 			error();
 			logAction('cancel');
 		}), 360, 180);
-		
+
 		// Adds important notice to dialog
 		if (this.ui.dialog != null && this.ui.dialog.container != null)
 		{

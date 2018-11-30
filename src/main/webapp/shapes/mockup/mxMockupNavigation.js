@@ -33,7 +33,7 @@ mxShapeMockupBreadcrumb.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupBreadcrumb.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -152,7 +152,7 @@ mxShapeMockupStepBar.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupStepBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -237,7 +237,7 @@ mxShapeMockupStepBar.prototype.stepLineBg = function(c, w, h, buttonNum, buttonW
 
 		if (i === 0)
 		{
-			startX = currWidth;	
+			startX = currWidth;
 		}
 		else if (i + 1 === buttonNum)
 		{
@@ -279,14 +279,14 @@ mxShapeMockupStepBar.prototype.stepLineFg = function(c, w, h, buttonNum, buttonW
 
 		if (i === 0)
 		{
-			startX = currWidth;	
+			startX = currWidth;
 		}
 		else if (i === selectedButton)
 		{
 			endX = currWidth;
 		}
 	}
-	
+
 	c.setFillColor(doneColor);
 	c.begin();
 	c.rect(startX, midY - size * 0.15, endX - startX, size * 0.3);
@@ -308,7 +308,7 @@ mxShapeMockupStepBar.prototype.stepLineFg = function(c, w, h, buttonNum, buttonW
 
 		if (i === 0)
 		{
-			startX = currWidth;	
+			startX = currWidth;
 		}
 		else if (i + 1 === selectedButton)
 		{
@@ -393,7 +393,7 @@ mxShapeMockupCoverFlow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupCoverFlow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -476,7 +476,7 @@ mxShapeMockupScrollBar.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupScrollBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -484,7 +484,7 @@ mxShapeMockupScrollBar.prototype.paintVertexShape = function(c, x, y, w, h)
 	h = 20;
 	var buttonX = 20;
 	w = Math.max(w, 2 * buttonX);
-	
+
 	c.translate(x, y);
 	this.background(c, w, h, buttonX);
 	c.setShadow(false);
@@ -509,13 +509,13 @@ mxShapeMockupScrollBar.prototype.foreground = function(c, w, h, buttonX)
 	var barPos = mxUtils.getValue(this.style, mxShapeMockupScrollBar.prototype.cst.BAR_POS, '20');
 	var fillColor2 = mxUtils.getValue(this.style, mxShapeMockupScrollBar.prototype.cst.FILL_COLOR2, '#99ddff');
 	var strokeColor2 = mxUtils.getValue(this.style, mxShapeMockupScrollBar.prototype.cst.STROKE_COLOR2, 'none');
-	
+
 	barPos = Math.max(0, barPos);
 	barPos = Math.min(100, barPos);
-	
+
 	c.setStrokeColor(strokeColor2);
 	c.setFillColor(fillColor2);
-	
+
 	c.begin();
 	c.moveTo(buttonX * 0.2, h * 0.5);
 	c.lineTo(buttonX * 0.8, h * 0.2);
@@ -588,7 +588,7 @@ mxShapeMockupPagination.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupPagination.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -637,7 +637,7 @@ mxShapeMockupPageControl.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupPageControl.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -698,7 +698,7 @@ mxShapeMockupMapNavigator.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupMapNavigator.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -736,7 +736,7 @@ mxShapeMockupMapNavigator.prototype.foreground = function(c, w, h)
 	c.fillAndStroke();
 	c.ellipse(w * 0.4, h * 0.85, w * 0.2, h * 0.12);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w * 0.1806, h * 0.34);
 	c.lineTo(w * 0.1357, h * 0.366);
@@ -795,10 +795,10 @@ mxShapeMockupMapNavigator.prototype.foreground = function(c, w, h)
 	c.lineTo(w * 0.4994, h * 0.35);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setStrokeWidth(2);
 	c.setStrokeColor(strokeColor3);
-	
+
 	c.begin();
 	c.moveTo(w * 0.5, h * 0.67);
 	c.lineTo(w * 0.5, h * 0.75);
@@ -834,7 +834,7 @@ mxShapeMockupNavigationAnchor.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupNavigationAnchor.prototype.paintVertexShape = function(c, x, y, w, h)

@@ -9,11 +9,11 @@
 		var sb = this;
 		var gn = 'mxgraph.sitemap';
 		var dt = '';
-		
+
 		var scale = 0.2;
 		var w = 600 * scale;
 		var h = 350 * scale;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'page;',
@@ -117,7 +117,7 @@
 			this.createVertexTemplateEntry(s + 'warning;',
 					w, h, 'Warning', 'Warning', null, null, this.getTagsForStencil(gn, 'warning', dt).join(' '))
 		];
-			
+
 		this.addPalette('sitemap', 'Sitemap', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)

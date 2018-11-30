@@ -5,7 +5,7 @@ Draw.loadPlugin(function(ui)
 {
 	// Adds resource for action
 	mxResources.parse('exploreFromHere=Explore from here...');
-	
+
 	// Max number of edges per page
 	var pageSize = 20;
 
@@ -13,9 +13,9 @@ Draw.loadPlugin(function(ui)
 	ui.menus.createPopupMenu = function(menu, cell, evt)
 	{
 		uiCreatePopupMenu.apply(this, arguments);
-		
+
 		var graph = ui.editor.graph;
-		
+
 		if (graph.model.isVertex(graph.getSelectionCell()))
 		{
 			this.addMenuItems(menu, ['-', 'exploreFromHere'], null, evt);
@@ -28,7 +28,7 @@ Draw.loadPlugin(function(ui)
 	function exploreFromHere(selectionCell)
 	{
 		var sourceGraph = ui.editor.graph;
-		
+
 		var container = document.createElement('div');
 		container.style.position = 'absolute';
 		container.style.display = 'block';
@@ -46,7 +46,7 @@ Draw.loadPlugin(function(ui)
 		deleteImage.style.right = '10px';
 		deleteImage.style.top = '10px';
 		container.appendChild(deleteImage);
-		
+
 		var closeLabel = document.createElement('div');
 		closeLabel.style.position = 'absolute';
 		closeLabel.style.cursor = 'pointer';
@@ -57,7 +57,7 @@ Draw.loadPlugin(function(ui)
 		mxUtils.write(closeLabel, mxResources.get('close'));
 		container.appendChild(closeLabel);
 		document.body.appendChild(container);
-		
+
 		var keyHandler = function(evt)
 		{
 			if (evt.keyCode == 27)
@@ -65,16 +65,16 @@ Draw.loadPlugin(function(ui)
 				deleteImage.click();
 			}
 		};
-		
+
 		mxEvent.addListener(document, 'keydown', keyHandler);
-		
+
 		// Global variable to make sure each cell in a response has
 		// a unique ID throughout the complete life of the program,
 		// in a real-life setup each cell should have an external
 		// ID on the business object or else the cell ID should be
 		// globally unique for the lifetime of the graph model.
 		var requestId = 0;
-		
+
 		function main(container)
 		{
 			// Checks if browser is supported
@@ -98,7 +98,7 @@ Draw.loadPlugin(function(ui)
 				{
 					return false;
 				};
-				
+
 				// Shows hand cursor for all vertices
 				graph.getCursorForCell = function(cell)
 				{
@@ -106,27 +106,27 @@ Draw.loadPlugin(function(ui)
 					{
 						return 'pointer';
 					}
-					
+
 					return null;
 				};
-				
+
 				graph.getFoldingImage = function()
 				{
 					return null;
 				};
-				
+
 				var closeHandler = function()
 				{
 					mxEvent.removeListener(document, 'keydown', keyHandler);
 					container.parentNode.removeChild(container);
-					
+
 					// FIXME: Does not work
 					sourceGraph.scrollCellToVisible(selectionCell);
 				};
-				
+
 				mxEvent.addListener(deleteImage, 'click', closeHandler);
 				mxEvent.addListener(closeLabel, 'click', closeHandler);
-				
+
 				// Disables all built-in interactions
 				graph.setEnabled(false);
 
@@ -135,13 +135,13 @@ Draw.loadPlugin(function(ui)
 				{
 					var evt = me.getEvent();
 					var cell = me.getCell();
-					
+
 					if (cell != null && cell != graph.rootCell)
 					{
 						load(graph, cell);
 					}
 				};
-			
+
 				// Gets the default parent for inserting new cells. This
 				// is normally the first child of the root (ie. layer 0).
 				var parent = graph.getDefaultParent();
@@ -163,7 +163,7 @@ Draw.loadPlugin(function(ui)
 					var prev = mxText.prototype.enableBoundingBox;
 					mxText.prototype.enableBoundingBox = false;
 					graph.labelsVisible = false;
-					
+
 					mxEffects.animateChanges(graph, changes, function()
 					{
 						mxText.prototype.prev = true;
@@ -186,7 +186,7 @@ Draw.loadPlugin(function(ui)
 			{
 				var cx = graph.container.scrollWidth / 2;
 				var cy = graph.container.scrollHeight / 3;
-				
+
 				// Gets the default parent for inserting new cells. This
 				// is normally the first child of the root (ie. layer 0).
 				var parent = graph.getDefaultParent();
@@ -202,7 +202,7 @@ Draw.loadPlugin(function(ui)
 					for (var key in graph.getModel().cells)
 					{
 						var tmp = graph.getModel().getCell(key);
-						
+
 						if (tmp != graph.rootCell && graph.getModel().isVertex(tmp))
 						{
 							graph.removeCells([tmp]);
@@ -219,22 +219,22 @@ Draw.loadPlugin(function(ui)
 					if (geo != null)
 					{
 						geo = geo.clone();
-						
+
 						geo.x = cx - geo.width / 2;
 						geo.y = cy - geo.height / 3;
 						graph.getModel().setGeometry(graph.rootCell, geo);
 					}
-					
+
 					// Creates a list of the new vertices, if there is more
 					// than the center vertex which might have existed
 					// previously, then this needs to be changed to analyze
 					// the target model before calling mergeChildren above
 					var vertices = [];
-					
+
 					for (var key in graph.getModel().cells)
 					{
 						var tmp = graph.getModel().getCell(key);
-						
+
 						if (tmp != graph.rootCell && graph.getModel().isVertex(tmp) &&
 							graph.getModel().getParent(tmp) == graph.getDefaultParent())
 						{
@@ -252,17 +252,17 @@ Draw.loadPlugin(function(ui)
 							}
 						}
 					}
-					
+
 					// Arranges the response in a circle
 					var cellCount = vertices.length;
 					var phi = 2 * Math.PI / cellCount;
 					var r = Math.min(graph.container.scrollWidth / 3 - 80,
 							graph.container.scrollHeight / 3 - 80);
-					
+
 					for (var i = 0; i < cellCount; i++)
 					{
 						var geo = graph.getModel().getGeometry(vertices[i]);
-						
+
 						if (geo != null)
 						{
 							geo = geo.clone();
@@ -272,7 +272,7 @@ Draw.loadPlugin(function(ui)
 							graph.getModel().setGeometry(vertices[i], geo);
 						}
 					}
-					
+
 					// Keeps parallel edges apart
 					var layout = new mxParallelEdgeLayout(graph);
 					layout.spacing = 60;
@@ -294,25 +294,25 @@ Draw.loadPlugin(function(ui)
 			var sourceCell = sourceGraph.model.getCell(realCell.sourceCellId);
 			var edges = sourceGraph.getEdges(sourceCell, null, true, true, false, true);
 			var cells = edges;
-			
+
 			// Paging by selecting a window in the edges array
 			if (cell.startIndex != null || (pageSize > 0 && edges.length > pageSize))
 			{
 				var start = cell.startIndex || 0;
-				
+
 				cells = edges.slice(Math.max(0, start), Math.min(edges.length, start + pageSize));
 			}
-			
+
 			cells = cells.concat(sourceGraph.getOpposites(cells, sourceCell));
 			var clones = graph.cloneCells(cells);
-			
+
 			var edgeStyle = ';curved=1;noEdgeStyle=1;entryX=none;entryY=none;exitX=none;exitY=none;';
 			var btnStyle = 'fillColor=green;fontColor=white;strokeColor=green;';
-			
+
 			for (var i = 0; i < cells.length; i++)
 			{
 				clones[i].sourceCellId = cells[i].id;
-				
+
 				if (graph.model.isEdge(clones[i]))
 				{
 					// Removes waypoints, edge styles, constraints and centers the label
@@ -331,7 +331,7 @@ Draw.loadPlugin(function(ui)
 				backCell.startIndex = Math.max(0, (cell.startIndex || 0) - pageSize);
 				clones.splice(0, 0, backCell);
 			}
-			
+
 			if (edges.length > (cell.startIndex || 0) + pageSize)
 			{
 				var moreCell = graph.createVertex(null, null, 'More...', 0, 0, 80, 30, btnStyle);
@@ -339,19 +339,19 @@ Draw.loadPlugin(function(ui)
 				moreCell.startIndex = (cell.startIndex || 0) + pageSize;
 				clones.splice(0, 0, moreCell);
 			}
-			
+
 			return clones;
 		};
-		
+
 		main(container);
 	};
-	
+
 	// Adds action
 	ui.actions.addAction('exploreFromHere', function()
 	{
 		exploreFromHere(ui.editor.graph.getSelectionCell());
 	});
-	
+
 	// Click handler for chromeless mode
 	if (ui.editor.isChromelessView())
 	{

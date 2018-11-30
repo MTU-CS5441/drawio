@@ -27,7 +27,7 @@
 		var sb = this;
 		var gn = 'mxgraph.mscae.cloud';
 		var dt = 'ms microsoft cloud enterprise ';
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s2 + 'active_directory_b2b;fillColor=#0079D6;',
@@ -336,7 +336,7 @@
 					150, 100, '', 'Virtual Network Box', null, null, this.getTagsForStencil(gn, 'virtual network box', dt).join(' ')),
 			this.createVertexTemplateEntry('shape=rect;dashed=1;strokeColor=#0079D6;fillColor=none;fontSize=14;fontColor=#0078D7;align=center;html=1;dashPattern=1 4;',
 					150, 100, '', 'Smart Virtual Network Box', null, null, this.getTagsForStencil(gn, 'virtual network box', dt).join(' ')),
-						
+
 		   	this.addEntry(dt + 'smart virtual network box', function()
 	   		{
 			   	var bg = new mxCell('', new mxGeometry(0, 0, 150, 100), 'shape=rect;dashed=1;strokeColor=#0079D6;fillColor=none;fontSize=14;fontColor=#0078D7;align=center;html=1;dashPattern=1 4;');
@@ -346,9 +346,9 @@
 			   	part1.geometry.offset = new mxPoint(-20, -8);
 			   	part1.vertex = true;
 			   	bg.insert(part1);
-				
+
 		   		return sb.createVertexTemplateFromCells([bg], bg.geometry.width + 10, bg.geometry.height + 10, 'Smart Virtual Network Box');
-			}),				
+			}),
 
 			this.createVertexTemplateEntry(s + 'visual_studio_online;',
 					50, 37, '', 'Visual Studio Team Services', null, null, this.getTagsForStencil(gn, 'visual studio online', dt).join(' ')),
@@ -377,7 +377,7 @@
 			this.createVertexTemplateEntry(s + 'worker_roles;',
 					50, 41, '', 'Worker Roles', null, null, this.getTagsForStencil(gn, 'worker roles', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeCloud', 'CAE / Cloud', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -397,7 +397,7 @@
 		var sb = this;
 		var gn = 'mxgraph.mscae.deprecated';
 		var dt = 'ms microsoft cloud enterprise deprecated ';
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'access_control;fillColor=#0078D7;',
@@ -469,7 +469,7 @@
 			this.createVertexTemplateEntry(s + 'vhd;fillColor=#0078D7;',
 					40, 50, '', 'VHD', null, null, this.getTagsForStencil(gn, 'vhd virtual hard drive', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeDeprecated', 'CAE / (Deprecated)', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -478,7 +478,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addMSCAEEnterprisePalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;shape=mxgraph.azure.';
@@ -489,7 +489,7 @@
 		var sb = this;
 		var gn = 'mxgraph.mscae.enterprise';
 		var dt = 'ms microsoft cloud enterprise ';
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s2 + 'ad_fs;fillColor=#00188D;',
@@ -693,7 +693,7 @@
 			this.createVertexTemplateEntry(s2 + 'xml_web_service;fillColor=#00188D;',
 					50, 50, '', 'XML Web Service', null, null, this.getTagsForStencil(gn, 'xml web service', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeEnterprise', 'CAE / Enterprise', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -702,7 +702,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addMSCAEGeneralPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;shape=mxgraph.azure.';
@@ -714,7 +714,7 @@
 		var sb = this;
 		var gn = 'mxgraph.mscae.general';
 		var dt = 'ms microsoft cloud enterprise general ';
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s2 + 'audio;fillColor=#7D7D7D;',
@@ -770,7 +770,7 @@
 			this.createVertexTemplateEntry(s2 + 'video;fillColor=#7D7D7D;',
 					49, 50, '', 'Video', null, null, this.getTagsForStencil(gn, 'video', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeGeneral', 'CAE / General', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -779,7 +779,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addMSCAEGeneralSymbolsPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;shape=mxgraph.azure.';
@@ -792,7 +792,7 @@
 		var sb = this;
 		var gn = 'mxgraph.mscae.general_symbols';
 		var dt = 'ms microsoft cloud enterprise general symbols ';
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s2 + 'attachments;fillColor=#7D7D7D;',
@@ -862,7 +862,7 @@
 			this.createVertexTemplateEntry(s2 + 'waiting;fillColor=#7D7D7D;',
 					46, 50, '', 'Waiting', null, null, this.getTagsForStencil(gn, 'waiting', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeGeneral Symbols', 'CAE / General Symbols', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -871,7 +871,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addMSCAEIntunePalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;shape=mxgraph.azure.';
@@ -882,7 +882,7 @@
 		var sb = this;
 		var gn = 'mxgraph.mscae.intune';
 		var dt = 'ms microsoft cloud enterprise intune';
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s2 + 'account_portal;fillColor=#505050;',
@@ -978,7 +978,7 @@
 			this.createVertexTemplateEntry(s2 + 'user_management;fillColor=#505050;',
 					50, 46, '', 'User Management', null, null, this.getTagsForStencil(gn, 'user management', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeIntune', 'CAE / Intune', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -987,7 +987,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addMSCAEOMSPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;shape=mxgraph.azure.';
@@ -998,7 +998,7 @@
 		var sb = this;
 		var gn = 'mxgraph.mscae.oms';
 		var dt = 'ms microsoft cloud enterprise oms';
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s2 + 'alerts;fillColor=#505050;',
@@ -1044,7 +1044,7 @@
 			this.createVertexTemplateEntry(s2 + 'wire_data;fillColor=#505050;',
 					50, 50, '', 'Wire Data', null, null, this.getTagsForStencil(gn, 'wire data', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeOMS', 'CAE / OMS', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -1053,7 +1053,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addMSCAEOpsManagerPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;shape=mxgraph.azure.';
@@ -1064,7 +1064,7 @@
 		var sb = this;
 		var gn = 'mxgraph.mscae.opsmanager';
 		var dt = 'ms microsoft cloud enterprise opsmanager ops manager operations';
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s2 + 'advanced_group_policy_management;fillColor=#0078D7;',
@@ -1110,7 +1110,7 @@
 			this.createVertexTemplateEntry(s2 + 'virtual_machine_manager;fillColor=#0078D7;',
 					50, 38, '', 'Virtual Machine Manager', null, null, this.getTagsForStencil(gn, 'virtual machine manager', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeOpsManager', 'CAE / OpsManager', false, mxUtils.bind(this, function(content)
 		{
 			for (var i = 0; i < fns.length; i++)
@@ -1119,7 +1119,7 @@
 			}
 		}));
 	};
-	
+
 	Sidebar.prototype.addMSCAEOtherPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;shape=mxgraph.azure.';
@@ -1129,7 +1129,7 @@
 		var sb = this;
 		var gn = 'mxgraph.mscae.other';
 		var dt = 'ms microsoft cloud enterprise other';
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s2 + 'access;fillColor=#BA2024;',
@@ -1165,7 +1165,7 @@
 			this.createVertexTemplateEntry(s2 + 'xbox_one;',
 					50, 16, '', 'Xbox One', null, null, this.getTagsForStencil(gn, 'xbox one', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeOther', 'CAE / Other', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -1174,7 +1174,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addMSCAESystemCenterPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;shape=mxgraph.azure.';
@@ -1185,7 +1185,7 @@
 		var sb = this;
 		var gn = 'mxgraph.mscae.system_center';
 		var dt = 'ms microsoft cloud enterprise system center';
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s2 + 'admin_console;fillColor=#515151;strokeColor=none;',
@@ -1209,7 +1209,7 @@
 			this.createVertexTemplateEntry(s2 + 'software_update_point;fillColor=#515151;strokeColor=none;',
 					50, 43, '', 'Software Update Point', null, null, this.getTagsForStencil(gn, 'software update point', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeSystem Center', 'CAE / System Center', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -1218,7 +1218,7 @@
 					}
 		}));
 	};
-	
+
 	Sidebar.prototype.addMSCAEVMPalette = function()
 	{
 		var s = 'shadow=0;dashed=0;html=1;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;shape=mxgraph.azure.';
@@ -1229,7 +1229,7 @@
 		var sb = this;
 		var gn = 'mxgraph.mscae.vm';
 		var dt = 'ms microsoft cloud enterprise vm virtual machine ';
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s2 + 'active_directory;fillColor=#00188F;strokeColor=none;',
@@ -1267,7 +1267,7 @@
 			this.createVertexTemplateEntry(s2 + 'windows_server_multi;fillColor=#00188F;strokeColor=none;',
 					58, 50, '', 'Windows Server (multi)', null, null, this.getTagsForStencil(gn, 'windows server multi', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeVirtual Machine', 'CAE / Virtual Machine', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -1932,7 +1932,7 @@
 			 this.createVertexTemplateEntry(s + 'XboxController.svg;',
 					 d, d * 0.7, '', 'Xbox Controller', false, null, this.getTagsForStencil(gn, 'xbox controller', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeCloud Color', 'CAE / Cloud (color)', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -1942,7 +1942,7 @@
 		}));
 
 	}
-	
+
 	Sidebar.prototype.addMSCAEDeprecatedColorPalette = function()
 	{
 		var d = 50;
@@ -1970,7 +1970,7 @@
 			 this.createVertexTemplateEntry(s + 'SQL_Server_Stretch_DB.svg;',
 					 d, d, '', 'SQL Server Stretch DB', false, null, this.getTagsForStencil(gn, 'sql server stretch db database', dt).join(' '))
 		];
-			
+
 		this.addPalette('mscaeDeprecated Color', 'CAE / Deprecated (color)', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)

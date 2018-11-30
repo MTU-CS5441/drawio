@@ -44,7 +44,7 @@ mxShapePidDiscInst.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapePidDiscInst.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -145,7 +145,7 @@ mxShapePidSharedCont.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapePidSharedCont.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -249,7 +249,7 @@ mxShapePidCompFunc.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapePidCompFunc.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -357,7 +357,7 @@ mxShapePidProgLogCont.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapePidProgLogCont.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -385,7 +385,7 @@ mxShapePidProgLogCont.prototype.foreground = function(c, x, y, w, h)
 	c.lineTo(w * 0.5, h);
 	c.close();
 	c.stroke();
-	
+
 	if (mounting === mxShapePidProgLogCont.prototype.cst.ROOM)
 	{
 		c.begin();
@@ -478,7 +478,7 @@ mxShapePidIndicator.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapePidIndicator.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -492,7 +492,7 @@ mxShapePidIndicator.prototype.paintVertexShape = function(c, x, y, w, h)
 mxShapePidIndicator.prototype.background = function(c, x, y, w, h)
 {
 	var type = mxUtils.getValue(this.style, mxShapePidIndicator.prototype.cst.IND_TYPE, 'inst');
-	
+
 	c.begin();
 	c.moveTo(w * 0.5, w);
 	c.lineTo(w * 0.5, h);
@@ -619,7 +619,7 @@ mxShapePidLogic.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapePidLogic.prototype.paintVertexShape = function(c, x, y, w, h)

@@ -29,7 +29,7 @@ mxShapeAws4ProductIcon.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAws4ProductIcon.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -59,7 +59,7 @@ mxShapeAws4ProductIcon.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(ind, w - ind);
 	c.close();
 	c.fill();
-	
+
 
 	var prIcon = mxUtils.getValue(this.state.style, 'prIcon', '');
 	var stencil = mxStencilRegistry.getStencil(prIcon);
@@ -101,7 +101,7 @@ mxShapeAws4ResourceIcon.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAws4ResourceIcon.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -157,7 +157,7 @@ mxShapeAws4Group.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAws4Group.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -217,7 +217,7 @@ mxShapeAws4GroupCenter.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAws4GroupCenter.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -233,7 +233,7 @@ mxShapeAws4GroupCenter.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w, h);
 	c.lineTo(0, h);
 	c.close();
-	
+
 	if (grStroke == '1')
 	{
 		c.fillAndStroke();
@@ -242,7 +242,7 @@ mxShapeAws4GroupCenter.prototype.paintVertexShape = function(c, x, y, w, h)
 	{
 		c.fill();
 	}
-	
+
 	c.setShadow(false);
 	var grIcon = mxUtils.getValue(this.state.style, 'grIcon', '');
 	var stencil = mxStencilRegistry.getStencil(grIcon);

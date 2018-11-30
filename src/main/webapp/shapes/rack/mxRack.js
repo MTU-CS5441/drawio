@@ -29,7 +29,7 @@ mxUtils.extend(mxRackContainer, mxShape);
 
 mxRackContainer.unitSize = 20;
 
-mxRackContainer.prototype.cst = 
+mxRackContainer.prototype.cst =
 {
 		SHAPE_RACK_CONTAINER : 'mxgraph.rackGeneral.container',
 		TEXT_COLOR : 'textColor',
@@ -48,7 +48,7 @@ mxRackContainer.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxRackContainer.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -153,14 +153,14 @@ function mxRackPlate(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackPlate, mxShape);
 
-mxRackPlate.prototype.cst = 
+mxRackPlate.prototype.cst =
 {
 		SHAPE_RACK_PLATE : 'mxgraph.rackGeneral.plate'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackPlate.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -213,14 +213,14 @@ function mxRackHorCableDuct(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackHorCableDuct, mxShape);
 
-mxRackHorCableDuct.prototype.cst = 
+mxRackHorCableDuct.prototype.cst =
 {
 		SHAPE_RACK_HOR_CABLE_DUCT : 'mxgraph.rackGeneral.horCableDuct'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackHorCableDuct.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -253,7 +253,7 @@ mxRackHorCableDuct.prototype.foreground = function(c, w, h)
 			c.stroke();
 			c.rect(buffer, 7, 3, 7.8);
 			c.stroke();
-			
+
 			buffer += unitSpacing;
 		}
 	}
@@ -273,14 +273,14 @@ function mxRackHorRoutingBank(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackHorRoutingBank, mxShape);
 
-mxRackHorRoutingBank.prototype.cst = 
+mxRackHorRoutingBank.prototype.cst =
 {
 		SHAPE_RACK_HOR_ROUTING_BANK : 'mxgraph.rackGeneral.horRoutingBank'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackHorRoutingBank.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -316,7 +316,7 @@ mxRackHorRoutingBank.prototype.foreground = function(c, w, h)
 			{
 				c.rect(buffer, 4 + (i * mxRackContainer.unitSize), rectWidth, 6.8);
 				c.stroke();
-				
+
 				buffer += unitSpacing;
 			}
 		}
@@ -337,14 +337,14 @@ function mxRackNeatPatch(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackNeatPatch, mxShape);
 
-mxRackNeatPatch.prototype.cst = 
+mxRackNeatPatch.prototype.cst =
 {
 		SHAPE_RACK_NEAT_PATCH : 'mxgraph.rackGeneral.neatPatch'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackNeatPatch.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -384,14 +384,14 @@ function mxRackShelf(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackShelf, mxShape);
 
-mxRackShelf.prototype.cst = 
+mxRackShelf.prototype.cst =
 {
 		SHAPE_RACK_SHELF : 'mxgraph.rackGeneral.shelf'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackShelf.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -425,7 +425,7 @@ function mxRackRackNumbering(bounds, fill, stroke, strokewidth)
  */
 mxUtils.extend(mxRackRackNumbering, mxShape);
 
-mxRackRackNumbering.prototype.cst = 
+mxRackRackNumbering.prototype.cst =
 {
 		SHAPE_RACK_RACK_NUMBERING : 'mxgraph.rackGeneral.rackNumbering',
 		UNIT_NUM : 'unitNum',
@@ -439,7 +439,7 @@ mxRackRackNumbering.prototype.cst =
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxRackRackNumbering.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -516,7 +516,7 @@ function mxRackRackCabinet(bounds, fill, stroke, strokewidth)
  */
 mxUtils.extend(mxRackRackCabinet, mxShape);
 
-mxRackRackCabinet.prototype.cst = 
+mxRackRackCabinet.prototype.cst =
 {
 		SHAPE_RACK_RACK_CABINET : 'mxgraph.rackGeneral.rackCabinet',
 		UNIT_NUM : 'unitNum',
@@ -533,7 +533,7 @@ mxRackRackCabinet.prototype.cst =
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxRackRackCabinet.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -646,14 +646,14 @@ function mxRackHorCableDuct1U(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackHorCableDuct1U, mxShape);
 
-mxRackHorCableDuct1U.prototype.cst = 
+mxRackHorCableDuct1U.prototype.cst =
 {
 		SHAPE_RACK_HOR_CABLE_DUCT_1U : 'mxgraph.rackGeneral.horCableDuct1U'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackHorCableDuct1U.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -681,17 +681,17 @@ mxRackHorCableDuct1U.prototype.foreground = function(c, w, h)
 	c.stroke();
 	c.rect(45.5, 7, 3, 7.8);
 	c.stroke();
-	
+
 	c.rect(79, 0, 3, 7);
 	c.stroke();
 	c.rect(79, 7, 3, 7.8);
 	c.stroke();
-	
+
 	c.rect(112.5, 0, 3, 7);
 	c.stroke();
 	c.rect(112.5, 7, 3, 7.8);
 	c.stroke();
-	
+
 	c.rect(146, 0, 3, 7);
 	c.stroke();
 	c.rect(146, 7, 3, 7.8);
@@ -718,14 +718,14 @@ function mxRackHorCableDuct2U(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackHorCableDuct2U, mxShape);
 
-mxRackHorCableDuct2U.prototype.cst = 
+mxRackHorCableDuct2U.prototype.cst =
 {
 		SHAPE_RACK_HOR_CABLE_DUCT_2U : 'mxgraph.rackGeneral.horCableDuct2U'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackHorCableDuct2U.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -753,17 +753,17 @@ mxRackHorCableDuct2U.prototype.foreground = function(c, w, h)
 	c.stroke();
 	c.rect(45.5, 7, 3, 22.6);
 	c.stroke();
-	
+
 	c.rect(79, 0, 3, 7);
 	c.stroke();
 	c.rect(79, 7, 3, 22.6);
 	c.stroke();
-	
+
 	c.rect(112.5, 0, 3, 7);
 	c.stroke();
 	c.rect(112.5, 7, 3, 22.6);
 	c.stroke();
-	
+
 	c.rect(146, 0, 3, 7);
 	c.stroke();
 	c.rect(146, 7, 3, 22.6);
@@ -790,14 +790,14 @@ function mxRackHorRoutingBank1U(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackHorRoutingBank1U, mxShape);
 
-mxRackHorRoutingBank1U.prototype.cst = 
+mxRackHorRoutingBank1U.prototype.cst =
 {
 		SHAPE_RACK_HOR_ROUTING_BANK_1U : 'mxgraph.rackGeneral.horRoutingBank1U'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackHorRoutingBank1U.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -852,14 +852,14 @@ function mxRackHorRoutingBank2U(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackHorRoutingBank2U, mxShape);
 
-mxRackHorRoutingBank2U.prototype.cst = 
+mxRackHorRoutingBank2U.prototype.cst =
 {
 		SHAPE_RACK_HOR_ROUTING_BANK_2U : 'mxgraph.rackGeneral.horRoutingBank2U'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackHorRoutingBank2U.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -929,14 +929,14 @@ function mxRackNeatPatch2U(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackNeatPatch2U, mxShape);
 
-mxRackNeatPatch2U.prototype.cst = 
+mxRackNeatPatch2U.prototype.cst =
 {
 		SHAPE_RACK_NEAT_PATCH_2U : 'mxgraph.rackGeneral.neatPatch2U'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackNeatPatch2U.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -982,14 +982,14 @@ function mxRackShelf1U(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackShelf1U, mxShape);
 
-mxRackShelf1U.prototype.cst = 
+mxRackShelf1U.prototype.cst =
 {
 		SHAPE_RACK_SHELF_1U : 'mxgraph.rackGeneral.shelf1U'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackShelf1U.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1029,14 +1029,14 @@ function mxRackShelf2U(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackShelf2U, mxShape);
 
-mxRackShelf2U.prototype.cst = 
+mxRackShelf2U.prototype.cst =
 {
 		SHAPE_RACK_SHELF_2U : 'mxgraph.rackGeneral.shelf2U'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackShelf2U.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1076,14 +1076,14 @@ function mxRackShelf4U(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackShelf4U, mxShape);
 
-mxRackShelf4U.prototype.cst = 
+mxRackShelf4U.prototype.cst =
 {
 		SHAPE_RACK_SHELF_4U : 'mxgraph.rackGeneral.shelf4U'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackShelf4U.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1128,14 +1128,14 @@ function mxRackChannelBase(bounds, fill, stroke, strokewidth)
  */
 mxUtils.extend(mxRackChannelBase, mxShape);
 
-mxRackChannelBase.prototype.cst = 
+mxRackChannelBase.prototype.cst =
 {
 		SHAPE_RACK_CHANNEL_BASE : 'mxgraph.rackGeneral.channelBase'
 };
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxRackChannelBase.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1188,14 +1188,14 @@ function mxRackCabinetLeg(bounds, fill, stroke, strokewidth)
 */
 mxUtils.extend(mxRackCabinetLeg, mxShape);
 
-mxRackCabinetLeg.prototype.cst = 
+mxRackCabinetLeg.prototype.cst =
 {
 		SHAPE_RACK_CABINET_LEG : 'mxgraph.rackGeneral.cabinetLeg'
 };
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxRackCabinetLeg.prototype.paintVertexShape = function(c, x, y, w, h)

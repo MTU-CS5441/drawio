@@ -5,10 +5,10 @@
 	{
 		var s = 'strokeColor=#666666;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;outlineConnect=0;shadow=0;dashed=0;';
 		var sr = 'strokeColor=#666666;html=1;labelPosition=right;align=left;spacingLeft=15;shadow=0;dashed=0;fillColor=#ffffff;outlineConnect=0;';
-		
+
 		//default tags
 		var dt = 'rack equipment ';
-		
+
 		this.addPaletteFunctions('rackGeneral', 'Rack / General', false,
 		[
 			this.createVertexTemplateEntry(s + 'shape=mxgraph.rackGeneral.container;container=1;collapsible=0;childLayout=rack;marginLeft=9;marginRight=9;marginTop=21;marginBottom=22;textColor=#666666;numDisp=off;', 180, 228.6, '', 'Rack Cabinet', null, null, dt + 'cabinet'),
@@ -35,11 +35,11 @@
 			this.createVertexTemplateEntry(sr + 'shape=mxgraph.rack.general.switches_2;', 160, 30, '', 'Switches 2', null, null, dt + 'server')
 		]);
 	};
-	
+
 	Sidebar.prototype.addRackF5Palette = function()
 	{
 		var sr = 'strokeColor=#666666;html=1;labelPosition=right;align=left;spacingLeft=15;shadow=0;dashed=0;fillColor=#ffffff;outlineConnect=0;';
-		
+
 		//default tags
 		var dt = 'rack equipment ';
 
@@ -72,5 +72,5 @@
 			this.createVertexTemplateEntry(sr + 'shape=mxgraph.rack.f5.viprion_4800;', 168, 320, '', 'VIPRION 4800', null, null, dt + 'big ip')
 		]);
 	};
-	
+
 })();

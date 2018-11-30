@@ -7,7 +7,7 @@
 		var s = mxConstants.STYLE_VERTICAL_LABEL_POSITION + '=bottom;html=1;' + mxConstants.STYLE_VERTICAL_ALIGN + '=top;align=center;strokeColor=none;fillColor=#00BEF2;shape=mxgraph.azure.';
 		var gn = 'mxgraph.azure';
 		var dt = '';
-		
+
 		this.addPaletteFunctions('azure', mxResources.get('azure'), false,
 		[
 			this.createVertexTemplateEntry(s + 'access_control;', w, h, '', 'Access Control', null, null, this.getTagsForStencil(gn, 'access_control', dt).join(' ')),

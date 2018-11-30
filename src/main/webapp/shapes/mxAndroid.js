@@ -36,7 +36,7 @@ mxShapeAndroidTabBar.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeAndroidTabBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -188,7 +188,7 @@ mxUtils.extend(mxShapeAndroidPhone, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidPhone.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -198,9 +198,9 @@ mxShapeAndroidPhone.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	c.roundrect(0, 0, w, h, rSize, rSize);
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	this.foreground(c, x, y, w, h, rSize);
 };
 
@@ -244,7 +244,7 @@ mxUtils.extend(mxShapeAndroidStatusBar, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidStatusBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -282,39 +282,39 @@ mxShapeAndroidStatusBar.prototype.foreground = function(c, x, y, w, h)
 	c.lineTo(w - 31, h * 0.5 + 6);
 	c.close();
 	c.fill();
-	
+
 	c.setFillColor(mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, 'none'));
 	c.ellipse(w - 56, h * 0.5 + 2, 2, 2);
 	c.fillAndStroke();
-	
+
 	c.setStrokeWidth(2);
 	c.begin();
 	c.moveTo(w - 52, h * 0.5 + 1);
 	c.arcTo(3.5, 3.5, 0, 0, 0, w - 58, h * 0.5 + 1);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(w - 50, h * 0.5 - 1);
 	c.arcTo(6, 6, 0, 0, 0, w - 60, h * 0.5 - 1);
 	c.stroke();
-	
+
 	c.setStrokeWidth(1);
-	
+
 	c.rect(w - 51, h * 0.5 + 5, 2, 1);
 	c.fill();
-	
+
 	c.rect(w - 48, h * 0.5 + 2, 2, 4);
 	c.fill();
-	
+
 	c.rect(w - 45, h * 0.5 - 1, 2, 7);
 	c.fill();
-	
+
 	c.rect(w - 42, h * 0.5 - 4, 2, 10);
 	c.fill();
 
 	c.rect(w - 37, h * 0.5  - 2, 6, 8);
 	c.fill();
-	
+
 };
 
 mxCellRenderer.registerShape('mxgraph.android.statusBar', mxShapeAndroidStatusBar);
@@ -348,7 +348,7 @@ mxShapeAndroidCheckboxGroup.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidCheckboxGroup.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -360,7 +360,7 @@ mxShapeAndroidCheckboxGroup.prototype.paintVertexShape = function(c, x, y, w, h)
 	var optionText = mxUtils.getValue(this.style, mxShapeAndroidCheckboxGroup.prototype.cst.BUTTON_TEXT, 'Option 1').toString().split(',');
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, 'none');
 	var strokeColor2 = mxUtils.getValue(this.style, mxShapeAndroidCheckboxGroup.prototype.cst.STYLE_STROKECOLOR2, 'none');
-	
+
 	c.setStrokeColor(strokeColor2);
 	var optionNum = optionText.length;
 	var buttonSize = 5;
@@ -371,7 +371,7 @@ mxShapeAndroidCheckboxGroup.prototype.paintVertexShape = function(c, x, y, w, h)
 	var minH = optionNum * lineH;
 	var trueH = Math.max(h, minH);
 
-	//get min width and selected option 
+	//get min width and selected option
 	for (var i = 0; i < optionNum; i++)
 	{
 		var currText = optionText[i];
@@ -470,7 +470,7 @@ mxShapeAndroidRadioGroup.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidRadioGroup.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -494,7 +494,7 @@ mxShapeAndroidRadioGroup.prototype.paintVertexShape = function(c, x, y, w, h)
 	var minH = optionNum * lineH;
 	var trueH = Math.max(h, minH);
 
-	//get min width and selected option 
+	//get min width and selected option
 	for (var i = 0; i < optionNum; i++)
 	{
 		var currText = optionText[i];
@@ -586,7 +586,7 @@ mxShapeAndroidMenuBar.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidMenuBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -666,7 +666,7 @@ mxUtils.extend(mxShapeAndroidTextSelHandles, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidTextSelHandles.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -677,10 +677,10 @@ mxShapeAndroidTextSelHandles.prototype.paintVertexShape = function(c, x, y, w, h
 	var handleSizeX = 15;
 	var barH = Math.max(0, h - handleSizeX * 1.5);
 	c.setAlpha(0.5);
-	
+
 	c.rect(handleSizeX, 0, w - 2 * handleSizeX, barH);
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(0, h - handleSizeX);
 	c.lineTo(handleSizeX * 0.5, h - handleSizeX * 1.5);
@@ -691,7 +691,7 @@ mxShapeAndroidTextSelHandles.prototype.paintVertexShape = function(c, x, y, w, h
 	c.lineTo(w, h - handleSizeX);
 	c.close();
 	c.fill();
-	
+
 	c.setFillColor(strokeColor);
 	c.rect(0, h - handleSizeX, handleSizeX, handleSizeX);
 	c.fill();
@@ -723,7 +723,7 @@ mxUtils.extend(mxShapeAndroidIndeterminateSpinner, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidIndeterminateSpinner.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -778,7 +778,7 @@ mxShapeAndroidAnchor.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidAnchor.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -814,7 +814,7 @@ mxShapeAndroidRRect.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidRRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -854,7 +854,7 @@ mxShapeAndroidCheckbox.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidCheckbox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -862,7 +862,7 @@ mxShapeAndroidCheckbox.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.translate(x, y);
 	c.rect(0, 0, w, h);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w * 0.8, h * 0.2);
 	c.lineTo(w * 0.4, h * 0.8);
@@ -905,7 +905,7 @@ mxShapeAndroidProgressBar.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidProgressBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -914,7 +914,7 @@ mxShapeAndroidProgressBar.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx2 = w * Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx2', this.dx2))));
 
 	c.translate(x, y);
-	
+
 	c.save();
 	c.save();
 	c.setStrokeColor('#444444');
@@ -922,21 +922,21 @@ mxShapeAndroidProgressBar.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w , h * 0.5);
 	c.stroke();
-	
+
 	c.restore();
 	c.setShadow(false);
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(dx1, h * 0.5);
 	c.stroke();
-	
+
 	c.setStrokeColor('#000000');
 	c.setAlpha('0.2');
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(dx1, h * 0.5);
 	c.stroke();
-	
+
 	c.restore();
 	c.setShadow(false);
 	c.begin();
@@ -970,7 +970,7 @@ Graph.handleFactory[mxShapeAndroidProgressBar.prototype.cst.PROGRESS_BAR] = func
 			{
 				this.state.style['dx2'] = Math.round(100 * Math.max(0, Math.min(1, (pt.x - bounds.x) / bounds.width))) / 100;
 			});
-	
+
 	handles.push(handle2);
 
 	return handles;
@@ -1007,7 +1007,7 @@ mxShapeAndroidProgressScrubberDisabled.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidProgressScrubberDisabled.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1015,7 +1015,7 @@ mxShapeAndroidProgressScrubberDisabled.prototype.paintVertexShape = function(c, 
 	var dx = w * Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 
 	c.translate(x, y);
-	
+
 	c.save();
 	c.save();
 	c.setStrokeColor('#444444');
@@ -1023,7 +1023,7 @@ mxShapeAndroidProgressScrubberDisabled.prototype.paintVertexShape = function(c, 
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w, h * 0.5);
 	c.stroke();
-	
+
 	c.restore();
 	c.setShadow(false);
 	c.setAlpha('0.5');
@@ -1032,14 +1032,14 @@ mxShapeAndroidProgressScrubberDisabled.prototype.paintVertexShape = function(c, 
 	var r = Math.min(h, w * 0.1) / 2;
 	c.ellipse(dx - r, h * 0.5 - r, 2 * r, 2 * r);
 	c.fill();
-	
+
 	c.restore();
 	c.setShadow(false);
 	c.begin();
 	var r = Math.min(h, w * 0.1) / 8;
 	c.ellipse(dx - r, h * 0.5 - r, 2 * r, 2 * r);
 	c.fill();
-	
+
 };
 
 mxCellRenderer.registerShape(mxShapeAndroidProgressScrubberDisabled.prototype.cst.PROGRESS_SCRUBBER_DISABLED, mxShapeAndroidProgressScrubberDisabled);
@@ -1092,7 +1092,7 @@ mxShapeAndroidProgressScrubberFocused.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidProgressScrubberFocused.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1101,7 +1101,7 @@ mxShapeAndroidProgressScrubberFocused.prototype.paintVertexShape = function(c, x
 	var fillColor = mxUtils.getValue(this.style, 'fillColor', '#ffffff');
 
 	c.translate(x, y);
-	
+
 	c.save();
 	c.save();
 	c.setStrokeColor('#444444');
@@ -1109,7 +1109,7 @@ mxShapeAndroidProgressScrubberFocused.prototype.paintVertexShape = function(c, x
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w, h * 0.5);
 	c.stroke();
-	
+
 	c.restore();
 	c.setShadow(false);
 	c.setAlpha('0.75');
@@ -1117,21 +1117,21 @@ mxShapeAndroidProgressScrubberFocused.prototype.paintVertexShape = function(c, x
 	var r = Math.min(h, w * 0.1) / 2;
 	c.ellipse(dx - r, h * 0.5 - r, 2 * r, 2 * r);
 	c.fill();
-	
+
 	c.restore();
 	c.setShadow(false);
 	c.setStrokeColor(fillColor);
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(dx, h * 0.5);
 	c.stroke();
-	
+
 	c.begin();
 	var r = Math.min(h, w * 0.1) / 8;
 	c.ellipse(dx - r, h * 0.5 - r, 2 * r, 2 * r);
 	c.fill();
-	
+
 };
 
 mxCellRenderer.registerShape(mxShapeAndroidProgressScrubberFocused.prototype.cst.PROGRESS_SCRUBBER_FOCUSED, mxShapeAndroidProgressScrubberFocused);
@@ -1184,7 +1184,7 @@ mxShapeAndroidProgressScrubberPressed.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidProgressScrubberPressed.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1193,7 +1193,7 @@ mxShapeAndroidProgressScrubberPressed.prototype.paintVertexShape = function(c, x
 	var fillColor = mxUtils.getValue(this.style, 'fillColor', '#ffffff');
 
 	c.translate(x, y);
-	
+
 	c.save();
 	c.save();
 	c.setStrokeColor('#444444');
@@ -1201,7 +1201,7 @@ mxShapeAndroidProgressScrubberPressed.prototype.paintVertexShape = function(c, x
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w, h * 0.5);
 	c.stroke();
-	
+
 	c.restore();
 	c.setShadow(false);
 	c.setStrokeColor(fillColor);
@@ -1210,21 +1210,21 @@ mxShapeAndroidProgressScrubberPressed.prototype.paintVertexShape = function(c, x
 	var r = Math.min(h, w * 0.1) / 2;
 	c.ellipse(dx - r, h * 0.5 - r, 2 * r, 2 * r);
 	c.fillAndStroke();
-	
+
 	c.restore();
 	c.setShadow(false);
 	c.setStrokeColor(fillColor);
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(dx, h * 0.5);
 	c.stroke();
-	
+
 	c.begin();
 	var r = Math.min(h, w * 0.1) / 8;
 	c.ellipse(dx - r, h * 0.5 - r, 2 * r, 2 * r);
 	c.fill();
-	
+
 };
 
 mxCellRenderer.registerShape(mxShapeAndroidProgressScrubberPressed.prototype.cst.PROGRESS_SCRUBBER_PRESSED, mxShapeAndroidProgressScrubberPressed);
@@ -1277,7 +1277,7 @@ mxShapeAndroidQuickscroll2.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidQuickscroll2.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1286,7 +1286,7 @@ mxShapeAndroidQuickscroll2.prototype.paintVertexShape = function(c, x, y, w, h)
 	var fillColor = mxUtils.getValue(this.style, 'fillColor', '#ffffff');
 
 	c.translate(x, y);
-	
+
 	c.save();
 	c.save();
 	c.setStrokeColor('#cccccc');
@@ -1294,17 +1294,17 @@ mxShapeAndroidQuickscroll2.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.moveTo(w - 3, 0);
 	c.lineTo(w - 3, h);
 	c.stroke();
-	
+
 	c.restore();
 	c.begin();
 	c.roundrect(w - 6, dy - 10, 6, 20, 1, 1);
 	c.fillAndStroke();
-	
+
 	c.setFillColor('#cccccc');
 	c.begin();
 	c.rect(0, dy - 20, w - 18, 40);
 	c.fill();
-	
+
 	c.setFillColor('#666666');
 	c.begin();
 	c.moveTo(w - 18, dy - 20);
@@ -1312,7 +1312,7 @@ mxShapeAndroidQuickscroll2.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w - 18, dy + 20);
 	c.close();
 	c.fill();
-	
+
 	c.setFontSize('12');
 	c.text((w - 18) * 0.5, dy, 0, 0, 'Aa', mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
 };
@@ -1367,7 +1367,7 @@ mxShapeAndroidQuickscroll3.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidQuickscroll3.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1376,14 +1376,14 @@ mxShapeAndroidQuickscroll3.prototype.paintVertexShape = function(c, x, y, w, h)
 	var fillColor = mxUtils.getValue(this.style, 'fillColor', '#ffffff');
 
 	c.translate(x, y);
-	
+
 	c.save();
 	c.setStrokeColor('#cccccc');
 	c.begin();
 	c.moveTo(w * 0.5, 0);
 	c.lineTo(w * 0.5, h);
 	c.stroke();
-	
+
 	c.restore();
 	c.begin();
 	c.roundrect(w * 0.5 - 3, dy - 10, 6, 20, 1, 1);
@@ -1435,14 +1435,14 @@ mxShapeAndroidScrollbars2.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidScrollbars2.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 
 	c.translate(x, y);
-	
+
 	c.begin();
 	c.rect(w - 5, 0, 5, h - 7);
 	c.fillAndStroke();
@@ -1482,19 +1482,19 @@ mxShapeAndroidSpinner2.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeAndroidSpinner2.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 
 	c.translate(x, y);
-	
+
 	c.begin();
 	c.moveTo(0, h);
 	c.lineTo(w, h);
 	c.stroke();
-	
+
 	var s = Math.min(w / 10, h)
 	c.begin();
 	c.moveTo(w - s, h);

@@ -2,11 +2,11 @@
 {
 	// Adds containers
 	var sidebarCreateAdvancedShapes = Sidebar.prototype.createAdvancedShapes;
-	
+
 	Sidebar.prototype.createAdvancedShapes = function()
 	{
 		var fns = sidebarCreateAdvancedShapes.apply(this, arguments);
-		
+
 		// Avoids having to bind all functions to "this"
 		var sb = this;
 
@@ -14,40 +14,40 @@
 		var flow = new mxCell('Vertical Flow Layout', new mxGeometry(0, 0, 270, 280),
 				'swimlane;html=1;startSize=20;horizontal=1;childLayout=flowLayout;flowOrientation=north;resizable=0;interRankCellSpacing=50;containerType=tree;');
 		flow.vertex = true;
-		
+
 		var flow1 = new mxCell('Start', new mxGeometry(20, 20, 100, 40), 'whiteSpace=wrap;html=1;');
 		flow1.vertex = true;
 		flow.insert(flow1);
-		
+
 		var flow2 = new mxCell('Task', new mxGeometry(20, 20, 100, 40), 'whiteSpace=wrap;html=1;');
 		flow2.vertex = true;
 		flow.insert(flow2);
-		
+
 		var edge = new mxCell('', new mxGeometry(0, 0, 0, 0), 'html=1;curved=1;');
 		edge.geometry.relative = true;
 		edge.edge = true;
 		flow1.insertEdge(edge, true);
 		flow2.insertEdge(edge, false);
 		flow.insert(edge);
-		
+
 		var flow3 = new mxCell('Task', new mxGeometry(20, 20, 100, 40), 'whiteSpace=wrap;html=1;');
 		flow3.vertex = true;
 		flow.insert(flow3);
-		
+
 		edge = edge.clone();
 		flow1.insertEdge(edge, true);
 		flow3.insertEdge(edge, false);
 		flow.insert(edge);
-		
+
 		var flow4 = new mxCell('End', new mxGeometry(20, 20, 100, 40), 'whiteSpace=wrap;html=1;');
 		flow4.vertex = true;
 		flow.insert(flow4);
-		
+
 		edge = edge.clone();
 		flow2.insertEdge(edge, true);
 		flow4.insertEdge(edge, false);
 		flow.insert(edge);
-		
+
 		edge = edge.clone();
 		flow3.insertEdge(edge, true);
 		flow4.insertEdge(edge, false);
@@ -67,7 +67,7 @@
 				'5ZXNUoMwEICfhjuQWvVaqL3oxXa8p7ADmQmECUspfXo3JNgirdMZ7UE9MGT/s182E49FxX6leZW/qBSkx5Yei7RSaFfFPgIpvdAXqcdiLwx9+rzw6YI16K1+xTWUeE1AaAN2XDZgNW+gUSTcOG00AP2eeacatI41dtI51q0oJC9JWuRY0M7jgJY1co1rcTBOVJtsSouDKpEPHkkuZOpyshipxiCc+PalWWwSaKjFgW/lICfGQZSgN10FLgOpXSO0e9hfhNGrHIkVqAJQd+TSihRzB+TBAvNzEFk+hD06Ja+tIvuIPbKlhcN7HjWboH41x/wZa5sLhHXFEyO3NBhjvle1GZ5v0wW4kfC7sXgCIfDPQJj9AIPZhEFkpoFUwf8CcTcBMekf0gzWTgS5Ve3yqFj0CjLshts6YqNVU6aQugtjM5t0X3Oi6qrRCYzGla5zBnhyelOaGiRHsRtn/w6c+cUpmVL601Ny/xunZH6bKSHx+Cz2ttGr+Q4='),
 			this.addDataEntry('horizontal tree layout', 310, 160, 'Horizontal Tree Layout',
 				'5ZXNUoMwEMefJncgtd4LVQ96sX2BtOxAZgJhwlJKn94NSQWkdTqjHtQDQ/a/X+THZsJ4XBwfjajyF52CYnzNeGy0RrcqjjEoxaJApownLIoCelj0cMUb9t6gEgZKvCUhcgkHoRpwypM28qRLFDZsawDo9Sw63aALrbFTPrRuZaFESdYqx4K+PQlpWaMwuJEnG0TdyTdU5IkV9rlUqa/JE6QeZ2MU27d2FQ3U8iR2fds+3wbIEsy2q8BXINlvBQzC8SqOXvIsHkEXgKajkFammLsIHjpkQQ4yy89pSy+K2gnZe+5AlxYe8GXYfAb71f7oj1jbXCJsKrG3dkujMeV70zajy9v0CX4ogm5qjiCEwQUIi29gsJgxiO00kBT+LxB3MxCz/UOawcaboHa6XQ/CqhfIMT5dYzpGN2UKqT8yrrYt+Dkp6q8bs4fJwNKBzgBH/2/O04ASKA/T6l/Bs7w6J3NOf3pO7n/nnCx/Zk7IHC7H3je5O98A'),
-				
+
 		 	this.addEntry('vertical flow layout', function()
 			{
 		 		return sb.createVertexTemplateFromCells([flow], flow.geometry.width, flow.geometry.height, 'Vertical Flow Layout', true);
@@ -78,10 +78,10 @@
 				cell.geometry = new mxGeometry(0, 0, 460, 150);
 				cell.style = 'swimlane;html=1;startSize=20;horizontal=0;childLayout=flowLayout;flowOrientation=west;resizable=0;interRankCellSpacing=50;containerType=tree;';
 				cell.value = 'Horizontal Flow Layout';
-				
+
 				return sb.createVertexTemplateFromCells([cell], cell.geometry.width, cell.geometry.height, 'Horizontal Flow Layout', true);
 			})
 		]);
 	};
-	
+
 })();

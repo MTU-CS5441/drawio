@@ -41,12 +41,12 @@ mxShapeMockupVideoPlayer.prototype.customProperties = [
 	{name: 'strokeColor2', dispName: 'Stroke2 Color', type: 'color'},
 	{name: 'strokeColor3', dispName: 'Stroke3 Color', type: 'color'},
 	{name: 'barPos', dispName: 'Handle Position', type: 'float', min:0, max:100, defVal:20},
-	{name: 'barHeight', dispName: 'Video Bar Height', type: 'float', min:0, defVal:30} 
+	{name: 'barHeight', dispName: 'Video Bar Height', type: 'float', min:0, defVal:30}
 ];
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupVideoPlayer.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -76,7 +76,7 @@ mxShapeMockupVideoPlayer.prototype.background = function(c, x, y, w, h, bgColor,
 	c.lineTo(w, 0);
 	c.lineTo(w, h);
 	c.lineTo(0, h);
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -205,7 +205,7 @@ Graph.handleFactory[mxShapeMockupVideoPlayer.prototype.cst.SHAPE_VIDEO_PLAYER] =
 			{
 				this.state.style['barHeight'] = Math.round(1000 * Math.max(0, Math.min(bounds.height, bounds.y + bounds.height - pt.y))) / 1000;
 			});
-	
+
 	handles.push(handle2);
 
 	return handles;
@@ -244,7 +244,7 @@ mxShapeMockupAccordion.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupAccordion.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -309,7 +309,7 @@ mxShapeMockupAccordion.prototype.paintVertexShape = function(c, x, y, w, h)
 		var currHeight = 0;
 
 		if (selectedButton === -1 || i <= selectedButton)
-		{	
+		{
 			currHeight = (i * minButtonHeight + minButtonHeight * 0.5);
 		}
 		else
@@ -438,7 +438,7 @@ mxShapeMockupBrowserWindow.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupBrowserWindow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -464,7 +464,7 @@ mxShapeMockupBrowserWindow.prototype.background = function(c, x, y, w, h, bgColo
 	c.lineTo(w, 0);
 	c.lineTo(w, h);
 	c.lineTo(0, h);
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -637,7 +637,7 @@ mxShapeMockupUserMale.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupUserMale.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -660,7 +660,7 @@ mxShapeMockupUserMale.prototype.background = function(c, x, y, w, h, bgColor, fr
 	c.lineTo(w, 0);
 	c.lineTo(w, h);
 	c.lineTo(0, h);
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -799,7 +799,7 @@ mxShapeMockupUserMale.prototype.otherShapes = function(c, x, y, w, h, insideColo
 	c.lineTo(w, 0);
 	c.lineTo(w, h);
 	c.lineTo(0, h);
-	c.close();	
+	c.close();
 	c.stroke();
 };
 
@@ -836,7 +836,7 @@ mxShapeMockupUserFemale.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupUserFemale.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -859,7 +859,7 @@ mxShapeMockupUserFemale.prototype.background = function(c, x, y, w, h, bgColor, 
 	c.lineTo(w, 0);
 	c.lineTo(w, h);
 	c.lineTo(0, h);
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -994,7 +994,7 @@ mxShapeMockupUserFemale.prototype.otherShapes = function(c, x, y, w, h, insideCo
 	c.lineTo(w, 0);
 	c.lineTo(w, h);
 	c.lineTo(0, h);
-	c.close();	
+	c.close();
 	c.stroke();
 };
 
@@ -1030,7 +1030,7 @@ mxShapeMockupGroup.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupGroup.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1117,7 +1117,7 @@ mxShapeMockupWindow.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupWindow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1216,7 +1216,7 @@ mxShapeMockupHorTabBar.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 //TODO tab widths are fixed, so tab text length is a bit of an issue. Cannot be fixed while we use labels for tab names
@@ -1490,7 +1490,7 @@ mxShapeMockupVerTabBar.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupVerTabBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1709,7 +1709,7 @@ mxShapeMockupAlertBox.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupAlertBox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1821,7 +1821,7 @@ mxShapeMockupContainersRRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupContainersRRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1858,7 +1858,7 @@ mxShapeMockupContainersAnchor.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupContainersAnchor.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1898,7 +1898,7 @@ mxShapeMockupContrainersTopButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupContrainersTopButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1951,7 +1951,7 @@ mxShapeMockupContainersLeftButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupContainersLeftButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2012,12 +2012,12 @@ mxShapeMockupContainersMarginRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupContainersMarginRect.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
 };
@@ -2084,12 +2084,12 @@ mxShapeMockupContainersMarginRect2.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupContainersMarginRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
 };

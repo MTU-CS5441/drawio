@@ -9,7 +9,7 @@
 		var dt = 'web icons icon';
 		var w = 0.2;
 		var h = 0.2;
-		
+
 		this.addPaletteFunctions('webicons', 'Web Icons', false,
 		[
 		 this.createVertexTemplateEntry(s + 'adfty;fillColor=#66E8F3;gradientColor=#1C7CBA',
@@ -364,7 +364,7 @@
 				 w * 512, h * 512, '', 'Youmob', null, null, this.getTagsForStencil(gn, 'youmob', dt).join(' '))
 		]);
 	};
-	
+
 	// Adds Web Icons shapes
 	Sidebar.prototype.addWebLogosPalette = function()
 	{
@@ -374,7 +374,7 @@
 		var dt = 'web logos logo';
 		var w = 0.2;
 		var h = 0.2;
-		
+
 		this.addPaletteFunctions('weblogos', 'Web Logos', false,
 		[
 		 this.createVertexTemplateEntry(s + 'adfty;fillColor=#66E8F3;gradientColor=#1C7CBA',
@@ -759,5 +759,5 @@
 				 w * 232, h * 163, '', 'Youtube', null, null, this.getTagsForStencil(gn, 'youtube', dt).join(' '))
 		]);
 	};
-	
+
 })();

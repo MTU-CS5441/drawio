@@ -33,7 +33,7 @@ mxShapeMockupCheckboxGroup.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupCheckboxGroup.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -52,7 +52,7 @@ mxShapeMockupCheckboxGroup.prototype.paintVertexShape = function(c, x, y, w, h)
 	var minH = optionNum * lineH;
 	var trueH = Math.max(h, minH);
 
-	//get min width and selected option 
+	//get min width and selected option
 	for (var i = 0; i < optionNum; i++)
 	{
 		var currText = optionText[i];
@@ -160,7 +160,7 @@ mxShapeMockupRadioGroup.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupRadioGroup.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -179,7 +179,7 @@ mxShapeMockupRadioGroup.prototype.paintVertexShape = function(c, x, y, w, h)
 	var minH = optionNum * lineH;
 	var trueH = Math.max(h, minH);
 
-	//get min width and selected option 
+	//get min width and selected option
 	for (var i = 0; i < optionNum; i++)
 	{
 		var currText = optionText[i];
@@ -283,7 +283,7 @@ mxShapeMockupColorPicker.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupColorPicker.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -359,7 +359,7 @@ mxShapeMockupComboBox.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupComboBox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -458,20 +458,20 @@ mxShapeMockupSpinner.prototype.cst = {
 };
 
 mxShapeMockupSpinner.prototype.customProperties = [
-	{name: 'spinLayout', dispName: 'Layout', type: 'enum', 
+	{name: 'spinLayout', dispName: 'Layout', type: 'enum',
 		enumList: [{val: 'right', dispName: 'Right'}, {val: 'left', dispName: 'Left'}, {val: 'top', dispName: 'Top'}, {val: 'bottom', dispName: 'Bottom'}, {val: 'vertical', dispName: 'Vertical'}, {val: 'horizontal', dispName: 'Horizontal'}]
 	},
-	{name: 'spinStyle', dispName: 'Spinner Style', type: 'enum', 
+	{name: 'spinStyle', dispName: 'Spinner Style', type: 'enum',
 		enumList: [{val: 'merged', dispName: 'Merged'}, {val: 'normal', dispName: 'Normal'}]
 	},
-	{name: 'adjStyle', dispName: 'Button Style', type: 'enum', 
+	{name: 'adjStyle', dispName: 'Button Style', type: 'enum',
 		enumList: [{val: 'triangle', dispName: 'Triangle'}, {val: 'plusMinus', dispName: '+/-'}, {val: 'arrow', dispName: 'Arrow'}]
 	}
 ];
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupSpinner.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1004,7 +1004,7 @@ mxShapeMockupMenuBar.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupMenuBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1170,10 +1170,10 @@ mxShapeMockupHorSlider.prototype.cst = {
 };
 
 mxShapeMockupHorSlider.prototype.customProperties = [
-	{name: 'sliderStyle', dispName: 'Slider Style', type: 'enum', 
+	{name: 'sliderStyle', dispName: 'Slider Style', type: 'enum',
 		enumList: [{val: 'basic', dispName: 'Basic'}, {val: 'fancy', dispName: 'Fancy'}]
 	},
-	{name: 'handleStyle', dispName: 'Handle Style', type: 'enum', 
+	{name: 'handleStyle', dispName: 'Handle Style', type: 'enum',
 		enumList: [{val: 'triangle', dispName: 'Triangle'}, {val: 'circle', dispName: 'Circle'}, {val: 'handle', dispName: 'Handle'}]
 	},
 	{name: 'sliderPos', dispName: 'Handle Position', type: 'float'},
@@ -1182,7 +1182,7 @@ mxShapeMockupHorSlider.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupHorSlider.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1324,7 +1324,7 @@ mxShapeMockupListBox.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupListBox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1448,7 +1448,7 @@ mxShapeMockupPwField.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupPwField.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1508,7 +1508,7 @@ mxShapeMockupSplitter.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupSplitter.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1589,7 +1589,7 @@ mxShapeMockupWedgeBar.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupWedgeBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1831,7 +1831,7 @@ mxShapeMockupSearchBox.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupSearchBox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1904,7 +1904,7 @@ mxShapeMockupSignIn.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupSignIn.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1948,7 +1948,7 @@ mxShapeMockupSignIn.prototype.foreground = function(c, w, h)
 	c.setStrokeColor(strokeColor2);
 	c.setStrokeWidth(2);
 
-	c.begin();	
+	c.begin();
 	c.moveTo(w * 0.05, h * 0.12);
 	c.lineTo(w * 0.95, h * 0.12);
 	c.moveTo(w * 0.05, h * 0.72);
@@ -2023,7 +2023,7 @@ mxShapeMockupCalendar.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupCalendar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2142,7 +2142,7 @@ mxShapeMockupCalendar.prototype.foreground = function(c, w, h)
 
 	for (var i = 0; i < days; i++)
 	{
-		var d = i + 1; 
+		var d = i + 1;
 		var currX = w * 0.0625 + x * cellSize;
 		var currY = h * 0.2686 + y * h * 0.1143;
 
@@ -2240,7 +2240,7 @@ mxShapeMockupEmailForm.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupEmailForm.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2251,20 +2251,20 @@ mxShapeMockupEmailForm.prototype.paintVertexShape = function(c, x, y, w, h)
 	var tabX = fontSize * 4;
 
 	var optCount = 0;
-	
+
 	if (showCC === 'true')
 	{
 		optCount++;
 	}
-	
+
 	if (showBCC === 'true')
 	{
 		optCount++;
 	}
-	
+
 	w = Math.max(w, fontSize * 5);
 	h = Math.max(h, fontSize * 10.5 + optCount * fontSize * 3);
-	
+
 	c.translate(x, y);
 	this.background(c, w, h, fontSize, tabX, showCC, showBCC);
 	c.setShadow(false);
@@ -2314,7 +2314,7 @@ mxShapeMockupEmailForm.prototype.foreground = function(c, w, h, fontSize, tabX, 
 	c.text(tabX + fontSize * 0.5, fontSize * 0.75, 0, 0, mainText[0], mxConstants.ALIGN_LEFT, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
 	c.text(tabX + fontSize * 0.5, fontSize * 3.75, 0, 0, mainText[1], mxConstants.ALIGN_LEFT, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
 	c.text(tabX + fontSize * 0.5, fontSize * 6.75, 0, 0, mainText[2], mxConstants.ALIGN_LEFT, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
-	
+
 	var messX = fontSize * 9;
 
 	if (showCC === 'true')
@@ -2367,7 +2367,7 @@ mxShapeMockupFormsRRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupFormsRRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2404,7 +2404,7 @@ mxShapeMockupFormsAnchor.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupFormsAnchor.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2439,7 +2439,7 @@ mxShapeMockupFormsCheckbox.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupFormsCheckbox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2448,7 +2448,7 @@ mxShapeMockupFormsCheckbox.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	c.rect(0, 0, w, h);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w * 0.8, h * 0.2);
 	c.lineTo(w * 0.4, h * 0.8);
@@ -2484,7 +2484,7 @@ mxShapeMockupFormsURect.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupFormsURect.prototype.paintVertexShape = function(c, x, y, w, h)

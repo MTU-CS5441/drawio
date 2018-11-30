@@ -5,7 +5,7 @@
 OneDriveFile = function(ui, data, meta)
 {
 	DrawioFile.call(this, ui, data);
-	
+
 	this.meta = meta;
 };
 
@@ -14,7 +14,7 @@ mxUtils.extend(OneDriveFile, DrawioFile);
 
 OneDriveFile.prototype.getIdOf = function(itemObj, parent)
 {
-	//TODO driveId is most probably always there. No need to check if it exists. Also, after some time, the code that check the old id format won't be needed 
+	//TODO driveId is most probably always there. No need to check if it exists. Also, after some time, the code that check the old id format won't be needed
 	return (itemObj.parentReference.driveId? itemObj.parentReference.driveId + '/' : '') + (parent? itemObj.parentReference.id : itemObj.id);
 };
 
@@ -30,7 +30,7 @@ OneDriveFile.prototype.getParentId = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -41,7 +41,7 @@ OneDriveFile.prototype.getHash = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -60,7 +60,7 @@ OneDriveFile.prototype.isAutosaveOptional = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -71,7 +71,7 @@ OneDriveFile.prototype.getTitle = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -82,7 +82,7 @@ OneDriveFile.prototype.isRenamable = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -93,7 +93,7 @@ OneDriveFile.prototype.save = function(revision, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -104,7 +104,7 @@ OneDriveFile.prototype.saveAs = function(title, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -115,13 +115,13 @@ OneDriveFile.prototype.doSave = function(title, success, error)
 	this.meta.name = title;
 	DrawioFile.prototype.save.apply(this, arguments);
 	this.meta.name = prev;
-	
+
 	this.saveFile(title, false, success, error);
 };
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -137,7 +137,7 @@ OneDriveFile.prototype.saveFile = function(title, revision, success, error)
 	else if (!this.savingFile)
 	{
 		this.savingFile = true;
-		
+
 		if (this.getTitle() == title)
 		{
 			// Makes sure no changes get lost while the file is saved
@@ -147,22 +147,22 @@ OneDriveFile.prototype.saveFile = function(title, revision, success, error)
 			var prepare = mxUtils.bind(this, function()
 			{
 				this.setModified(false);
-				
+
 				this.isModified = function()
 				{
 					return modified;
 				};
 			});
-			
+
 			prepare();
-			
+
 			this.ui.oneDrive.saveFile(this, mxUtils.bind(this, function(meta)
 			{
 				this.savingFile = false;
 				this.isModified = prevModified;
 				this.meta = meta;
 				this.contentChanged();
-				
+
 				if (success != null)
 				{
 					success();
@@ -173,21 +173,21 @@ OneDriveFile.prototype.saveFile = function(title, revision, success, error)
 				this.savingFile = false;
 				this.isModified = prevModified;
 				this.setModified(modified || this.isModified());
-				
+
 				if (error != null)
 				{
 					// Handles modified state for retries
 					if (err != null && err.retry != null)
 					{
 						var retry = err.retry;
-						
+
 						err.retry = function()
 						{
 							prepare();
 							retry();
 						};
 					}
-					
+
 					error(err);
 				}
 			}));
@@ -197,17 +197,17 @@ OneDriveFile.prototype.saveFile = function(title, revision, success, error)
 			this.ui.oneDrive.insertFile(title, this.getData(), mxUtils.bind(this, function(file)
 			{
 				this.savingFile = false;
-				
+
 				if (success != null)
 				{
 					success();
 				}
-				
+
 				this.ui.fileLoaded(file);
 			}), mxUtils.bind(this, function()
 			{
 				this.savingFile = false;
-				
+
 				if (error != null)
 				{
 					error();
@@ -223,7 +223,7 @@ OneDriveFile.prototype.saveFile = function(title, revision, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -240,7 +240,7 @@ OneDriveFile.prototype.rename = function(title, success, error)
 		{
 			this.meta = meta;
 			this.descriptorChanged();
-			
+
 			if (success != null)
 			{
 				success();
@@ -251,7 +251,7 @@ OneDriveFile.prototype.rename = function(title, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -261,7 +261,7 @@ OneDriveFile.prototype.move = function(folderId, success, error)
 	{
 		this.meta = meta;
 		this.descriptorChanged();
-		
+
 		if (success != null)
 		{
 			success(meta);

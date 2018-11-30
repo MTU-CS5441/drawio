@@ -10,13 +10,13 @@
  * needed, then this shape's <redrawPath> should be overridden.
  * This shape is registered under <mxConstants.SHAPE_CYLINDER>
  * in <mxCellRenderer>.
- * 
+ *
  * Constructor: mxBpmnShape
  *
  * Constructs a new cylinder shape.
- * 
+ *
  * Parameters:
- * 
+ *
  * bounds - <mxRectangle> that defines the bounds. This is stored in
  * <mxShape.bounds>.
  * fill - String that defines the fill color. This is stored in <fill>.
@@ -39,43 +39,43 @@ function mxBpmnShape(bounds, fill, stroke, strokewidth)
 mxUtils.extend(mxBpmnShape, mxShape);
 
 mxBpmnShape.prototype.customProperties = [
-	{name: 'symbol', dispName: 'Event', type: 'enum', defVal:'general', 
-		enumList: [{val: 'general', dispName: 'General'}, 
-				   {val: 'message', dispName: 'Message'}, 
-				   {val: 'timer', dispName: 'Timer'}, 
-				   {val: 'escalation', dispName: 'Escalation'}, 
-				   {val: 'conditional', dispName: 'Conditional'}, 
-				   {val: 'link', dispName: 'Link'}, 
-				   {val: 'error', dispName: 'Error'}, 
-				   {val: 'cancel', dispName: 'Cancel'}, 
-				   {val: 'compensation', dispName: 'Compensation'}, 
-				   {val: 'signal', dispName: 'Signal'}, 
-				   {val: 'multiple', dispName: 'Multiple'}, 
-				   {val: 'parallelMultiple', dispName: 'Parallel Multiple'}, 
-				   {val: 'terminate', dispName: 'Terminate'}, 
-				   {val: 'exclusiveGw', dispName: 'Exclusive Gw'}, 
-				   {val: 'parallelGw', dispName: 'Parallel Gw'}, 
+	{name: 'symbol', dispName: 'Event', type: 'enum', defVal:'general',
+		enumList: [{val: 'general', dispName: 'General'},
+				   {val: 'message', dispName: 'Message'},
+				   {val: 'timer', dispName: 'Timer'},
+				   {val: 'escalation', dispName: 'Escalation'},
+				   {val: 'conditional', dispName: 'Conditional'},
+				   {val: 'link', dispName: 'Link'},
+				   {val: 'error', dispName: 'Error'},
+				   {val: 'cancel', dispName: 'Cancel'},
+				   {val: 'compensation', dispName: 'Compensation'},
+				   {val: 'signal', dispName: 'Signal'},
+				   {val: 'multiple', dispName: 'Multiple'},
+				   {val: 'parallelMultiple', dispName: 'Parallel Multiple'},
+				   {val: 'terminate', dispName: 'Terminate'},
+				   {val: 'exclusiveGw', dispName: 'Exclusive Gw'},
+				   {val: 'parallelGw', dispName: 'Parallel Gw'},
 				   {val: 'complexGw', dispName: 'Complex Gw'}]
 	},
-	{name: 'outline', dispName: 'Event Type', type: 'enum', defVal:'standard', 
-		enumList: [{val: 'standard', dispName: 'Standard'}, 
-				   {val: 'eventInt', dispName: 'Interrupting'}, 
-				   {val: 'eventNonint', dispName: 'Non-Interrupting'}, 
-				   {val: 'catching', dispName: 'Catching'}, 
-				   {val: 'boundInt', dispName: 'Bound Interrupting'}, 
-				   {val: 'boundNonint', dispName: 'Bound Non-Interrupting'}, 
-				   {val: 'throwing', dispName: 'Throwing'}, 
-				   {val: 'end', dispName: 'End'}, 
+	{name: 'outline', dispName: 'Event Type', type: 'enum', defVal:'standard',
+		enumList: [{val: 'standard', dispName: 'Standard'},
+				   {val: 'eventInt', dispName: 'Interrupting'},
+				   {val: 'eventNonint', dispName: 'Non-Interrupting'},
+				   {val: 'catching', dispName: 'Catching'},
+				   {val: 'boundInt', dispName: 'Bound Interrupting'},
+				   {val: 'boundNonint', dispName: 'Bound Non-Interrupting'},
+				   {val: 'throwing', dispName: 'Throwing'},
+				   {val: 'end', dispName: 'End'},
 				   {val: 'none', dispName: 'None'}]
 	},
 	{name: 'background', dispName: 'Background', type: 'enum', defVal:'none',
-		enumList: [{val: 'gateway', dispName: 'Gateway'}, 
+		enumList: [{val: 'gateway', dispName: 'Gateway'},
 				   {val: 'none', dispName: 'None'}]
 }];
 
-mxBpmnShape.prototype.eventTypeEnum = { 
-		START_STANDARD : 'standard', 
-		EVENT_SP_INT : 'eventInt', 
+mxBpmnShape.prototype.eventTypeEnum = {
+		START_STANDARD : 'standard',
+		EVENT_SP_INT : 'eventInt',
 		EVENT_SP_NONINT : 'eventNonint',
 		CATCHING : 'catching',
 		BOUND_INT : 'boundInt',
@@ -85,19 +85,19 @@ mxBpmnShape.prototype.eventTypeEnum = {
 		NONE : 'none',
 		GATEWAY : 'gateway'};
 
-mxBpmnShape.prototype.eventEnum = { 
-		GENERAL 		: 'general', 
-		MESSAGE 		: 'message', 
-		TIMER 			: 'timer', 
-		ESCALATION 		: 'escalation', 
-		CONDITIONAL 	: 'conditional', 
-		LINK 			: 'link', 
-		ERROR			: 'error', 
-		CANCEL			: 'cancel', 
-		COMPENSATION 	: 'compensation', 
-		SIGNAL 			: 'signal', 
-		MULTIPLE		: 'multiple', 
-		PAR_MULTI		: 'parallelMultiple', 
+mxBpmnShape.prototype.eventEnum = {
+		GENERAL 		: 'general',
+		MESSAGE 		: 'message',
+		TIMER 			: 'timer',
+		ESCALATION 		: 'escalation',
+		CONDITIONAL 	: 'conditional',
+		LINK 			: 'link',
+		ERROR			: 'error',
+		CANCEL			: 'cancel',
+		COMPENSATION 	: 'compensation',
+		SIGNAL 			: 'signal',
+		MULTIPLE		: 'multiple',
+		PAR_MULTI		: 'parallelMultiple',
 		TERMINATE		: 'terminate',
 		GW_EXCLUSIVE 	: 'exclusiveGw',
 		GW_PARALLEL		: 'parallelGw',
@@ -111,7 +111,7 @@ mxBpmnShape.prototype.miscEnum = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxBpmnShape.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -157,7 +157,7 @@ mxBpmnShape.prototype.redrawPath = function(c, x, y, w, h, layer)
 			c.translate(w / 4, h / 4);
 			h /= 2;
 			w /= 2;
-			
+
 			//add rhombus connections here
 			this.constraints = [
 			                                      new mxConnectionConstraint(new mxPoint(0.5, 0), true),
@@ -300,9 +300,9 @@ mxBpmnShape.prototype.redrawPath = function(c, x, y, w, h, layer)
 				else if (s === mxBpmnShape.prototype.eventEnum.GW_COMPLEX)
 				{
 				}
-				
+
 				isInverse = false;
-				
+
 				if (s === 'star')
 				{
 					c.setFillColor(strokeColor);
@@ -315,7 +315,7 @@ mxBpmnShape.prototype.redrawPath = function(c, x, y, w, h, layer)
 				}
 
 				f.call(this, c, x, y, w, h, layer, isInverse);
-				
+
 				if (s === 'star')
 				{
 					c.setFillColor(fillColor);
@@ -482,7 +482,7 @@ mxBpmnShape.prototype.symbols = {
 					c.setStrokeColor('#ffffff');
 				}
 			}
-			
+
 			c.begin();
 			c.moveTo(0, 0);
 			c.lineTo(w * 0.5, h * 0.5);
@@ -521,7 +521,7 @@ mxBpmnShape.prototype.symbols = {
 			c.lineTo(w * 0.2854, h * 0.1281);
 			c.moveTo(w * 0.5246, h * 0.0706);
 			c.lineTo(w * 0.5, h * 0.5);
-			c.lineTo(w * 0.7804, h * 0.5118);	
+			c.lineTo(w * 0.7804, h * 0.5118);
 			c.stroke();
 		},
 		'escalation' : function(c, x, y, w, h)
@@ -744,7 +744,7 @@ mxBpmnShape.prototype.symbols = {
 			c.translate(w / 5, h / 6);
 			h *= 2 / 3;
 			w *= 3 / 5;
-			
+
 			c.begin();
 			c.moveTo(0, h / 4);
 			c.lineTo(w / 3, h / 4);

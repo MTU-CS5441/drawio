@@ -2,7 +2,7 @@
  * Copyright (c) 2017, CTI LOGIC
  * Copyright (c) 2006-2017, JGraph Ltd
  * Copyright (c) 2006-2017, Gaudenz Alder
- * 
+ *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
  *
  * 1. Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
@@ -11,13 +11,13 @@
  *
  * 3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY 
- * AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL 
- * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, 
+ * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY
+ * AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+ * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY,
  * WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-var mxRuler = function(graph, container, isVertical) 
+var mxRuler = function(graph, container, isVertical)
 {
     var ruler = this;
     var canvas = document.createElement("canvas");
@@ -33,7 +33,7 @@ var mxRuler = function(graph, container, isVertical)
     this.container = container;
     this.canvas = canvas;
 
-    var drawLine = function (x1, y1, x2, y2, text) 
+    var drawLine = function (x1, y1, x2, y2, text)
     {
         //remove all fractions
         x1 = Math.round(x1); y1 = Math.round(y1); x2 = Math.round(x2); y2 = Math.round(y2);
@@ -41,10 +41,10 @@ var mxRuler = function(graph, container, isVertical)
         ctx.moveTo(x1 + 0.5, y1 + 0.5);
         ctx.lineTo(x2 + 0.5, y2 + 0.5);
         ctx.stroke();
-        
-        if (text) 
+
+        if (text)
         {
-            if (isVertical) 
+            if (isVertical)
             {
                 var x = x1;
                 var y = y1 - 3;
@@ -72,11 +72,11 @@ var mxRuler = function(graph, container, isVertical)
         }
     };
 
-    var drawRuler = function(forceErase) 
+    var drawRuler = function(forceErase)
     {
         //The area is automatically cleared when the canvas size is changed
     	if (forceErase) ctx.clearRect(0, 0, canvas.width, canvas.height);
-    	
+
         ctx.beginPath();
         ctx.lineWidth = 0.1;
         ctx.strokeStyle = "#BBBBBB";
@@ -89,13 +89,13 @@ var mxRuler = function(graph, container, isVertical)
         var bounds = graph.view.getGraphBounds();
 
         var rStart = (isVertical? bgPages.y : bgPages.x);
-        
+
         //handle negative pages
-        if (isVertical) 
+        if (isVertical)
         {
             var y = ((bounds.y) / scale - t.y);
-            
-            if (y <= -1) 
+
+            if (y <= -1)
             {
                 rStart += Math.ceil(Math.abs(y) / graph.pageFormat.height) * graph.pageFormat.height * scale;
             }
@@ -103,18 +103,18 @@ var mxRuler = function(graph, container, isVertical)
         else
         {
             var x = ((bounds.x) / scale - t.x);
-            
-            if (x <= -1) 
+
+            if (x <= -1)
             {
                 rStart += Math.ceil(Math.abs(x) / graph.pageFormat.width) * graph.pageFormat.width * scale;
             }
         }
-        
+
         rStart += isVertical? (graph.container.offsetTop - ruler.container.offsetTop) : (graph.container.offsetLeft - ruler.container.offsetLeft);
-        
+
         var tickStep, tickSize, len;
 
-        switch(ruler.unit) 
+        switch(ruler.unit)
         {
             case ruler.PIXELS:
                 len = 10;
@@ -131,28 +131,28 @@ var mxRuler = function(graph, container, isVertical)
                     len = 8;
                 else
                     len = 16;
-                
+
                 tickStep = ruler.pPerInch/len;
                 tickSize = [25,5,8,5,12,5,8,5,15,5,8,5,12,5,8,5];
                 break;
         }
-        
+
         var step = tickStep;
-        
+
         if (ruler.unit != ruler.INCHES || (scale > 2 || scale < 0.25))
             step = scale>= 1 ? (tickStep / Math.floor(scale)) : Math.floor(10 / scale / 10) * 10;
-            
-        for (var i = rStart % (step * scale); i <= (isVertical? canvas.height : canvas.width); i += step * scale) 
+
+        for (var i = rStart % (step * scale); i <= (isVertical? canvas.height : canvas.width); i += step * scale)
         {
             var current = Math.round((i - rStart) / scale / step);
             var text = null;
-            
-            if (current % len == 0) 
+
+            if (current % len == 0)
             {
                 text = ruler.formatText(Math.round(current * step)) + "";
             }
-            
-            if (isVertical) 
+
+            if (isVertical)
             {
                 drawLine(30 - tickSize[Math.abs(current) % len], i, 30, i, text);
             }
@@ -162,14 +162,14 @@ var mxRuler = function(graph, container, isVertical)
             }
         }
     };
-    
-	var sizeListener = function() 
+
+	var sizeListener = function()
 	{
 	    var div = graph.container;
 	    var newW = isVertical? container.offsetWidth : div.scrollWidth;
 	    var newH = isVertical? div.scrollHeight : container.offsetHeight;
-	    
-	    if (newW != canvas.width || newH != canvas.height) 
+
+	    if (newW != canvas.width || newH != canvas.height)
 	    {
             canvas.width = newW;
             canvas.height = newH;
@@ -186,17 +186,17 @@ var mxRuler = function(graph, container, isVertical)
     //graph.view.addListener(mxEvent.SCALE, efficientSizeListener);
     graph.addListener(mxEvent.SIZE, efficientSizeListener);
     graph.container.addEventListener("scroll", function() {
-        if (isVertical) 
+        if (isVertical)
         {
             canvas.style.top = -graph.container.scrollTop + "px";
         }
-        else 
+        else
         {
             canvas.style.left = -graph.container.scrollLeft + "px";
         }
     });
 
-    function debounce(func, wait, immediate) 
+    function debounce(func, wait, immediate)
     {
         var timeout;
         return function() {

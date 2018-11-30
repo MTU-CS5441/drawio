@@ -29,7 +29,7 @@ mxShapeGmdlPlayer.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGmdlPlayer.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -52,7 +52,7 @@ mxShapeGmdlPlayer.prototype.foreground = function(c, x, y, w, h)
 		c.rect(0, 0, w * 0.8, 4);
 		c.fill();
 	}
-	
+
 	if ( h >= 14 && w >= 33)
 	{
 		c.setFillColor('#717171');
@@ -102,12 +102,12 @@ mxShapeGmdlSwitch.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGmdlSwitch.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	var state = mxUtils.getValue(this.style, mxShapeGmdlSwitch.prototype.cst.STATE, mxShapeGmdlSwitch.prototype.cst.STATE_ON);
 	this.background(c, x, y, w, h, state);
@@ -202,12 +202,12 @@ mxShapeGmdlMarginRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGmdlMarginRect.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
 };
@@ -266,12 +266,12 @@ mxShapeGmdlSliderNormal.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGmdlSliderNormal.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
 	c.setShadow(true);
@@ -283,7 +283,7 @@ mxShapeGmdlSliderNormal.prototype.background = function(c, x, y, w, h)
 
 	c.ellipse(0, h * 0.5 - hSize * 0.5, hSize, hSize);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(hSize, h * 0.5);
 	c.lineTo(w, h * 0.5);
@@ -325,12 +325,12 @@ mxShapeGmdlSlider2.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGmdlSlider2.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
 	c.setShadow(true);
@@ -349,13 +349,13 @@ mxShapeGmdlSlider2.prototype.background = function(c, x, y, w, h)
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w, h * 0.5);
 	c.fillAndStroke();
-	
+
 	c.restore();
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(barPos * w, h * 0.5);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.ellipse(barPos * w - hSize * 0.5, h * 0.5 - hSize * 0.5, hSize, hSize);
 	c.fillAndStroke();
@@ -377,7 +377,7 @@ Graph.handleFactory[mxShapeGmdlSlider2.prototype.cst.SHAPE_SLIDER] = function(st
 			{
 				this.state.style['barPos'] = Math.round(100 * Math.max(0, Math.min(100, (pt.x - bounds.x) * 100 / bounds.width))) / 100;
 			})];
-			
+
 	return handles;
 };
 
@@ -414,12 +414,12 @@ mxShapeGmdlSliderFocused.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGmdlSliderFocused.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
 	c.setShadow(true);
@@ -445,7 +445,7 @@ mxShapeGmdlSliderFocused.prototype.background = function(c, x, y, w, h)
 	c.moveTo(0, h * 0.5);
 	c.lineTo(barPos * w, h * 0.5);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.ellipse(barPos * w - hSize * 0.167, h * 0.5 - hSize * 0.167, hSize * 0.33, hSize * 0.33);
 	c.fillAndStroke();
@@ -473,7 +473,7 @@ Graph.handleFactory[mxShapeGmdlSliderFocused.prototype.cst.SHAPE_SLIDER_FOCUSED]
 			{
 				this.state.style['barPos'] = Math.round(100 * Math.max(0, Math.min(100, (pt.x - bounds.x) * 100 / bounds.width))) / 100;
 			})];
-			
+
 	return handles;
 
 };
@@ -511,7 +511,7 @@ mxShapeGmdlSliderDisabled.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGmdlSliderDisabled.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -525,16 +525,16 @@ mxShapeGmdlSliderDisabled.prototype.background = function(c, x, y, w, h)
 {
 	var hSize = parseFloat(mxUtils.getValue(this.style, mxShapeGmdlSliderDisabled.prototype.cst.HANDLE_SIZE, '10'));
 	var hPos = parseFloat(mxUtils.getValue(this.style, mxShapeGmdlSliderDisabled.prototype.cst.HANDLE_POSITION, '50')) / 100;
-	
+
 	hPos = Math.max(hPos, 0);
 	hPos = Math.min(hPos, 1);
 
 	c.ellipse(w * hPos - hSize * 0.5, (h - hSize) * 0.5, hSize, hSize);
 	c.fillAndStroke();
-	
+
 	var endL = w * hPos - 7;
 	var startR = w * hPos + 7;
-	
+
 	if (endL > 0)
 	{
 		c.begin();
@@ -542,7 +542,7 @@ mxShapeGmdlSliderDisabled.prototype.background = function(c, x, y, w, h)
 		c.lineTo(endL, h * 0.5);
 		c.stroke();
 	}
-	
+
 	if (startR < w)
 	{
 		c.begin();
@@ -587,7 +587,7 @@ mxShapeGmdlSliderDisabled2.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGmdlSliderDisabled2.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -601,15 +601,15 @@ mxShapeGmdlSliderDisabled2.prototype.background = function(c, x, y, w, h)
 {
 	var hSize = parseFloat(mxUtils.getValue(this.style, mxShapeGmdlSliderDisabled2.prototype.cst.HANDLE_SIZE, '10'));
 	var hPos = parseFloat(mxUtils.getValue(this.style, mxShapeGmdlSliderDisabled2.prototype.cst.HANDLE_POSITION, '50')) / 100;
-	
+
 	hPos = Math.min(Math.max(hPos, 0), 1);
 
 	c.ellipse(w * hPos - hSize * 0.5, (h - hSize) * 0.5, hSize, hSize);
 	c.fillAndStroke();
-	
+
 	var endL = w * hPos - 7;
 	var startR = w * hPos + 7;
-	
+
 	if (endL > 0)
 	{
 		c.begin();
@@ -617,7 +617,7 @@ mxShapeGmdlSliderDisabled2.prototype.background = function(c, x, y, w, h)
 		c.lineTo(endL, h * 0.5);
 		c.stroke();
 	}
-	
+
 	if (startR < w)
 	{
 		c.begin();
@@ -642,7 +642,7 @@ Graph.handleFactory[mxShapeGmdlSliderDisabled2.prototype.cst.SHAPE_SLIDER_DISABL
 			{
 				this.state.style['hPos'] = Math.round(100 * Math.max(0, Math.min(100, (pt.x - bounds.x) * 100 / bounds.width))) / 100;
 			})];
-			
+
 	return handles;
 };
 
@@ -679,12 +679,12 @@ mxShapeGmdlSliderDiscrete.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGmdlSliderDiscrete.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
 	c.setShadow(true);
@@ -705,13 +705,13 @@ mxShapeGmdlSliderDiscrete.prototype.background = function(c, x, y, w, h)
 	c.moveTo(0, h * 0.5 + 22.5);
 	c.lineTo(w, h * 0.5 + 22.5);
 	c.fillAndStroke();
-	
+
 	c.restore();
 	c.begin();
 	c.moveTo(0, h * 0.5 + 22.5);
 	c.lineTo(barPos * w, h * 0.5 + 22.5);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(barPos * w, h * 0.5 + 15.5);
 	c.lineTo(barPos * w - 10.5, h * 0.5 + 2.5);
@@ -741,7 +741,7 @@ Graph.handleFactory[mxShapeGmdlSliderDiscrete.prototype.cst.SHAPE_DISCRETE] = fu
 			{
 				this.state.style['barPos'] = Math.round(100 * Math.max(0, Math.min(100, (pt.x - bounds.x) * 100 / bounds.width))) / 100;
 			})];
-			
+
 	return handles;
 };
 
@@ -778,12 +778,12 @@ mxShapeGmdlSliderDiscreteDots.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGmdlSliderDiscreteDots.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
 	c.setShadow(true);
@@ -805,19 +805,19 @@ mxShapeGmdlSliderDiscreteDots.prototype.background = function(c, x, y, w, h)
 	c.moveTo(0, h * 0.5 + 22.5);
 	c.lineTo(w, h * 0.5 + 22.5);
 	c.fillAndStroke();
-	
+
 	c.restore();
 
 	if (barPos <= 0.1)
 	{
 		c.setFillColor('#bebebe');
 	}
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.5 + 22.5);
 	c.lineTo(barPos * w, h * 0.5 + 22.5);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(barPos * w, h * 0.5 + 15.5);
 	c.lineTo(barPos * w - 10.5, h * 0.5 + 2.5);
@@ -825,7 +825,7 @@ mxShapeGmdlSliderDiscreteDots.prototype.background = function(c, x, y, w, h)
 	c.arcTo(15, 15, 0, 0, 1, barPos * w + 10.5, h * 0.5 + 2.5);
 	c.close();
 	c.fill();
-	
+
 	if (bright == '1')
 	{
 		c.setFillColor('#000000');
@@ -834,25 +834,25 @@ mxShapeGmdlSliderDiscreteDots.prototype.background = function(c, x, y, w, h)
 	{
 		c.setFillColor('#ffffff');
 	}
-	
+
 	c.ellipse(-1.5, h * 0.5 + 21, 3, 3);
 	c.fill();
-	
+
 	c.ellipse(w * 0.2 - 1.5, h * 0.5 + 21, 3, 3);
 	c.fill();
-	
+
 	c.ellipse(w * 0.4 - 1.5, h * 0.5 + 21, 3, 3);
 	c.fill();
-	
+
 	c.ellipse(w * 0.6 - 1.5, h * 0.5 + 21, 3, 3);
 	c.fill();
-	
+
 	c.ellipse(w * 0.8 - 1.5, h * 0.5 + 21, 3, 3);
 	c.fill();
-	
+
 	c.ellipse(w - 1.5, h * 0.5 + 21, 3, 3);
 	c.fill();
-	
+
 	c.setFontSize(fontSize);
 	c.setFontColor(fontColor);
 	var p = Math.round(barPos * 100);
@@ -874,7 +874,7 @@ Graph.handleFactory[mxShapeGmdlSliderDiscreteDots.prototype.cst.SHAPE_DISCRETE_D
 			{
 				this.state.style['barPos'] = Math.round(0.05 * Math.max(0, Math.min(100, (pt.x - bounds.x) * 100 / bounds.width))) / 0.05;
 			})];
-			
+
 	return handles;
 };
 
@@ -909,7 +909,7 @@ mxShapeGmdlProgressBar.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeGmdlProgressBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -917,21 +917,21 @@ mxShapeGmdlProgressBar.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx1 = w * Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx1', this.dx1))));
 
 	c.translate(x, y);
-	
+
 	c.save();
 	c.setStrokeColor('#aaaaaa');
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w , h * 0.5);
 	c.stroke();
-	
+
 	c.restore();
 	c.setShadow(false);
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(dx1, h * 0.5);
 	c.stroke();
-	
+
 };
 
 mxCellRenderer.registerShape(mxShapeGmdlProgressBar.prototype.cst.PROGRESS_BAR, mxShapeGmdlProgressBar);
@@ -959,7 +959,7 @@ Graph.handleFactory[mxShapeGmdlProgressBar.prototype.cst.PROGRESS_BAR] = functio
 			{
 				this.state.style['dx2'] = Math.round(100 * Math.max(0, Math.min(1, (pt.x - bounds.x) / bounds.width))) / 100;
 			});
-	
+
 	handles.push(handle2);
 
 	return handles;

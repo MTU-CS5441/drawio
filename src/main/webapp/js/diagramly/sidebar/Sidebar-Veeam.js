@@ -13,7 +13,7 @@
 		this.addVeeamVMsTapePalette();
 		this.addVeeam3DPalette();
 	};
-	
+
 	Sidebar.prototype.addVeeamDataCenterPalette = function()
 	{
 		var sn = 'shadow=0;dashed=0;html=1;strokeColor=none;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.2d.';
@@ -26,10 +26,10 @@
 		var sb = this;
 		var gn = 'mxgraph.veeam.data_center';
 		var dt = 'veeam vmware virtual machine data center';
-		
+
 		var w = 4.0;
 		var h = 4.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s3 + 'hyper_v_vmware_host;',
@@ -92,9 +92,9 @@
 					w * 11.2, h * 11.2, '', 'Virtual Switch', null, null, this.getTagsForStencil(gn, 'switch', dt).join(' ')),
 			this.createVertexTemplateEntry(s + 'vnic;',
 					w * 11.2, h * 11.2, '', 'vNIC', null, null, this.getTagsForStencil(gn, 'vnic', dt).join(' '))
-					
+
 		];
-			
+
 		this.addPalette('veeamData Center', 'Veeam / Data Center', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -116,10 +116,10 @@
 		var sb = this;
 		var gn = 'mxgraph.veeam.misc';
 		var dt = 'veeam vmware virtual machine misc miscellaneous';
-		
+
 		var w = 4.0;
 		var h = 4.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'alarm;',
@@ -179,7 +179,7 @@
 			this.createVertexTemplateEntry(s3 + 'transportation;',
 					w * 13.8, h * 9.6, '', 'Transportation', null, null, this.getTagsForStencil(gn, 'transportation', dt).join(' '))
 		];
-			
+
 		this.addPalette('veeamMisc', 'Veeam / Miscellaneous', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -201,10 +201,10 @@
 		var sb = this;
 		var gn = 'mxgraph.veeam.software';
 		var dt = 'veeam vmware virtual machine software';
-		
+
 		var w = 4.0;
 		var h = 4.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry('shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#07B152;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.veeam_logo;',
@@ -268,7 +268,7 @@
 			this.createVertexTemplateEntry(s + 'transport_service;',
 					w * 11.2, h * 11.2, '', 'Transport Service', null, null, this.getTagsForStencil(gn, 'transport service', dt).join(' '))
 		];
-			
+
 		this.addPalette('veeamSoftware', 'Veeam / Software', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -290,10 +290,10 @@
 		var sb = this;
 		var gn = 'mxgraph.veeam.storage';
 		var dt = 'veeam vmware virtual machine storage';
-		
+
 		var w = 4.0;
 		var h = 4.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'backup_repository;',
@@ -349,7 +349,7 @@
 			this.createVertexTemplateEntry(s3 + 'linux_repository;',
 					w * 13.4, h * 12.4, '', 'Linux Repository', null, null, this.getTagsForStencil(gn, 'linux repository', dt).join(' '))
 		];
-			
+
 		this.addPalette('veeamStorage', 'Veeam / Storage', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -371,10 +371,10 @@
 		var sb = this;
 		var gn = 'mxgraph.veeam.storage';
 		var dt = 'veeam vmware virtual machine users status';
-		
+
 		var w = 4.0;
 		var h = 4.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'user;',
@@ -420,7 +420,7 @@
 			this.createVertexTemplateEntry(s4 + 'unlocked;',
 					w * 10.4, h * 8.7, '', 'Unlocked', null, null, this.getTagsForStencil(gn, 'unlocked', dt).join(' '))
 		];
-			
+
 		this.addPalette('veeamUsersStatus', 'Veeam / Users and Status', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -442,10 +442,10 @@
 		var sb = this;
 		var gn = 'mxgraph.veeam.vascomponent';
 		var dt = 'veeam vmware virtual machine vas availability suite component';
-		
+
 		var w = 4.0;
 		var h = 4.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s3 + 'database_server;',
@@ -499,7 +499,7 @@
 			this.createVertexTemplateEntry(s3 + 'one_client;',
 					w * 22.7, h * 15.4, '', 'ONE client', null, null, this.getTagsForStencil(gn, 'one client', dt).join(' '))
 		];
-			
+
 		this.addPalette('veeamVASComponents', 'Veeam / Availability Suite components', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -521,10 +521,10 @@
 		var sb = this;
 		var gn = 'mxgraph.veeam.backup_replication';
 		var dt = 'veeam vmware virtual machine backup replication';
-		
+
 		var w = 4.0;
 		var h = 4.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s2 + 'built_in_wan_acceleration;',
@@ -598,7 +598,7 @@
 			this.createVertexTemplateEntry(s2 + 'veeam_explorer;',
 					w * 11.2, h * 11.2, '', 'Veeam Explorer', null, null, this.getTagsForStencil(gn, 'explorer', dt).join(' '))
 		];
-			
+
 		this.addPalette('veeamBackup Replication', 'Veeam / Backup and Replication', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -620,10 +620,10 @@
 		var sb = this;
 		var gn = 'mxgraph.veeam.products';
 		var dt = 'veeam vmware virtual machine products';
-		
+
 		var w = 4.0;
 		var h = 4.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry('shadow=0;dashed=0;html=1;strokeColor=none;fillColor=#07B152;labelPosition=center;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.veeam.veeam_logo;',
@@ -655,7 +655,7 @@
 			this.createVertexTemplateEntry(s2 + 'veeam_one_server;',
 					w * 11.2, h * 11.2, '', 'ONE Server', null, null, this.getTagsForStencil(gn, 'one server', dt).join(' '))
 		];
-			
+
 		this.addPalette('veeamProducts', 'Veeam / Products', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -677,10 +677,10 @@
 		var sb = this;
 		var gn = 'mxgraph.veeam.vmstape';
 		var dt = 'veeam vmware virtual machine vm tape';
-		
+
 		var w = 4.0;
 		var h = 4.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(s + 'virtual_machine;',
@@ -728,7 +728,7 @@
 			this.createVertexTemplateEntry(s + 'tape_checked;',
 					w * 18.8, h * 11.4, '', 'Tape Checked', null, null, this.getTagsForStencil(gn, 'tape checked', dt).join(' '))
 		];
-			
+
 		this.addPalette('veeamVMs and Tape', 'Veeam / VMs and Tape', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)
@@ -748,10 +748,10 @@
 		var sb = this;
 		var gn = 'mxgraph.veeam.3d';
 		var dt = 'veeam 3d vmware virtual machine ';
-		
+
 		var w = 2.0;
 		var h = 2.0;
-		
+
 		var fns =
 		[
 			this.createVertexTemplateEntry(sn + '1ftvm;',
@@ -887,7 +887,7 @@
 			this.createVertexTemplateEntry(sn + 'workstation;',
 					w * 38, h * 31, '', 'Workstation', null, null, this.getTagsForStencil(gn, 'workstation', dt).join(' '))
 		];
-			
+
 		this.addPalette('veeam3D', 'Veeam / 3D', false, mxUtils.bind(this, function(content)
 				{
 					for (var i = 0; i < fns.length; i++)

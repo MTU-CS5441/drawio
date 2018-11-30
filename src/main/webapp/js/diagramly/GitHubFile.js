@@ -5,7 +5,7 @@
 GitHubFile = function(ui, data, meta)
 {
 	DrawioFile.call(this, ui, data);
-	
+
 	this.meta = meta;
 };
 
@@ -14,7 +14,7 @@ mxUtils.extend(GitHubFile, DrawioFile);
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -52,7 +52,7 @@ GitHubFile.prototype.getPublicUrl = function(fn)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -71,7 +71,7 @@ GitHubFile.prototype.isAutosave = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -82,7 +82,7 @@ GitHubFile.prototype.getTitle = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -93,7 +93,7 @@ GitHubFile.prototype.isRenamable = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -104,7 +104,7 @@ GitHubFile.prototype.save = function(revision, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -115,7 +115,7 @@ GitHubFile.prototype.saveAs = function(title, success, error)
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -126,13 +126,13 @@ GitHubFile.prototype.doSave = function(title, success, error)
 	this.meta.name = title;
 	DrawioFile.prototype.save.apply(this, arguments);
 	this.meta.name = prev;
-	
+
 	this.saveFile(title, false, success, error);
 };
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
@@ -148,7 +148,7 @@ GitHubFile.prototype.saveFile = function(title, revision, success, error)
 	else if (!this.savingFile)
 	{
 		this.savingFile = true;
-		
+
 		if (this.getTitle() == title)
 		{
 			// Makes sure no changes get lost while the file is saved
@@ -158,15 +158,15 @@ GitHubFile.prototype.saveFile = function(title, revision, success, error)
 			var prepare = mxUtils.bind(this, function()
 			{
 				this.setModified(false);
-				
+
 				this.isModified = function()
 				{
 					return modified;
 				};
 			});
-			
+
 			prepare();
-			
+
 			this.ui.gitHub.saveFile(this, mxUtils.bind(this, function(commit)
 			{
 				this.savingFile = false;
@@ -186,26 +186,26 @@ GitHubFile.prototype.saveFile = function(title, revision, success, error)
 				this.savingFile = false;
 				this.isModified = prevModified;
 				this.setModified(modified || this.isModified());
-				
+
 				if (this.isModified())
 				{
 					this.addUnsavedStatus();
 				}
-				
+
 				if (error != null)
 				{
 					// Handles modified state for retries
 					if (err != null && err.retry != null)
 					{
 						var retry = err.retry;
-						
+
 						err.retry = function()
 						{
 							prepare();
 							retry();
 						};
 					}
-					
+
 					error(err);
 				}
 			}));
@@ -217,17 +217,17 @@ GitHubFile.prototype.saveFile = function(title, revision, success, error)
 				this.ui.gitHub.insertFile(title, this.getData(), mxUtils.bind(this, function(file)
 				{
 					this.savingFile = false;
-					
+
 					if (success != null)
 					{
 						success();
 					}
-					
+
 					this.ui.fileLoaded(file);
 				}), mxUtils.bind(this, function()
 				{
 					this.savingFile = false;
-					
+
 					if (error != null)
 					{
 						error();

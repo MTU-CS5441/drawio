@@ -22,7 +22,7 @@ function ChatWindow(editorUi, title, content, x, y, width, height, realtime)
 	var chatLineDiv = document.createElement('div');
 	chatLineDiv.style.paddingLeft = '3px';
 	chatLineDiv.style.paddingRight = '15px';
-	
+
 	if (editorUi.editor.graph.isEnabled())
 	{
 		mainDiv.appendChild(chatLineDiv);
@@ -48,7 +48,7 @@ function ChatWindow(editorUi, title, content, x, y, width, height, realtime)
 			this.sendMessage();
 		}
 	});
-	
+
 	this.sendBtn = document.createElement('button');
 	this.sendBtn.style.cssFloat = 'right';
 	this.sendBtn.style.styleFloat = 'right';
@@ -83,13 +83,13 @@ function ChatWindow(editorUi, title, content, x, y, width, height, realtime)
 		{
 			this.updateChatArea(this.chatHistory.get(i));
 		}
-		
+
 		this.chatHistory.addEventListener(gapi.drive.realtime.EventType.VALUES_ADDED, mxUtils.bind(this, function(evt)
 		{
 			this.updateChatArea(evt.target.get(evt.index))
 		}));
 	}
-	
+
 	this.doc.addEventListener(gapi.drive.realtime.EventType.COLLABORATOR_JOINED, mxUtils.bind(this, this.collaboratorListener));
 	this.doc.addEventListener(gapi.drive.realtime.EventType.COLLABORATOR_LEFT, mxUtils.bind(this, this.collaboratorListener));
 
@@ -127,7 +127,7 @@ ChatWindow.prototype.sendMessage = function()
 	{
 		var msgObj = {timestamp: new Date().getTime(), collaboratorColor : this.collabColor, collaboratorName : this.displayName, text : this.chatLineArea.value, version : 1};
 		this.chatHistory.push(msgObj);
-	
+
 		this.chatLineArea.value = '';
 		//this.chatLineArea.selectionStart = 0;
 	}
@@ -138,10 +138,10 @@ ChatWindow.prototype.sendMessage = function()
 };
 
 ChatWindow.prototype.updateChatArea = function(newMsgObj)
-{	
+{
 	var headingElt = '<span style="color : ' + newMsgObj.collaboratorColor + ';">&#x25BA;</span>' + '<b>' + newMsgObj.collaboratorName + '</b>' + ': ';
 	var newChatLine = headingElt + this.htmlEscape(newMsgObj.text) + '<br>';
-	
+
 	this.chatArea.innerHTML += newChatLine;
 	this.chatArea.scrollTop = this.chatArea.scrollHeight;
 };
@@ -158,11 +158,11 @@ ChatWindow.prototype.collaboratorListener = function(evt)
 {
 	var msg = null;
 
-	if (evt.collaborator.isMe) 
+	if (evt.collaborator.isMe)
 	{
 		return;
 	}
-	
+
 	if (evt.type == gapi.drive.realtime.EventType.COLLABORATOR_JOINED)
 	{
 		msg = '<span style="color : ' + evt.collaborator.color + ';">&#x25B2</span>' + '<i>' + mxResources.get('chatJoined', [evt.collaborator.displayName]) + '</i>';
@@ -183,11 +183,11 @@ ChatWindow.prototype.collaboratorListener = function(evt)
 ChatWindow.prototype.configCollabInfo = function()
 {
 	var collaboratorsList = this.doc.getCollaborators();
-	
+
 	for ( var i = 0; i < collaboratorsList.length; i++)
 	{
 		var collaborator = collaboratorsList[i];
-		
+
 		if (collaborator.isMe)
 		{
 			this.collabColor = collaborator.color;
@@ -196,12 +196,12 @@ ChatWindow.prototype.configCollabInfo = function()
 	}
 };
 
-ChatWindow.prototype.destroy = function() 
+ChatWindow.prototype.destroy = function()
 {
 	this.window.destroy();
 };
 
-ChatWindow.prototype.htmlEscape = function(string) 
+ChatWindow.prototype.htmlEscape = function(string)
 {
 	return string.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
 };

@@ -5,7 +5,7 @@
 TrelloFile = function(ui, data, meta)
 {
 	DrawioFile.call(this, ui, data);
-	
+
 	this.meta = meta;
 	this.saveNeededCounter = 0;
 };
@@ -14,7 +14,7 @@ TrelloFile = function(ui, data, meta)
 mxUtils.extend(TrelloFile, DrawioFile);
 
 /**
- * 
+ *
  */
 TrelloFile.prototype.getHash = function()
 {
@@ -22,7 +22,7 @@ TrelloFile.prototype.getHash = function()
 };
 
 /**
- * 
+ *
  */
 TrelloFile.prototype.getMode = function()
 {
@@ -38,7 +38,7 @@ TrelloFile.prototype.isAutosave = function()
 };
 
 /**
- * 
+ *
  */
 TrelloFile.prototype.getTitle = function()
 {
@@ -46,7 +46,7 @@ TrelloFile.prototype.getTitle = function()
 };
 
 /**
- * 
+ *
  */
 TrelloFile.prototype.isRenamable = function()
 {
@@ -54,7 +54,7 @@ TrelloFile.prototype.isRenamable = function()
 };
 
 /**
- * 
+ *
  */
 TrelloFile.prototype.save = function(revision, success, error)
 {
@@ -62,7 +62,7 @@ TrelloFile.prototype.save = function(revision, success, error)
 };
 
 /**
- * 
+ *
  */
 TrelloFile.prototype.saveAs = function(title, success, error)
 {
@@ -70,7 +70,7 @@ TrelloFile.prototype.saveAs = function(title, success, error)
 };
 
 /**
- * 
+ *
  */
 TrelloFile.prototype.doSave = function(title, success, error)
 {
@@ -79,12 +79,12 @@ TrelloFile.prototype.doSave = function(title, success, error)
 	this.meta.name = title;
 	DrawioFile.prototype.save.apply(this, arguments);
 	this.meta.name = prev;
-	
+
 	this.saveFile(title, false, success, error);
 };
 
 /**
- * 
+ *
  */
 TrelloFile.prototype.saveFile = function(title, revision, success, error)
 {
@@ -98,7 +98,7 @@ TrelloFile.prototype.saveFile = function(title, revision, success, error)
 	else if (!this.savingFile)
 	{
 		this.savingFile = true;
-		
+
 		if (this.getTitle() == title)
 		{
 			// Makes sure no changes get lost while the file is saved
@@ -108,22 +108,22 @@ TrelloFile.prototype.saveFile = function(title, revision, success, error)
 			var prepare = mxUtils.bind(this, function()
 			{
 				this.setModified(false);
-				
+
 				this.isModified = function()
 				{
 					return modified;
 				};
 			});
-			
+
 			prepare();
-			
+
 			this.ui.trello.saveFile(this, mxUtils.bind(this, function(meta)
 			{
 				this.savingFile = false;
 				this.isModified = prevModified;
 				this.meta = meta;
 				this.contentChanged();
-				
+
 				if (success != null)
 				{
 					success();
@@ -138,21 +138,21 @@ TrelloFile.prototype.saveFile = function(title, revision, success, error)
 				this.savingFile = false;
 				this.isModified = prevModified;
 				this.setModified(modified || this.isModified());
-				
+
 				if (error != null)
 				{
 					// Handles modified state for retries
 					if (err != null && err.retry != null)
 					{
 						var retry = err.retry;
-						
+
 						err.retry = function()
 						{
 							prepare();
 							retry();
 						};
 					}
-					
+
 					error(err);
 				}
 			}));
@@ -164,14 +164,14 @@ TrelloFile.prototype.saveFile = function(title, revision, success, error)
 				this.ui.trello.insertFile(title, this.getData(), mxUtils.bind(this, function(file)
 				{
 					this.savingFile = false;
-					
+
 					if (success != null)
 					{
 						success();
 					}
-					
+
 					this.ui.fileLoaded(file);
-					
+
 					if (this.saveNeededCounter > 0) {
 						this.saveNeededCounter--;
 						this.saveFile(title, revision, success, error);
@@ -179,7 +179,7 @@ TrelloFile.prototype.saveFile = function(title, revision, success, error)
 				}), mxUtils.bind(this, function()
 				{
 					this.savingFile = false;
-					
+
 					if (error != null)
 					{
 						error();

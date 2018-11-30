@@ -42,7 +42,7 @@ mxShapePidFan.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapePidFan.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -155,7 +155,7 @@ mxShapePidColumn.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapePidColumn.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -345,14 +345,14 @@ mxShapePidColumn.prototype.foreground = function(c, x, y, w, h)
 		{
 			c.setDashed(true);
 		}
-		
+
 		c.begin();
 
 		for (var i = off + stepY * 0.5; i < range + off; i += stepY)
 		{
 				c.moveTo(0, i);
 				c.lineTo(w * 0.4, i);
-				
+
 				if (type === mxShapePidColumn.prototype.cst.VALVE)
 				{
 					c.moveTo(w * 0.4, i - stepY * 0.2);
@@ -382,14 +382,14 @@ mxShapePidColumn.prototype.foreground = function(c, x, y, w, h)
 		for (var i = 0; i <= range - step; i += step)
 		{
 			c.setDashed(true);
-			
+
 			c.begin();
 			c.moveTo(0, i + off + step * 0.2);
 			c.lineTo(w, i + off + step * 0.2);
 			c.moveTo(0, i + off + step * 0.8);
 			c.lineTo(w, i + off + step * 0.8);
 			c.stroke();
-			
+
 			if (dashed === 0)
 			{
 				c.setDashed(false);
@@ -415,10 +415,10 @@ mxShapePidColumn.prototype.foreground = function(c, x, y, w, h)
 				c.moveTo(w * 0.5, i + off);
 				c.lineTo(w * 0.5, i + off + step * 0.08);
 			}
-			
+
 			c.stroke();
 		}
-		
+
 		c.stroke();
 	}
 };
@@ -451,7 +451,7 @@ mxShapePidConveyor.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapePidConveyor.prototype.paintVertexShape = function(c, x, y, w, h)

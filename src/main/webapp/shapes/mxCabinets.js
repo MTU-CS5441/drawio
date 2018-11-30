@@ -34,7 +34,7 @@ mxCabinetsCabinet.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxCabinetsCabinet.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -56,16 +56,16 @@ mxCabinetsCabinet.prototype.foreground = function(c, x, y, w, h)
 	var wallTh = 15;
 	c.rect(0, 0, w, wallTh);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(wallTh, wallTh);
 	c.lineTo(wallTh, h);
 	c.moveTo(w - wallTh, wallTh);
 	c.lineTo(w - wallTh, h);
 	c.stroke();
-	
+
 	var hasStand = mxUtils.getValue(this.style, mxCabinetsCabinet.prototype.cst.HAS_STAND, '1');
-	
+
 	if (hasStand === 1)
 	{
 		c.rect(0, h - 40, w, 40);
@@ -108,7 +108,7 @@ mxCabinetsCoverPlate.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxCabinetsCoverPlate.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -169,7 +169,7 @@ mxCabinetsDimension.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxCabinetsDimension.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -226,7 +226,7 @@ mxCabinetsDimensionBottom.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxCabinetsDimensionBottom.prototype.paintVertexShape = function(c, x, y, w, h)

@@ -16,7 +16,7 @@ var mxIOS7C =
 		STATE_ON : 'on',
 		STATE_OFF : 'off',
 		GRID_SIZE : 'gridSize',
-		
+
 		SHAPE_IOS7_APP_BAR : 'mxgraph.ios7ui.appBar',
 		SHAPE_IOS7_ON_OFF_BUTTON : 'mxgraph.ios7ui.onOffButton',
 		SHAPE_IOS7_SLIDER : 'mxgraph.ios7ui.slider',
@@ -30,7 +30,7 @@ var mxIOS7C =
 		SHAPE_IOS7_SEARCH_BOX : 'mxgraph.ios7ui.searchBox',
 		SHAPE_IOS7_URL : 'mxgraph.ios7ui.url',
 		SHAPE_IOS7_ACTION_DIALOG : 'mxgraph.ios7ui.actionDialog',
-		
+
 		STYLE_FILLCOLOR2 : 'fillColor2',
 		STYLE_FILLCOLOR3 : 'fillColor3',
 		STYLE_TEXTCOLOR : 'textColor',
@@ -66,7 +66,7 @@ mxShapeIOS7AppBar.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeIOS7AppBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -97,21 +97,21 @@ mxShapeIOS7AppBar.prototype.foreground = function(c, x, y, w, h)
 	c.fill();
 	c.ellipse(21, h * 0.5 - 1.5, 3, 3);
 	c.fill();
-	
+
 	c.ellipse(54, h * 0.5 + 2, 2, 2);
 	c.fillAndStroke();
-	
+
 	c.setStrokeWidth(2);
 	c.begin();
 	c.moveTo(52, h * 0.5 + 1);
 	c.arcTo(3.5, 3.5, 0, 0, 1, 58, h * 0.5 + 1);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(50, h * 0.5 - 1);
 	c.arcTo(6, 6, 0, 0, 1, 60, h * 0.5 - 1);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(w - 19, h * 0.5 - 2);
 	c.lineTo(w - 6, h * 0.5 - 2);
@@ -129,7 +129,7 @@ mxShapeIOS7AppBar.prototype.foreground = function(c, x, y, w, h)
 	c.lineTo(w - 36, h * 0.5 - 2.5);
 	c.lineTo(w - 44, h * 0.5 + 2.5);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(w - 20, h * 0.5 - 3);
 	c.lineTo(w - 5, h * 0.5 - 3);
@@ -176,7 +176,7 @@ mxShapeIOS7OnOffButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7OnOffButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -249,7 +249,7 @@ mxUtils.extend(mxShapeIOS7Slider, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7Slider.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -263,7 +263,7 @@ mxShapeIOS7Slider.prototype.paintVertexShape = function(c, x, y, w, h)
 mxShapeIOS7Slider.prototype.foreground = function(c, w, h)
 {
 	c.setStrokeWidth(2);
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w, h * 0.5);
@@ -272,7 +272,7 @@ mxShapeIOS7Slider.prototype.foreground = function(c, w, h)
 	var barPos = mxUtils.getValue(this.style, mxIOS7C.BAR_POS, '80');
 	barPos = Math.min(barPos, 100);
 	barPos = Math.max(barPos, 0);
-	var deadzone = 0; 
+	var deadzone = 0;
 	var virRange = w - 2 * deadzone;
 	var truePos = deadzone + virRange * barPos / 100;
 
@@ -326,7 +326,7 @@ mxShapeIOS7DownloadBar.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7DownloadBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -400,7 +400,7 @@ mxUtils.extend(mxShapeIOS7Icon, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7Icon.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -415,7 +415,7 @@ mxShapeIOS7Icon.prototype.foreground = function(c, w, h)
 	c.setGradient('#00D0F0', '#0080F0', w * 0.325, 0, w * 0.675, h * 0.5, mxConstants.DIRECTION_SOUTH, 1, 1);
 	c.roundrect(0, 0, w, h, w * 0.1, h * 0.1);
 	c.fill();
-	
+
 	var fieldText = mxUtils.getValue(this.style, mxIOS7C.BUTTON_TEXT, '');
 	c.setFontColor('#ffffff');
 	c.setFontStyle(mxConstants.FONT_BOLD);
@@ -447,7 +447,7 @@ mxUtils.extend(mxShapeIOS7horButtonBar, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7horButtonBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -651,7 +651,7 @@ mxUtils.extend(mxShapeIOS7pageControl, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7pageControl.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -704,7 +704,7 @@ mxShapeIOS7iconGrid.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7iconGrid.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -714,7 +714,7 @@ mxShapeIOS7iconGrid.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	var boxSizeX = w / (parseInt(gridSize[0],10) + (gridSize[0]-1) * 0.1);
 	var boxSizeY = h / (parseInt(gridSize[1],10) + (gridSize[1]-1) * 0.1);
-	
+
 	for (var i = 0; i < gridSize[0]; i++)
 	{
 		for (var j = 0; j < gridSize[1]; j++)
@@ -749,7 +749,7 @@ mxUtils.extend(mxShapeIOS7phone, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7phone.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -759,9 +759,9 @@ mxShapeIOS7phone.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	c.roundrect(0, 0, w, h, rSize, rSize);
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	this.foreground(c, x, y, w, h, rSize);
 };
 
@@ -805,7 +805,7 @@ mxUtils.extend(mxShapeIOS7searchBox, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7searchBox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -833,7 +833,7 @@ mxShapeIOS7searchBox.prototype.foreground = function(c, w, h)
 	c.setFillColor('#ffffff');
 	c.roundrect(w * 0.05, h * 0.15, w * 0.5, h * 0.7, rSize, rSize);
 	c.fillAndStroke();
-	
+
 	c.setFontColor(fontColor);
 	c.setFontSize(Math.min(h * 0.7, w * 0.1));
 
@@ -872,7 +872,7 @@ mxUtils.extend(mxShapeIOS7URL, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7URL.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -900,7 +900,7 @@ mxShapeIOS7URL.prototype.foreground = function(c, w, h)
 	c.setFillColor('#d8d8d8');
 	c.roundrect(w * 0.05, h * 0.15, w * 0.9, h * 0.7, rSize, rSize);
 	c.fill();
-	
+
 	c.setFontColor(fontColor);
 	c.setFontSize(Math.min(h * 0.7, w * 0.1));
 
@@ -945,7 +945,7 @@ mxUtils.extend(mxShapeIOS7Actiondialog, mxShape);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7Actiondialog.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -956,15 +956,15 @@ mxShapeIOS7Actiondialog.prototype.paintVertexShape = function(c, x, y, w, h)
 	var fontSize = mxUtils.getValue(this.style, mxIOS7C.STYLE_TEXTSIZE, '17');
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
-	
+
 	c.setShadow(false);
-	
+
 	c.setFillColor('#e0e0e0');
 	c.roundrect(w * 0.05, h * 0.1, w * 0.9, h * 0.35, w * 0.025, h * 0.05);
 	c.fill();
 	c.roundrect(w * 0.05, h * 0.55, w * 0.9, h * 0.35, w * 0.025, h * 0.05);
 	c.fill();
-	
+
 	c.setFontStyle(mxConstants.FONT_BOLD);
 	this.mainText(c, x, y, w, h, mainText, fontSize, fontColor);
 	this.subText(c, x, y, w, h, subText, fontSize / 1.4, fontColor);
@@ -1016,7 +1016,7 @@ mxShapeIOS7Anchor.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7Anchor.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1056,7 +1056,7 @@ mxShapeIOS7RRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7RRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1101,7 +1101,7 @@ mxShapeIOS7LeftButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7LeftButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1154,7 +1154,7 @@ mxShapeIOS7RightButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7RightButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1207,7 +1207,7 @@ mxShapeIOS7TopButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7TopButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1260,7 +1260,7 @@ mxShapeIOS7BottomButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7BottomButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1308,7 +1308,7 @@ mxShapeIOS7HorLines.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7HorLines.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1317,7 +1317,7 @@ mxShapeIOS7HorLines.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	c.rect(0, 0, w, h);
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w, 0);
@@ -1370,12 +1370,12 @@ mxShapeIOS7MarginRect.prototype.cst = {
 };
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7MarginRect.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
 };
@@ -1431,12 +1431,12 @@ mxShapeIOS7Callout.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7Callout.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
 };
@@ -1444,7 +1444,7 @@ mxShapeIOS7Callout.prototype.paintVertexShape = function(c, x, y, w, h)
 mxShapeIOS7Callout.prototype.background = function(c, x, y, w, h, state)
 {
 	var r = 10;
-	
+
 	if (w >= 30 && h >= 20)
 	{
 		c.begin();
@@ -1503,7 +1503,7 @@ mxShapeIOS7SelectBar.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7SelectBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1518,7 +1518,7 @@ mxShapeIOS7SelectBar.prototype.paintVertexShape = function(c, x, y, w, h)
 	r = Math.min(h / 2, w / 2, r);
 	dx = Math.max(r + dy, dx);
 	dx = Math.min(w - r - dy, w - 20 - dy, dx);
-	
+
 	c.begin();
 	c.moveTo(dx - dy, h);
 	c.lineTo(r, h);
@@ -1533,32 +1533,32 @@ mxShapeIOS7SelectBar.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(dx, h + dy);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	c.begin();
 	c.moveTo(w - Math.max(20, r), 0);
 	c.lineTo(w - Math.max(20, r), h);
 	c.stroke();
 
 	var currDx = dx2;
-	
+
 	c.begin();
-	
+
 	while (currDx < (w - Math.max(20, r)))
 	{
 		c.moveTo(currDx, 0);
 		c.lineTo(currDx, h);
-		
+
 		currDx = currDx + dx2;
 	}
-	
+
 	c.stroke();
-	
+
 	var w1 = Math.min(Math.max(20, r), h);
 	var x1 = w - w1 * 0.5;
 	var y1 = h * 0.5;
-	
+
 	c.setFillColor(mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, ''));
 	c.begin();
 	c.moveTo(x1 - w1 * 0.15, y1 - w1 * 0.225);
@@ -1606,7 +1606,7 @@ Graph.handleFactory[mxShapeIOS7SelectBar.prototype.cst.SELECT_BAR] = function(st
 			{
 				this.state.style['size'] = Math.round(100 * Math.max(0, Math.min(bounds.width / 2, bounds.height / 2, bounds.x + bounds.width - pt.x))) / 100;
 			});
-	
+
 	handles.push(handle3);
 
 	var handle4 = Graph.createHandle(state, ['dx2'], function(bounds)
@@ -1659,12 +1659,12 @@ mxShapeIOS7Slider2.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeIOS7Slider2.prototype.paintVertexShape = function(c, x, y, w, h)
 {
-	
+
 	c.translate(x, y);
 	this.background(c, x, y, w, h);
 	c.setShadow(true);
@@ -1683,14 +1683,14 @@ mxShapeIOS7Slider2.prototype.background = function(c, x, y, w, h)
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w, h * 0.5);
 	c.fillAndStroke();
-	
+
 
 	c.restore();
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(barPos * w, h * 0.5);
 	c.fillAndStroke();
-	
+
 	c.setStrokeColor('#bbbbbb');
 	c.begin();
 	c.ellipse(barPos * w - hSize * 0.5, h * 0.5 - hSize * 0.5, hSize, hSize);
@@ -1713,7 +1713,7 @@ Graph.handleFactory[mxShapeIOS7Slider2.prototype.cst.SHAPE_SLIDER] = function(st
 			{
 				this.state.style['barPos'] = Math.round(100 * Math.max(0, Math.min(100, (pt.x - bounds.x) * 100 / bounds.width))) / 100;
 			})];
-			
+
 	return handles;
 };
 

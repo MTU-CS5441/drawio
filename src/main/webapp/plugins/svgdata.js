@@ -7,11 +7,11 @@ Draw.loadPlugin(function(ui) {
 	 * Overrides SVG export to add metadata for each cell.
 	 */
 	var graphCreateSvgImageExport = Graph.prototype.createSvgImageExport;
-	
+
 	Graph.prototype.createSvgImageExport = function()
 	{
 		var exp = graphCreateSvgImageExport.apply(this, arguments);
-		
+
 		// Overrides rendering to add metadata
 		var expDrawCellState = exp.drawCellState;
 
@@ -26,9 +26,9 @@ Draw.loadPlugin(function(ui) {
 			var prev = canvas.root;
 			prev.appendChild(g);
 			canvas.root = g;
-			
+
 			expDrawCellState.apply(this, arguments);
-			
+
 			// Adds metadata if group is not empty
 			if (g.firstChild == null)
 			{
@@ -37,19 +37,19 @@ Draw.loadPlugin(function(ui) {
 			else if (mxUtils.isNode(state.cell.value))
 			{
 				g.setAttribute('content', mxUtils.getXml(state.cell.value));
-				
+
 				for (var i = 0; i < state.cell.value.attributes.length; i++)
 				{
 					var attrib = state.cell.value.attributes[i];
 					g.setAttribute('data-' + attrib.name, attrib.value);
 				}
 			}
-			
+
 			// Restores previous root
 			canvas.root = prev;
 		};
 
 		return exp;
 	};
-	
+
 });

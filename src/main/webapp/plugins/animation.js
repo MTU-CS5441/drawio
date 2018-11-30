@@ -21,30 +21,30 @@ Draw.loadPlugin(function(editorUi)
 			this.animationWindow.window.setVisible(!this.animationWindow.window.isVisible());
 		}
 	});
-	
+
 	var menu = editorUi.menus.get('extras');
 	var oldFunct = menu.funct;
-	
+
 	menu.funct = function(menu, parent)
 	{
 		oldFunct.apply(this, arguments);
-		
+
 		editorUi.menus.addMenuItems(menu, ['-', 'animation'], parent);
 	};
-	
+
 	// For animation and fading
 	function getNodesForCells(graph, cells)
 	{
 		var nodes = [];
-		
+
 		for (var i = 0; i < cells.length; i++)
 		{
 			var state = graph.view.getState(cells[i]);
-			
+
 			if (state != null)
 			{
 				var shapes = graph.cellRenderer.getShapesForState(state);
-				
+
 				for (var j = 0; j < shapes.length; j++)
 				{
 					if (shapes[j] != null && shapes[j].node != null)
@@ -52,7 +52,7 @@ Draw.loadPlugin(function(editorUi)
 						nodes.push(shapes[j].node);
 					}
 				}
-				
+
 				// Adds folding icon
 				if (state.control != null && state.control.node != null)
 				{
@@ -60,10 +60,10 @@ Draw.loadPlugin(function(editorUi)
 				}
 			}
 		}
-		
+
 		return nodes;
 	};
-	
+
 	function fadeIn(nodes)
 	{
 		if (nodes != null)
@@ -73,7 +73,7 @@ Draw.loadPlugin(function(editorUi)
 				mxUtils.setPrefixedStyle(nodes[i].style, 'transition', null);
 				nodes[i].style.opacity = '0';
 			}
-			
+
 			window.setTimeout(function()
 			{
 				for (var i = 0; i < nodes.length; i++)
@@ -84,7 +84,7 @@ Draw.loadPlugin(function(editorUi)
 			}, 0);
 		}
 	};
-	
+
 	function fadeOut(nodes)
 	{
 		if (nodes != null)
@@ -94,7 +94,7 @@ Draw.loadPlugin(function(editorUi)
 				mxUtils.setPrefixedStyle(nodes[i].style, 'transition', null);
 				nodes[i].style.opacity = '1';
 			}
-			
+
 			window.setTimeout(function()
 			{
 				for (var i = 0; i < nodes.length; i++)
@@ -105,7 +105,7 @@ Draw.loadPlugin(function(editorUi)
 			}, 0);
 		}
 	};
-	
+
 	function createEdgeAnimation(state)
 	{
 		var pts = state.absolutePoints.slice();
@@ -120,14 +120,14 @@ Draw.loadPlugin(function(editorUi)
 				{
 					var pts2 = [pts[0]];
 					var dist = total * step / steps;
-					
+
 					for (var i = 1; i < n; i++)
 					{
 						if (dist <= segs[i - 1])
 						{
 							pts2.push(new mxPoint(pts[i - 1].x + (pts[i].x - pts[i - 1].x) * dist / segs[i - 1],
 								pts[i - 1].y + (pts[i].y - pts[i - 1].y) * dist / segs[i - 1]));
-							
+
 							break;
 						}
 						else
@@ -136,7 +136,7 @@ Draw.loadPlugin(function(editorUi)
 							pts2.push(pts[i]);
 						}
 					}
-					
+
 					state.shape.points = pts2;
 					state.shape.redraw();
 				}
@@ -151,17 +151,17 @@ Draw.loadPlugin(function(editorUi)
 			}
 		};
 	};
-	
+
 	function createVertexAnimation(state)
 	{
 		var bds = new mxRectangle.fromRectangle(state.shape.bounds);
 		var ttr = null;
-		
+
 		if (state.text != null && state.text.node != null && state.text.node.firstChild != null)
 		{
 			ttr = state.text.node.firstChild.getAttribute('transform');
 		}
-		
+
 		return {
 			execute: function(step, steps)
 			{
@@ -170,7 +170,7 @@ Draw.loadPlugin(function(editorUi)
 					var f = step / steps;
 					state.shape.bounds = new mxRectangle(bds.x, bds.y, bds.width * f, bds.height);
 					state.shape.redraw();
-					
+
 					// Text is animated using CSS3 transitions
 					if (ttr != null)
 					{
@@ -184,7 +184,7 @@ Draw.loadPlugin(function(editorUi)
 				{
 					state.shape.bounds = bds;
 					state.shape.redraw();
-					
+
 					if (ttr != null)
 					{
 						state.text.node.firstChild.setAttribute('transform', ttr);
@@ -198,9 +198,9 @@ Draw.loadPlugin(function(editorUi)
 	{
 		steps = (steps != null) ? steps : 30;
 		delay = (delay != null) ? delay : 30;
-		
+
 		var animations = [];
-		
+
 		for (var i = 0; i < cells.length; i++)
 		{
 			var state = graph.view.getState(cells[i]);
@@ -217,15 +217,15 @@ Draw.loadPlugin(function(editorUi)
 				// TODO: include descendants
 			}
 		}
-		
+
 		var step = 0;
-		
+
 		function animate()
 		{
 			if (step == steps)
 			{
 				window.clearInterval(thread);
-				
+
 				for (var i = 0; i < animations.length; i++)
 				{
 					animations[i].stop();
@@ -237,38 +237,38 @@ Draw.loadPlugin(function(editorUi)
 				{
 					animations[i].execute(step, steps);
 				}
-				
-				step++;							
+
+				step++;
 			}
 		}
-		
+
 		var thread = window.setInterval(animate, delay);
 		animate();
 	};
-	
+
 	function mapCell(cell, clone, mapping)
 	{
 		mapping = (mapping != null) ? mapping : new Object();
 		mapping[cell.id] = clone;
-		
+
 		var childCount = cell.getChildCount();
-		
+
 		for (var i = 0; i < childCount; i++)
 		{
 			mapCell(cell.getChildAt(i), clone.getChildAt(i), mapping);
 		}
-		
+
 		return mapping;
 	};
-	
+
 	var allowedToRun = false;
 	var running = false;
-	
+
 	function stop()
 	{
 		allowedToRun = false;
 	};
-	
+
 	function run(graph, steps, loop)
 	{
 		if (!running)
@@ -282,7 +282,7 @@ Draw.loadPlugin(function(editorUi)
 				for (var id in graph.getModel().cells)
 				{
 					var cell = graph.getModel().cells[id];
-					
+
 					if (graph.getModel().isVertex(cell) || graph.getModel().isEdge(cell))
 					{
 						graph.setCellStyles('opacity', '0', [cell]);
@@ -294,16 +294,16 @@ Draw.loadPlugin(function(editorUi)
 			{
 				graph.getModel().endUpdate();
 			}
-			
+
 			var mapping = mapCell(editorUi.editor.graph.getModel().getRoot(), graph.getModel().getRoot());
 			var step = 0;
-			
+
 			function next()
 			{
 				if (allowedToRun && step < steps.length)
 				{
 					var tokens = steps[step].split(' ');
-					
+
 					if (tokens.length > 0)
 					{
 						if (tokens[0] == 'wait' && tokens.length > 1)
@@ -319,14 +319,14 @@ Draw.loadPlugin(function(editorUi)
 							if (tokens.length > 1)
 							{
 								var cell = mapping[tokens[1]];
-								
+
 								if (cell != null)
 								{
 									if (tokens[0] == 'show')
 									{
 										graph.setCellStyles('opacity', '100', [cell]);
 										graph.setCellStyles('noLabel', null, [cell]);
-										
+
 										if (tokens.length > 2 && tokens[2] == 'fade')
 										{
 											fadeIn(getNodesForCells(graph, [cell]));
@@ -346,7 +346,7 @@ Draw.loadPlugin(function(editorUi)
 									console.log('cell not found', id, steps[step]);
 								}
 							}
-							
+
 							step++;
 							next();
 						}
@@ -355,7 +355,7 @@ Draw.loadPlugin(function(editorUi)
 				else
 				{
 					running = false;
-					
+
 					if (loop)
 					{
 						// Workaround for edge animation
@@ -364,13 +364,13 @@ Draw.loadPlugin(function(editorUi)
 					}
 				}
 			};
-	
+
 			next();
 		}
 	};
-	
+
 	/**
-	 * 
+	 *
 	 */
 	var AnimationWindow = function(editorUi, x, y, w, h)
 	{
@@ -386,30 +386,30 @@ Draw.loadPlugin(function(editorUi)
 		tr2.style.height = '40px';
 		var td21 = document.createElement('td');
 		td21.setAttribute('colspan', '2');
-		
+
 		var list = document.createElement('textarea');
 		list.style.overflow = 'auto';
 		list.style.width = '100%';
 		list.style.height = '100%';
 		td11.appendChild(list);
-		
+
 		var root = editorUi.editor.graph.getModel().getRoot();
-		
+
 		if (root.value != null && typeof(root.value) == 'object')
 		{
 			list.value = root.value.getAttribute('animation');
 		}
-		
+
 		var container = document.createElement('div');
 		container.style.border = '1px solid lightGray';
 		container.style.background = '#ffffff';
 		container.style.width = '100%';
 		container.style.height = '100%';
 		container.style.overflow = 'auto';
-		
+
 		mxEvent.disableContextMenu(container);
 		td12.appendChild(container);
-		
+
 		var graph = new Graph(container);
 		graph.setEnabled(false);
 		graph.setPanning(true);
@@ -423,39 +423,39 @@ Draw.loadPlugin(function(editorUi)
 		var fadeInBtn = mxUtils.button('Fade In', function()
 		{
 			var cells = editorUi.editor.graph.getSelectionCells();
-			
+
 			if (cells.length > 0)
 			{
 				for (var i = 0; i < cells.length; i++)
 				{
 					list.value = list.value + 'show ' + cells[i].id + ' fade\n';
 				}
-				
+
 				list.value = list.value + 'wait 1000\n';
 			}
 		});
 		td21.appendChild(fadeInBtn);
-		
+
 		var animateBtn = mxUtils.button('Wipe In', function()
 		{
 			var cells = editorUi.editor.graph.getSelectionCells();
-			
+
 			if (cells.length > 0)
 			{
 				for (var i = 0; i < cells.length; i++)
 				{
 					list.value = list.value + 'show ' + cells[i].id + '\n';
 				}
-				
+
 				list.value = list.value + 'wait 1000\n';
 			}
 		});
 		td21.appendChild(animateBtn);
-		
+
 		var addBtn = mxUtils.button('Fade Out', function()
 		{
 			var cells = editorUi.editor.graph.getSelectionCells();
-			
+
 			if (cells.length > 0)
 			{
 				for (var i = 0; i < cells.length; i++)
@@ -467,13 +467,13 @@ Draw.loadPlugin(function(editorUi)
 			}
 		});
 		td21.appendChild(addBtn);
-		
+
 		var waitBtn = mxUtils.button('Wait', function()
 		{
 			list.value = list.value + 'wait 1000\n';
 		});
 		td21.appendChild(waitBtn);
-		
+
 		var runBtn = mxUtils.button('Preview', function()
 		{
 			graph.getModel().clear();
@@ -481,24 +481,24 @@ Draw.loadPlugin(function(editorUi)
 			graph.maxFitScale = 1;
 			graph.fit(8);
 			graph.center();
-			
+
 			run(graph, list.value.split('\n'));
 		});
 		td21.appendChild(runBtn);
-		
+
 		var stopBtn = mxUtils.button('Stop', function()
 		{
 			graph.getModel().clear();
 			stop();
 		});
 		td21.appendChild(stopBtn);
-		
+
 		var applyBtn = mxUtils.button('Apply', function()
 		{
 			editorUi.editor.graph.setAttributeForCell(root, 'animation', list.value);
 		});
 		td21.appendChild(applyBtn);
-		
+
 		tr1.appendChild(td11);
 		tr1.appendChild(td12);
 		tbody.appendChild(tr1);
@@ -513,7 +513,7 @@ Draw.loadPlugin(function(editorUi)
 		this.window.setClosable(true);
 		this.window.setVisible(true);
 	};
-	
+
 	// Autostart in chromeless mode
 	if (editorUi.editor.isChromelessView())
 	{
@@ -521,21 +521,21 @@ Draw.loadPlugin(function(editorUi)
 		{
 			var root = editorUi.editor.graph.getModel().getRoot();
 			var result = false;
-			
+
 			if (root.value != null && typeof(root.value) == 'object')
 			{
 				var desc = root.value.getAttribute('animation');
-				
+
 				if (desc != null)
 				{
 					run(editorUi.editor.graph, desc.split('\n'), true);
 					result = true;
 				}
 			}
-			
+
 			return result;
 		};
-		
+
 		// Wait for file to be loaded if no animation data is present
 		if (!startAnimation())
 		{

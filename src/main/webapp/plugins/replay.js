@@ -8,12 +8,12 @@ Draw.loadPlugin(function(ui) {
 	var graph = ui.editor.graph;
 	var codec = new mxCodec();
 	var model = graph.model;
-	
+
 	codec.lookup = function(id)
 	{
 		return model.getCell(id);
 	};
-	
+
 	if (ui.editor.isChromelessView())
 	{
 		function decodeChanges(delta)
@@ -23,21 +23,21 @@ Draw.loadPlugin(function(ui) {
 			{
 				return model.getCell(id);
 			};
-			
+
 			var changeNode = delta.firstChild.firstChild;
 			var changes = [];
-			
+
 			while (changeNode != null)
 			{
 				var change = codec2.decode(changeNode);
-				
+
 				change.model = model;
 				change.execute();
 				changes.push(change);
-				
+
 				changeNode = changeNode.nextSibling;
 			}
-			
+
 			return changes;
 		};
 
@@ -45,7 +45,7 @@ Draw.loadPlugin(function(ui) {
 		{
 			var edit = new mxUndoableEdit(model);
 			edit.changes = changes;
-			
+
 			edit.notify = function()
 			{
 				// LATER: Remove changes property (deprecated)
@@ -54,31 +54,31 @@ Draw.loadPlugin(function(ui) {
 				edit.source.fireEvent(new mxEventObject(mxEvent.NOTIFY,
 					'edit', edit, 'changes', edit.changes));
 			};
-			
+
 			return edit;
 		};
 
 		function processDelta(delta)
 		{
 			var changes = decodeChanges(delta);
-			
+
 			if (changes.length > 0)
 			{
 				var edit = createUndoableEdit(changes);
-				
+
 				// No notify event here to avoid the edit from being encoded and transmitted
 				// LATER: Remove changes property (deprecated)
 				model.fireEvent(new mxEventObject(mxEvent.CHANGE,
 					'edit', edit, 'changes', changes));
 				model.fireEvent(new mxEventObject(mxEvent.UNDO, 'edit', edit));
-				
+
 				ui.chromelessResize();
 			}
 		};
-		
+
 		var replayData = urlParams['replay-data'];
 		var delay = parseInt(urlParams['delay-delay'] || 1000);
-		
+
 		if (replayData != null)
 		{
 			var xmlDoc = mxUtils.parseXml(graph.decompress(replayData));
@@ -87,7 +87,7 @@ Draw.loadPlugin(function(ui) {
 
 			// Process deltas
 			var delta = xmlDoc.documentElement.firstChild.nextSibling;
-			
+
 			function nextStep()
 			{
 				if (delta != null)
@@ -100,7 +100,7 @@ Draw.loadPlugin(function(ui) {
 					}, delay);
 				}
 			};
-			
+
 			nextStep();
 		}
 	}
@@ -119,10 +119,10 @@ Draw.loadPlugin(function(ui) {
 		    	tape.push(mxUtils.getXml(delta));
 	    	}
 	    });
-		
+
 		// Extends View menu
 		mxResources.parse('record=Record');
-	
+
 	    // Adds action
 	    var action = ui.actions.addAction('record...', function()
 	    {
@@ -153,17 +153,17 @@ Draw.loadPlugin(function(ui) {
 				dlg.init();
 	    	}
 	    });
-		
+
 	    action.setToggleAction(true);
 		action.setSelectedCallback(function() { return tape != null; });
-	    
+
 		var menu = ui.menus.get('extras');
 		var oldFunct = menu.funct;
-		
+
 		menu.funct = function(menu, parent)
 		{
 			oldFunct.apply(this, arguments);
-			
+
 			ui.menus.addMenuItems(menu, ['-', 'record'], parent);
 		};
 	}

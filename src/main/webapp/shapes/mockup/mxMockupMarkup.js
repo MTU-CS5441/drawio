@@ -29,7 +29,7 @@ mxShapeMockupCurlyBrace.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupCurlyBrace.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -81,7 +81,7 @@ mxShapeMockupLine.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupLine.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -121,7 +121,7 @@ mxShapeMockupScratchOut.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupScratchOut.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -174,7 +174,7 @@ mxShapeMockupRedX.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupRedX.prototype.paintVertexShape = function(c, x, y, w, h)

@@ -38,7 +38,7 @@ Draw.loadPlugin(function(ui)
 					return true;
 				}
 			}
-			
+
 			return false;
 		};
 
@@ -47,11 +47,11 @@ Draw.loadPlugin(function(ui)
 		{
 			var childCount = 0;
 			var maxChildsInHierarchy = 0;
-			
+
 			for (var i = 0; i < node.childNodes.length; i++)
 			{
 				var childNode = node.childNodes[i];
-				
+
 				if (childNode.nodeName == 'node')
 				{
 					var maxChilds = generatePreprocessingNodeInfo(childNode);
@@ -59,7 +59,7 @@ Draw.loadPlugin(function(ui)
 					childCount++;
 				}
 			}
-			
+
 			node.childCount = childCount;
 			node.maxChilds = Math.max(childCount, maxChildsInHierarchy);
 			return childCount;
@@ -70,7 +70,7 @@ Draw.loadPlugin(function(ui)
 		{
 			var mainConcept = false;
 			var vertexStyle = freeMindBranchVertexStyle;
-			
+
 			if (nodeParent == defaultParent)
 			{
 				mainConcept = true;
@@ -81,31 +81,31 @@ Draw.loadPlugin(function(ui)
 				// Concept, style appropiately
 				vertexStyle = freeMindConceptVertexStyle;
 			}
-			
+
 			var nodeName = node.getAttribute('TEXT') || '';
 			var nodeVertex = graph.insertVertex(defaultParent, null, nodeName, x, y, defaultWidth,
 					defaultHeight, vertexStyle);
 			graph.cellLabelChanged(nodeVertex, nodeName, true);
-			
+
 			if (mainConcept)
 			{
 				nodeVertex.geometry.height = mainConceptHeight; // TODO: Maybe set height according to it's width, so it's rounded?
 			}
-			
+
 			if (nodeParent != defaultParent)
 			{
 				// Don't generate an edge for the first node
 				graph.insertEdge(defaultParent, null, '', nodeParent, nodeVertex, freeMindEdgeStyle);
 			}
-			
+
 			cells.push(nodeVertex);
 			// Insert child nodes, on correct positions
 			var childNumber = 0;
-			
+
 			for (var i = 0; i < node.childNodes.length; i++)
 			{
 				var childNode = node.childNodes[i];
-				
+
 				if (childNode.nodeName == 'node')
 				{
 					var childX = x + nodeVertex.geometry.width + defaultHorizontalSpaceBetweenVertex;
@@ -125,7 +125,7 @@ Draw.loadPlugin(function(ui)
 			var freeMindDOM = mxUtils.parseXml(data);
 			var freeMindDOMchilds = freeMindDOM.children[0];
 
-			// Transverse the childs, and generate relevant input 
+			// Transverse the childs, and generate relevant input
 			for (var i = 0; i < freeMindDOMchilds.childNodes.length; i++)
 			{
 				if (freeMindDOMchilds.childNodes[i].nodeName == 'node')
@@ -133,7 +133,7 @@ Draw.loadPlugin(function(ui)
 					generatePreprocessingNodeInfo(freeMindDOMchilds.childNodes[i]);
 				}
 			}
-			
+
 			// Generate the nodes
 			for (var i = 0; i < freeMindDOMchilds.childNodes.length; i++)
 			{

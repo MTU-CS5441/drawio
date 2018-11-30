@@ -9,7 +9,7 @@
 		var s3 = mxConstants.STYLE_VERTICAL_LABEL_POSITION + '=bottom;' + mxConstants.STYLE_VERTICAL_ALIGN + '=top;html=1;shape=';
 		var gn = 'mxgraph.basic';
 		var dt = '';
-		
+
 		this.addPaletteFunctions('basic', mxResources.get('basic'), false,
 		[
 			this.createVertexTemplateEntry(s2 + 'rect;fillColor=#ffffff;fillColor2=none;strokeColor=#000000;strokeWidth=1;size=20;indent=5;', 120, 60, '', 'Partial Rectangle'),

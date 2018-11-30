@@ -29,7 +29,7 @@ mxShapeNetworksBus.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeNetworksBus.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -78,23 +78,23 @@ mxShapeNetworksCommLinkEdge.prototype.paintEdgeShape = function(c, pts)
 	// Base vector (between end points)
 	var p0 = pts[0];
 	var pe = pts[pts.length - 1];
-	
+
 	var dx = pe.x - p0.x;
 	var dy = pe.y - p0.y;
-	
+
 	p0.x = p0.x + dx * 0.05;
 	p0.y = p0.y + dy * 0.05;
 	pe.x = pe.x - dx * 0.05;
 	pe.y = pe.y - dy * 0.05;
 	dx = pe.x - p0.x;
 	dy = pe.y - p0.y;
-	
+
 	var dist = Math.sqrt(dx * dx + dy * dy);
 	var nx = dx / dist;
 	var ny = dy / dist;
-	var midX = p0.x + dx * 0.5; 
+	var midX = p0.x + dx * 0.5;
 	var midY = p0.y + dy * 0.5;
-	
+
 	var p1x = midX + nx * dist / 3 * 0.1 - ny / 3 * dist * 0.1;
 	var p1y = midY + ny * dist / 3 * 0.1 + nx / 3 * dist * 0.1;
 	var p2x = midX + nx * dist * 0.1 + ny * dist * 0.1;

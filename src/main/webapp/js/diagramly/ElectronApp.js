@@ -11,8 +11,8 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 	EditDiagramDialog.showNewWindowOption = false;
 
 	// Redirects printing to iframe to avoid document.write
-	var printDialogCreatePrintPreview = PrintDialog.createPrintPreview; 
-	
+	var printDialogCreatePrintPreview = PrintDialog.createPrintPreview;
+
 	PrintDialog.createPrintPreview = function()
 	{
 		var iframe = document.createElement('iframe');
@@ -21,18 +21,18 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 		var result = printDialogCreatePrintPreview.apply(this, arguments);
 		result.wnd = iframe.contentWindow;
 		result.iframe = iframe;
-				
+
 		// Workaround for lost gradients in print output
 		result.previousGetBaseUrl = mxSvgCanvas2D.prototype.getBaseUrl;
-		
+
 		mxSvgCanvas2D.prototype.getBaseUrl = function()
 		{
 			return '';
 		};
-		
+
 		return result;
 	};
-	
+
 	var oldWindowOpen = window.open;
 	window.open = function(url)
 	{
@@ -55,25 +55,25 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 	mxPrintPreview.prototype.closeDocument = function()
 	{
 		var doc = this.wnd.document;
-		
+
 		// Removes all event handlers in the print output
 		mxEvent.release(doc.body);
 	};
-	
+
 	PrintDialog.printPreview = function(preview)
 	{
 		if (preview.iframe != null)
 		{
 			preview.iframe.contentWindow.print();
 			preview.iframe.parentNode.removeChild(preview.iframe);
-		
+
 			mxSvgCanvas2D.prototype.getBaseUrl = preview.previousGetBaseUrl;
 			preview.iframe = null;
 		}
 	};
-	
+
 	PrintDialog.previewEnabled = false;
-	
+
 	var menusInit = Menus.prototype.init;
 	Menus.prototype.init = function()
 	{
@@ -85,7 +85,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 		{
 			editorUi.openLink('https://www.draw.io/')
 		}));
-		
+
 		// Replaces file menu to replace openFrom menu with open and rename downloadAs to export
 		this.put('file', new Menu(mxUtils.bind(this, function(menu, parent)
 		{
@@ -99,13 +99,13 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 			// LATER: Find API for application.quit
 		})));
 	};
-	
+
 	var graphCreateLinkForHint = Graph.prototype.createLinkForHint;
-	
+
 	Graph.prototype.createLinkForHint = function(href, label)
 	{
 		var a = graphCreateLinkForHint.call(this, href, label);
-		
+
 		if (href != null && !this.isCustomLink(href))
 		{
 			// KNOWN: Event with gesture handler mouseUp the middle click opens a framed window
@@ -115,15 +115,15 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 				mxEvent.consume(evt);
 			}));
 		}
-		
+
 		return a;
 	};
-	
+
 	Graph.prototype.openLink = function(url, target)
 	{
 		require('electron').shell.openExternal(url);
 	};
-	
+
 	// Initializes the user interface
 	var editorUiInit = EditorUi.prototype.init;
 	EditorUi.prototype.init = function()
@@ -132,7 +132,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 
 		var editorUi = this;
 		var graph = this.editor.graph;
-		
+
 		global.__emt_isModified =
 		e => {
 			if (this.getCurrentFile())
@@ -142,7 +142,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 
 			return false
 		}
-		
+
 		// global.__emt_getCurrentFile = e => {
 		// 	return this.getCurrentFile()
 		// }
@@ -152,7 +152,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 		{
 			editorUi.showLibraryDialog(null, null, null, null, App.MODE_DEVICE);
 		}));
-		
+
 		this.actions.addAction('openLibrary...', mxUtils.bind(this, function()
 		{
 			editorUi.pickLibrary(App.MODE_DEVICE);
@@ -168,7 +168,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 				var dialog = remote.dialog;
 
 		        var paths = dialog.showOpenDialog({properties: ['openFile']});
-			           
+
 		        if (paths !== undefined && paths[0] != null)
 		        {
 		        	var path = paths[0];
@@ -219,7 +219,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 											if (xhr.readyState == 4)
 											{
 												editorUi.spinner.stop();
-												
+
 												if (xhr.status >= 200 && xhr.status <= 299)
 												{
 													graph.setSelectionCells(editorUi.importXml(xhr.responseText));
@@ -232,7 +232,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 										if (/\.png$/i.test(path))
 										{
 											var tmp = editorUi.extractGraphModelFromPng(data);
-											
+
 											if (tmp != null)
 											{
 												asImage = false;
@@ -245,22 +245,22 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 						    				// Checks if SVG contains content attribute
 					    					var root = mxUtils.parseXml(data);
 				    						var svgs = root.getElementsByTagName('svg');
-				    						
+
 				    						if (svgs.length > 0)
 					    					{
 				    							var svgRoot = svgs[0];
 						    					var cont = svgRoot.getAttribute('content');
-		
+
 						    					if (cont != null && cont.charAt(0) != '<' && cont.charAt(0) != '%')
 						    					{
 						    						cont = unescape((window.atob) ? atob(cont) : Base64.decode(cont, true));
 						    					}
-						    					
+
 						    					if (cont != null && cont.charAt(0) == '%')
 						    					{
 						    						cont = decodeURIComponent(cont);
 						    					}
-		
+
 						    					if (cont != null && (cont.substring(0, 8) === '<mxfile ' ||
 						    						cont.substring(0, 14) === '<mxGraphModel '))
 						    					{
@@ -274,7 +274,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 						    					}
 					    					}
 						    			}
-										
+
 										if (asImage)
 										{
 											var img = new Image();
@@ -288,26 +288,26 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 														'shape=image;aspect=fixed;image=' + editorUi.convertDataUri(data2) + ';'));
 												}, true);
 											};
-											
+
 											img.onerror = function(e)
 											{
 												editorUi.spinner.stop();
 												editorUi.handleError();
 											};
-											
+
 											var format = path.substring(path.lastIndexOf('.') + 1);
-											
+
 											if (format == 'svg')
 											{
 												format = 'svg+xml';
 											}
-											
+
 											img.src = 'data:image/' + format + ';base64,' + data;
 										}
 										else
 										{
 											editorUi.spinner.stop();
-											
+
 											if (data != null)
 											{
 												graph.setSelectionCells(editorUi.importXml(data));
@@ -326,10 +326,10 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 		        }
 			}
 		}));
-		
+
 		// Replaces new action
 		var oldNew = this.actions.get('new').funct;
-		
+
 		this.actions.addAction('new...', mxUtils.bind(this, function()
 		{
 			if (this.getCurrentFile() == null)
@@ -342,43 +342,43 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 				ipc.sendSync('winman', {action: 'newfile', opt: {width: 1600}})
 			}
 		}), null, null, Editor.ctrlKey + '+N');
-		
+
 		this.actions.get('open').shortcut = Editor.ctrlKey + '+O';
-		
+
 		// Adds shortcut keys for file operations
 		editorUi.keyHandler.bindAction(78, true, 'new'); // Ctrl+N
 		editorUi.keyHandler.bindAction(79, true, 'open'); // Ctrl+O
 	}
-	
+
 	var appLoad = App.prototype.load;
 
 	App.prototype.load = function()
 	{
 		appLoad.apply(this, arguments);
 		const {ipcRenderer} = require('electron');
-		
+
 		ipcRenderer.on('args-obj', (event, argsObj) =>
 		{
 			this.loadArgs(argsObj)
 		})
 	}
-	
+
 	App.prototype.loadArgs = function(argsObj)
 	{
 		var paths = argsObj.args;
-		
-		// If a file is passed 
+
+		// If a file is passed
 		if (paths !== undefined && paths[0] != null)
 		{
 			var path = paths[0];
-			
+
 			var success = mxUtils.bind(this, function(fileEntry, data)
 			{
 				var file = new LocalFile(this, data, '');
 				file.fileObject = fileEntry;
 				this.fileLoaded(file);
 			});
-			
+
 			var error = mxUtils.bind(this, function(e)
 			{
 				if (e.code === 'ENOENT')
@@ -386,21 +386,21 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 					var title = path.replace(/^.*[\\\/]/, '');
 					var data = this.emptyDiagramXml;
 					var file = new LocalFile(this, data, title, null);
-					
+
 					file.fileObject = new Object();
 					file.fileObject.path = path;
 					file.fileObject.name = title;
 					file.fileObject.type = 'utf-8';
-					this.fileCreated(file, null, null, null);					
+					this.fileCreated(file, null, null, null);
 					this.saveFile();
 				}
 				else
 				{
 					this.handleError(e);
 				}
-				
+
 			});
-			
+
 			// Tries to open the file
 			this.readGraphFile(success, error, path);
 		}
@@ -411,7 +411,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 			var data = this.emptyDiagramXml;
 			var file = new LocalFile(this, data, title, null);
 			this.fileCreated(file, null, null, null);
-		}		
+		}
 	}
 
 	// Uses local picker
@@ -428,7 +428,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 		});
 
 		var file = this.getCurrentFile();
-		
+
 		if (file != null && file.isModified())
 		{
 			this.confirm(mxResources.get('allChangesLost'), null, doPickFile,
@@ -439,10 +439,10 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 			doPickFile();
 		}
 	};
-	
+
 	/**
 	 * Selects a library to load from a picker
-	 * 
+	 *
 	 * @param mode the device mode, ignored in this case
 	 */
 	App.prototype.pickLibrary = function(mode)
@@ -461,7 +461,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 			}
 		}));
 	};
-	
+
 	// Uses local picker
 	App.prototype.chooseFileEntry = function(fn)
 	{
@@ -470,7 +470,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 		var dialog = remote.dialog;
 
         var paths = dialog.showOpenDialog({properties: ['openFile']});
-	           
+
         if (paths !== undefined && paths[0] != null)
         {
 			this.readGraphFile(fn, this.handleError.bind(this), paths[0]);
@@ -510,7 +510,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 
 	// Disables temp files in Electron
 	var LocalFileCtor = LocalFile;
-	
+
 	LocalFile = function(ui, data, title, temp)
 	{
 		LocalFileCtor.call(this, ui, data, title, false);
@@ -522,17 +522,17 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 	{
 		return this.ui.editor.autosave && this.fileObject != null;
 	};
-	
+
 	LocalFile.prototype.isAutosaveOptional = function()
 	{
 		return true;
 	};
-	
+
 	LocalLibrary.prototype.isAutosave = function()
 	{
 		return this.fileObject != null;
 	};
-	
+
 	LocalFile.prototype.getTitle = function()
 	{
 		return (this.fileObject != null) ? this.fileObject.name : this.title;
@@ -542,17 +542,17 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 	{
 		return false;
 	};
-	
+
 	// Restores default implementation of open with autosave
 	LocalFile.prototype.open = DrawioFile.prototype.open;
 
 	LocalFile.prototype.save = function(revision, success, error)
 	{
 		DrawioFile.prototype.save.apply(this, arguments);
-		
+
 		this.saveFile(revision, success, error);
 	};
-	
+
 	LocalFile.prototype.saveFile = function(revision, success, error)
 	{
 		var fn = mxUtils.bind(this, function()
@@ -562,13 +562,13 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 				if (!this.savingFile)
 				{
 					this.savingFile = true;
-					
+
 					// Makes sure no changes get lost while the file is saved
 					var prevModified = this.isModified;
 					var modified = this.isModified();
 					this.setModified(false);
 					var fs = require('fs');
-					
+
 					fs.writeFile(this.fileObject.path, data, enc || this.fileObject.encoding, mxUtils.bind(this, function (e)
 				    {
 		        		if (e)
@@ -576,7 +576,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 		        			this.savingFile = false;
 							this.isModified = prevModified;
 							this.setModified(modified || this.isModified());
-							
+
 							if (error != null)
 							{
 		        				error();
@@ -588,7 +588,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 							this.isModified = prevModified;
 							this.contentChanged();
 							this.lastData = data;
-							
+
 							if (success != null)
 							{
 								success();
@@ -618,7 +618,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 				}, error);
 			}
 		});
-		
+
 		if (this.fileObject == null)
 		{
 			const electron = require('electron');
@@ -646,23 +646,23 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 	{
 		LocalFile.prototype.saveFile.apply(this, arguments);
 	};
-	
+
 	LocalFile.prototype.saveAs = function(title, success, error)
 	{
 		const electron = require('electron');
 		var remote = electron.remote;
 		var dialog = remote.dialog;
 		var filename = this.title;
-		
+
 		// Adds default extension
 		if (filename.length > 0 && (!/(\.xml)$/i.test(filename) && !/(\.html)$/i.test(filename) &&
 			!/(\.svg)$/i.test(filename) && !/(\.png)$/i.test(filename)))
 		{
 			filename += '.xml';
 		}
-		
+
 		var path = dialog.showSaveDialog({defaultPath: filename});
-        
+
         if (path != null)
         {
 			this.fileObject = new Object();
@@ -676,7 +676,7 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 	App.prototype.saveFile = function(forceDialog)
 	{
 		var file = this.getCurrentFile();
-		
+
 		if (file != null)
 		{
 			if (!forceDialog && file.getTitle() != null)
@@ -705,10 +705,10 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 			}
 		}
 	};
-	
+
 	/**
 	 * Translates this point by the given vector.
-	 * 
+	 *
 	 * @param {number} dx X-coordinate of the translation.
 	 * @param {number} dy Y-coordinate of the translation.
 	 */
@@ -718,56 +718,56 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 		noSpin = (noSpin != null) ? noSpin : false;
 		noReload = (noReload != null) ? noReload : false;
 		var xml = this.createLibraryDataFromImages(images);
-		
+
 		var error = mxUtils.bind(this, function(resp)
 		{
 			this.spinner.stop();
-			
+
 			if (fn != null)
 			{
 				fn();
 			}
-			
+
 			// Null means cancel by user and is ignored
 			if (resp != null)
 			{
 				this.handleError(resp, mxResources.get('errorSavingFile'));
 			}
 		});
-	
+
 		// Handles special case for local libraries
 		if (file == null)
 		{
 			file = new LocalLibrary(this, xml, name);
 		}
-		
+
 		if (noSpin || this.spinner.spin(document.body, mxResources.get('saving')))
 		{
 			file.setData(xml);
-			
+
 			var doSave = mxUtils.bind(this, function()
 			{
 				file.save(true, mxUtils.bind(this, function(resp)
 				{
 					this.spinner.stop();
 					this.hideDialog(true);
-					
+
 					if (!noReload)
 					{
 						this.libraryLoaded(file, images)
 					}
-					
+
 					if (fn != null)
 					{
 						fn();
 					}
 				}), error);
 			});
-			
+
 			if (name != file.getTitle())
 			{
 				var oldHash = file.getHash();
-				
+
 				file.rename(name, mxUtils.bind(this, function(resp)
 				{
 					// Change hash in stored settings
@@ -776,12 +776,12 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 						mxSettings.removeCustomLibrary(oldHash);
 						mxSettings.addCustomLibrary(file.getHash());
 					}
-	
+
 					// Workaround for library files changing hash so
 					// the old library cannot be removed from the
 					// sidebar using the updated file in libraryLoaded
 					this.removeLibrarySidebar(oldHash);
-	
+
 					doSave();
 				}), error)
 			}
@@ -791,22 +791,22 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 			}
 		}
 	};
-	
+
 	EditorUi.prototype.saveLocalFile = function(data, filename, mimeType, base64Encoded, format, allowBrowser)
 	{
 		this.saveData(filename, format, data, mimeType, base64Encoded);
 	};
-	
+
 	EditorUi.prototype.saveRequest = function(filename, format, fn, data, base64Encoded, mimeType)
 	{
 		var xhr = fn(null, '1');
-		
+
 		if (xhr != null && this.spinner.spin(document.body, mxResources.get('saving')))
 		{
 			xhr.send(mxUtils.bind(this, function()
 			{
 				this.spinner.stop();
-				
+
 				if (xhr.getStatus() >= 200 && xhr.getStatus() <= 299)
 				{
 					this.saveData(filename, format, xhr.getText(), mimeType, true);
@@ -822,34 +822,34 @@ FeedbackDialog.feedbackUrl = 'https://log.draw.io/email';
 			});
 		}
 	};
-	
+
 	EditorUi.prototype.saveData = function(filename, format, data, mimeType, base64Encoded)
 	{
 		const electron = require('electron');
 		var remote = electron.remote;
 		var dialog = remote.dialog;
 		var resume = (this.spinner != null && this.spinner.pause != null) ? this.spinner.pause() : function() {};
-		
+
 		// Spinner.stop is asynchronous so we must invoke save dialog asynchronously
 		// to give the spinner some time to stop spinning
 		window.setTimeout(mxUtils.bind(this, function()
 		{
 			var path = dialog.showSaveDialog({defaultPath: filename});
-	
+
 	        if (path != null)
 	        {
 				var fs = require('fs');
 				resume();
-				
+
 				var fileObject = new Object();
 				fileObject.path = path;
 				fileObject.name = path.replace(/^.*[\\\/]/, '');
 				fileObject.type = (base64Encoded) ? 'base64' : 'utf-8';
-				
+
 				fs.writeFile(fileObject.path, data, fileObject.type, mxUtils.bind(this, function (e)
 			    {
 					this.spinner.stop();
-					
+
 					if (e)
 					{
 						this.handleError({message: mxResources.get('errorSavingFile')});

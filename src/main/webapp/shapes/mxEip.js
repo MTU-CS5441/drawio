@@ -29,7 +29,7 @@ mxShapeEipMessageExpiration.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeEipMessageExpiration.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -42,7 +42,7 @@ mxShapeEipMessageExpiration.prototype.background = function(c, x, y, w, h)
 {
 	c.ellipse(0, 0, w, h);
 	c.stroke();
-	
+
 	c.setStrokeColor("#808080");
 	c.begin();
 	c.moveTo(w * 0.5, h * 0.1);
@@ -79,7 +79,7 @@ mxShapeEipReturnAddress.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeEipReturnAddress.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -148,7 +148,7 @@ mxShapeEipAnchor.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeEipAnchor.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -183,7 +183,7 @@ mxShapeEipMessageChannel.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeEipMessageChannel.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -287,7 +287,7 @@ mxShapeEipDatatypeChannel.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeEipDatatypeChannel.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -318,10 +318,10 @@ mxShapeEipDatatypeChannel.prototype.foreground = function(c, x, y, w, h)
 	c.arcTo(12, 12, 0, 0, 1, w - 8, h * 0.5 + 10);
 	c.arcTo(12, 12, 0, 0, 1, w - 8, h * 0.5 - 10);
 	c.fillAndStroke();
-	
+
 	c.setFillColor("#fffbc0");
 	c.setStrokeWidth("1");
-	
+
 	for(var i = 1; i * 20 + 10 < w - 14; i++)
 	{
 		c.rect(i * 20, h * 0.5 - 5, 10, 10);
@@ -401,7 +401,7 @@ mxShapeEipDeadLetterChannel.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeEipDeadLetterChannel.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -432,7 +432,7 @@ mxShapeEipDeadLetterChannel.prototype.foreground = function(c, x, y, w, h)
 	c.arcTo(12, 12, 0, 0, 1, w - 8, h * 0.5 + 10);
 	c.arcTo(12, 12, 0, 0, 1, w - 8, h * 0.5 - 10);
 	c.fillAndStroke();
-	
+
 	c.setFillColor("#ff0000");
 	c.setStrokeWidth("1");
 	c.begin();
@@ -446,7 +446,7 @@ mxShapeEipDeadLetterChannel.prototype.foreground = function(c, x, y, w, h)
 	c.lineTo(w * 0.5 - 6, h * 0.5 + 3);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setStrokeWidth("2");
 	c.setStrokeColor("#ffffff");
 	c.begin();
@@ -526,7 +526,7 @@ mxShapeEipInvalidMessageChannel.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeEipInvalidMessageChannel.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -557,7 +557,7 @@ mxShapeEipInvalidMessageChannel.prototype.foreground = function(c, x, y, w, h)
 	c.arcTo(12, 12, 0, 0, 1, w - 8, h * 0.5 + 10);
 	c.arcTo(12, 12, 0, 0, 1, w - 8, h * 0.5 - 10);
 	c.fillAndStroke();
-	
+
 	c.setFillColor("#ffe040");
 	c.setStrokeWidth("1");
 	c.begin();
@@ -566,7 +566,7 @@ mxShapeEipInvalidMessageChannel.prototype.foreground = function(c, x, y, w, h)
 	c.lineTo(w * 0.5 + 6, h * 0.5 + 5);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setStrokeWidth("1");
 	c.begin();
 	c.moveTo(w * 0.5, h * 0.5 - 2);

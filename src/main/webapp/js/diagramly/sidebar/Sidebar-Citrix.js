@@ -7,7 +7,7 @@
 		var s = mxConstants.STYLE_VERTICAL_LABEL_POSITION + '=bottom;aspect=fixed;html=1;' + mxConstants.STYLE_VERTICAL_ALIGN + '=top;strokeColor=none;align=center;outlineConnect=0;shape=mxgraph.citrix.';
 		var gn = 'mxgraph.citrix';
 		var dt = '';
-		
+
 		this.addPaletteFunctions('citrix', 'Citrix', false,
 		[
 			this.createVertexTemplateEntry(s + '1u_2u_server;', w * 200, h * 78.2, '', '1U 2U Server', null, null, this.getTagsForStencil(gn, '1U 2U Server', dt).join(' ')),

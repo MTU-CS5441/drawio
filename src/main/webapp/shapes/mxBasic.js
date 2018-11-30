@@ -27,7 +27,7 @@ mxShapeBasicCross.prototype.cst = {CROSS : 'mxgraph.basic.cross2'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicCross.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -68,7 +68,7 @@ Graph.handleFactory[mxShapeBasicCross.prototype.cst.CROSS] = function(state)
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, pt.x - bounds.x - bounds.width / 2))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -103,7 +103,7 @@ mxShapeBasicRectCallout.prototype.cst = {RECT_CALLOUT : 'mxgraph.basic.rectCallo
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicRectCallout.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -131,7 +131,7 @@ mxShapeBasicRectCallout.prototype.getLabelMargins = function()
 	{
 		return new mxRectangle(0, 0, 0, parseFloat(mxUtils.getValue(this.style, 'dy', this.dy)) * this.scale);
 	}
-	
+
 	return null;
 };
 
@@ -153,7 +153,7 @@ Graph.handleFactory[mxShapeBasicRectCallout.prototype.cst.RECT_CALLOUT] = functi
 		this.state.style['dx'] = Math.round(100 * Math.max(y, Math.min(bounds.width - y, pt.x - bounds.x))) / 100;
 		this.state.style['dy'] = Math.round(Math.max(0, Math.min(bounds.height, bounds.y + bounds.height - pt.y)));
 	})];
-			
+
 	return handles;
 };
 
@@ -192,7 +192,7 @@ mxShapeBasicRoundRectCallout.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicRoundRectCallout.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -206,7 +206,7 @@ mxShapeBasicRoundRectCallout.prototype.paintVertexShape = function(c, x, y, w, h
 	r = Math.min((h - dy) / 2, w / 2, r);
 	dx = Math.max(r + dy * 0.5, dx);
 	dx = Math.min(w - r - dy * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(dx - dy * 0.5, h - dy);
 	c.lineTo(r, h - dy);
@@ -282,7 +282,7 @@ mxShapeBasicWave.prototype.cst = {WAVE : 'mxgraph.basic.wave2'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicWave.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -291,7 +291,7 @@ mxShapeBasicWave.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	var dy = h * Math.max(0, Math.min(h, parseFloat(mxUtils.getValue(this.style, 'dy', this.dy))));
 	var fy = 1.4
-	
+
 	c.begin();
 	c.moveTo(0, dy / 2);
 	c.quadTo(w / 6, dy * (1 - fy), w / 3, dy / 2);
@@ -353,7 +353,7 @@ mxShapeBasicOctagon.prototype.cst = {OCTAGON : 'mxgraph.basic.octagon2'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicOctagon.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -363,7 +363,7 @@ mxShapeBasicOctagon.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx)))) * 2;
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(dx, 0);
 	c.lineTo(w - dx, 0);
@@ -392,7 +392,7 @@ Graph.handleFactory[mxShapeBasicOctagon.prototype.cst.OCTAGON] = function(state)
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 4, bounds.width / 4, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -425,7 +425,7 @@ mxShapeBasicIsoCube.prototype.cst = {ISO_CUBE : 'mxgraph.basic.isocube'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicIsoCube.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -434,7 +434,7 @@ mxShapeBasicIsoCube.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	var isoAngle = Math.max(0.01, Math.min(94, parseFloat(mxUtils.getValue(this.style, 'isoAngle', this.isoAngle)))) * Math.PI / 200 ;
 	var isoH = Math.min(w * Math.tan(isoAngle), h * 0.5);
-	
+
 	c.begin();
 	c.moveTo(w * 0.5, 0);
 	c.lineTo(w, isoH);
@@ -446,7 +446,7 @@ mxShapeBasicIsoCube.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.fillAndStroke();
 
 	c.setShadow(false);
-	
+
 	c.begin();
 	c.moveTo(0, isoH);
 	c.lineTo(w * 0.5, 2 * isoH);
@@ -472,7 +472,7 @@ Graph.handleFactory[mxShapeBasicIsoCube.prototype.cst.ISO_CUBE] = function(state
 	{
 		this.state.style['isoAngle'] = Math.round(100 * Math.max(0, Math.min(100, pt.y - bounds.y))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -505,7 +505,7 @@ mxShapeBasicTriangleAcute.prototype.cst = {ACUTE_TRIANGLE : 'mxgraph.basic.acute
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicTriangleAcute.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -513,7 +513,7 @@ mxShapeBasicTriangleAcute.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.translate(x, y);
 
 	var dx = w * Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
-	
+
 	c.begin();
 	c.moveTo(0, h);
 	c.lineTo(dx, 0);
@@ -570,7 +570,7 @@ mxShapeBasicTriangleObtuse.prototype.cst = {OBTUSE_TRIANGLE : 'mxgraph.basic.obt
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicTriangleObtuse.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -578,7 +578,7 @@ mxShapeBasicTriangleObtuse.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.translate(x, y);
 
 	var dx = w * Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
-	
+
 	c.begin();
 	c.moveTo(dx, h);
 	c.lineTo(0, 0);
@@ -630,7 +630,7 @@ mxShapeBasicDrop.prototype.cst = {DROP : 'mxgraph.basic.drop'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicDrop.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -640,12 +640,12 @@ mxShapeBasicDrop.prototype.paintVertexShape = function(c, x, y, w, h)
 	var r = Math.min(h, w) * 0.5;
 	var d = h - r;
 	var a = Math.sqrt(d * d - r * r);
-	
+
 	var angle = Math.atan(a / r);
-	
+
 	var x1 = r * Math.sin(angle);
 	var y1 = r * Math.cos(angle);
-	
+
 	c.begin();
 	c.moveTo(w * 0.5, 0);
 	c.lineTo(w * 0.5 + x1, h - r - y1);
@@ -692,7 +692,7 @@ mxShapeBasicCone2.prototype.cst = {CONE2 : 'mxgraph.basic.cone2'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicCone2.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -701,12 +701,12 @@ mxShapeBasicCone2.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	var dx = w * Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 	var dy = h * Math.max(0, Math.min(h, parseFloat(mxUtils.getValue(this.style, 'dy', this.dy))));
-	
+
 	var ry = h - dy;
-	
+
 	c.begin();
 	c.moveTo(dx, 0);
-	
+
 	if (ry > 0)
 	{
 		c.lineTo(w, h - ry);
@@ -718,7 +718,7 @@ mxShapeBasicCone2.prototype.paintVertexShape = function(c, x, y, w, h)
 		c.lineTo(w, h);
 		c.lineTo(0, h);
 	}
-	
+
 	c.close();
 	c.fillAndStroke();
 };
@@ -748,9 +748,9 @@ Graph.handleFactory[mxShapeBasicCone2.prototype.cst.CONE2] = function(state)
 	{
 		this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(1, (pt.y - bounds.y) / bounds.height))) / 100;
 	});
-	
+
 	handles.push(handle2);
-	
+
 	return handles;
 };
 
@@ -789,7 +789,7 @@ mxShapeBasicPyramid.prototype.cst = {PYRAMID : 'mxgraph.basic.pyramid'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicPyramid.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -800,7 +800,7 @@ mxShapeBasicPyramid.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx2 = w * Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx2', this.dx2))));
 	var dy1 = h * Math.max(0, Math.min(h, parseFloat(mxUtils.getValue(this.style, 'dy1', this.dy1))));
 	var dy2 = h * Math.max(0, Math.min(h, parseFloat(mxUtils.getValue(this.style, 'dy2', this.dy2))));
-	
+
 	c.begin();
 	c.moveTo(dx1, 0);
 	c.lineTo(w, dy2);
@@ -808,9 +808,9 @@ mxShapeBasicPyramid.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(0, dy1);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	c.begin();
 	c.moveTo(dx1, 0);
 	c.lineTo(dx2, h);
@@ -842,9 +842,9 @@ Graph.handleFactory[mxShapeBasicPyramid.prototype.cst.PYRAMID] = function(state)
 	{
 		this.state.style['dx2'] = Math.round(100 * Math.max(0, Math.min(1, (pt.x - bounds.x) / bounds.width))) / 100;
 	});
-	
+
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['dy1'], function(bounds)
 	{
 		var dy1 = Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.state.style, 'dy1', this.dy1))));
@@ -854,9 +854,9 @@ Graph.handleFactory[mxShapeBasicPyramid.prototype.cst.PYRAMID] = function(state)
 	{
 		this.state.style['dy1'] = Math.round(100 * Math.max(0, Math.min(1, (pt.y - bounds.y) / bounds.height))) / 100;
 	});
-	
+
 	handles.push(handle3);
-	
+
 	var handle4 = Graph.createHandle(state, ['dy2'], function(bounds)
 	{
 		var dy2 = Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.state.style, 'dy2', this.dy2))));
@@ -866,9 +866,9 @@ Graph.handleFactory[mxShapeBasicPyramid.prototype.cst.PYRAMID] = function(state)
 	{
 		this.state.style['dy2'] = Math.round(100 * Math.max(0, Math.min(1, (pt.y - bounds.y) / bounds.height))) / 100;
 	});
-	
+
 	handles.push(handle4);
-	
+
 	return handles;
 };
 
@@ -901,7 +901,7 @@ mxShapeBasic4PointStar2.prototype.cst = {FOUR_POINT_STAR_2 : 'mxgraph.basic.4_po
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasic4PointStar2.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -971,7 +971,7 @@ mxShapeBasicDiagSnipRect.prototype.cst = {DIAG_SNIP_RECT : 'mxgraph.basic.diag_s
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicDiagSnipRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -981,7 +981,7 @@ mxShapeBasicDiagSnipRect.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx)))) * 2;
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(dx, 0);
 	c.lineTo(w, 0);
@@ -1008,7 +1008,7 @@ Graph.handleFactory[mxShapeBasicDiagSnipRect.prototype.cst.DIAG_SNIP_RECT] = fun
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 4, bounds.width / 4, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1042,7 +1042,7 @@ mxShapeBasicDiagRoundRect.prototype.cst = {DIAG_ROUND_RECT : 'mxgraph.basic.diag
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicDiagRoundRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1052,7 +1052,7 @@ mxShapeBasicDiagRoundRect.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx)))) * 2;
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(dx, 0);
 	c.lineTo(w, 0);
@@ -1080,7 +1080,7 @@ Graph.handleFactory[mxShapeBasicDiagRoundRect.prototype.cst.DIAG_ROUND_RECT] = f
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 4, bounds.width / 4, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1113,7 +1113,7 @@ mxShapeBasicCornerRoundRect.prototype.cst = {CORNER_ROUND_RECT : 'mxgraph.basic.
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicCornerRoundRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1123,7 +1123,7 @@ mxShapeBasicCornerRoundRect.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx)))) * 2;
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(dx, 0);
 	c.lineTo(w, 0);
@@ -1150,7 +1150,7 @@ Graph.handleFactory[mxShapeBasicCornerRoundRect.prototype.cst.CORNER_ROUND_RECT]
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 4, bounds.width / 4, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1183,7 +1183,7 @@ mxShapeBasicPlaque.prototype.cst = {PLAQUE : 'mxgraph.basic.plaque'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicPlaque.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1193,7 +1193,7 @@ mxShapeBasicPlaque.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx)))) * 2;
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(w - dx, 0);
 	c.arcTo(dx, dx, 0, 0, 0, w, dx);
@@ -1222,7 +1222,7 @@ Graph.handleFactory[mxShapeBasicPlaque.prototype.cst.PLAQUE] = function(state)
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 4, bounds.width / 4, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1255,7 +1255,7 @@ mxShapeBasicFrame.prototype.cst = {FRAME : 'mxgraph.basic.frame'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicFrame.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1265,7 +1265,7 @@ mxShapeBasicFrame.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(w, 0);
 	c.lineTo(w, h);
@@ -1295,7 +1295,7 @@ Graph.handleFactory[mxShapeBasicFrame.prototype.cst.FRAME] = function(state)
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1328,7 +1328,7 @@ mxShapeBasicPlaqueFrame.prototype.cst = {PLAQUE_FRAME : 'mxgraph.basic.plaque_fr
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicPlaqueFrame.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1338,7 +1338,7 @@ mxShapeBasicPlaqueFrame.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 
 	dx = Math.min(w * 0.25, h * 0.25, dx);
-	
+
 	c.begin();
 	c.moveTo(w - dx, 0);
 	c.arcTo(dx, dx, 0, 0, 0, w, dx);
@@ -1349,7 +1349,7 @@ mxShapeBasicPlaqueFrame.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(0, dx);
 	c.arcTo(dx, dx, 0, 0, 0, dx, 0);
 	c.close();
-	
+
 	c.moveTo(dx * 2, dx);
 	c.arcTo(dx * 2, dx * 2, 0, 0, 1, dx, dx * 2);
 	c.lineTo(dx, h - 2 * dx);
@@ -1379,7 +1379,7 @@ Graph.handleFactory[mxShapeBasicPlaqueFrame.prototype.cst.PLAQUE_FRAME] = functi
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 4, bounds.width / 4, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1412,7 +1412,7 @@ mxShapeBasicRoundedFrame.prototype.cst = {ROUNDED_FRAME : 'mxgraph.basic.rounded
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicRoundedFrame.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1422,7 +1422,7 @@ mxShapeBasicRoundedFrame.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 
 	dx = Math.min(w * 0.25, h * 0.25, dx);
-	
+
 	c.begin();
 	c.moveTo(w - 2 * dx, 0);
 	c.arcTo(dx * 2, dx * 2, 0, 0, 1, w, 2 * dx);
@@ -1433,7 +1433,7 @@ mxShapeBasicRoundedFrame.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(0, 2 * dx);
 	c.arcTo(dx * 2, dx * 2, 0, 0, 1, 2 * dx, 0);
 	c.close();
-	
+
 	c.moveTo(dx * 2, dx);
 	c.arcTo(dx, dx, 0, 0, 0, dx, dx * 2);
 	c.lineTo(dx, h - 2 * dx);
@@ -1463,7 +1463,7 @@ Graph.handleFactory[mxShapeBasicRoundedFrame.prototype.cst.ROUNDED_FRAME] = func
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 4, bounds.width / 4, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1496,7 +1496,7 @@ mxShapeBasicFrameCorner.prototype.cst = {FRAME_CORNER : 'mxgraph.basic.frame_cor
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicFrameCorner.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1506,7 +1506,7 @@ mxShapeBasicFrameCorner.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w, 0);
@@ -1533,7 +1533,7 @@ Graph.handleFactory[mxShapeBasicFrameCorner.prototype.cst.FRAME_CORNER] = functi
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1566,7 +1566,7 @@ mxShapeBasicDiagStripe.prototype.cst = {DIAG_STRIPE : 'mxgraph.basic.diag_stripe
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicDiagStripe.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1576,7 +1576,7 @@ mxShapeBasicDiagStripe.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 
 	dx = Math.min(w, h, dx);
-	
+
 	c.begin();
 	c.moveTo(0, h);
 	c.lineTo(w, 0);
@@ -1601,7 +1601,7 @@ Graph.handleFactory[mxShapeBasicDiagStripe.prototype.cst.DIAG_STRIPE] = function
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1634,7 +1634,7 @@ mxShapeBasicDonut.prototype.cst = {DONUT : 'mxgraph.basic.donut'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicDonut.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1644,7 +1644,7 @@ mxShapeBasicDonut.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.arcTo(w * 0.5, h * 0.5, 0, 0, 1, w * 0.5, 0);
@@ -1676,7 +1676,7 @@ Graph.handleFactory[mxShapeBasicDonut.prototype.cst.DONUT] = function(state)
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1709,7 +1709,7 @@ mxShapeBasicLayeredRect.prototype.cst = {LAYERED_RECT : 'mxgraph.basic.layered_r
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicLayeredRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1719,7 +1719,7 @@ mxShapeBasicLayeredRect.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(dx, dx);
 	c.lineTo(w, dx);
@@ -1727,7 +1727,7 @@ mxShapeBasicLayeredRect.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(dx, h);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(dx * 0.5, dx * 0.5);
 	c.lineTo(w - dx * 0.5, dx * 0.5);
@@ -1735,7 +1735,7 @@ mxShapeBasicLayeredRect.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(dx * 0.5, h - dx * 0.5);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w - dx, 0);
@@ -1760,7 +1760,7 @@ Graph.handleFactory[mxShapeBasicLayeredRect.prototype.cst.LAYERED_RECT] = functi
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, - pt.x + bounds.width + bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1793,7 +1793,7 @@ mxShapeBasicButton.prototype.cst = {BUTTON : 'mxgraph.basic.button'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1803,7 +1803,7 @@ mxShapeBasicButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w, 0);
@@ -1811,10 +1811,10 @@ mxShapeBasicButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(0, h);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
 	c.setLineJoin('round');
-	
+
 	c.begin();
 	c.moveTo(0, h);
 	c.lineTo(0, 0);
@@ -1822,7 +1822,7 @@ mxShapeBasicButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(dx, h - dx);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w, 0);
@@ -1830,7 +1830,7 @@ mxShapeBasicButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(dx, dx);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w, 0);
 	c.lineTo(w, h);
@@ -1838,7 +1838,7 @@ mxShapeBasicButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w - dx, dx);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(0, h);
 	c.lineTo(dx, h - dx);
@@ -1846,7 +1846,7 @@ mxShapeBasicButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w, h);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(0, h);
 	c.lineTo(0, 0);
@@ -1854,8 +1854,8 @@ mxShapeBasicButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(dx, h - dx);
 	c.close();
 	c.fillAndStroke();
-	
-	
+
+
 };
 
 mxCellRenderer.registerShape(mxShapeBasicButton.prototype.cst.BUTTON, mxShapeBasicButton);
@@ -1873,7 +1873,7 @@ Graph.handleFactory[mxShapeBasicButton.prototype.cst.BUTTON] = function(state)
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -1906,19 +1906,19 @@ mxShapeBasicShadedButton.prototype.cst = {SHADED_BUTTON : 'mxgraph.basic.shaded_
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicShadedButton.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	c.setShadow(false);
 
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w, 0);
@@ -1926,7 +1926,7 @@ mxShapeBasicShadedButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(0, h);
 	c.close();
 	c.fill();
-	
+
 	c.setFillColor('#ffffff');
 	c.setAlpha(0.25);
 	c.begin();
@@ -1936,7 +1936,7 @@ mxShapeBasicShadedButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(dx, h - dx);
 	c.close();
 	c.fill();
-	
+
 	c.setAlpha(0.5);
 	c.begin();
 	c.moveTo(0, 0);
@@ -1945,7 +1945,7 @@ mxShapeBasicShadedButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(dx, dx);
 	c.close();
 	c.fill();
-	
+
 	c.setFillColor('#000000');
 	c.setAlpha(0.25);
 	c.begin();
@@ -1955,7 +1955,7 @@ mxShapeBasicShadedButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w - dx, dx);
 	c.close();
 	c.fill();
-	
+
 	c.setAlpha(0.5);
 	c.begin();
 	c.moveTo(0, h);
@@ -1964,8 +1964,8 @@ mxShapeBasicShadedButton.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w, h);
 	c.close();
 	c.fill();
-	
-	
+
+
 };
 
 mxCellRenderer.registerShape(mxShapeBasicShadedButton.prototype.cst.SHADED_BUTTON, mxShapeBasicShadedButton);
@@ -1983,7 +1983,7 @@ Graph.handleFactory[mxShapeBasicShadedButton.prototype.cst.SHADED_BUTTON] = func
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -2018,7 +2018,7 @@ mxShapeBasicPie.prototype.cst = {PIE : 'mxgraph.basic.pie'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicPie.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2029,26 +2029,26 @@ mxShapeBasicPie.prototype.paintVertexShape = function(c, x, y, w, h)
 	var endAngle = 2 * Math.PI * Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.style, 'endAngle', this.endAngle))));
 	var rx = w * 0.5;
 	var ry = h * 0.5;
-	
+
 	var startX = rx + Math.sin(startAngle) * rx;
 	var startY = ry - Math.cos(startAngle) * ry;
 	var endX = rx + Math.sin(endAngle) * rx;
 	var endY = ry - Math.cos(endAngle) * ry;
-	
+
 	var angDiff = endAngle - startAngle;
-	
+
 	if (angDiff < 0)
 	{
 		angDiff = angDiff + Math.PI * 2;
 	}
-		
+
 	var bigArc = 0;
-	
+
 	if (angDiff > Math.PI)
 	{
 		bigArc = 1;
 	}
-		
+
 	c.begin();
 	c.moveTo(rx, ry);
 	c.lineTo(startX, startY);
@@ -2072,16 +2072,16 @@ Graph.handleFactory[mxShapeBasicPie.prototype.cst.PIE] = function(state)
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
 
 		this.state.style['startAngle'] = res;
-		
+
 	})];
 
 	var handle2 = Graph.createHandle(state, ['endAngle'], function(bounds)
@@ -2093,19 +2093,19 @@ Graph.handleFactory[mxShapeBasicPie.prototype.cst.PIE] = function(state)
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
-		
+
 		this.state.style['endAngle'] = res;
 	});
-	
+
 	handles.push(handle2);
-	
+
 	return handles;
 };
 
@@ -2140,7 +2140,7 @@ mxShapeBasicArc.prototype.cst = {ARC : 'mxgraph.basic.arc'};
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicArc.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2151,26 +2151,26 @@ mxShapeBasicArc.prototype.paintVertexShape = function(c, x, y, w, h)
 	var endAngle = 2 * Math.PI * Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.style, 'endAngle', this.endAngle))));
 	var rx = w * 0.5;
 	var ry = h * 0.5;
-	
+
 	var startX = rx + Math.sin(startAngle) * rx;
 	var startY = ry - Math.cos(startAngle) * ry;
 	var endX = rx + Math.sin(endAngle) * rx;
 	var endY = ry - Math.cos(endAngle) * ry;
-	
+
 	var angDiff = endAngle - startAngle;
-	
+
 	if (angDiff < 0)
 	{
 		angDiff = angDiff + Math.PI * 2;
 	}
-		
+
 	var bigArc = 0;
-	
+
 	if (angDiff > Math.PI)
 	{
 		bigArc = 1;
 	}
-		
+
 	c.begin();
 	c.moveTo(startX, startY);
 	c.arcTo(rx, ry, 0, bigArc, 1, endX, endY);
@@ -2192,16 +2192,16 @@ Graph.handleFactory[mxShapeBasicArc.prototype.cst.ARC] = function(state)
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
 
 		this.state.style['startAngle'] = res;
-		
+
 	})];
 
 	var handle2 = Graph.createHandle(state, ['endAngle'], function(bounds)
@@ -2213,19 +2213,19 @@ Graph.handleFactory[mxShapeBasicArc.prototype.cst.ARC] = function(state)
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
-		
+
 		this.state.style['endAngle'] = res;
 	});
-	
+
 	handles.push(handle2);
-	
+
 	return handles;
 };
 
@@ -2262,7 +2262,7 @@ mxShapeBasicPartConcEllipse.prototype.cst = {PART_CONC_ELLIPSE : 'mxgraph.basic.
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicPartConcEllipse.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2276,9 +2276,9 @@ mxShapeBasicPartConcEllipse.prototype.paintVertexShape = function(c, x, y, w, h)
 	var ry = h * 0.5;
 	var rx2 = rx * arcWidth;
 	var ry2 = ry * arcWidth;
-	
+
 	var angDiff = endAngle - startAngle;
-	
+
 	if (angDiff < 0)
 	{
 		angDiff = angDiff + Math.PI * 2;
@@ -2287,7 +2287,7 @@ mxShapeBasicPartConcEllipse.prototype.paintVertexShape = function(c, x, y, w, h)
 	{
 		endAngle = endAngle + 0.00001;
 	}
-	
+
 	var startX = rx + Math.sin(startAngle) * rx;
 	var startY = ry - Math.cos(startAngle) * ry;
 	var innerStartX = rx + Math.sin(startAngle) * rx2;
@@ -2296,15 +2296,15 @@ mxShapeBasicPartConcEllipse.prototype.paintVertexShape = function(c, x, y, w, h)
 	var endY = ry - Math.cos(endAngle) * ry;
 	var innerEndX = rx + Math.sin(endAngle) * rx2;
 	var innerEndY = ry - Math.cos(endAngle) * ry2;
-	
-		
+
+
 	var bigArc = 0;
-	
+
 	if (angDiff >= Math.PI)
 	{
 		bigArc = 1;
 	}
-		
+
 	c.begin();
 	c.moveTo(startX, startY);
 	c.arcTo(rx, ry, 0, bigArc, 1, endX, endY);
@@ -2329,16 +2329,16 @@ Graph.handleFactory[mxShapeBasicPartConcEllipse.prototype.cst.PART_CONC_ELLIPSE]
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
 
 		this.state.style['startAngle'] = res;
-		
+
 	})];
 
 	var handle2 = Graph.createHandle(state, ['endAngle'], function(bounds)
@@ -2350,19 +2350,19 @@ Graph.handleFactory[mxShapeBasicPartConcEllipse.prototype.cst.PART_CONC_ELLIPSE]
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
-		
+
 		this.state.style['endAngle'] = res;
 	});
-	
+
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['arcWidth'], function(bounds)
 	{
 		var arcWidth = Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.state.style, 'arcWidth', this.arcWidth))));
@@ -2372,9 +2372,9 @@ Graph.handleFactory[mxShapeBasicPartConcEllipse.prototype.cst.PART_CONC_ELLIPSE]
 	{
 		this.state.style['arcWidth'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, (pt.y - bounds.y) / (bounds.height * 0.5)))) / 100;
 	});
-			
+
 	handles.push(handle3);
-	
+
 	return handles;
 };
 
@@ -2403,7 +2403,7 @@ mxShapeBasicNumEntryVert.prototype.cst = {NUM_ENTRY_VERT : 'mxgraph.basic.number
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicNumEntryVert.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2415,10 +2415,10 @@ mxShapeBasicNumEntryVert.prototype.paintVertexShape = function(c, x, y, w, h)
 	var inset = 5;
 
 	var d = Math.min(dy, w - 2 * inset, h - inset);
-	
+
 	c.ellipse(w * 0.5 - d * 0.5, 0, d, d);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(0, d * 0.5);
 	c.lineTo(w * 0.5 - d * 0.5 - inset, d * 0.5);
@@ -2445,7 +2445,7 @@ Graph.handleFactory[mxShapeBasicNumEntryVert.prototype.cst.NUM_ENTRY_VERT] = fun
 	{
 		this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height, bounds.width, pt.y - bounds.y))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -2476,7 +2476,7 @@ mxShapeBasicBendingArch.prototype.cst = {BENDING_ARCH : 'mxgraph.basic.bendingAr
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicBendingArch.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2490,7 +2490,7 @@ mxShapeBasicBendingArch.prototype.paintVertexShape = function(c, x, y, w, h)
 	var ry = h * 0.5;
 	var rx2 = rx * arcWidth;
 	var ry2 = ry * arcWidth;
-	
+
 	var startX = rx + Math.sin(startAngle) * rx;
 	var startY = ry - Math.cos(startAngle) * ry;
 	var innerStartX = rx + Math.sin(startAngle) * rx2;
@@ -2499,16 +2499,16 @@ mxShapeBasicBendingArch.prototype.paintVertexShape = function(c, x, y, w, h)
 	var endY = ry - Math.cos(endAngle) * ry;
 	var innerEndX = rx + Math.sin(endAngle) * rx2;
 	var innerEndY = ry - Math.cos(endAngle) * ry2;
-	
+
 	var angDiff = endAngle - startAngle;
-	
+
 	if (angDiff < 0)
 	{
 		angDiff = angDiff + Math.PI * 2;
 	}
-		
+
 	var bigArc = 0;
-	
+
 	if (angDiff > Math.PI)
 	{
 		bigArc = 1;
@@ -2519,7 +2519,7 @@ mxShapeBasicBendingArch.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	c.ellipse(w * 0.5 - rx3, h * 0.5 - ry3, 2 * rx3, 2 * ry3);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(startX, startY);
 	c.arcTo(rx, ry, 0, bigArc, 1, endX, endY);
@@ -2544,16 +2544,16 @@ Graph.handleFactory[mxShapeBasicBendingArch.prototype.cst.BENDING_ARCH] = functi
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
 
 		this.state.style['startAngle'] = res;
-		
+
 	})];
 
 	var handle2 = Graph.createHandle(state, ['endAngle'], function(bounds)
@@ -2565,19 +2565,19 @@ Graph.handleFactory[mxShapeBasicBendingArch.prototype.cst.BENDING_ARCH] = functi
 	{
 		var handleX = Math.round(100 * Math.max(-1, Math.min(1, (pt.x - bounds.x - bounds.width * 0.5) / (bounds.width * 0.5)))) / 100;
 		var handleY = -Math.round(100 * Math.max(-1, Math.min(1, (pt.y - bounds.y - bounds.height * 0.5) / (bounds.height * 0.5)))) / 100;
-		
+
 		var res =  0.5 * Math.atan2(handleX, handleY) / Math.PI;
-		
+
 		if (res < 0)
 		{
 			res = 1 + res;
 		}
-		
+
 		this.state.style['endAngle'] = res;
 	});
-	
+
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['arcWidth'], function(bounds)
 	{
 		var arcWidth = Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.state.style, 'arcWidth', this.arcWidth))));
@@ -2587,9 +2587,9 @@ Graph.handleFactory[mxShapeBasicBendingArch.prototype.cst.BENDING_ARCH] = functi
 	{
 		this.state.style['arcWidth'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, (pt.y - bounds.y) / (bounds.height * 0.5)))) / 100;
 	});
-			
+
 	handles.push(handle3);
-	
+
 	return handles;
 };
 
@@ -2622,7 +2622,7 @@ mxShapeBasicThreeCornerRoundRect.prototype.cst = {THREE_CORNER_ROUND_RECT : 'mxg
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicThreeCornerRoundRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2632,7 +2632,7 @@ mxShapeBasicThreeCornerRoundRect.prototype.paintVertexShape = function(c, x, y, 
 	var dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx)))) * 2;
 
 	dx = Math.min(w * 0.5, h * 0.5, dx);
-	
+
 	c.begin();
 	c.moveTo(dx, 0);
 	c.lineTo(w - dx, 0);
@@ -2661,7 +2661,7 @@ Graph.handleFactory[mxShapeBasicThreeCornerRoundRect.prototype.cst.THREE_CORNER_
 	{
 		this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 4, bounds.width / 4, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	return handles;
 };
 
@@ -2763,7 +2763,7 @@ mxShapeBasicRect2.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2772,23 +2772,23 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	var rectStyle = mxUtils.getValue(this.style, 'rectStyle', this.rectStyle);
 	var absoluteCornerSize = mxUtils.getValue(this.style, 'absoluteCornerSize', this.absoluteCornerSize);
-	
+
 	var size = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'size', this.size))));
 	var relSize = Math.max(0, Math.min(50, size));
-	
+
 	size = Math.min(h * 0.5, w * 0.5, size);
-	
+
 	if (!absoluteCornerSize)
 	{
 		size = relSize * Math.min(w, h) / 100;
 	}
-	
+
 	var rectOutline = mxUtils.getValue(this.style, 'rectOutline', this.rectOutline);
 	var indent = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'indent', this.indent))));
 	var relIndent = Math.max(0, Math.min(50, indent));
-		
+
 	size = Math.min(size, Math.min(w, h) * 0.5);
-	
+
 	if (!absoluteCornerSize)
 	{
 		indent = Math.min(relIndent * Math.min(w, h) / 100);
@@ -2796,7 +2796,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 
 //	indent = Math.min(indent, 2 * size, Math.min(w, h) - size);
 	indent = Math.min(indent, Math.min(w, h) * 0.5 - size);
-	
+
 	var top = mxUtils.getValue(this.style, 'top', true);
 	var right = mxUtils.getValue(this.style, 'right', true);
 	var bottom = mxUtils.getValue(this.style, 'bottom', true);
@@ -2811,10 +2811,10 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 	var gradientColor2 = mxUtils.getValue(this.style, 'gradientColor2', 'none');
 	var gdir2 = mxUtils.getValue(this.style, 'gradientDirection2', 'south');
 	var opacity = mxUtils.getValue(this.style, 'opacity', '100');
-	
+
 	if ((top || right || bottom || left) && rectOutline != 'frame')
 	{
-		
+
 		//outline fill
 		c.begin();
 		if (!top)
@@ -2825,28 +2825,28 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 		{
 			mxShapeBasicRect2.prototype.moveNW(c, x, y, w, h, rectStyle, topLeftStyle, size, left);
 		}
-		
+
 		if (top)
 		{
 			mxShapeBasicRect2.prototype.paintNW(c, x, y, w, h, rectStyle, topLeftStyle, size, left);
 		}
 
 		mxShapeBasicRect2.prototype.paintTop(c, x, y, w, h, rectStyle, topRightStyle, size, right);
-		
+
 		if (right)
 		{
 			mxShapeBasicRect2.prototype.paintNE(c, x, y, w, h, rectStyle, topRightStyle, size, top);
 		}
 
 		mxShapeBasicRect2.prototype.paintRight(c, x, y, w, h, rectStyle, bottomRightStyle, size, bottom);
-		
+
 		if (bottom)
 		{
 			mxShapeBasicRect2.prototype.paintSE(c, x, y, w, h, rectStyle, bottomRightStyle, size, right);
 		}
-		
+
 		mxShapeBasicRect2.prototype.paintBottom(c, x, y, w, h, rectStyle, bottomLeftStyle, size, left);
-		
+
 		if (left)
 		{
 			mxShapeBasicRect2.prototype.paintSW(c, x, y, w, h, rectStyle, bottomLeftStyle, size, bottom);
@@ -2863,20 +2863,20 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 		c.setFillColor(fillColor2);
 		var op1 = opacity;
 		var op2 = opacity;
-		
+
 		if (fillColor2 == 'none')
 		{
 			op1 = 0;
 		}
-		
+
 		if (gradientColor2 == 'none')
 		{
 			op2 = 0;
 		}
-		
-		
+
+
 		c.setGradient(fillColor2, gradientColor2, 0, 0, w, h, gdir2, op1, op2);
-		
+
 		c.begin();
 
 		if (!top)
@@ -2889,28 +2889,28 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 		}
 
 		mxShapeBasicRect2.prototype.paintLeftInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, bottom, left);
-		
+
 		if (left && bottom)
 		{
 			mxShapeBasicRect2.prototype.paintSWInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, bottom);
 		}
 
 		mxShapeBasicRect2.prototype.paintBottomInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent, right, bottom);
-		
+
 		if (bottom && right)
 		{
 			mxShapeBasicRect2.prototype.paintSEInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent);
 		}
-		
+
 		mxShapeBasicRect2.prototype.paintRightInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent, top, right);
-		
+
 		if (right && top)
 		{
 			mxShapeBasicRect2.prototype.paintNEInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent);
 		}
 
 		mxShapeBasicRect2.prototype.paintTopInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent, left, top);
-		
+
 		if (top && left)
 		{
 			mxShapeBasicRect2.prototype.paintNWInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent);
@@ -2929,7 +2929,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 	//draw all the combinations
 	if (!top && !right && !bottom && left)
 	{
-		
+
 		if (rectOutline != 'frame')
 		{
 			c.begin();
@@ -2941,7 +2941,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 				mxShapeBasicRect2.prototype.moveNWInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent, top, left);
 				mxShapeBasicRect2.prototype.paintLeftInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, bottom, left);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -2962,13 +2962,13 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			c.begin();
 			mxShapeBasicRect2.prototype.moveSE(c, x, y, w, h, rectStyle, bottomRightStyle, size, right);
 			mxShapeBasicRect2.prototype.paintBottom(c, x, y, w, h, rectStyle, bottomLeftStyle, size, left);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveSWInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, left);
 				mxShapeBasicRect2.prototype.paintBottomInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent, right, bottom);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -2991,7 +2991,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			mxShapeBasicRect2.prototype.paintBottom(c, x, y, w, h, rectStyle, bottomLeftStyle, size, left);
 			mxShapeBasicRect2.prototype.paintSW(c, x, y, w, h, rectStyle, bottomLeftStyle, size, bottom);
 			mxShapeBasicRect2.prototype.paintLeft(c, x, y, w, h, rectStyle, topLeftStyle, size, top);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveNWInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent, top, left);
@@ -2999,7 +2999,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 				mxShapeBasicRect2.prototype.paintSWInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, bottom);
 				mxShapeBasicRect2.prototype.paintBottomInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent, right, bottom);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3024,13 +3024,13 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			c.begin();
 			mxShapeBasicRect2.prototype.moveNE(c, x, y, w, h, rectStyle, topRightStyle, size, top);
 			mxShapeBasicRect2.prototype.paintRight(c, x, y, w, h, rectStyle, bottomRightStyle, size, bottom);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveSEInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent, bottom);
 				mxShapeBasicRect2.prototype.paintRightInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent, top, right);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3051,25 +3051,25 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			c.begin();
 			mxShapeBasicRect2.prototype.moveSW(c, x, y, w, h, rectStyle, topLeftStyle, size, bottom);
 			mxShapeBasicRect2.prototype.paintLeft(c, x, y, w, h, rectStyle, topLeftStyle, size, top);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveNWInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent, top, left);
 				mxShapeBasicRect2.prototype.paintLeftInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, bottom, left);
 			}
-			
+
 			c.stroke();
-			
+
 			c.begin();
 			mxShapeBasicRect2.prototype.moveNE(c, x, y, w, h, rectStyle, topRightStyle, size, top);
 			mxShapeBasicRect2.prototype.paintRight(c, x, y, w, h, rectStyle, bottomRightStyle, size, bottom);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveSEInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent, bottom);
 				mxShapeBasicRect2.prototype.paintRightInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent, top, right);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3081,7 +3081,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			mxShapeBasicRect2.prototype.paintLeftInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, bottom, left);
 			c.close();
 			c.fillAndStroke();
-			
+
 			c.begin();
 			mxShapeBasicRect2.prototype.moveNE(c, x, y, w, h, rectStyle, topRightStyle, size, top);
 			mxShapeBasicRect2.prototype.paintRight(c, x, y, w, h, rectStyle, bottomRightStyle, size, bottom);
@@ -3108,7 +3108,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 				mxShapeBasicRect2.prototype.paintSEInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent);
 				mxShapeBasicRect2.prototype.paintRightInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent, top, right);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3137,7 +3137,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			mxShapeBasicRect2.prototype.paintBottom(c, x, y, w, h, rectStyle, bottomLeftStyle, size, left);
 			mxShapeBasicRect2.prototype.paintSW(c, x, y, w, h, rectStyle, bottomLeftStyle, size, bottom);
 			mxShapeBasicRect2.prototype.paintLeft(c, x, y, w, h, rectStyle, topLeftStyle, size, top);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveNWInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent, top, left);
@@ -3147,7 +3147,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 				mxShapeBasicRect2.prototype.paintSEInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent);
 				mxShapeBasicRect2.prototype.paintRightInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent, top, right);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3176,13 +3176,13 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			c.begin();
 			mxShapeBasicRect2.prototype.moveNW(c, x, y, w, h, rectStyle, topLeftStyle, size, left);
 			mxShapeBasicRect2.prototype.paintTop(c, x, y, w, h, rectStyle, topRightStyle, size, right);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveNEInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent, right);
 				mxShapeBasicRect2.prototype.paintTopInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent, left, top);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3205,7 +3205,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			mxShapeBasicRect2.prototype.paintLeft(c, x, y, w, h, rectStyle, topLeftStyle, size, top);
 			mxShapeBasicRect2.prototype.paintNW(c, x, y, w, h, rectStyle, topLeftStyle, size, left);
 			mxShapeBasicRect2.prototype.paintTop(c, x, y, w, h, rectStyle, topRightStyle, size, right);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveNEInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent, right);
@@ -3213,7 +3213,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 				mxShapeBasicRect2.prototype.paintNWInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent);
 				mxShapeBasicRect2.prototype.paintLeftInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, bottom, left);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3238,25 +3238,25 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			c.begin();
 			mxShapeBasicRect2.prototype.moveNW(c, x, y, w, h, rectStyle, topLeftStyle, size, left);
 			mxShapeBasicRect2.prototype.paintTop(c, x, y, w, h, rectStyle, topRightStyle, size, right);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveNEInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent, right);
 				mxShapeBasicRect2.prototype.paintTopInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent, left, top);
 			}
-			
+
 			c.stroke();
-	
+
 			c.begin();
 			mxShapeBasicRect2.prototype.moveSE(c, x, y, w, h, rectStyle, bottomRightStyle, size, right);
 			mxShapeBasicRect2.prototype.paintBottom(c, x, y, w, h, rectStyle, bottomLeftStyle, size, left);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveSWInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, left);
 				mxShapeBasicRect2.prototype.paintBottomInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent, right, bottom);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3268,7 +3268,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			mxShapeBasicRect2.prototype.paintTopInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent, left, top);
 			c.close();
 			c.fillAndStroke();
-	
+
 			c.begin();
 			mxShapeBasicRect2.prototype.moveSE(c, x, y, w, h, rectStyle, bottomRightStyle, size, right);
 			mxShapeBasicRect2.prototype.paintBottom(c, x, y, w, h, rectStyle, bottomLeftStyle, size, left);
@@ -3289,7 +3289,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			mxShapeBasicRect2.prototype.paintLeft(c, x, y, w, h, rectStyle, topLeftStyle, size, top);
 			mxShapeBasicRect2.prototype.paintNW(c, x, y, w, h, rectStyle, topLeftStyle, size, left);
 			mxShapeBasicRect2.prototype.paintTop(c, x, y, w, h, rectStyle, topRightStyle, size, right);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveNEInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent, right);
@@ -3299,7 +3299,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 				mxShapeBasicRect2.prototype.paintSWInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, bottom);
 				mxShapeBasicRect2.prototype.paintBottomInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent, right, bottom);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3330,7 +3330,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			mxShapeBasicRect2.prototype.paintTop(c, x, y, w, h, rectStyle, topRightStyle, size, right);
 			mxShapeBasicRect2.prototype.paintNE(c, x, y, w, h, rectStyle, topRightStyle, size, top);
 			mxShapeBasicRect2.prototype.paintRight(c, x, y, w, h, rectStyle, bottomRightStyle, size, bottom);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveSEInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent, bottom);
@@ -3338,7 +3338,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 				mxShapeBasicRect2.prototype.paintNEInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent);
 				mxShapeBasicRect2.prototype.paintTopInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent, left, top);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3367,7 +3367,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			mxShapeBasicRect2.prototype.paintTop(c, x, y, w, h, rectStyle, topRightStyle, size, right);
 			mxShapeBasicRect2.prototype.paintNE(c, x, y, w, h, rectStyle, topRightStyle, size, top);
 			mxShapeBasicRect2.prototype.paintRight(c, x, y, w, h, rectStyle, bottomRightStyle, size, bottom);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveSEInner(c, x, y, w, h, rectStyle, bottomRightStyle, size, indent, bottom);
@@ -3377,7 +3377,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 				mxShapeBasicRect2.prototype.paintNWInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent);
 				mxShapeBasicRect2.prototype.paintLeftInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, bottom, left);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3410,7 +3410,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			mxShapeBasicRect2.prototype.paintRight(c, x, y, w, h, rectStyle, bottomRightStyle, size, bottom);
 			mxShapeBasicRect2.prototype.paintSE(c, x, y, w, h, rectStyle, bottomRightStyle, size, right);
 			mxShapeBasicRect2.prototype.paintBottom(c, x, y, w, h, rectStyle, bottomLeftStyle, size, left);
-	
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveSWInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, left);
@@ -3420,7 +3420,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 				mxShapeBasicRect2.prototype.paintNEInner(c, x, y, w, h, rectStyle, topRightStyle, size, indent);
 				mxShapeBasicRect2.prototype.paintTopInner(c, x, y, w, h, rectStyle, topLeftStyle, size, indent, left, top);
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3457,7 +3457,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 			mxShapeBasicRect2.prototype.paintSW(c, x, y, w, h, rectStyle, bottomLeftStyle, size, bottom);
 			mxShapeBasicRect2.prototype.paintLeft(c, x, y, w, h, rectStyle, topLeftStyle, size, top);
 			c.close();
-			
+
 			if (rectOutline == 'double')
 			{
 				mxShapeBasicRect2.prototype.moveSWInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, left);
@@ -3471,7 +3471,7 @@ mxShapeBasicRect2.prototype.paintVertexShape = function(c, x, y, w, h)
 				mxShapeBasicRect2.prototype.paintLeftInner(c, x, y, w, h, rectStyle, bottomLeftStyle, size, indent, bottom, left);
 				c.close();
 			}
-			
+
 			c.stroke();
 		}
 		else
@@ -3564,12 +3564,12 @@ mxShapeBasicRect2.prototype.paintNW = function(c, x, y, w, h, rectStyle, topLeft
 			(topLeftStyle == 'invRound' || (topLeftStyle == 'default' && rectStyle == 'invRound' )) )
 	{
 		var inv = 0;
-		
+
 		if (topLeftStyle == 'rounded' || (topLeftStyle == 'default' && rectStyle == 'rounded' ))
 		{
 			inv = 1;
 		}
-		
+
 		c.arcTo(size, size, 0, 0, inv, size, 0);
 	}
 	else if((topLeftStyle == 'snip' || (topLeftStyle == 'default' && rectStyle == 'snip' )) ||
@@ -3601,12 +3601,12 @@ mxShapeBasicRect2.prototype.paintNE = function(c, x, y, w, h, rectStyle, topRigh
 			(topRightStyle == 'invRound' || (topRightStyle == 'default' && rectStyle == 'invRound' )) )
 	{
 		var inv = 0;
-		
+
 		if (topRightStyle == 'rounded' || (topRightStyle == 'default' && rectStyle == 'rounded' ))
 		{
 			inv = 1;
 		}
-		
+
 		c.arcTo(size, size, 0, 0, inv, w, size);
 	}
 	else if((topRightStyle == 'snip' || (topRightStyle == 'default' && rectStyle == 'snip' )) ||
@@ -3650,12 +3650,12 @@ mxShapeBasicRect2.prototype.paintSE = function(c, x, y, w, h, rectStyle, bottomR
 			(bottomRightStyle == 'invRound' || (bottomRightStyle == 'default' && rectStyle == 'invRound' )) )
 	{
 		var inv = 0;
-		
+
 		if (bottomRightStyle == 'rounded' || (bottomRightStyle == 'default' && rectStyle == 'rounded' ))
 		{
 			inv = 1;
 		}
-		
+
 		c.arcTo(size, size, 0, 0, inv, w - size, h);
 	}
 	else if((bottomRightStyle == 'snip' || (bottomRightStyle == 'default' && rectStyle == 'snip' )) ||
@@ -3687,12 +3687,12 @@ mxShapeBasicRect2.prototype.paintSW = function(c, x, y, w, h, rectStyle, bottomL
 			(bottomLeftStyle == 'invRound' || (bottomLeftStyle == 'default' && rectStyle == 'invRound' )) )
 	{
 		var inv = 0;
-		
+
 		if (bottomLeftStyle == 'rounded' || (bottomLeftStyle == 'default' && rectStyle == 'rounded' ))
 		{
 			inv = 1;
 		}
-		
+
 		c.arcTo(size, size, 0, 0, inv, 0, h - size);
 	}
 	else if((bottomLeftStyle == 'snip' || (bottomLeftStyle == 'default' && rectStyle == 'snip' )) ||
@@ -4124,21 +4124,21 @@ mxShapeBasicRect2.prototype.paintFolds = function(c, x, y, w, h, rectStyle, topL
 			c.lineTo(size, size);
 			c.lineTo(size, 0);
 		}
-		
+
 		if ((topRightStyle == 'fold' || (topRightStyle == 'default' && rectStyle == 'fold' )) && (top && right))
 		{
 			c.moveTo(w - size, 0);
 			c.lineTo(w - size, size);
 			c.lineTo(w, size);
 		}
-		
+
 		if ((bottomRightStyle == 'fold' || (bottomRightStyle == 'default' && rectStyle == 'fold' )) && (bottom && right))
 		{
 			c.moveTo(w - size, h);
 			c.lineTo(w - size, h - size);
 			c.lineTo(w, h - size);
 		}
-		
+
 		if ((bottomLeftStyle == 'fold' || (bottomLeftStyle == 'default' && rectStyle == 'fold' )) && (bottom && left))
 		{
 			c.moveTo(0, h - size);
@@ -4163,7 +4163,7 @@ Graph.handleFactory[mxShapeBasicRect2.prototype.cst.DIAG_ROUND_RECT] = function(
 	{
 		this.state.style['size'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2, bounds.width / 2, pt.x - bounds.x))) / 100;
 	})];
-			
+
 	var handle2 = Graph.createHandle(state, ['indent'], function(bounds)
 	{
 		var dx2 = Math.max(0, Math.min(100, parseFloat(mxUtils.getValue(this.state.style, 'indent', this.dx2))));
@@ -4173,8 +4173,8 @@ Graph.handleFactory[mxShapeBasicRect2.prototype.cst.DIAG_ROUND_RECT] = function(
 	{
 		this.state.style['indent'] = Math.round(100 * Math.max(0, Math.min(100, 200 * (pt.y - bounds.y) / bounds.height))) / 100;
 	});
-	
+
 	handles.push(handle2);
-	
+
 	return handles;
 };

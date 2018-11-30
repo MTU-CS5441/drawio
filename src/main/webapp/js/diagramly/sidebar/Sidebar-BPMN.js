@@ -2,7 +2,7 @@
 {
 	// Adds BPMN shapes
 	var sidebarAddBpmnPalette = Sidebar.prototype.addBpmnPalette;
-	
+
 	Sidebar.prototype.addBpmnPalette = function(dir, expand)
 	{
 		sidebarAddBpmnPalette.apply(this, arguments);
@@ -13,7 +13,7 @@
 		var s = 'shape=mxgraph.bpmn.shape;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=rhombusPerimeter;background=gateway;outlineConnect=0;';
 		//default tags
 		var dt = 'bpmn business process model gateway ';
-		
+
 		this.addPaletteFunctions('bpmnGateways', 'BPMN Gateways', false,
 		[
 			this.createVertexTemplateEntry(s + 'outline=none;symbol=exclusiveGw;', w, h, '', 'Exclusive Gateway', null, null, dt + 'exclusive'),
@@ -89,7 +89,7 @@
 			this.createVertexTemplateEntry(s + 'outline=end;symbol=multiple;', w, h, '', 'Multiple End Gateway', null, null, dt + 'multiple end'),
 
 			this.createVertexTemplateEntry(s + 'outline=standard;symbol=star;', w, h, '', 'Multiple Start Gateway', null, null, dt + 'multiple end'),
-			
+
 			this.createVertexTemplateEntry(s + 'outline=standard;symbol=parallelMultiple;', w, h, '', 'Parallel Multiple Standard Gateway', null, null, dt + 'parallel multiple standard'),
 			this.createVertexTemplateEntry(s + 'outline=eventInt;symbol=parallelMultiple;', w, h, '', 'Parallel Multiple Interrupting Gateway', null, null, dt + 'parallel multiple interrupting'),
 			this.createVertexTemplateEntry(s + 'outline=eventNonint;symbol=parallelMultiple;', w, h, '', 'Parallel Multiple Non-Interrupting Gateway', null, null, dt + 'parallel multiple non interrupting noninterrupting'),
@@ -99,16 +99,16 @@
 
 			this.createVertexTemplateEntry(s + 'outline=end;symbol=terminate;', w, h, '', 'Terminate Gateway', null, null, dt + 'terminate')
 		]);
-		
+
 		s = 'shape=mxgraph.bpmn.shape;html=1;verticalLabelPosition=bottom;labelBackgroundColor=#ffffff;verticalAlign=top;align=center;perimeter=ellipsePerimeter;outlineConnect=0;';
 		var dt = 'bpmn business process model event ';
-		
+
 		this.addPaletteFunctions('bpmnEvents', 'BPMN Events', false,
 		[
 			this.createVertexTemplateEntry(s + 'outline=standard;symbol=general;', w, h, '', 'General Start', null, null, dt + 'general start'),
 			this.createVertexTemplateEntry(s + 'outline=throwing;symbol=general;', w, h, '', 'General Intermediate', null, null, dt + 'general intermediate'),
 			this.createVertexTemplateEntry(s + 'outline=end;symbol=general;', w, h, '', 'General End', null, null, dt + 'general end'),
-			
+
 			this.createVertexTemplateEntry(s + 'outline=standard;symbol=message;', w, h, '', 'Message Standard', null, null, dt + 'message standard'),
 			this.createVertexTemplateEntry(s + 'outline=eventInt;symbol=message;', w, h, '', 'Message Interrupting', null, null, dt + 'message interrupting'),
 			this.createVertexTemplateEntry(s + 'outline=eventNonint;symbol=message;', w, h, '', 'Message Non-Interrupting', null, null, dt + 'message non interrupting noninterrupting'),
@@ -173,7 +173,7 @@
 			this.createVertexTemplateEntry(s + 'outline=end;symbol=multiple;', w, h, '', 'Multiple End', null, null, dt + 'multiple end'),
 
 			this.createVertexTemplateEntry(s + 'outline=standard;symbol=star;', w, h, '', 'Multiple Start', null, null, dt + 'multiple start'),
-			
+
 			this.createVertexTemplateEntry(s + 'outline=standard;symbol=parallelMultiple;', w, h, '', 'Parallel Multiple Standard', null, null, dt + 'parallel multiple standard'),
 			this.createVertexTemplateEntry(s + 'outline=eventInt;symbol=parallelMultiple;', w, h, '', 'Parallel Multiple Interrupting', null, null, dt + 'parallel multiple interrupting'),
 			this.createVertexTemplateEntry(s + 'outline=eventNonint;symbol=parallelMultiple;', w, h, '', 'Parallel Multiple Non-Interrupting', null, null, dt + 'parallel multiple non interrupting noninterrupting'),

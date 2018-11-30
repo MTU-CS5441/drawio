@@ -27,7 +27,7 @@ mxUtils.extend(mxShapeEREntity, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeEREntity.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -59,7 +59,7 @@ mxShapeEREntity.prototype.background = function(c, x, y, w, h, rSize, fontColor)
 		c.arcTo(rSize, rSize, 0, 0, 1, w - rSize, h);
 		c.lineTo(rSize, h);
 		c.arcTo(rSize, rSize, 0, 0, 1, 0, h - rSize);
-		c.close();	
+		c.close();
 		c.fillAndStroke();
 	}
 	else if (buttonStyle === 'rect')
@@ -69,7 +69,7 @@ mxShapeEREntity.prototype.background = function(c, x, y, w, h, rSize, fontColor)
 		c.lineTo(w, 0);
 		c.lineTo(w, h);
 		c.lineTo(0, h);
-		c.close();	
+		c.close();
 		c.fillAndStroke();
 	}
 	else if (buttonStyle === 'dblFrame')
@@ -81,7 +81,7 @@ mxShapeEREntity.prototype.background = function(c, x, y, w, h, rSize, fontColor)
 		c.lineTo(w, 0);
 		c.lineTo(w, h);
 		c.lineTo(0, h);
-		c.close();	
+		c.close();
 		c.fillAndStroke();
 		rSize = Math.min(w, h);
 		c.begin();
@@ -89,7 +89,7 @@ mxShapeEREntity.prototype.background = function(c, x, y, w, h, rSize, fontColor)
 		c.lineTo(w - rSize * 0.1, rSize * 0.1);
 		c.lineTo(w - rSize * 0.1, h - rSize * 0.1);
 		c.lineTo(rSize * 0.1, h - rSize * 0.1);
-		c.close();	
+		c.close();
 		c.stroke();
 	}
 
@@ -142,7 +142,7 @@ mxUtils.extend(mxShapeEREntityExt, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeEREntityExt.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -201,7 +201,7 @@ mxShapeEREntityExt.prototype.background = function(c, x, y, w, h, rSize)
 		c.lineTo(0, h);
 	}
 
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -281,7 +281,7 @@ mxShapeEREntityExt.prototype.shapes = function(c, x, y, w, h, fontSize, mainColo
 		c.lineTo(0, h);
 	}
 
-	c.close();	
+	c.close();
 	c.stroke();
 };
 
@@ -335,7 +335,7 @@ mxUtils.extend(mxShapeERAttribute, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeERAttribute.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -419,7 +419,7 @@ mxUtils.extend(mxShapeERHas, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeERHas.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -447,7 +447,7 @@ mxShapeERHas.prototype.background = function(c, x, y, w, h, rSize, fontColor)
 		c.lineTo(w * 0.5, 0);
 		c.lineTo(w, h * 0.5);
 		c.lineTo(w * 0.5, h);
-		c.close();	
+		c.close();
 		c.fillAndStroke();
 	}
 	else if (buttonStyle === 'dblFrame')
@@ -459,14 +459,14 @@ mxShapeERHas.prototype.background = function(c, x, y, w, h, rSize, fontColor)
 		c.lineTo(w * 0.5, 0);
 		c.lineTo(w, h * 0.5);
 		c.lineTo(w * 0.5, h);
-		c.close();	
+		c.close();
 		c.fillAndStroke();
 		c.begin();
 		c.moveTo(w * 0.1, h * 0.5);
 		c.lineTo(w * 0.5, h * 0.1);
 		c.lineTo(w * 0.9, h * 0.5);
 		c.lineTo(w * 0.5, h * 0.9);
-		c.close();	
+		c.close();
 		c.stroke();
 	}
 };
@@ -514,7 +514,7 @@ mxUtils.extend(mxShapeERCloud, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeERCloud.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -538,7 +538,7 @@ mxShapeERCloud.prototype.background = function(c, x, y, w, h, rSize, fontColor)
 	c.curveTo(0.05 * w, 0.25 * h, 0, 0.5 * h, 0.16 * w, 0.55 * h);
 	c.curveTo(0, 0.66 * h, 0.18 * w, 0.9 * h, 0.31 * w, 0.8 * h);
 	c.curveTo(0.4 * w, h, 0.7 * w, h, 0.8 * w, 0.8 * h);
-	c.curveTo(w, 0.8 * h, w, 0.6 * h, 0.875 * w, 0.5 * h); 
+	c.curveTo(w, 0.8 * h, w, 0.6 * h, 0.875 * w, 0.5 * h);
 	c.curveTo(w, 0.3 * h, 0.8 * w, 0.1 * h, 0.625 * w, 0.2 * h);
 	c.curveTo(0.5 * w, 0.05 * h, 0.3 * w, 0.05 * h, 0.25 * w, 0.25 * h);
 	c.fillAndStroke();
@@ -587,7 +587,7 @@ mxUtils.extend(mxShapeERHierarchy, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeERHierarchy.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -620,7 +620,7 @@ mxShapeERHierarchy.prototype.background = function(c, x, y, w, h, rSize, fontCol
 		c.arcTo(rSize, rSize, 0, 0, 1, w - rSize, h);
 		c.lineTo(rSize, h);
 		c.arcTo(rSize, rSize, 0, 0, 1, 0, h - rSize);
-		c.close();	
+		c.close();
 		c.fillAndStroke();
 	}
 	else if (buttonStyle === 'rect')
@@ -630,7 +630,7 @@ mxShapeERHierarchy.prototype.background = function(c, x, y, w, h, rSize, fontCol
 		c.lineTo(w, 0);
 		c.lineTo(w, h);
 		c.lineTo(0, h);
-		c.close();	
+		c.close();
 		c.fillAndStroke();
 	}
 	else if (buttonStyle === 'dblFrame')
@@ -642,7 +642,7 @@ mxShapeERHierarchy.prototype.background = function(c, x, y, w, h, rSize, fontCol
 		c.lineTo(w, 0);
 		c.lineTo(w, h);
 		c.lineTo(0, h);
-		c.close();	
+		c.close();
 		c.fillAndStroke();
 		rSize = Math.min(w, h);
 		c.begin();
@@ -650,7 +650,7 @@ mxShapeERHierarchy.prototype.background = function(c, x, y, w, h, rSize, fontCol
 		c.lineTo(w - rSize * 0.1, rSize * 0.1);
 		c.lineTo(w - rSize * 0.1, h - rSize * 0.1);
 		c.lineTo(rSize * 0.1, h - rSize * 0.1);
-		c.close();	
+		c.close();
 		c.stroke();
 	}
 
@@ -673,7 +673,7 @@ mxShapeERHierarchy.prototype.background = function(c, x, y, w, h, rSize, fontCol
 		c.arcTo(rSize, rSize, 0, 0, 1, w - rSize, h);
 		c.lineTo(rSize, h);
 		c.arcTo(rSize, rSize, 0, 0, 1, 0, h - rSize);
-		c.close();	
+		c.close();
 		c.fillAndStroke();
 	}
 	else if (buttonStyle === 'rect')
@@ -688,7 +688,7 @@ mxShapeERHierarchy.prototype.background = function(c, x, y, w, h, rSize, fontCol
 		c.lineTo(w, 0);
 		c.lineTo(w, h);
 		c.lineTo(0, h);
-		c.close();	
+		c.close();
 		c.fillAndStroke();
 	}
 	else if (buttonStyle === 'dblFrame')
@@ -705,7 +705,7 @@ mxShapeERHierarchy.prototype.background = function(c, x, y, w, h, rSize, fontCol
 		c.lineTo(w, 0);
 		c.lineTo(w, h);
 		c.lineTo(0, h);
-		c.close();	
+		c.close();
 		c.fillAndStroke();
 		rSize = Math.min(w, h);
 		c.begin();
@@ -713,7 +713,7 @@ mxShapeERHierarchy.prototype.background = function(c, x, y, w, h, rSize, fontCol
 		c.lineTo(w - rSize * 0.1, rSize * 0.1);
 		c.lineTo(w - rSize * 0.1, h - rSize * 0.1);
 		c.lineTo(rSize * 0.1, h - rSize * 0.1);
-		c.close();	
+		c.close();
 		c.stroke();
 	}
 
@@ -771,7 +771,7 @@ mxUtils.extend(mxShapeERNote, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeERNote.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -798,7 +798,7 @@ mxShapeERNote.prototype.background = function(c, x, y, w, h, flipSize)
 	c.lineTo(w, flipSize);
 	c.lineTo(w, h);
 	c.lineTo(0, h);
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -810,7 +810,7 @@ mxShapeERNote.prototype.flipShape = function(c, x, y, w, h, flipSize, backColor)
 	c.moveTo(w - flipSize, 0);
 	c.lineTo(w, flipSize);
 	c.lineTo(w - flipSize, flipSize);
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -864,7 +864,7 @@ mxUtils.extend(mxShapeERChen, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeERChen.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -887,7 +887,7 @@ mxShapeERChen.prototype.background = function(c, x, y, w, h)
 	c.lineTo(w, 0);
 	c.lineTo(w, h);
 	c.lineTo(0, h);
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -975,7 +975,7 @@ mxUtils.extend(mxShapeERBachman, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeERBachman.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -995,7 +995,7 @@ mxShapeERBachman.prototype.background = function(c, x, y, w, h)
 	c.lineTo(w, 0);
 	c.lineTo(w, h);
 	c.lineTo(0, h);
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -1130,7 +1130,7 @@ mxUtils.extend(mxShapeERInfEng, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeERInfEng.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1152,7 +1152,7 @@ mxShapeERInfEng.prototype.background = function(c, x, y, w, h)
 	c.lineTo(w, 0);
 	c.lineTo(w, h);
 	c.lineTo(0, h);
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -1320,9 +1320,9 @@ mxMarker.addMarker('ERzeroToMany', function(c, shape, type, pe, unitX, unitY, si
 
 		if (filled)
 		{
-			// TODO not sure if this is ok, because by default, markers use strokeColor for filling 
+			// TODO not sure if this is ok, because by default, markers use strokeColor for filling
 			var oldColor = mxUtils.getValue(shape.style, mxConstants.STYLE_STROKECOLOR, '#666666');
-			
+
 			c.setFillColor('#ffffff');
 			c.fillAndStroke();
 			c.setFillColor(oldColor);
@@ -1353,9 +1353,9 @@ mxMarker.addMarker('ERzeroToOne', function(c, shape, type, pe, unitX, unitY, siz
 
 		if (filled)
 		{
-			// TODO not sure if this is ok, because by default, markers use strokeColor for filling 
+			// TODO not sure if this is ok, because by default, markers use strokeColor for filling
 			var oldColor = mxUtils.getValue(shape.style, mxConstants.STYLE_STROKECOLOR, '#666666');
-			
+
 			c.setFillColor('#ffffff');
 			c.fillAndStroke();
 			c.setFillColor(oldColor);
@@ -1403,7 +1403,7 @@ mxShapeERRRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeERRRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1457,7 +1457,7 @@ mxShapeERAnchor.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeERAnchor.prototype.paintVertexShape = function(c, x, y, w, h)

@@ -11,14 +11,14 @@ function RealtimeMapping(driveRealtime, diagramMap, page)
 	this.driveRealtime = driveRealtime;
 	this.diagramMap = diagramMap;
 	this.page = page;
-	
+
 	this.graphModel = new mxGraphModel();
-	
+
 	if (page.root != null)
 	{
 		this.graphModel.setRoot(page.root);
 	}
-	
+
 	this.ui = this.driveRealtime.ui;
 	this.root = this.driveRealtime.root;
 	this.graph = this.driveRealtime.graph;
@@ -112,7 +112,7 @@ RealtimeMapping.prototype.init = function()
 					this.realtimeMathEnabledChanged(evt.newValue);
 				}
 			}
-			
+
 			// Marks the mapping dirty regardless of active state
 			if (evt.newValue != null && (evt.property == 'pageFormat' ||
 				evt.property == 'pageScale' || evt.property == 'shadowVisible' ||
@@ -133,10 +133,10 @@ RealtimeMapping.prototype.init = function()
 	{
 		this.initRealtime();
 	}
-	
+
 	this.page.root = this.graphModel.getRoot();
 	this.selectionMap = this.diagramMap.get('select');
-	
+
 	if (this.selectionMap == null)
 	{
 		this.initializeSelection();
@@ -147,17 +147,17 @@ RealtimeMapping.prototype.init = function()
 	{
 		this.selectionMap.set(this.driveRealtime.userId, '');
 	}
-	
+
 	this.installRemoteSelectionListener();
 };
 
 /**
- * 
+ *
  */
-RealtimeMapping.prototype.initializeSelection = function() 
+RealtimeMapping.prototype.initializeSelection = function()
 {
 	this.selectionMap = this.rtModel.createMap();
-	
+
 	if (this.driveRealtime.file.isEditable())
 	{
 		this.diagramMap.set('select', this.selectionMap);
@@ -177,7 +177,7 @@ RealtimeMapping.prototype.installRemoteSelectionListener = function()
 			this.ui.currentPage == this.page))
 		{
 			var cellIds = evt.newValue.split(',');
-			
+
 			for (var i = 0; i < cellIds.length; i++)
 			{
 				this.driveRealtime.highlight(this.driveRealtime.model.getCell(cellIds[i]), evt.sessionId);
@@ -217,9 +217,9 @@ RealtimeMapping.prototype.initGraph = function()
 		// TODO: Fixes math offset - why?
 		this.ui.editor.graph.sizeDidChange();
 	}
-	
+
 	var rtRoot = this.diagramMap.get(this.driveRealtime.rootKey);
-	
+
 	if (rtRoot.cell == null)
 	{
 		this.createCell(rtRoot);
@@ -227,13 +227,13 @@ RealtimeMapping.prototype.initGraph = function()
 	}
 	else
 	{
-		this.installAllRealtimeCellListeners(rtRoot);	
+		this.installAllRealtimeCellListeners(rtRoot);
 	}
-	
+
 	// Stores root in current model and local model
 	var gm = this.getGraphModel();
 	gm.setRoot(rtRoot.cell);
-	
+
 	if (gm != this.graphModel)
 	{
 		this.graphModel.setRoot(gm.getRoot());
@@ -249,27 +249,27 @@ RealtimeMapping.prototype.writeRealtimeToNode = function(node)
 	node.setAttribute('fold', this.diagramMap.get('foldingEnabled'));
 	node.setAttribute('math', this.diagramMap.get('mathEnabled'));
 	node.setAttribute('pageScale', this.diagramMap.get('pageScale'));
-	
+
 	var img = this.diagramMap.get('backgroundImage');
-	
+
 	if (img != null && img.length > 0)
 	{
 		node.setAttribute('backgroundImage', img);
 	}
-	
+
 	var color = this.diagramMap.get('backgroundColor');
-	
+
 	if (color != null)
 	{
 		node.setAttribute('background', color);
 	}
-	
+
 	var pf = this.diagramMap.get('pageFormat');
-	
+
 	if (pf != null)
 	{
 		var values = pf.split(',');
-		
+
 		if (values.length > 1)
 		{
 			node.setAttribute('pageWidth', parseInt(values[0]));
@@ -288,16 +288,16 @@ RealtimeMapping.prototype.writeNodeToRealtime = function(node)
 	this.diagramMap.set('mathEnabled', node.getAttribute('math'));
 	this.diagramMap.set('pageScale', node.getAttribute('pageScale'));
 	this.diagramMap.set('pageVisible', node.getAttribute('pageVisible'));
-	
+
 	var img = node.getAttribute('backgroundImage');
-	
+
 	if (img != null && img.length > 0)
 	{
 		this.diagramMap.set('backgroundImage', img);
 	}
-	
+
 	var color = node.getAttribute('background');
-	
+
 	if (color != null)
 	{
 		this.diagramMap.set('backgroundColor', color);
@@ -328,13 +328,13 @@ RealtimeMapping.prototype.activate = function(quiet)
 RealtimeMapping.prototype.initRealtime = function()
 {
 	this.rtModel.beginCompoundOperation();
-	
+
 	try
 	{
 		var rtCell = this.createRealtimeCell(this.getGraphModel().getRoot());
 		this.saveRealtimeCell(rtCell.cell);
 		this.diagramMap.set(this.driveRealtime.rootKey, rtCell);
-		
+
 		if (this.page.graphModelNode != null)
 		{
 			this.writeNodeToRealtime(this.page.graphModelNode);
@@ -343,7 +343,7 @@ RealtimeMapping.prototype.initRealtime = function()
 		{
 			var vs = this.page.viewState;
 			var pf = (vs != null) ? vs.pageFormat : mxSettings.getPageFormat();
-			
+
 			this.diagramMap.set('shadowVisible', (vs != null && vs.shadowVisible) ? '1' : '0');
 			this.diagramMap.set('foldingEnabled', (vs != null && !vs.foldingEnabled) ? '0' : '1');
 			this.diagramMap.set('mathEnabled', (vs != null && vs.mathEnabled) ? '1' : '0');
@@ -355,7 +355,7 @@ RealtimeMapping.prototype.initRealtime = function()
 			this.diagramMap.set('backgroundColor', (vs != null &&
 				vs.background != null) ? vs.background : '');
 		}
-		
+
 		this.root.set('modifiedDate', new Date().getTime());
 		this.rtModel.endCompoundOperation();
 	}
@@ -372,7 +372,7 @@ RealtimeMapping.prototype.initRealtime = function()
 RealtimeMapping.prototype.createRealtimeCell = function(cell)
 {
 	var rtCell = cell.rtCell;
-	
+
 	if (rtCell == null)
 	{
 		rtCell = this.rtModel.create('Cell');
@@ -383,7 +383,7 @@ RealtimeMapping.prototype.createRealtimeCell = function(cell)
 		rtCell.cellId = cell.id;
 		rtCell.type = (cell.vertex) ? 'vertex' : ((cell.edge) ? 'edge' : '');
 		rtCell.connectable = (cell.connectable == null || cell.connectable) ? '1' : '0';
-		
+
 		if (mxUtils.isNode(cell.value))
 		{
 			rtCell.xmlValue = mxUtils.getXml(cell.value);
@@ -392,7 +392,7 @@ RealtimeMapping.prototype.createRealtimeCell = function(cell)
 		{
 			rtCell.value = cell.value;
 		}
-		
+
 		rtCell.style = (cell.style != null) ? cell.style : null;
 		rtCell.geometry = (cell.geometry != null) ? mxUtils.getXml(this.driveRealtime.codec.encode(cell.geometry)) : null;
 		rtCell.visible = (cell.visible == null || cell.visible) ? '1' : '0';
@@ -402,14 +402,14 @@ RealtimeMapping.prototype.createRealtimeCell = function(cell)
 		{
 			var child = this.graphModel.getChildAt(cell, i);
 			this.createRealtimeCell(child);
-			
+
 			if (child.rtCell.parent == null)
 			{
 				child.rtCell.parent = rtCell;
 				rtCell.children.push(child.rtCell);
 			}
 		}
-	
+
 		this.installRealtimeCellListeners(rtCell);
 	}
 
@@ -427,7 +427,7 @@ RealtimeMapping.prototype.saveRealtimeCell = function(cell)
 		{
 			this.createRealtimeCell(cell.source);
 		}
-		
+
 		cell.rtCell.source = cell.source.rtCell;
 	}
 	else
@@ -441,7 +441,7 @@ RealtimeMapping.prototype.saveRealtimeCell = function(cell)
 		{
 			this.createRealtimeCell(cell.target);
 		}
-		
+
 		cell.rtCell.target = cell.target.rtCell;
 	}
 	else
@@ -461,7 +461,7 @@ RealtimeMapping.prototype.saveRealtimeCell = function(cell)
 RealtimeMapping.prototype.createCell = function(rtCell)
 {
 	var cell = rtCell.cell;
-	
+
 	if (cell == null)
 	{
 		cell = new mxCell();
@@ -482,16 +482,16 @@ RealtimeMapping.prototype.createCell = function(rtCell)
 		{
 			var rtChild = rtCell.children.get(i);
 			this.createCell(rtChild);
-			
+
 			if (rtChild.cell.parent == null)
 			{
 				cell.insert(rtChild.cell);
 			}
 		}
-		
+
 		this.installRealtimeCellListeners(rtCell);
 	}
-	
+
 	return cell;
 };
 
@@ -505,7 +505,7 @@ RealtimeMapping.prototype.restoreCell = function(rtCell)
 	if (rtCell.cell != null)
 	{
 		//console.log('restoreCell', rtCell.cellId);
-		
+
 		if (rtCell.source != null)
 		{
 			// Removes edge if source is no longer in the model
@@ -521,11 +521,11 @@ RealtimeMapping.prototype.restoreCell = function(rtCell)
 				{
 					this.createCell(rtCell.source);
 				}
-				
+
 				rtCell.source.cell.insertEdge(rtCell.cell, true);
 			}
 		}
-		
+
 		if (valid && rtCell.target != null)
 		{
 			// Removes edge if source is no longer in the model
@@ -541,7 +541,7 @@ RealtimeMapping.prototype.restoreCell = function(rtCell)
 				{
 					this.createCell(rtCell.target);
 				}
-				
+
 				rtCell.target.cell.insertEdge(rtCell.cell, false);
 			}
 		}
@@ -556,7 +556,7 @@ RealtimeMapping.prototype.restoreCell = function(rtCell)
 			//console.log('geometry check', valid, rtCell.cellId);
 		}
 	}
-	
+
 	// Removes invalid cell
 	if (!valid)
 	{
@@ -565,7 +565,7 @@ RealtimeMapping.prototype.restoreCell = function(rtCell)
 			rtCell.parent.children.removeValue(rtCell);
 			rtCell.parent = null;
 		}
-		
+
 		if (rtCell.cell != null)
 		{
 			// TODO: Remove from source and target?
@@ -588,34 +588,34 @@ RealtimeMapping.prototype.restoreCell = function(rtCell)
 RealtimeMapping.prototype.containsRealtimeCell = function(rtCell)
 {
 	var tmp = rtCell;
-	
+
 	while (tmp.parent != null)
 	{
 		tmp = tmp.parent;
 	}
-	
+
 	return tmp == this.diagramMap.get(this.driveRealtime.rootKey);
 };
 
 /**
- * 
+ *
  */
 RealtimeMapping.prototype.beginUpdate = function()
 {
 	var graphModel = this.getGraphModel();
-	
+
 	if (!this.driveRealtime.ignoreChange)
 	{
 		this.driveRealtime.ignoreChange = true;
 		graphModel.beginUpdate();
-		
+
 		window.setTimeout(mxUtils.bind(this, function()
 		{
 			graphModel.endUpdate();
 			this.driveRealtime.ignoreChange = false;
 		}), 0);
 	}
-	
+
 	return graphModel;
 };
 
@@ -627,7 +627,7 @@ RealtimeMapping.prototype.installAllRealtimeCellListeners = function(rtCell)
 	if (rtCell != null)
 	{
 		this.installRealtimeCellListeners(rtCell);
-		
+
 		for (var i = 0; i < rtCell.children.length; i++)
 		{
 			this.installAllRealtimeCellListeners(rtCell.children.get(i));
@@ -646,13 +646,13 @@ RealtimeMapping.prototype.installRealtimeCellListeners = function(rtCell)
 		this.handleValueChanged(rtCell, evt);
 		this.needsUpdate = true;
 	}));
-	
+
 	rtCell.children.addEventListener(gapi.drive.realtime.EventType.VALUES_ADDED, mxUtils.bind(this, function(evt)
 	{
 		this.handleValuesAdded(rtCell, evt);
 		this.needsUpdate = true;
 	}));
-	
+
 	rtCell.children.addEventListener(gapi.drive.realtime.EventType.VALUES_REMOVED, mxUtils.bind(this, function(evt)
 	{
 		this.handleValuesRemoved(rtCell, evt);
@@ -674,7 +674,7 @@ RealtimeMapping.prototype.handleValueChanged = function(rtCell, evt)
 		var key = evt.property;
 		var graphModel = this.beginUpdate();
 		//console.log('valueChanged: cell=' + rtCell.cellId + ' key=' + key + ' value=' + ((value != null) ? (value.cellId || value) : '[null]'));
-		
+
 		if (key == 'type')
 		{
 			cell.vertex = value == 'vertex';
@@ -703,7 +703,7 @@ RealtimeMapping.prototype.handleValueChanged = function(rtCell, evt)
 						rtCell.parent.children.removeValue(rtCell);
 						rtCell.parent = null;
 					}
-					
+
 					graphModel.setTerminal(cell, null, key == 'source');
 					graphModel.remove(rtCell.cell);
 					rtCell[key] = null;
@@ -750,9 +750,9 @@ RealtimeMapping.prototype.handleValueChanged = function(rtCell, evt)
 			else
 			{
 				this.createCell(rtCell);
-				this.restoreCell(rtCell);	
+				this.restoreCell(rtCell);
 			}
-			
+
 			if (value == null)
 			{
 				graphModel.remove(cell);
@@ -760,7 +760,7 @@ RealtimeMapping.prototype.handleValueChanged = function(rtCell, evt)
 			else
 			{
 				var index = value.children.indexOf(rtCell);
-				
+
 				if (index >= 0)
 				{
 					//console.log('move child', 'parent', value.cellId, 'child', rtCell.cellId, index);
@@ -780,12 +780,12 @@ RealtimeMapping.prototype.handleValuesAdded = function(rtCell, evt)
 	if (!this.driveRealtime.isLocalEvent(evt))
 	{
 		var graphModel = this.beginUpdate();
-		
+
 		for (var i = 0; i < evt.values.length; i++)
 		{
 			var rtChild = evt.values[i];
 			//console.log('valueAdded', 'parent', rtCell.cellId, 'child', rtChild.cellId, 'index', evt.index + i, rtChild);
-			
+
 			// Removes child if the parent of the child and the parent of the children array are not
 			// the same. This happens if clients move a cell into different parents concurrently.
 			if (rtChild.parent != null)
@@ -802,7 +802,7 @@ RealtimeMapping.prototype.handleValuesAdded = function(rtCell, evt)
 						this.createCell(rtChild);
 						this.restoreCell(rtChild);
 					}
-					
+
 					// Resolves conflict when two clients change the order of a child at the same
 					// time which results in the same child appearing multiple times in the list.
 					// Note that the actual child index may be different from the event information
@@ -810,14 +810,14 @@ RealtimeMapping.prototype.handleValuesAdded = function(rtCell, evt)
 					// first appearance of the cell in the list.
 					var first = rtCell.children.indexOf(rtChild);
 					var last = rtCell.children.lastIndexOf(rtChild);
-					
+
 					while (first != last)
 					{
 						//console.log('remove duplicate', rtChild.cellId, last);
 						rtCell.children.remove(last);
 						last = rtCell.children.lastIndexOf(rtChild);
 					}
-	
+
 					// Inserts the child at the smallest index to maintain consistency with RT
 					if (rtChild.parent == rtCell)
 					{
@@ -839,16 +839,16 @@ RealtimeMapping.prototype.handleValuesRemoved = function(rtCell, evt)
 	if (!this.driveRealtime.isLocalEvent(evt))
 	{
 		var graphModel = this.beginUpdate();
-		
+
 		for (var i = 0; i < evt.values.length; i++)
 		{
 			var rtChild = evt.values[i];
-			
+
 			if (rtChild.cell != null)
 			{
 				//console.log('valueRemoved', 'parent', rtCell.cellId, 'child', rtChild.cellId,
 				//	'index', evt.index + i, rtChild, rtChild.cell);
-				
+
 				// Checks if the realtime parent and the graph parent are different and updates the parent
 				// in the graph to match the realtime parent. This happens if the child was removed as a
 				// clone in another client.
@@ -864,7 +864,7 @@ RealtimeMapping.prototype.handleValuesRemoved = function(rtCell, evt)
 					// and updates the index of the child in the graph. This happens if the
 					// child was removed as a duplicate entry in another client.
 					var index = rtCell.children.indexOf(rtChild);
-					
+
 					if (index >= 0)
 					{
 						//console.log('adjust duplicate', rtCell.cellId, evt.index + i, rtChild.cellId, 'index', index);
@@ -884,7 +884,7 @@ RealtimeMapping.prototype.realtimePageFormatChanged = function(value, quiet)
 	if (value != null)
 	{
 		var values = value.split(',');
-		
+
 		if (values.length > 1)
 		{
 			if (!this.isActive())
@@ -998,7 +998,7 @@ RealtimeMapping.prototype.realtimePageVisibleChanged = function(value, quiet)
 	else if (quiet)
 	{
 		this.graph.pageVisible = value != '0';
-		this.graph.pageBreaksVisible = this.graph.pageVisible; 
+		this.graph.pageBreaksVisible = this.graph.pageVisible;
 		this.graph.preferPageSize = this.graph.pageVisible;
 	}
 	else
@@ -1036,7 +1036,7 @@ RealtimeMapping.prototype.realtimeShadowVisibleChanged = function(value, quiet)
 RealtimeMapping.prototype.realtimeBackgroundImageChanged = function(value, quiet)
 {
 	var data = (value != null && value.length > 0) ? JSON.parse(value) : null;
-	
+
 	if (!this.isActive())
 	{
 		if (this.page.viewState != null)
@@ -1089,7 +1089,7 @@ RealtimeMapping.prototype.removeAllRealtimeCellListeners = function(rtCell)
 	{
 		rtCell.removeAllEventListeners();
 		rtCell.children.removeAllEventListeners();
-		
+
 		for (var i = 0; i < rtCell.children.length; i++)
 		{
 			this.removeAllRealtimeCellListeners(rtCell.children.get(i));

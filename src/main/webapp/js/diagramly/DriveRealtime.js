@@ -11,12 +11,12 @@ function DriveRealtime(file, doc)
 {
 	this.realtimeAutosaveDelay = this.defaultRealtimeAutosaveDelay;
 	this.realtimeMaxAutosaveDelay = this.defaultRealtimeMaxAutosaveDelay;
-	
+
 	this.file = file;
 	this.doc = doc;
 	this.rtModel = this.doc.getModel();
 	this.root = this.rtModel.getRoot();
-	
+
 	this.ui = file.getUi()
 	this.graph = this.ui.editor.graph;
 	this.model = this.graph.model;
@@ -31,9 +31,9 @@ function DriveRealtime(file, doc)
 		// LATER: How to reload realtime document without refreshing the page
 		this.sessionExpiredError();
 	});
-	
+
 	this.ui.drive.addListener('disconnected', this.disconnectListener);
-	
+
 	// Change of autosave triggers an immediate save to update thumbnail
 	this.autosaveChangeListener = mxUtils.bind(this, function()
 	{
@@ -44,7 +44,7 @@ function DriveRealtime(file, doc)
 		{
 			this.ui.editor.setStatus(mxUtils.htmlEntities(mxResources.get('saving')) + '...');
 		}
-		
+
 		this.file.save(true, mxUtils.bind(this, function()
 		{
 			if (this.connected && this.ui.editor.autosave)
@@ -56,10 +56,10 @@ function DriveRealtime(file, doc)
 				this.file.setModified(true);
 			}
 		}));
-		
+
 		this.ui.drive.enableThumbnails = prevValue;
 	});
-	
+
 	this.ui.editor.addListener('autosaveChanged', this.autosaveChangeListener);
 };
 
@@ -189,7 +189,7 @@ DriveRealtime.prototype.start = function()
 			this.ui.showRefreshDialog();
 		}
 	}));
-	
+
 	if (this.root.has('realtimeConverted'))
 	{
 		this.ui.showRefreshDialog();
@@ -198,11 +198,11 @@ DriveRealtime.prototype.start = function()
 	var prefix = this.createPrefix();
 	this.model.prefix = prefix + '-';
 	this.ui.editor.resetGraph();
-		
+
 	// Creates diagrams list and default entry
 	this.diagrams = this.root.get(this.diagramsKey);
 	var diagramsCreated = false;
-	
+
 	if (this.diagrams == null)
 	{
 		this.diagrams = this.rtModel.createList();
@@ -210,26 +210,26 @@ DriveRealtime.prototype.start = function()
 		diagramsCreated = true;
 		this.log('realtime model initialized');
 	}
-	
+
 	// Specifies if the file should be saved immediately after setup
 	var forceSave = false;
-	
+
 	if (this.file.getData() != '')
 	{
 		this.ui.fileNode = null;
 		this.ui.pages = null;
-		
+
 		// Converts from XML to realtime
     	this.ui.setFileData(this.file.getData());
     	this.log('xml converted');
-    	
+
     	// Logs conversion of old RT models (converted from XML backup)
     	if (this.root.has('cells') && diagramsCreated)
     	{
 	    	try
 	    	{
 				var img = new Image();
-				
+
 				// Timestamp is added to bypass client-side cache
 				img.src = 'https://log.draw.io/log?severity=CONFIG&msg=converted-oldrt&v=' +
 					encodeURIComponent(EditorUi.VERSION) + '&ts=' + new Date().getTime();
@@ -239,23 +239,23 @@ DriveRealtime.prototype.start = function()
 	    		// ignore
 	    	}
     	}
-    	
+
 		if (this.ui.pages != null)
 		{
 			for (var i = 0; i < this.ui.pages.length; i++)
 			{
 				var page = this.ui.pages[i];
-				
+
 				var diagramMap = this.rtModel.createMap();
 				this.diagrams.push(diagramMap);
-				
+
 				this.ui.updatePageRoot(page);
 				page.mapping = new RealtimeMapping(this, diagramMap, page);
-				
+
 				if (this.file.isEditable())
 				{
 					diagramMap.set('id', page.getId());
-					
+
 					// Read or create name for page
 					if (page.getName() != '')
 					{
@@ -279,13 +279,13 @@ DriveRealtime.prototype.start = function()
 			// Dummy node, should be XML node if used
 			this.page = new DiagramPage(document.createElement('diagram'));
 			this.page.mapping = new RealtimeMapping(this, this.diagramMap, this.page);
-			
+
 			if (this.file.isEditable())
 			{
 				this.diagramMap.set('name', mxResources.get('pageWithNumber', [1]));
 				this.diagramMap.set('id', this.page.getId());
 			}
-			
+
 			this.page.setName(this.diagramMap.get('name') || mxResources.get('pageWithNumber', [1]));
 			this.page.mapping.init();
 		}
@@ -293,10 +293,10 @@ DriveRealtime.prototype.start = function()
 		{
 			this.ui.fileNode = mxUtils.createXmlDocument().createElement('mxfile');
 			this.ui.pages = [];
-			
+
 			var diagramMap = this.rtModel.createMap();
 			this.diagrams.push(diagramMap);
-			
+
 			var page = new DiagramPage(this.ui.fileNode.ownerDocument.createElement('diagram'));
 			page.mapping = new RealtimeMapping(this, diagramMap, page);
 			this.ui.currentPage = page;
@@ -307,25 +307,25 @@ DriveRealtime.prototype.start = function()
 				{
 					page.mapping.diagramMap.set('name', mxResources.get('pageWithNumber', [1]));
 				}
-				
+
 				if (!page.mapping.diagramMap.has('id'))
 				{
 					page.mapping.diagramMap.set('id', page.getId());
 				}
 			}
-			
+
 			page.setName(page.mapping.diagramMap.get('name') || mxResources.get('pageWithNumber', [1]));
 			this.ui.pages.push(page);
 			page.mapping.init();
 		}
-		
+
 		forceSave = true;
 	}
 	else if (this.diagrams.length < 2 && urlParams['pages'] == '0')
 	{
 		this.ui.fileNode = null;
 		this.ui.pages = null;
-		
+
 		if (this.diagrams.length == 0)
 		{
 			this.diagramMap = this.rtModel.createMap();
@@ -335,25 +335,25 @@ DriveRealtime.prototype.start = function()
 		{
 			this.diagramMap = this.diagrams.get(0);
 		}
-		
+
 		var node = document.createElement('diagram');
-		
+
 		if (this.diagramMap.has('id'))
 		{
 			node.setAttribute('id', this.diagramMap.get('id'));
 		}
-		
+
 		this.page = new DiagramPage(node);
 		this.page.mapping = new RealtimeMapping(this, this.diagramMap, this.page);
-		
+
 		if (!this.diagramMap.has('name'))
 		{
 			this.diagramMap.set('name', mxResources.get('pageWithNumber', [1]));
 		}
-		
+
 		this.page.setName(this.page.mapping.diagramMap.get('name'));
 		this.diagramMap.set('id', this.page.getId());
-		
+
 		// Avoids scroll offset when switching page
 		this.page.mapping.init();
 		this.ui.editor.fireEvent(new mxEventObject('resetGraphView'));
@@ -362,45 +362,45 @@ DriveRealtime.prototype.start = function()
 	{
 		this.ui.fileNode = mxUtils.createXmlDocument().createElement('mxfile');
 		this.ui.pages = [];
-		
+
 		if (this.diagrams.length == 0)
 		{
 			this.diagrams.push(this.rtModel.createMap());
 		}
-		
+
 		var pageIndex = Math.max(0, Math.min(this.diagrams.length - 1, urlParams['page'] || 0));
-		
+
 		for (var i = 0; i < this.diagrams.length; i++)
 		{
 			var node = this.ui.fileNode.ownerDocument.createElement('diagram');
 			var diagramMap = this.diagrams.get(i);
-			
+
 			if (diagramMap.has('id'))
 			{
 				node.setAttribute('id', diagramMap.get('id'));
 			}
-			
+
 			var page = new DiagramPage(node);
 			page.mapping = new RealtimeMapping(this, diagramMap, page);
-			
+
 			if (this.file.isEditable() && !diagramMap.has('name'))
 			{
 				diagramMap.set('name', mxResources.get('pageWithNumber', [i + 1]));
 			}
-			
+
 			page.setName(diagramMap.get('name') || mxResources.get('pageWithNumber', [i + 1]));
-			
+
 			if (this.file.isEditable() && !diagramMap.has('id'))
 			{
 				diagramMap.set('id', page.getId());
 			}
-			
+
 			this.ui.pages.push(page);
 		}
 
 		// Sets the current page
 		this.ui.currentPage = this.ui.pages[Math.max(0, Math.min(this.ui.pages.length - 1, urlParams['page'] || 0))];;
-		
+
 		// Initializes graphs and mappings
 		for (var i = 0; i < this.ui.pages.length; i++)
 		{
@@ -414,21 +414,21 @@ DriveRealtime.prototype.start = function()
 	this.installPageSelectListener();
 
 	this.chatHistory = this.root.get('chatHistory');
-	
+
 	if (this.chatHistory == null)
 	{
 		this.initializeChat();
 	}
-	
+
 	this.installSelectionModelListener();
 	this.installCollaboratorListener();
 	this.updateCollaborators();
-	
+
 	this.doc.addEventListener(gapi.drive.realtime.EventType.DOCUMENT_SAVE_STATE_CHANGED, mxUtils.bind(this, function(evt)
 	{
 		this.documentSaveStateChanged(evt, forceSave);
 	}));
-	
+
 	var initialized = mxUtils.bind(this, function()
 	{
 		this.resetUpdateStatusThread();
@@ -487,28 +487,28 @@ DriveRealtime.prototype.documentSaveStateChanged = function(evt, forceSave)
 		{
 			this.file.addAllSavedStatus();
 		}
-		
+
 		this.saving = false;
 		this.connected = true;
 		this.resetUpdateStatusThread();
 		this.realtimeHeartbeat = DriveRealtime.prototype.realtimeHeartbeat;
-		
+
 		if (this.isAliveThread != null)
 		{
 			window.clearTimeout(this.isAliveThread);
 			this.isAliveThread = null;
 		}
 	}
-	
+
 	if (this.file.isEditable())
 	{
 		var avail = 10485760 - this.rtModel.bytesUsed;
-		
+
 		if (avail > 0 && avail < 500000 && !this.sizeLimitWarningShown)
 		{
 			// Shows warning just once
 			this.sizeLimitWarningShown = true;
-			
+
 			this.ui.showError(mxResources.get('warning'), mxResources.get('fileNearlyFullSeeFaq'),
 				mxResources.get('close'), mxUtils.bind(this, function()
 				{
@@ -529,12 +529,12 @@ DriveRealtime.prototype.documentSaveStateChanged = function(evt, forceSave)
 DriveRealtime.prototype.triggerAutosave = function()
 {
 	this.ui.editor.setStatus(mxUtils.htmlEntities(mxResources.get('updatingPreview')));
-	
+
 	this.file.autosave(this.realtimeAutosaveDelay, this.realtimeMaxAutosaveDelay, mxUtils.bind(this, function(resp)
-	{					
+	{
 		// Updates autosave delay to take into account actual delay
 		this.realtimeAutosaveDelay = this.defaultRealtimeAutosaveDelay + Math.min(10000, this.file.saveDelay);
-		
+
 		// Does not update status if another autosave was scheduled
 		if (this.ui.getCurrentFile() == this.file && !this.saving)
 		{
@@ -544,7 +544,7 @@ DriveRealtime.prototype.triggerAutosave = function()
 	mxUtils.bind(this, function(resp)
 	{
 		this.ui.editor.setStatus(mxUtils.htmlEntities(mxResources.get('errorUpdatingPreview')));
-		
+
 		// Handles error where mime type cannot be overridden because it has been changed by another app and no
 		// new revision was created. This happens eg. if draw.io pro overwrites the mime type and adds a new realtime
 		// model to the file which is not visible for this app so we need to switch app to stay connected to RT.
@@ -552,7 +552,7 @@ DriveRealtime.prototype.triggerAutosave = function()
 		// the focus is on not losing data, so only clients that write to the file are being notified with this.
 		if (this.ui.isLegacyDriveDomain() && urlParams['ignoremime'] != '1' && resp != null &&
 			resp.error != null && (resp.error.code == 400 || resp.error.code == 403))
-		{	
+		{
 			this.ui.drive.verifyMimeType(this.file.getId(), null, true);
 		}
 	}));
@@ -569,7 +569,7 @@ DriveRealtime.prototype.installReadOnlyListener = function()
 		if (evt.attribute == 'is_read_only')
 		{
 			this.file.descriptorChanged();
-			
+
 			if (!this.file.isEditable())
 			{
 				this.ui.editor.graph.reset();
@@ -603,9 +603,9 @@ DriveRealtime.prototype.installUiChangeListeners = function()
 			}
 		}
 	});
-	
+
 	this.ui.addListener('pageFormatChanged', this.pageFormatListener);
-	
+
 	this.pageScaleListener = mxUtils.bind(this, function(sender, evt)
 	{
 		if (!this.ignorePageScaleChanged)
@@ -621,9 +621,9 @@ DriveRealtime.prototype.installUiChangeListeners = function()
 			}
 		}
 	});
-	
+
 	this.ui.addListener('pageScaleChanged', this.pageScaleListener);
-	
+
 	this.backgroundColorListener = mxUtils.bind(this, function(sender, evt)
 	{
 		if (!this.ignoreBackgroundColorChanged)
@@ -639,9 +639,9 @@ DriveRealtime.prototype.installUiChangeListeners = function()
 			}
 		}
 	});
-	
+
 	this.ui.addListener('backgroundColorChanged', this.backgroundColorListener);
-	
+
 	this.shadowVisibleListener = mxUtils.bind(this, function(sender, evt)
 	{
 		if (!this.ignoreShadowVisibleChanged)
@@ -662,9 +662,9 @@ DriveRealtime.prototype.installUiChangeListeners = function()
 			}
 		}
 	});
-	
+
 	this.graph.addListener('shadowVisibleChanged', this.shadowVisibleListener);
-	
+
 	this.foldingEnabledListener = mxUtils.bind(this, function(sender, evt)
 	{
 		if (!this.ignoreFoldingEnabledChanged)
@@ -680,11 +680,11 @@ DriveRealtime.prototype.installUiChangeListeners = function()
 			}
 		}
 	});
-	
+
 	this.ui.addListener('foldingEnabledChanged', this.foldingEnabledListener);
-		
+
 	this.graph.addListener('shadowVisibleChanged', this.shadowVisibleListener);
-	
+
 	this.pageVisibleListener = mxUtils.bind(this, function(sender, evt)
 	{
 		if (!this.ignorePageVisibleChanged)
@@ -700,9 +700,9 @@ DriveRealtime.prototype.installUiChangeListeners = function()
 			}
 		}
 	});
-	
+
 	this.ui.addListener('pageViewChanged', this.pageVisibleListener);
-	
+
 	this.backgroundImageListener = mxUtils.bind(this, function(sender, evt)
 	{
 		if (!this.ignoreBackgroundImageChanged)
@@ -718,9 +718,9 @@ DriveRealtime.prototype.installUiChangeListeners = function()
 			}
 		}
 	});
-	
+
 	this.ui.addListener('backgroundImageChanged', this.backgroundImageListener);
-	
+
 	this.mathEnabledListener = mxUtils.bind(this, function(sender, evt)
 	{
 		if (!this.ignoreMathEnabledChanged)
@@ -736,7 +736,7 @@ DriveRealtime.prototype.installUiChangeListeners = function()
 			}
 		}
 	});
-	
+
 	this.ui.addListener('mathEnabledChanged', this.mathEnabledListener);
 };
 
@@ -757,7 +757,7 @@ DriveRealtime.prototype.resetUpdateStatusThread = function()
 	{
 		window.clearInterval(this.updateStatusThread);
 	}
-	
+
 	this.updateStatusThread = window.setInterval(mxUtils.bind(this, function()
 	{
 		this.ui.drive.checkToken(mxUtils.bind(this, function()
@@ -769,54 +769,54 @@ DriveRealtime.prototype.resetUpdateStatusThread = function()
 
 /**
  * Translates this point by the given vector.
- * 
+ *
  * @param {number} dx X-coordinate of the translation.
  * @param {number} dy Y-coordinate of the translation.
  */
 DriveRealtime.prototype.timeSince = function(date)
 {
     var seconds = Math.floor((new Date() - date) / 1000);
-	
+
     var interval = Math.floor(seconds / 31536000);
 
     if (interval > 1)
     {
         return interval + ' ' + mxResources.get('years');
     }
-    
+
     interval = Math.floor(seconds / 2592000);
-    
+
     if (interval > 1)
     {
         return interval + ' ' + mxResources.get('months');
     }
-    
+
     interval = Math.floor(seconds / 86400);
-    
+
     if (interval > 1)
     {
         return interval + ' ' + mxResources.get('days');
     }
-    
+
     interval = Math.floor(seconds / 3600);
-    
+
     if (interval > 1)
     {
         return interval + ' ' + mxResources.get('hours');
     }
-    
+
     interval = Math.floor(seconds / 60);
-    
+
     if (interval > 1)
     {
         return interval + ' ' + mxResources.get('minutes');
     }
-    
+
     if (interval == 1)
     {
         return interval + ' ' + mxResources.get('minute');
     }
-    
+
     return null;
 };
 
@@ -830,27 +830,27 @@ DriveRealtime.prototype.updateStatus = function()
 	{
 		// LATER: Check if realtime model contains last modified timestamp
 		var mod = this.root.get('modifiedDate');
-		
+
 		if (mod != '')
 		{
 			// LATER: Write out modified date for more than 2 weeks ago
 			var str = this.ui.timeSince(new Date(mod));
-			
+
 			if (str == null)
 			{
 				str = mxResources.get('lessThanAMinute');
 			}
-			
+
 			this.ui.editor.setStatus('<span title="'+ mxUtils.htmlEntities(
 				mxResources.get('revisionHistory')) + '" style="text-decoration:underline;cursor:pointer;">' +
 				mxUtils.htmlEntities(mxResources.get('lastChange', [str]))  + '</span>' +
 				(this.file.isEditable() ? '' : '<span class="geStatusAlert" style="margin-left:8px;">' +
 				mxUtils.htmlEntities(mxResources.get('readOnly')) + '</span>'));
-			
+
 			if (this.ui.statusContainer != null)
 			{
 				var links = this.ui.statusContainer.getElementsByTagName('span');
-				
+
 				if (links.length > 0)
 				{
 					mxEvent.addListener(links[0], 'click', mxUtils.bind(this, function()
@@ -875,7 +875,7 @@ DriveRealtime.prototype.getPageIndexForMap = function(map)
 			return i;
 		}
 	}
-	
+
 	return null;
 };
 
@@ -889,12 +889,12 @@ DriveRealtime.prototype.installPageSelectListener = function()
 	this.pageChangeListener = mxUtils.bind(this, function(sender, evt)
 	{
 		var page = evt.getProperty('change').relatedPage;
-		
+
 		if (page.mapping == null)
 		{
 			page.mapping = new RealtimeMapping(this, this.rtModel.createMap(), page);
 			page.mapping.init();
-			
+
 			if (this.file.isEditable())
 			{
 				page.mapping.diagramMap.set('name', page.getName());
@@ -902,7 +902,7 @@ DriveRealtime.prototype.installPageSelectListener = function()
 			}
 		}
 	});
-	
+
 	this.ui.editor.addListener('beforePageChange', this.pageChangeListener);
 
 	// Adds a graph model listener to update the view
@@ -917,7 +917,7 @@ DriveRealtime.prototype.installPageSelectListener = function()
 			page.mapping.activate(true);
 		}
 	});
-	
+
 	this.ui.editor.addListener('setViewState', this.viewStateListener);
 
 	this.diagrams.addEventListener(gapi.drive.realtime.EventType.VALUES_ADDED, mxUtils.bind(this, function(evt)
@@ -927,13 +927,13 @@ DriveRealtime.prototype.installPageSelectListener = function()
 			if (evt.movedFromList == null)
 			{
 				this.ignoreChange = true;
-				
+
 				// Switches to pages datastructure
 				if (this.ui.pages == null)
 				{
 					this.ui.fileNode = mxUtils.createXmlDocument().createElement('mxfile');
 					this.ui.pages = [];
-					
+
 					if (this.page != null)
 					{
 						this.ui.currentPage = this.page;
@@ -942,23 +942,23 @@ DriveRealtime.prototype.installPageSelectListener = function()
 						this.page = null;
 					}
 				}
-				
+
 				for (var i = 0; i < evt.values.length; i++)
 				{
 					var page = new DiagramPage(document.createElement('diagram'));
 					page.mapping = new RealtimeMapping(this, evt.values[i], page);
 					page.setName(page.mapping.diagramMap.get('name') || mxResources.get('pageWithNumber',
 						[this.ui.pages.length + 1]));
-					
+
 					if (page.mapping.diagramMap.has('id'))
 					{
 						page.node.setAttribute('id', page.mapping.diagramMap.get('id'));
 					}
-					
+
 					this.ui.pages.splice(evt.index + i, 0, page);
 					page.mapping.init();
 				}
-				
+
 				// Shows tab container if pages are added with pages disabled
 				if (this.ui.pages != null && this.ui.pages.length > 1 &&
 					this.ui.tabContainer != null &&
@@ -966,30 +966,30 @@ DriveRealtime.prototype.installPageSelectListener = function()
 				{
 					this.ui.editor.graph.view.validateBackground();
 				}
-					
+
 				this.ui.updateTabContainer();
 				this.ignoreChange = false;
 			}
 			else if (evt.movedFromList == this.diagrams && evt.movedFromIndex != null)
 			{
 				this.ignoreChange = true;
-			
+
 				for (var i = 0; i < evt.values.length; i++)
 				{
 					var index = this.getPageIndexForMap(evt.values[i]);
-					
+
 					if (index != null)
 					{
 						this.ui.movePage(index + i, evt.index + i);
 					}
 				}
-				
+
 				this.ignoreChange = false;
 				this.ui.updateTabContainer();
 			}
 		}
 	}));
-			
+
 	this.diagrams.addEventListener(gapi.drive.realtime.EventType.VALUES_REMOVED, mxUtils.bind(this, function(evt)
 	{
 		if (!this.isLocalEvent(evt))
@@ -997,15 +997,15 @@ DriveRealtime.prototype.installPageSelectListener = function()
 			if (evt.movedToList == null)
 			{
 				this.ignoreChange = true;
-				
+
 				for (var i = 0; i < evt.values.length; i++)
 				{
 					var index = this.getPageIndexForMap(evt.values[i]);
-					
+
 					if (index != null)
 					{
 						var page = this.ui.pages[index];
-						
+
 						if (page != null)
 						{
 							this.ui.removePage(page);
@@ -1013,7 +1013,7 @@ DriveRealtime.prototype.installPageSelectListener = function()
 						}
 					}
 				}
-				
+
 				this.ignoreChange = false;
 			}
 		}
@@ -1059,7 +1059,7 @@ DriveRealtime.prototype.processChange = function(change)
 		if (change.parent != change.previous || change.index != change.previousIndex)
 		{
 			var childRtCell = change.child.rtCell;
-			
+
 			if (childRtCell == null)
 			{
 				childRtCell = this.getCurrentPage().mapping.createRealtimeCell(change.child);
@@ -1067,11 +1067,11 @@ DriveRealtime.prototype.processChange = function(change)
 			}
 
 			var parentRtCell = (change.parent != null) ? change.parent.rtCell : null;
-			
+
 			if (change.previous != null)
 			{
 				var previousParentRtCell = change.previous.rtCell;
-				
+
 				if (previousParentRtCell != null)
 				{
 					previousParentRtCell.children.removeValue(childRtCell);
@@ -1082,14 +1082,14 @@ DriveRealtime.prototype.processChange = function(change)
 			{
 				parentRtCell.children.insert(Math.min(parentRtCell.children.length, change.index), childRtCell);
 			}
-			
+
 			childRtCell.parent = parentRtCell;
 		}
 	}
 	else if (change.cell != null && change.cell.id != null)
 	{
 		var rtCell = change.cell.rtCell;
-		
+
 		if (rtCell != null)
 		{
 			if (change instanceof mxTerminalChange)
@@ -1138,14 +1138,14 @@ DriveRealtime.prototype.setFileModified = function()
 {
 	this.root.set('modifiedDate', new Date().getTime());
 	this.file.setModified(true);
-	
+
 	if (!this.saving)
 	{
 		if (this.connected)
 		{
 			this.ui.editor.setStatus(mxUtils.htmlEntities(mxResources.get('saving')) + '...');
 		}
-		
+
 		this.saving = true;
 	}
 };
@@ -1160,7 +1160,7 @@ DriveRealtime.prototype.installGraphModelListener = function()
 	this.graphModelChangeListener = mxUtils.bind(this, function(sender, evt)
 	{
 		var edit = evt.getProperty('edit');
-		
+
 		if (!this.ignoreChange && this.file.isEditable() && !edit.ignoreEdit)
 		{
 			//console.log('startEdit');
@@ -1170,11 +1170,11 @@ DriveRealtime.prototype.installGraphModelListener = function()
 			{
 				this.rtModel.beginCompoundOperation();
 				this.setFileModified();
-				
+
 				try
 				{
 					var changes = edit.changes;
-					
+
 					if (edit.undone)
 					{
 						for (var i = changes.length - 1; i >= 0; i--)
@@ -1189,7 +1189,7 @@ DriveRealtime.prototype.installGraphModelListener = function()
 							this.processChange(changes[i]);
 						}
 					}
-					
+
 					this.rtModel.endCompoundOperation();
 				}
 				catch (e)
@@ -1197,7 +1197,7 @@ DriveRealtime.prototype.installGraphModelListener = function()
 					this.rtModel.endCompoundOperation();
 					this.ui.handleError(e);
 				}
-				
+
 				if (this.isAliveThread == null)
 				{
 					this.isAliveThread = window.setTimeout(mxUtils.bind(this, function()
@@ -1209,8 +1209,8 @@ DriveRealtime.prototype.installGraphModelListener = function()
 								' <a href="https://desk.draw.io/support/solutions/articles/16000076743" target="_blank"><img border="0" ' +
 								'title="' + mxUtils.htmlEntities(mxResources.get('help')) + '" valign="bottom" src="' +
 								Editor.helpImage + '"/></a></div>');
-						}	
-						
+						}
+
 						this.isAliveThread = window.setTimeout(mxUtils.bind(this, function()
 						{
 							this.isAliveThread = null;
@@ -1219,18 +1219,18 @@ DriveRealtime.prototype.installGraphModelListener = function()
 					}), this.realtimeHeartbeat);
 				}
 			}));
-			
+
 			//console.log('endEdit');
 		}
 	});
-	
+
 	this.model.addListener(mxEvent.CHANGE, this.graphModelChangeListener);
 };
 
 /**
- * 
+ *
  */
-DriveRealtime.prototype.sessionExpiredError = function() 
+DriveRealtime.prototype.sessionExpiredError = function()
 {
 	// LATER: How to reload realtime document without refreshing the page
 	this.ui.showError(mxResources.get('error'), mxResources.get('sessionExpired'), mxResources.get('refresh'), mxUtils.bind(this, function()
@@ -1242,9 +1242,9 @@ DriveRealtime.prototype.sessionExpiredError = function()
 };
 
 /**
- * 
+ *
  */
-DriveRealtime.prototype.timeoutError = function() 
+DriveRealtime.prototype.timeoutError = function()
 {
 	// LATER: How to reload realtime document without refreshing the page
 	if (this.ui.editor.autosave)
@@ -1255,14 +1255,14 @@ DriveRealtime.prototype.timeoutError = function()
 	{
 		// Checks if we're actually online by retrieving an image
 		var img = new Image();
-		
+
 		img.onload = mxUtils.bind(this, function()
 		{
 			try
 			{
 				var email = this.ui.drive.getUser().email || 'Unknown email';
 				var desc = this.file.desc;
-	
+
 				this.ui.logEvent({category: 'Disconnected', action: email, label: {id: desc.id, editable: desc.editable,
 					copyable: desc.copyable, labels: desc.labels, capabilities: desc.capabilities, fileSize: desc.fileSize,
 					teamDriveId: desc.teamDriveId, fileExtension: desc.fileExtension, mimeType: desc.mimeType,
@@ -1275,7 +1275,7 @@ DriveRealtime.prototype.timeoutError = function()
 
 			// LATER: How to reload realtime document without refreshing the page
 			this.timeoutErrorShowing = true;
-			
+
 			this.ui.showError(mxResources.get('timeout'), mxResources.get('realtimeTimeout'), mxResources.get('discardChangesAndReconnect'), mxUtils.bind(this, function()
 			{
 				this.ui.spinner.spin(document.body, mxResources.get('connecting'));
@@ -1293,15 +1293,15 @@ DriveRealtime.prototype.timeoutError = function()
 				this.ui.openLink('https://desk.draw.io/support/solutions/articles/16000076743');
 			}), 480, 150);
 		});
-		
+
 		img.src = IMAGE_PATH + '/1x1.png?t=' + new Date().getTime();
-	}	
+	}
 };
 
 /**
- * 
+ *
  */
-DriveRealtime.prototype.showDisconnectedStatus = function() 
+DriveRealtime.prototype.showDisconnectedStatus = function()
 {
 	this.ui.editor.setStatus('<div class="geStatusAlert geBlink">' + mxUtils.htmlEntities(mxResources.get('disconnected')) +
 			' <a href="https://desk.draw.io/support/solutions/articles/16000076743" target="_blank">' +
@@ -1310,9 +1310,9 @@ DriveRealtime.prototype.showDisconnectedStatus = function()
 };
 
 /**
- * 
+ *
  */
-DriveRealtime.prototype.initializeChat = function() 
+DriveRealtime.prototype.initializeChat = function()
 {
 	this.chatHistory = this.rtModel.createList();
 	this.root.set('chatHistory', this.chatHistory);
@@ -1338,12 +1338,12 @@ DriveRealtime.prototype.installSelectionModelListener = function()
 					// better solution is to mark this "transient" (ie no history).
 					var cells = this.graph.getSelectionCells();
 					var selectedCellIds = '';
-					
+
 			    	for (var i = 0; i < cells.length; i++)
 			    	{
 			    		selectedCellIds += cells[i].id + ',';
 			    	}
-			    	
+
 			    	this.getCurrentPage().mapping.selectionMap.set(this.userId, selectedCellIds);
 				}
 				catch (e)
@@ -1353,7 +1353,7 @@ DriveRealtime.prototype.installSelectionModelListener = function()
 			}
 		}));
 	});
-	
+
 	this.graph.getSelectionModel().addListener(mxEvent.CHANGE, this.graphSelectionModelChangeListener);
 };
 
@@ -1372,7 +1372,7 @@ DriveRealtime.prototype.installCollaboratorListener = function()
 DriveRealtime.prototype.updateCollaborators = function()
 {
 	var n = this.doc.getCollaborators().length - 1;
-	
+
 	if (this.collaboratorsElement == null)
 	{
 		this.collaboratorsElement = document.createElement('a');
@@ -1389,15 +1389,15 @@ DriveRealtime.prototype.updateCollaborators = function()
 		this.collaboratorsElement.style.verticalAlign = 'middle';
 		this.collaboratorsElement.style.backgroundPosition = '100% 60%';
 		this.collaboratorsElement.style.backgroundRepeat = 'no-repeat';
-		
+
 		if (screen.width <= 540)
 		{
 			this.collaboratorsElement.style.maxWidth = Math.max(10, screen.width - 500) + 'px';
 			this.collaboratorsElement.style.overflow = 'hidden';
 		}
-		
+
 		this.ui.toolbarContainer.appendChild(this.collaboratorsElement);
-		
+
 		mxEvent.addListener(this.collaboratorsElement, 'click', mxUtils.bind(this, function(evt)
 		{
 			if (this.collabPanel == null)
@@ -1413,13 +1413,13 @@ DriveRealtime.prototype.updateCollaborators = function()
 
 				this.collabPanel = div;
 			}
-			
+
 			if (this.collabPanel.parentNode == null)
 			{
 				this.collabPanel.style.top = (this.collaboratorsElement.clientTop + this.collaboratorsElement.clientHeight + this.ui.menubarHeight + 8) + 'px';
 				document.body.appendChild(this.collabPanel);
 				this.collabPanel.innerHTML = '';
-				
+
 				var img = document.createElement('img');
 
 				img.setAttribute('src', Dialog.prototype.closeImage);
@@ -1427,7 +1427,7 @@ DriveRealtime.prototype.updateCollaborators = function()
 				img.className = 'geDialogClose';
 				img.style.top = '8px';
 				img.style.right = '8px';
-				
+
 				mxEvent.addListener(img, 'click', mxUtils.bind(this, function()
 				{
 					if (this.collabPanel.parentNode != null)
@@ -1435,21 +1435,21 @@ DriveRealtime.prototype.updateCollaborators = function()
 						this.collabPanel.parentNode.removeChild(this.collabPanel);
 					}
 				}));
-				
+
 				this.collabPanel.appendChild(img);
-								
+
 				if (this.doc.getCollaborators().length > 1)
 				{
 					for (var i = 0; i < this.doc.getCollaborators().length; i = i + 1)
 					{
 						var collaborator = this.doc.getCollaborators()[i];
-						
+
 						if (!collaborator.isMe)
 						{
 							var elt = document.createElement('div');
 							elt.style.cursor = 'pointer';
 							elt.style.whiteSpace = 'nowrap';
-							
+
 							var img = document.createElement('img');
 							img.src = collaborator.photoUrl;
 							img.style.backgroundColor = collaborator.color;
@@ -1460,26 +1460,26 @@ DriveRealtime.prototype.updateCollaborators = function()
 							img.style.height = '25px';
 							img.style.width = '25px';
 							img.setAttribute('align', 'absmiddle');
-							
+
 							elt.appendChild(img);
 							mxUtils.write(elt, collaborator.displayName);
-							
+
 							this.collabPanel.appendChild(elt);
-							
+
 							// Click on collaborator shows selection cells, scrolls to first cell
 							mxEvent.addListener(elt, 'click', mxUtils.bind(this, function()
 							{
 								var value = this.getCurrentPage().mapping.selectionMap.get(collaborator.userId);
-								
+
 								if (value != null)
 								{
 									var cellIds = value.split(',');
-									
+
 									for (var i = 0; i < cellIds.length; i++)
 									{
 										var cell = this.model.getCell(cellIds[i]);
 										this.highlight(cell, collaborator.sessionId);
-										
+
 										if (cell != null && i == 0)
 										{
 											this.graph.scrollCellToVisible(cell);
@@ -1499,10 +1499,10 @@ DriveRealtime.prototype.updateCollaborators = function()
 			{
 				this.collabPanel.parentNode.removeChild(this.collabPanel);
 			}
-			
+
 			mxEvent.consume(evt);
 		}));
-		
+
 		mxEvent.addListener(document.body, 'click', mxUtils.bind(this, function(evt)
 		{
 			if (!mxEvent.isConsumed(evt) && this.collabPanel != null && this.collabPanel.parentNode != null)
@@ -1511,9 +1511,9 @@ DriveRealtime.prototype.updateCollaborators = function()
 			}
 		}));
 	}
-	
+
 	var viewers = mxResources.get((n == 0) ? 'noOtherViewers' : ((n == 1) ? 'otherViewer' : 'otherViewers'));
-	
+
 	if (n > 0)
 	{
 		viewers = n + ' ' + viewers;
@@ -1527,28 +1527,28 @@ DriveRealtime.prototype.updateCollaborators = function()
 		this.collaboratorsElement.style.backgroundImage =  '';
 		this.collaboratorsElement.style.cursor = 'default';
 	}
-	
+
 	var html = '<div title="' + viewers + '" style="display:inline-block;white-space:nowrap;max-width:110px;overflow:hidden;text-overflow:ellipsis;">' + viewers + '</div>';
-	
+
 	var names = new Object();
 	var count = 0;
-	
+
 	for (var i = 0; i < this.doc.getCollaborators().length && count < 6; i = i + 1)
 	{
 		var c = this.doc.getCollaborators()[i];
-		
+
 		if (!c.isMe && names[c.color] == null)
 		{
 			names[c.color] = c.displayName;
 			count++;
 		}
 	}
-	
+
 	for (var color in names)
 	{
 		html += '<div title="' + mxUtils.htmlEntities(names[color]) + '" style="display:inline-block;background-color:' + color + ';width:13px;height:13px;margin-left:4px;margin-top:-1px;"></div>';
 	}
-	
+
 	this.collaboratorsElement.innerHTML = html;
 };
 
@@ -1558,7 +1558,7 @@ DriveRealtime.prototype.updateCollaborators = function()
 DriveRealtime.prototype.createPrefix = function()
 {
 	var collabs = this.doc.getCollaborators();
-	
+
 	for (var i = 0; i < collabs.length; i++)
 	{
 		if (collabs[i]['isMe'])
@@ -1566,14 +1566,14 @@ DriveRealtime.prototype.createPrefix = function()
 			return collabs[i]['sessionId'];
 		}
 	}
-	
+
 	return '';
 };
 
 DriveRealtime.prototype.highlight = function(cell, sessionId)
 {
 	var color = 'red'; // session not found
-	
+
 	for (var i = 0; i < this.doc.getCollaborators().length; i = i + 1)
 	{
 		var collaborator = this.doc.getCollaborators()[i];
@@ -1581,11 +1581,11 @@ DriveRealtime.prototype.highlight = function(cell, sessionId)
 		if (collaborator.sessionId == sessionId)
 		{
 			color = collaborator.color;
-			
+
 			break;
-		}      
+		}
 	}
-	
+
 	this.graph.highlightCell(cell, color);
 };
 
@@ -1603,7 +1603,7 @@ DriveRealtime.prototype.dumpRoot = function()
 DriveRealtime.prototype.dump = function(obj)
 {
 	var result = '';
-	
+
 	if (obj != null)
 	{
 		if (obj.constructor == mxCell)
@@ -1650,44 +1650,44 @@ DriveRealtime.prototype.dump = function(obj)
 		else if (obj.constructor == mxRtCell)
 		{
 			result += '[id=' + obj.cellId + ',parent=' + ((obj.parent != null) ? obj.parent.cellId : '[null]');
-			
+
 			if (obj.children.length > 0)
 			{
 				result += ',\n' + obj.children.length + ' children=[' +
 					this.dump(obj.children.get(0));
-				
+
 				for (var i = 1; i < obj.children.length; i++)
 				{
 					result += ',' + this.dump(obj.children.get(i));
 				}
-				
+
 				result += ']';
 			}
-			
+
 			result += ']\n';
 		}
 		else if (obj.keys != null)
 		{
 			var keys = obj.keys();
 			result += '{\n';
-			
+
 			for (var i = 0; i < keys.length; i++)
 			{
 				result += keys[i] + '=' + this.dump(obj.get(keys[i])) + ';\n';
 			}
-			
+
 			result += '}';
 		}
 		else if (obj.asArray != null)
 		{
 			var arr = obj.asArray();
 			result += '[';
-			
+
 			for (var i = 0; i < arr.length; i++)
 			{
 				result += arr[i] + ';';
 			}
-			
+
 			result += ']';
 		}
 		else
@@ -1699,7 +1699,7 @@ DriveRealtime.prototype.dump = function(obj)
 	{
 		result = 'null';
 	}
-	
+
 	return result;
 };
 
@@ -1730,27 +1730,27 @@ DriveRealtime.prototype.checkChildren = function(cell)
 			console.log('invalid source', 'edge', cell.id, 'source',
 				cell.getTerminal(true).id, 'rtSource', cell.rtCell.source);
 		}
-		
+
 		if (cell.getTerminal(false) != null && (cell.rtCell.target == null ||
 			cell.rtCell.target != cell.getTerminal(false).rtCell))
 		{
 			console.log('invalid target', 'edge', cell.id, 'target',
 				cell.getTerminal(false).id, 'rtTarget', cell.rtCell.target);
 		}
-		
+
 		var childCount = this.model.getChildCount(cell);
 		var children = cell.rtCell.children.asArray();
-		
+
 		if (childCount != cell.rtCell.children.length)
 		{
 			console.log('invalid child count', 'cell', cell.id, 'children',
 				children.length, 'childCount', childCount);
 		}
-	
+
 		for (var i = 0; i < cell.rtCell.children.length; i++)
 		{
 			var child = this.model.getChildAt(cell, i);
-			
+
 			if (child == null)
 			{
 				console.log('no child', 'index', i, 'child', cell.rtCell.children.get(i));
@@ -1762,7 +1762,7 @@ DriveRealtime.prototype.checkChildren = function(cell)
 			}
 		}
 	}
-		
+
 	for (var i = 0; i < childCount; i++)
 	{
 		var child = this.model.getChildAt(cell, i);
@@ -1800,13 +1800,13 @@ DriveRealtime.prototype.warn = function(message)
 DriveRealtime.prototype.destroy = function(unloading)
 {
 	unloading = (unloading != null) ? unloading : false;
-	
+
 	if (this.pageFormatListener != null)
 	{
 		this.ui.removeListener(this.pageFormatListener);
 		this.pageFormatListener = null;
 	}
-	
+
 	if (this.pageScaleListener != null)
 	{
 		this.ui.removeListener(this.pageScaleListener);
@@ -1818,7 +1818,7 @@ DriveRealtime.prototype.destroy = function(unloading)
 		this.ui.removeListener(this.backgroundColorListener);
 		this.backgroundColorListener = null;
 	}
-	
+
 	if (this.shadowVisibleListener != null)
 	{
 		this.graph.removeListener(this.shadowVisibleListener);
@@ -1848,7 +1848,7 @@ DriveRealtime.prototype.destroy = function(unloading)
 		this.ui.removeListener(this.mathEnabledListener);
 		this.mathEnabledListener = null;
 	}
-	
+
 	if (this.previousUndoListener != null)
 	{
 		this.ui.editor.undoListener = this.previousUndoListener;
@@ -1860,25 +1860,25 @@ DriveRealtime.prototype.destroy = function(unloading)
 		this.graph.selectionModel.removeListener(this.graphSelectionModelChangeListener);
 		this.graphSelectionModelChangeListener = null;
 	}
-	
+
 	if (this.disconnectListener != null)
 	{
 		this.ui.drive.removeListener(this.disconnectListener);
 		this.disconnectListener = null;
 	}
-	
+
 	if (this.autosaveChangeListener != null)
 	{
 		this.ui.editor.removeListener(this.autosaveChangeListener);
 		this.autosaveChangeListener = null;
 	}
-	
+
 	if (this.graphModelChangeListener != null)
 	{
 		this.model.removeListener(this.graphModelChangeListener);
 		this.graphModelChangeListener = null;
 	}
-	
+
 	if (this.pageChangeListener != null)
 	{
 		this.ui.editor.removeListener(this.pageChangeListener);
@@ -1890,19 +1890,19 @@ DriveRealtime.prototype.destroy = function(unloading)
 		this.ui.editor.removeListener(this.viewStateListener);
 		this.viewStateListener = null;
 	}
-	
+
 	if (this.collaboratorsElement != null)
 	{
 		this.collaboratorsElement.parentNode.removeChild(this.collaboratorsElement);
 		this.collaboratorsElement = null;
 	}
-	
+
 	if (this.updateStatusThread != null)
 	{
 		window.clearInterval(this.updateStatusThread);
 		this.updateStatusThread = null;
 	}
-	
+
 	this.ui.allowAnimation = true;
 
 	try

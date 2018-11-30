@@ -5,7 +5,7 @@ Draw.loadPlugin(function(ui)
 {
 	// Extracts macro data from JSON protocol
 	var macroData = {};
-	
+
 	mxEvent.addListener(window, 'message', mxUtils.bind(this, function(evt)
 	{
 		var data = evt.data;
@@ -13,14 +13,14 @@ Draw.loadPlugin(function(ui)
 		try
 		{
 			data = JSON.parse(data);
-			
+
 			if (data.action == 'load')
 			{
-				if (data.macroData != null) 
+				if (data.macroData != null)
 				{
 					macroData = data.macroData;
 				}
-				
+
 				macroData.diagramDisplayName = data.title;
 			}
 		}
@@ -29,7 +29,7 @@ Draw.loadPlugin(function(ui)
 			data = null;
 		}
 	}));
-	
+
 	// Creates actions
 	var action = ui.actions.put('viewerToolbarTop', new Action(mxResources.get('top'), function()
 	{
@@ -37,21 +37,21 @@ Draw.loadPlugin(function(ui)
 	}));
 	action.setToggleAction(true);
 	action.setSelectedCallback(function() { return macroData.tbstyle != 'inline' && macroData.tbstyle != 'hidden' });
-	
+
 	action = ui.actions.put('viewerToolbarMiddle', new Action(mxResources.get('embed'), function()
 	{
 		macroData.tbstyle = 'inline';
 	}));
 	action.setToggleAction(true);
 	action.setSelectedCallback(function() { return macroData.tbstyle == 'inline'; });
-	
+
 	action = ui.actions.put('viewerToolbarHidden', new Action(mxResources.get('hidden'), function()
 	{
 		macroData.tbstyle = 'hidden';
 	}));
 	action.setToggleAction(true);
 	action.setSelectedCallback(function() { return macroData.tbstyle == 'hidden'; });
-	
+
 	action = ui.actions.put('viewerLightbox', new Action(mxResources.get('lightbox'), function()
 	{
 		macroData.lbox = (macroData.lbox != '0') ? '0' : '1';
@@ -65,14 +65,14 @@ Draw.loadPlugin(function(ui)
 	}));
 	action.setToggleAction(true);
 	action.setSelectedCallback(function() { return macroData.links != 'blank' && macroData.links != 'self'; });
-	
+
 	action = ui.actions.put('linksBlank', new Action(mxResources.get('openInNewWindow'), function()
 	{
 		macroData.links = 'blank';
 	}));
 	action.setToggleAction(true);
 	action.setSelectedCallback(function() { return macroData.links == 'blank'; });
-	
+
 	action = ui.actions.put('linksSelf', new Action(mxResources.get('openInThisWindow'), function()
 	{
 		macroData.links = 'self';
@@ -88,23 +88,23 @@ Draw.loadPlugin(function(ui)
 			if (newValue != null)
 			{
 				var val = parseInt(newValue);
-				
+
 				if (!isNaN(val))
 				{
-					macroData.zoom = val / 100;			
+					macroData.zoom = val / 100;
 				}
 			}
 		}, mxResources.get('zoom'));
 		ui.showDialog(dlg.container, 300, 80, true, true);
 		dlg.init();
 	}));
-	
+
 	// Creates viewer toolbar menu
 	mxResources.parse('viewerMenu=Viewer');
 	mxResources.parse('viewerToolbar=Toolbar');
 	mxResources.parse('viewerLightbox=Lightbox');
 	mxResources.parse('viewerLinks=Links');
-	
+
 	ui.menus.put('viewerMenu', new Menu(mxUtils.bind(this, function(menu, parent)
 	{
 		ui.menus.addMenuItems(menu, ['viewerLightbox', 'viewerZoom', '-'], parent);
@@ -123,15 +123,15 @@ Draw.loadPlugin(function(ui)
 		ui.menus.addMenuItems(menu, ['linksAuto', 'linksBlank', 'linksSelf'], parent);
 	})));
 
-	var renameAction = ui.actions.get("rename"); 
+	var renameAction = ui.actions.get("rename");
 
 	renameAction.visible = true;
-	
+
 	renameAction.isEnabled = function()
 	{
 		return macroData.diagramDisplayName != null;
 	}
-	
+
 	renameAction.funct = function()
 	{
 		var dlg = new FilenameDialog(ui, macroData.diagramDisplayName || "",
@@ -141,11 +141,11 @@ Draw.loadPlugin(function(ui)
 			{
 				macroData.diagramDisplayName = newName;
 				var parent = window.opener || window.parent;
-				parent.postMessage(JSON.stringify({event: 'rename', name: newName}), '*'); 
+				parent.postMessage(JSON.stringify({event: 'rename', name: newName}), '*');
 				//Update file name in the UI
 				var tmp = document.createElement('span');
 				mxUtils.write(tmp, mxUtils.htmlEntities(newName));
-				
+
 				if (ui.embedFilenameSpan != null)
 				{
 					ui.embedFilenameSpan.parentNode.removeChild(ui.embedFilenameSpan);
@@ -162,40 +162,40 @@ Draw.loadPlugin(function(ui)
 				err = 'Filename too short';
 			}
 			else if (/[&\*+=\\;/{}|\":<>\?~]/g.test(name))
-			{        
+			{
 				err = 'Invalid characters \\ / | : { } < > & + ? = ; * " ~';
 			}
 			else
 			{
 				return true;
 			}
-			
+
 			ui.showError(mxResources.get('error'), err, mxResources.get('ok'));
 			return false;
 		});
 		ui.showDialog(dlg.container, 300, 80, true, true);
 		dlg.init();
 	}
-	
+
 	// Adds Viewer menu at bottom of Extras menu
 	var menu = ui.menus.get('extras');
 	var oldFunct = menu.funct;
-	
+
 	menu.funct = function(menu, parent)
 	{
 		oldFunct.apply(this, arguments);
-		
+
 		menu.addSeparator(parent);
 		ui.menus.addSubmenu('viewerMenu', menu, parent);
 	};
-	
+
 	// Returns modified macro data to client
 	var uiCreateLoadMessage = ui.createLoadMessage;
-	
+
 	ui.createLoadMessage = function(eventName)
 	{
 		var msg = uiCreateLoadMessage.apply(this, arguments);
-		
+
 		if (eventName == 'export')
 		{
 			msg.macroData = macroData;
@@ -203,9 +203,9 @@ Draw.loadPlugin(function(ui)
 
 		return msg;
 	};
-	
+
 	var lic = urlParams['lic'];
-	
+
 	if (lic != null && lic == 'active')
 	{
 		ui.hideFooter();
@@ -214,22 +214,22 @@ Draw.loadPlugin(function(ui)
 	{
 		// Display footer and alter it
 		var td = document.getElementById('geFooterItem2');
-		
+
 		if (td != null)
 		{
 			td.innerHTML = '<a title="faq" href="/wiki/plugins/servlet/upm" target="_blank">' +
 			'<img border="0" align="absmiddle" style="margin-top:-4px;"/>Please license draw.io to enable all functionality</a>';
 		}
-		
-		td = document.getElementById('geFooterItem1');	
-	
+
+		td = document.getElementById('geFooterItem1');
+
 		if (td != null)
 		{
 			td.parentNode.removeChild(td);
 		}
-		
+
 		td = document.getElementById('geFooterItem3');
-	
+
 		if (td != null)
 		{
 			td.parentNode.removeChild(td);

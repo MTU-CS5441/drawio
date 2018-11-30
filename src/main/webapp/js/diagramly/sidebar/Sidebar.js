@@ -17,42 +17,42 @@
 	 * Overrides gear image URL.
 	 */
 	Sidebar.prototype.gearImage = GRAPH_IMAGE_PATH + '/clipart/Gear_128x128.png';
-	
+
 	/**
 	 * Aliases for IDs in the libs parameter.
 	 */
 	Sidebar.prototype.libAliases = {'aws2': 'aws3', 'gcp' : 'gcp2'};
-	
+
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.defaultEntries = 'general;uml;er;bpmn;flowchart;basic;arrows2';
-	
+
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.signs = ['Animals', 'Food', 'Healthcare', 'Nature', 'People', 'Safety', 'Science', 'Sports', 'Tech', 'Transportation', 'Travel'];
 
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.ibm = ['Analytics', 'Applications', 'Blockchain', 'Data', 'DevOps', 'Infrastructure', 'Management', 'Miscellaneous', 'Security', 'Social', 'Users', 'VPC'];
 
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.allied_telesis = ['Buildings', 'Computer and Terminals', 'Media Converters', 'Security', 'Storage', 'Switch', 'Wireless'];
 
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.gcp = ['Cards', 'Big Data', 'Compute', 'Developer Tools', 'Extras', 'Identity and Security', 'Machine Learning', 'Management Tools', 'Networking', 'Storage Databases'];
-	
+
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.gcp2 = ['Paths', 'Zones', 'Service Cards', 'Compute', 'API Platform and Ecosystems', 'Identity and Security', 'Big Data', 'Data Transfer', 'Cloud AI', 'Internet of Things', 'Storage and Databases', 'Management Tools', 'Networking', 'Developer Tools', 'Expanded Product Cards', 'User Device Cards', 'Product Cards'];
-	
+
 	/**
 	 *
 	 */
@@ -61,7 +61,7 @@
 	/**
 	 *
 	 */
-	Sidebar.prototype.pids = ['Agitators', 'Apparatus Elements', 'Centrifuges', 'Compressors', 'Compressors ISO', 'Crushers Grinding', 
+	Sidebar.prototype.pids = ['Agitators', 'Apparatus Elements', 'Centrifuges', 'Compressors', 'Compressors ISO', 'Crushers Grinding',
                               'Driers', 'Engines', 'Feeders', 'Filters', 'Fittings', 'Flow Sensors', 'Heat Exchangers', 'Instruments', 'Misc',
                               'Mixers', 'Piping', 'Pumps', 'Pumps DIN', 'Pumps ISO', 'Separators', 'Shaping Machines', 'Valves', 'Vessels'];
 
@@ -70,67 +70,67 @@
 	 */
 	Sidebar.prototype.cisco = ['Buildings', 'Computers and Peripherals', 'Controllers and Modules', 'Directors', 'Hubs and Gateways', 'Misc',
 	                           'Modems and Phones', 'People', 'Routers', 'Security', 'Servers', 'Storage', 'Switches', 'Wireless'];
-	
+
 	/**
 	 *
 	 */
 	Sidebar.prototype.cisco_safe = ['Architecture', 'Capability', 'Design', 'Threat'];
-	
+
 	/**
 	 *
 	 */
-	Sidebar.prototype.sysml = ['Model Elements', 'Blocks', 'Ports and Flows', 'Constraint Blocks', 'Activities', 'Interactions', 'State Machines', 
+	Sidebar.prototype.sysml = ['Model Elements', 'Blocks', 'Ports and Flows', 'Constraint Blocks', 'Activities', 'Interactions', 'State Machines',
 	                           'Use Cases', 'Allocations', 'Requirements', 'Profiles', 'Stereotypes'];
 
 	/**
 	 *
 	 */
-	Sidebar.prototype.eip = ['Message Construction', 'Message Routing', 'Message Transformation', 'Messaging Channels', 'Messaging Endpoints', 
+	Sidebar.prototype.eip = ['Message Construction', 'Message Routing', 'Message Transformation', 'Messaging Channels', 'Messaging Endpoints',
 	                         'Messaging Systems', 'System Management'];
 
 	/**
 	 *
 	 */
-	Sidebar.prototype.gmdl = ['Bottom Navigation', 'Bottom Sheets', 'Buttons', 'Cards', 'Chips', 'Dialogs', 'Dividers', 'Grid Lists', 'Icons', 'Lists', 'Menus', 'Misc', 'Pickers', 
+	Sidebar.prototype.gmdl = ['Bottom Navigation', 'Bottom Sheets', 'Buttons', 'Cards', 'Chips', 'Dialogs', 'Dividers', 'Grid Lists', 'Icons', 'Lists', 'Menus', 'Misc', 'Pickers',
 	                          'Selection Controls', 'Sliders', 'Steppers', 'Tabs', 'Text Fields'];
 
 	/**
 	 *
 	 */
-	Sidebar.prototype.aws2 = ['Analytics', 'Application Services', 'Compute', 'Database', 'Developer Tools', 'Enterprise Applications', 'Game Development', 'General', 'Internet of Things',  
+	Sidebar.prototype.aws2 = ['Analytics', 'Application Services', 'Compute', 'Database', 'Developer Tools', 'Enterprise Applications', 'Game Development', 'General', 'Internet of Things',
 	                          'Management Tools', 'Mobile Services', 'Networking', 'On-Demand Workforce', 'SDKs', 'Security and Identity', 'Storage and Content Delivery', 'Groups'];
 
 	/**
 	 *
 	 */
-	Sidebar.prototype.aws3 = ['Analytics', 'Application Services', 'Artificial Intelligence', 'Business Productivity', 'Compute', 'Contact Center', 'Database', 'Desktop and App Streaming', 'Developer Tools', 
-	                          'Game Development', 'General', 'Groups', 'Internet of Things',  
+	Sidebar.prototype.aws3 = ['Analytics', 'Application Services', 'Artificial Intelligence', 'Business Productivity', 'Compute', 'Contact Center', 'Database', 'Desktop and App Streaming', 'Developer Tools',
+	                          'Game Development', 'General', 'Groups', 'Internet of Things',
 	                          'Management Tools', 'Messaging', 'Migration', 'Mobile Services', 'Networking and Content Delivery', 'On Demand Workforce', 'SDKs', 'Security Identity and Compliance', 'Storage'];
-	
+
 	/**
 	 *
 	 */
 	Sidebar.prototype.aws4 = ['Arrows', 'General Resources', 'Illustrations', 'Groups Light', 'Groups Dark', 'Analytics', 'Application Integration', 'AR VR', 'Cost Management', 'Business Productivity', 'Compute', 'Customer Engagement',
 							  'Database', 'Desktop App Streaming', 'Developer Tools', 'Game Development', 'Internet of Things', 'IoT Things', 'IoT Resources', 'Machine Learning', 'Management Tools',
 							  'Media Services', 'Migration', 'Mobile Services', 'Network Content Delivery', 'Security Identity Compliance', 'Storage'];
-	
+
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.office = ['Clouds', 'Communications', 'Concepts', 'Databases', 'Devices', 'Security', 'Servers', 'Services', 'Sites', 'Users'];
 
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.veeam = ['Data Center', 'Misc', 'Software', 'Storage', 'UsersStatus', 'VASComponents', 'Backup Replication', 'Products', 'VMs and Tape', '2D', '3D'];
 
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.archimate3 = ['Application', 'Business', 'Composite', 'Implementation and Migration', 'Motivation', 'Physical', 'Relationships', 'Strategy', 'Technology'];
 
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.electrical = ['LogicGates', 'Resistors', 'Capacitors', 'Inductors', 'SwitchesRelays', 'Diodes', 'Sources', 'Transistors', 'Misc', 'Audio', 'PlcLadder', 'Abstract', 'Optical', 'VacuumTubes', 'Waveforms', 'Instruments', 'RotMech', 'Transmission'];
 
@@ -138,11 +138,11 @@
 	 * Description of custom libraries, see https://desk.draw.io/a/solutions/articles/16000058316
 	 */
 	Sidebar.prototype.customEntries = null;
-	
+
 	/**
 	 * Array of strings for the built-in libraries to be enabled in the more shapes dialog. Null means all,
 	 * empty array means none, possible keys are listed for the libs parameter at
-	 * 
+	 *
 	 * https://desk.draw.io/support/solutions/articles/16000042546
 	 */
 	Sidebar.prototype.enabledLibraries = null;
@@ -151,20 +151,20 @@
 	 *
 	 */
 	Sidebar.prototype.configuration = [{id: 'general', libs: ['general', 'misc', 'advanced']}, {id: 'uml'}, {id: 'search'}, {id: 'er'},
-	                                   {id: 'ios', prefix: 'ios', libs: [''/*prefix is library*/, '7icons', '7ui']}, 
+	                                   {id: 'ios', prefix: 'ios', libs: [''/*prefix is library*/, '7icons', '7ui']},
 	                                   {id: 'android', prefix: 'android', libs: [''/*prefix is library*/]}, {id: 'aws3d'},
-	                                   {id: 'flowchart'}, {id: 'basic'}, {id: 'infographic'}, {id: 'arrows'}, {id: 'arrows2'}, {id: 'lean_mapping'}, {id: 'citrix'}, {id: 'azure'}, {id: 'network'}, 
+	                                   {id: 'flowchart'}, {id: 'basic'}, {id: 'infographic'}, {id: 'arrows'}, {id: 'arrows2'}, {id: 'lean_mapping'}, {id: 'citrix'}, {id: 'azure'}, {id: 'network'},
 	                                   {id: 'sitemap'}, {id: 'dfd'},
-	                                   
+
 	                                   {id: 'mscae', prefix: 'mscae', libs: ['Cloud', 'Enterprise', 'General', 'General Symbols', 'Intune', 'OMS', 'OpsManager', 'Other', 'System Center', 'Virtual Machine', 'Deprecated', 'Cloud Color', 'Deprecated Color']},
-	                                   
+
 	                                   {id: 'bpmn', prefix: 'bpmn', libs: [''/*prefix is library*/, 'Gateways', 'Events']},
 	                                   {id: 'clipart', prefix: null, libs: ['computer', 'finance', 'clipart', 'networking', 'people', 'telco']},
 	                                   {id: 'ibm', prefix: 'ibm', libs: Sidebar.prototype.ibm},
 	                                   {id: 'allied_telesis', prefix: 'allied_telesis', libs: Sidebar.prototype.allied_telesis},
 	                                   {id: 'eip', prefix: 'eip', libs: Sidebar.prototype.eip},
 	                                   {id: 'mockups', prefix: 'mockup', libs: ['Buttons', 'Containers', 'Forms', 'Graphics', 'Markup', 'Misc', 'Navigation', 'Text']},
-	                                   {id: 'pid2', prefix: 'pid2', libs: ['Agitators', 'Apparatus Elements', 'Centrifuges', 'Compressors', 'Compressors ISO', 'Crushers Grinding', 
+	                                   {id: 'pid2', prefix: 'pid2', libs: ['Agitators', 'Apparatus Elements', 'Centrifuges', 'Compressors', 'Compressors ISO', 'Crushers Grinding',
 	                                          	                          'Driers', 'Engines', 'Feeders', 'Filters', 'Fittings', 'Flow Sensors', 'Heat Exchangers', 'Instruments', 'Misc',
 	                                        	                          'Mixers', 'Piping', 'Pumps', 'Pumps DIN', 'Pumps ISO', 'Separators', 'Shaping Machines', 'Valves', 'Vessels']},
            	                           {id: 'signs', prefix: 'signs', libs: Sidebar.prototype.signs},
@@ -189,18 +189,18 @@
            	                           {id: 'archimate', libs: ['archimate']},
            	                           {id: 'webicons', libs: ['webicons', 'weblogos']},
            	                           {id: 'sysml', prefix: 'sysml', libs: Sidebar.prototype.sysml}];
-	
+
 	/**
 	 * Adds hint for quick tutorial video for certain search terms.
 	 */
 	var siderbarInsertSearchHint = Sidebar.prototype.insertSearchHint;
-	
+
 	Sidebar.prototype.insertSearchHint = function(div, searchTerm, count, page, results, len, more, terms)
 	{
 		if (terms != null && page == 1)
 		{
 			var hintText = null;
-			
+
 			// Adds hint for text inserts
 			if (mxUtils.indexOf(terms, 'text') >= 0)
 			{
@@ -212,7 +212,7 @@
 				var words = ['line', 'lines', 'arrow', 'arrows', 'connect', 'connection', 'connections',
 				             'connector', 'connectors', 'curve', 'curves', 'link', 'links', 'directed',
 				             'directional', 'bidirectional'];
-				
+
 				for (var i = 0; i < words.length; i++)
 				{
 					if (mxUtils.indexOf(terms, words[i]) >= 0)
@@ -222,7 +222,7 @@
 					}
 				}
 			}
-			
+
 			if (hintText != null && !this.hideSearchHint)
 			{
 				var link = document.createElement('a');
@@ -233,7 +233,7 @@
 					'border:1px solid black !important;text-align:center;white-space:normal;' +
 					'padding:6px 0px 6px 0px !important;margin:4px 4px 8px 2px;';
 				mxUtils.write(link, hintText);
-				
+
 				// Adds close button
 				var img = document.createElement('img');
 				img.setAttribute('src', Dialog.prototype.closeImage);
@@ -243,22 +243,22 @@
 				img.style.cursor = 'default';
 				img.style.top = '1px';
 				img.style.right = '0px';
-				
+
 				mxEvent.addListener(img, 'click', mxUtils.bind(this, function(evt)
 				{
 					link.parentNode.removeChild(link);
 					this.hideSearchHint = true;
 					mxEvent.consume(evt);
 				}));
-				
+
 				link.appendChild(img);
 				div.appendChild(link);
-				
+
 				// Shows hint only once
 				this.hideSearchHint = true;
 			}
 		}
-		
+
 		siderbarInsertSearchHint.apply(this, arguments);
 	};
 
@@ -277,7 +277,7 @@
 	{
 		this.showPalette(id);
 	};
-	
+
 	/**
 	 * Shows or hides palettes.
 	 */
@@ -289,27 +289,27 @@
 		}
 	};
 
-	
+
 	/**
 	 * Shows or hides a palette.
 	 */
 	Sidebar.prototype.showPalette = function(id, visible)
 	{
 		var elts = this.palettes[id];
-		
+
 		if (elts != null)
 		{
 			var vis = (visible != null) ? ((visible) ? 'block' : 'none') : (elts[0].style.display == 'none') ? 'block' : 'none';
-			
+
 			for (var i = 0; i < elts.length; i++)
 			{
 				elts[i].style.display = vis;
 			}
 		}
 	};
-	
+
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.isEntryVisible = function(key)
 	{
@@ -324,57 +324,57 @@
 				{
 					return elts[0].style.display != 'none';
 				}
-				
+
 				break;
 			}
 		}
-		
+
 		if (this.customEntries != null)
 		{
 			for (var i = 0; i < this.customEntries.length; i++)
 			{
 				var section = this.customEntries[i];
-				
+
 				for (var j = 0; j < section.entries.length; j++)
 				{
 					var entry = section.entries[j];
-					
+
 					if (entry.id == key)
 					{
 						if (entry.libs != null && entry.libs.length > 0)
 						{
 							var elts = this.palettes[entry.id + '.0'];
-							
+
 							if (elts != null)
 							{
 								return elts[0].style.display != 'none';
 							}
 						}
-					
+
 						break;
 					}
 				}
 			}
 		}
-		
+
 		return false;
 	};
-	
+
 	/**
-	 * 
+	 *
 	 */
 	Sidebar.prototype.showEntries = function(stc, remember, force)
 	{
 		this.libs = (stc != null && (force || stc.length > 0)) ? stc : ((urlParams['libs'] != null &&
 			urlParams['libs'].length > 0) ? decodeURIComponent(urlParams['libs']) : mxSettings.getLibraries());
 		var tmp = this.libs.split(';');
-		
+
 		// Maps library names via the alias table
 		for (var i = 0; i < tmp.length; i++)
 		{
 			tmp[i] = this.libAliases[tmp[i]] || tmp[i];
 		}
-		
+
 		for (var i = 0; i < this.configuration.length; i++)
 		{
 			// Search has separate switch in Extras menu
@@ -385,32 +385,32 @@
 					mxUtils.indexOf(tmp, this.configuration[i].id) >= 0);
 			}
 		}
-		
+
 		if (this.customEntries != null)
 		{
 			for (var i = 0; i < this.customEntries.length; i++)
 			{
 				var section = this.customEntries[i];
-				
+
 				for (var j = 0; j < section.entries.length; j++)
 				{
 					var entry = section.entries[j];
-					
+
 					if (entry.libs != null && entry.libs.length > 0)
 					{
 						var libs = [];
-						
+
 						for (var k = 0; k < entry.libs.length; k++)
 						{
 							libs.push(entry.id + '.' + k);
 						}
-						
+
 						this.showPalettes('', libs, mxUtils.indexOf(tmp, entry.id) >= 0);
 					}
 				}
 			}
 		}
-		
+
 		if (remember)
 		{
 			mxSettings.setLibraries(stc);
@@ -443,7 +443,7 @@
             			          {title: mxResources.get('uml'), id: 'uml', image: IMAGE_PATH + '/sidebar-uml.png'}]},
             			{title: mxResources.get('networking'),
             			entries: [{title: 'AWS17', id: 'aws3', image: IMAGE_PATH + '/sidebar-aws3.png'},
-            			// TODO: Add isometric containers  		                          
+            			// TODO: Add isometric containers
             				      {title: 'AWS18', id: 'aws4', image: IMAGE_PATH + '/sidebar-aws4.png'},
             					  {title: 'Allied Telesis', id: 'allied_telesis', image: IMAGE_PATH + '/sidebar-allied_telesis.png'},
             			          {title: mxResources.get('aws3d'), id: 'aws3d', image: IMAGE_PATH + '/sidebar-aws3d.png'},
@@ -478,7 +478,7 @@
 
 		// Uses search.xml index file instead (faster load times)
 		this.addStencilsToIndex = false;
-		
+
 		// Contains additional tags for shapes
 		this.shapetags = {};
 
@@ -488,10 +488,10 @@
 			this.addTagIndex(this.editorUi.editor.graph.decompress(this.tagIndex));
 			this.tagIndex = null;
 		}
-		
+
 		this.initPalettes();
 	}
-	
+
 	/**
 	 * Overridden to add image export via servlet
 	 */
@@ -500,21 +500,21 @@
 		Sidebar.prototype.addFoldingHandler = function(title, content, funct)
 		{
 			var initialized = false;
-	
+
 			// Avoids mixed content warning in IE6-8
 			if (!mxClient.IS_IE || document.documentMode >= 8)
 			{
 				title.style.backgroundImage = (content.style.display == 'none') ?
 					'url(\'' + this.collapsedImage + '\')' : 'url(\'' + this.expandedImage + '\')';
 			}
-			
+
 			title.style.backgroundRepeat = 'no-repeat';
 			title.style.backgroundPosition = '0% 50%';
-	
+
 			var btn = document.createElement('button');
 			btn.style.marginLeft = '4px';
 			mxUtils.write(btn, 'Save');
-			
+
 			mxEvent.addListener(title, 'click', mxUtils.bind(this, function(evt)
 			{
 				if (mxEvent.getSource(evt).nodeName == 'BUTTON')
@@ -528,58 +528,58 @@
 					title2.style.width = '456px';
 					title2.style.backgroundColor = '#ffffff';
 					title2.style.paddingLeft = '6px';
-					
+
 					var btn2 = title2.getElementsByTagName('button')[0];
 					btn2.parentNode.removeChild(btn2);
-					
+
 					var clone = content.cloneNode(true);
 					clone.style.backgroundColor = '#ffffff';
 					clone.style.borderColor = 'transparent';
 					clone.style.width = '456px';
-	
+
 					var parser = new DOMParser();
 					var doc = parser.parseFromString('<body style="background:#ffffff;font-family:Helvetica,Arial;">' +
 							title2.outerHTML + clone.outerHTML + '</body>', 'text/html');
-					
+
 					this.editorUi.convertImages(doc.documentElement, mxUtils.bind(this, function(body)
 					{
 						var html = '<!DOCTYPE html><html><head><link rel="stylesheet" type="text/css" ' +
 							'href="https://www.draw.io/styles/grapheditor.css"></head>' +
 							mxUtils.getXml(body) + '</html>';
-		
+
 						clone.style.position = 'absolute';
 						window.document.body.appendChild(clone);
 						var h = clone.clientHeight + 18;
 						clone.parentNode.removeChild(clone);
-						
+
 						this.editorUi.confirm('Image data created', mxUtils.bind(this, function()
 						{
 				    		new mxXmlRequest(EXPORT_URL, 'w=456&h=' + h + '&html=' + encodeURIComponent(
 					    			this.editorUi.editor.graph.compress(html))).simulate(document, '_blank');
 						}), null, mxResources.get('save'), mxResources.get('cancel'));
 					}));
-					
+
 					return;
 				}
-				
+
 				if (content.style.display == 'none')
 				{
 					if (!initialized)
 					{
 						initialized = true;
-						
+
 						if (funct != null)
 						{
 							if (btn.parentNode != null)
 							{
 								btn.parentNode.removeChild(btn);
 							}
-							
+
 							// Wait cursor does not show up on Mac
 							title.style.cursor = 'wait';
 							var prev = title.innerHTML;
 							title.innerHTML = mxResources.get('loading') + '...';
-							
+
 							window.setTimeout(function()
 							{
 								funct(content);
@@ -597,7 +597,7 @@
 					{
 						title.appendChild(btn);
 					}
-					
+
 					title.style.backgroundImage = 'url(\'' + this.expandedImage + '\')';
 					content.style.display = 'block';
 				}
@@ -605,18 +605,18 @@
 				{
 					title.style.backgroundImage = 'url(\'' + this.collapsedImage + '\')';
 					content.style.display = 'none';
-					
+
 					if (btn.parentNode != null)
 					{
 						btn.parentNode.removeChild(btn);
 					}
 				}
-				
+
 				mxEvent.consume(evt);
 			}));
 		};
 	}
-	
+
 	/**
 	 * Overridden to use shapetags to improve search results.
 	 */
@@ -625,40 +625,40 @@
 		if (style != null && style.substring(0, 6) == 'shape=')
 		{
 			var semi = style.indexOf(';');
-			
+
 			if (semi < 0)
 			{
 				semi = style.length;
 			}
-			
+
 			return style.substring(6, semi);
 		}
-		
+
 		return null;
 	};
-	
+
 	/**
 	 * Overridden to use shapetags to improve search results.
 	 */
 	var sidebarGetTagsForStencil = Sidebar.prototype.getTagsForStencil;
-	
+
 	Sidebar.prototype.getTagsForStencil = function(pkg, stc, moreTags)
 	{
 		var tags = sidebarGetTagsForStencil.apply(this, arguments);
-		
+
 		// Adds tags from tags file
 		if (this.shapetags != null)
 		{
 			pkg = pkg.toLowerCase();
 			stc = stc.toLowerCase();
-			
+
 			if (this.shapetags[pkg] != null)
 			{
 				tags.push(this.shapetags[pkg]);
 			}
-			
+
 			stc = pkg + '.' + stc;
-			
+
 			if (this.shapetags[stc] != null)
 			{
 				tags.push(this.shapetags[stc]);
@@ -667,25 +667,25 @@
 
 		return tags;
 	};
-	
+
 	/**
 	 * Overrides the sidebar init.
 	 */
 	Sidebar.prototype.addTagIndex = function(text)
 	{
 		var lines = text.split('\n');
-		
+
 		for (var i = 0; i < lines.length; i++)
 		{
 			if (lines[i] != null)
 			{
 				var tags = lines[i].split('\t');
-				
+
 				if (tags.length > 1)
 				{
 					var key = tags[0].toLowerCase().replace(' ', '_');
 					var value = mxUtils.trim(tags.slice(1, tags.length).join(' ').toLowerCase());
-					
+
 					if (value.length > 0)
 					{
 						this.shapetags[key] = value;
@@ -694,7 +694,7 @@
 			}
 		}
 	};
-	
+
 	/**
 	 * Overrides the sidebar init.
 	 */
@@ -703,22 +703,22 @@
 		if (node != null)
 		{
 			var shapes = node.getElementsByTagName('shape');
-			
+
 			for (var i = 0; i < shapes.length; i++)
 			{
 				var style = shapes[i].getAttribute('style');
 				var shapeStyle = this.extractShapeStyle(style);
-				
+
 				if (style != null && shapeStyle != null)
 				{
 					var lastDot = shapeStyle.lastIndexOf('.');
-					
+
 					if (lastDot > 0)
 					{
 						var pkg = shapeStyle.substring(0, lastDot);
 						var stc = shapeStyle.substring(lastDot + 1, shapeStyle.length);
 						var tags = this.getTagsForStencil(pkg, stc, shapes[i].getAttribute('tags'));
-						
+
 						// TODO: Use shapetags for programmatic stencils
 						if (tags != null)
 						{
@@ -726,7 +726,7 @@
 							var semi = style.indexOf(';');
 							style = 'shape=' + pkg + '.' + stc.toLowerCase() + ';' +
 								((semi < 0) ? '' : style.substring(semi + 1));
-							
+
 							this.createVertexTemplateEntry(style, parseInt(shapes[i].getAttribute('w')),
 									parseInt(shapes[i].getAttribute('h')), '', stc.replace(/_/g, ' '),
 									null, null, this.filterTags(tags.join(' ')));
@@ -736,7 +736,7 @@
 			}
 		}
 	};
-	
+
 	/**
 	 * Overrides the sidebar init.
 	 */
@@ -757,7 +757,7 @@
 		var veeam = this.veeam;
 		var archimate3 = this.archimate3;
 		var electrical = this.electrical;
-		
+
 		if (urlParams['createindex'] == '1')
 		{
 			mxLog.show();
@@ -765,18 +765,18 @@
 		}
 
 		this.addSearchPalette(true);
-		
+
 		// Adds custom sections first
 		if (this.customEntries != null)
 		{
 			for (var i = 0; i < this.customEntries.length; i++)
 			{
 				var section = this.customEntries[i];
-				
+
 				for (var j = 0; j < section.entries.length; j++)
 				{
 					var entry = section.entries[j];
-					
+
 					for (var k = 0; k < entry.libs.length; k++)
 					{
 						(mxUtils.bind(this, function(lib)
@@ -788,7 +788,7 @@
 								{
 									this.editorUi.addLibraryEntries(images, content);
 								});
-								
+
 								var showError = mxUtils.bind(this, function(err)
 								{
 									content.innerHTML = '';
@@ -799,7 +799,7 @@
 									mxUtils.write(div, err);
 									content.appendChild(div);
 								});
-								
+
 								if (lib.data)
 								{
 									dataLoaded(lib.data);
@@ -810,12 +810,12 @@
 									title.innerHTML = '';
 									mxUtils.write(title, mxResources.get('loading') + '...');
 									var url = lib.url;
-									
+
 									if (!this.editorUi.isCorsEnabledForUrl(url))
 									{
 										url = PROXY_URL + '?url=' + encodeURIComponent(url);
 									}
-									
+
 									this.editorUi.loadUrl(url, mxUtils.bind(this, function(data)
 									{
 										content.style.display = 'block';
@@ -825,7 +825,7 @@
 										try
 										{
 											var doc = mxUtils.parseXml(data);
-											
+
 											if (doc.documentElement.nodeName == 'mxlibrary')
 											{
 												var images = JSON.parse(mxUtils.getTextContent(doc.documentElement));
@@ -848,7 +848,7 @@
 				}
 			}
 		}
-		
+
 		this.addGeneralPalette(this.customEntries == null);
 		this.addMiscPalette(false);
 		this.addAdvancedPalette(false);
@@ -881,9 +881,9 @@
 
 		this.addStencilPalette('arrows', mxResources.get('arrows'), dir + '/arrows.xml',
 				';html=1;' + mxConstants.STYLE_VERTICAL_LABEL_POSITION + '=bottom;' + mxConstants.STYLE_VERTICAL_ALIGN + '=top;' + mxConstants.STYLE_STROKEWIDTH + '=2;strokeColor=#000000;');
-		
+
 		this.addArrows2Palette();
-				
+
 		this.addImagePalette('computer', 'Clipart / Computer', imgDir
 				+ '/lib/clip_art/computers/', '_128x128.png', ['Antivirus',
 				'Data_Filtering', 'Database', 'Database_Add', 'Database_Minus',
@@ -979,7 +979,7 @@
 				dir + '/signs/' + signs[i].toLowerCase() + '.xml',
 				';html=1;fillColor=#000000;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;');
 		}
-		
+
 		for (var i = 0; i < rack.length; i++)
 		{
 			if (rack[i].toLowerCase() === 'general')
@@ -1039,7 +1039,7 @@
 					';html=1;align=center;' + mxConstants.STYLE_VERTICAL_LABEL_POSITION + '=bottom;' + mxConstants.STYLE_VERTICAL_ALIGN + '=top;dashed=0;');
 			}
 		}
-		
+
 		for (var i = 0; i < sysml.length; i++)
 		{
 			if (sysml[i] == 'Model Elements')
@@ -1123,7 +1123,7 @@
 				this.addEipSystemManagementPalette();
 			}
 		}
-		
+
 		for (var i = 0; i < cisco.length; i++)
 		{
 			this.addStencilPalette('cisco' + cisco[i], 'Cisco / ' + cisco[i],
@@ -1217,11 +1217,11 @@
 		this.addArchiMatePalette();
 		this.addWebIconsPalette();
 		this.addWebLogosPalette();
-		
+
 		// LATER: Check if conflicts with restore libs after loading file
 		this.showEntries();
 	};
-	
+
 	/**
 	 * Overridden to manually create search index for stencil files which are not pre-loaded
 	 * and no entries are created programmatically.
@@ -1229,19 +1229,19 @@
 	if (urlParams['createindex'] == '1')
 	{
 		var sidebarAddStencilPalette = Sidebar.prototype.addStencilPalette;
-		
+
 		Sidebar.prototype.addStencilPalette = function(id, title, stencilFile, style, ignore, onInit, scale, tags)
 		{
 			sidebarAddStencilPalette.apply(this, arguments);
 			scale = (scale != null) ? scale : 1;
-	
+
 			// Used for creating index
 			mxStencilRegistry.loadStencilSet(stencilFile, mxUtils.bind(this, function(packageName, stencilName, displayName, w, h)
 			{
 				if (ignore == null || mxUtils.indexOf(ignore, stencilName) < 0)
 				{
 					var tmpTags = (tags != null) ? tags[stencilName] : null;
-	
+
 					mxLog.debug('<shape style="shape=' + packageName + stencilName + style + '" ' +
 						'w="' + Math.round(w * scale) + '" h="' + Math.round(h * scale) + '"' +
 						((tmpTags != null) ? ' tags="' + tmpTags + '"' : '') + '/>');
@@ -1249,30 +1249,30 @@
 			}), true);
 		};
 	}
-	
+
 	/**
 	 * Adds server icon results to local search results
 	 */
 	var sidebarSearchEntries = Sidebar.prototype.searchEntries;
-	
+
 	Sidebar.prototype.searchEntries = function(searchTerms, count, page, success, error)
 	{
 		var succ = success;
-		
+
 		// Lazy-load indices
 		if (this.searchFileData != null)
 		{
 			this.addSearchFileData(mxUtils.parseXml(this.editorUi.editor.graph.decompress(this.searchFileData)).documentElement);
-			
+
 			this.searchFileData = null;
 		}
-		
+
 		// Logs search terms for improving search results
 		if (!this.editorUi.isOffline() && page == 0)
 		{
 			this.editorUi.logEvent({category: 'Sidebar', action: 'search', label: searchTerms});
 		}
-		
+
 		if (ICONSEARCH_PATH != null)
 		{
 			success = mxUtils.bind(this, function(results, len, more, terms)
@@ -1280,7 +1280,7 @@
 				if (!this.editorUi.isOffline() && results.length <= count / 4)
 				{
 					var pg = page - Math.ceil((len - count / 4) / count);
-	
+
 					mxUtils.get(ICONSEARCH_PATH + '?q=' + encodeURIComponent(searchTerms) +
 						'&p=' + pg + '&c=' + count, mxUtils.bind(this, function(req)
 					{
@@ -1294,7 +1294,7 @@
 									try
 									{
 										var res = JSON.parse(req.getText());
-										
+
 										if (res == null || res.icons == null)
 										{
 											succ(results, len, false, terms);
@@ -1306,15 +1306,15 @@
 											{
 												var sizes = res.icons[i].raster_sizes;
 												var index = sizes.length - 1;
-												
+
 												while (index > 0 && sizes[index].size > 128)
 												{
 													index--;
 												}
-						
+
 												var size = sizes[index].size;
 												var url = sizes[index].formats[0].preview_url;
-						
+
 												if (size != null && url != null)
 												{
 													(mxUtils.bind(this, function(s, u)
@@ -1328,7 +1328,7 @@
 													}))(size, url);
 												}
 											}
-						
+
 											succ(results, (page - 1) * count + results.length, res.icons.length == count, terms);
 										}
 									}
@@ -1366,7 +1366,7 @@
 				}
 			});
 		}
-		
+
 		sidebarSearchEntries.apply(this, arguments);
 	};
 
@@ -1374,16 +1374,16 @@
 	 * Adds a click handler for inserting the cell as target for dangling edge.
 	 */
 	var sidebarItemClicked = Sidebar.prototype.itemClicked;
-	
+
 	Sidebar.prototype.itemClicked = function(cells, ds, evt)
 	{
 		var graph = this.editorUi.editor.graph;
 		var handled = false;
-		
+
 		if (cells != null && graph.getSelectionCount() == 1 && graph.getModel().isVertex(cells[0]))
 		{
 			var target = graph.cloneCells(cells)[0];
-			
+
 			// Inserts cell as target of selected edge if not connected
 			if (graph.getModel().isEdge(graph.getSelectionCell()) && graph.getModel().getTerminal(graph.getSelectionCell(), false) == null &&
 				graph.getModel().isVertex(target))
@@ -1392,7 +1392,7 @@
 				try
 				{
 					var edgeState = graph.view.getState(graph.getSelectionCell());
-					
+
 					if (edgeState != null)
 					{
 						var tr = graph.view.translate;
@@ -1402,7 +1402,7 @@
 						target.geometry.x = pt.x / s - tr.x - target.geometry.width / 2;
 						target.geometry.y = pt.y / s - tr.y - target.geometry.height / 2;
 					}
-					
+
 					graph.addCell(target);
 					graph.getModel().setTerminal(graph.getSelectionCell(), target, false);
 				}
@@ -1410,13 +1410,13 @@
 				{
 					graph.getModel().endUpdate();
 				}
-				
+
 				graph.scrollCellToVisible(target);
 				graph.setSelectionCell(target);
 				handled = true;
 			}
 		}
-		
+
 		if (!handled)
 		{
 			sidebarItemClicked.apply(this, arguments);

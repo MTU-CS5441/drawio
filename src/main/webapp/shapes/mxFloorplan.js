@@ -34,7 +34,7 @@ mxFloorplanWall.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanWall.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -83,7 +83,7 @@ mxFloorplanWallCorner.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanWallCorner.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -140,7 +140,7 @@ mxFloorplanWallU.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanWallU.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -199,7 +199,7 @@ mxFloorplanRoom.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanRoom.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -259,7 +259,7 @@ mxFloorplanWindow.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanWindow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -273,7 +273,7 @@ mxFloorplanWindow.prototype.background = function(c, x, y, w, h)
 	var wallTh = parseFloat(mxUtils.getValue(this.style, mxFloorplanWindow.prototype.cst.WALL_THICKNESS, '10'));
 	c.rect(0, h * 0.5 - wallTh * 0.5, w, wallTh);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w, h * 0.5);
@@ -312,7 +312,7 @@ mxFloorplanDimension.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanDimension.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -367,7 +367,7 @@ mxFloorplanDimensionBottom.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanDimensionBottom.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -422,7 +422,7 @@ mxFloorplanStairs.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanStairs.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -436,20 +436,20 @@ mxFloorplanStairs.prototype.background = function(c, x, y, w, h)
 {
 	c.rect(0, 0, w, h);
 	c.fillAndStroke();
-	
+
 	var step = 25;
 	c.setShadow(false);
-	
+
 	c.begin();
-	
+
 	for (var i = 25; i < w; i = i + step)
 	{
 		c.moveTo(i, 0);
 		c.lineTo(i, h);
 	}
-	
+
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w, h * 0.5);
@@ -489,7 +489,7 @@ mxCellRenderer.registerShape(mxFloorplanStairs.prototype.cst.STAIRS, mxFloorplan
 //
 ///**
 //* Function: paintVertexShape
-//* 
+//*
 //* Paints the vertex shape.
 //*/
 //mxFloorplanStairsRest.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -504,31 +504,31 @@ mxCellRenderer.registerShape(mxFloorplanStairs.prototype.cst.STAIRS, mxFloorplan
 //{
 //	c.rect(0, 0, w, h);
 //	c.fillAndStroke();
-//	
+//
 //	var step = 25;
 //	c.setShadow(false);
-//	
+//
 //	c.begin();
-//	
+//
 //	for (var i = 25; i < w - h * 0.5; i = i + step)
 //	{
 //		c.moveTo(i, 0);
 //		c.lineTo(i, h);
 //	}
-//	
+//
 //	c.stroke();
-//	
+//
 //	c.begin();
 //	c.moveTo(0, h * 0.5);
 //	c.lineTo(w, h * 0.5);
-//	
+//
 //	c.moveTo(w, 0);
 //	c.lineTo(w - h * 0.5, h * 0.5);
 //	c.lineTo(w, h);
-//	
+//
 //	c.moveTo(w - h * 0.5, 0);
 //	c.lineTo(w - h * 0.5, h);
-//	
+//
 //	c.moveTo(0, h * 0.5);
 //	c.lineTo(w, h * 0.5);
 //	c.stroke();
@@ -562,7 +562,7 @@ mxFloorplanStairsRest.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanStairsRest.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -577,31 +577,31 @@ mxFloorplanStairsRest.prototype.background = function(c, x, y, w, h)
 {
 	c.rect(0, 0, w, h);
 	c.fillAndStroke();
-	
+
 	var step = 25;
 	c.setShadow(false);
-	
+
 	c.begin();
-	
+
 	for (var i = 25; i < w - h * 0.5; i = i + step)
 	{
 		c.moveTo(i, 0);
 		c.lineTo(i, h);
 	}
-	
+
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w, h * 0.5);
-	
+
 	c.moveTo(w, 0);
 	c.lineTo(w - h * 0.5, h * 0.5);
 	c.lineTo(w, h);
-	
+
 	c.moveTo(w - h * 0.5, 0);
 	c.lineTo(w - h * 0.5, h);
-	
+
 	c.moveTo(0, h * 0.5);
 	c.lineTo(w, h * 0.5);
 	c.stroke();
@@ -635,7 +635,7 @@ mxFloorplanDoorLeft.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanDoorLeft.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -648,7 +648,7 @@ mxFloorplanDoorLeft.prototype.background = function(c, x, y, w, h)
 {
 		c.rect(0, 0, w, 5);
 		c.fillAndStroke();
-		
+
 		c.begin();
 		c.moveTo(w, 5);
 		c.arcTo(w, w, 0, 0, 1, 0, 5 + w);
@@ -684,7 +684,7 @@ mxFloorplanDoorRight.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanDoorRight.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -697,7 +697,7 @@ mxFloorplanDoorRight.prototype.background = function(c, x, y, w, h)
 {
 		c.rect(0, 0, w, 5);
 		c.fillAndStroke();
-		
+
 		c.begin();
 		c.moveTo(0, 5);
 		c.arcTo(w, w, 0, 0, 0, w, 5 + w);
@@ -733,7 +733,7 @@ mxFloorplanDoorDouble.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxFloorplanDoorDouble.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -744,10 +744,10 @@ mxFloorplanDoorDouble.prototype.paintVertexShape = function(c, x, y, w, h)
 
 mxFloorplanDoorDouble.prototype.background = function(c, x, y, w, h)
 {
-	var halfW = w * 0.5; 
+	var halfW = w * 0.5;
 	c.rect(0, 0, w, 5);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(halfW, 0);
 	c.lineTo(halfW, 5);

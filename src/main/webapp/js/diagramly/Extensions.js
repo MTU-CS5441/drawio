@@ -1,6 +1,6 @@
 /**
  * Handles paste from Lucidchart
- * 
+ *
  * TODO: Move to dynamic loading minimized plugin.
  */
 LucidImporter = {};
@@ -11,12 +11,12 @@ LucidImporter = {};
 	var scale = 0.6;
 	var dx = 0;
 	var dy = 0;
-	
+
 	var arcSize = 6;
 	var edgeStyle = 'html=1;jettySize=18;';
 	var vertexStyle = 'html=1;whiteSpace=wrap;';
 	var labelStyle = 'text;html=1;resizable=0;labelBackgroundColor=#ffffff;align=center;verticalAlign=middle;';
-	
+
 	var c = "fillColor=#036897;strokeColor=#ffffff";
 	var s = "shape=mxgraph.";
 	var ss = "strokeColor=none;shape=mxgraph.";
@@ -29,7 +29,7 @@ LucidImporter = {};
 		'UI2ButtonBlock',
 		'UMLStateBlock'
 	];
-	
+
 //	stencils with hardcoded default rounding (having absolute rounding of arcSize=8 without declaring anything)
 	var hardDefRound = [
 		'UMLActivationBlock'
@@ -37,46 +37,46 @@ LucidImporter = {};
 
 //	stencils with hardcoded stroke color
 	var hardStroke = [
-		'VennPlainColor1', 
-		'VennPlainColor2', 
-		'VennPlainColor3', 
-		'VennPlainColor4', 
-		'VennPlainColor5', 
-		'VennPlainColor6', 
-		'VennPlainColor7', 
+		'VennPlainColor1',
+		'VennPlainColor2',
+		'VennPlainColor3',
+		'VennPlainColor4',
+		'VennPlainColor5',
+		'VennPlainColor6',
+		'VennPlainColor7',
 		'VennPlainColor8',
-		'VennGradientColor1', 
-		'VennGradientColor2', 
-		'VennGradientColor3', 
-		'VennGradientColor4', 
-		'VennGradientColor5', 
-		'VennGradientColor6', 
-		'VennGradientColor7', 
-		'VennGradientColor8', 
+		'VennGradientColor1',
+		'VennGradientColor2',
+		'VennGradientColor3',
+		'VennGradientColor4',
+		'VennGradientColor5',
+		'VennGradientColor6',
+		'VennGradientColor7',
+		'VennGradientColor8',
 		'UMLEndBlock',
 		'DefaultTextBlockNew',
 		'iOSButton'
 	];
-	
+
 	//stencils with hardCoded fill color
 	var hardFill = [
-		'AWSAndroidBlock3', 
-		'AWSiOSBlock3', 
-		'AWSJavaBlock3', 
-		'AWSJavaScript', 
-		'AWSNetBlock3', 
-		'AWSNodeJSBlock3', 
-		'AWSPHPBlock3', 
-		'AWSPythonBlock3', 
-		'AWSRubyBlock3', 
-		'AWSXamarin', 
-		'AWSCLIBlock3', 
-		'AWSEclipseToolkitBlock3', 
-		'AWSVisualStudioToolkitBlock3', 
-		'AWSWindowsPowershellToolkitBlock3', 
-		'DefaultTextBlock', 
-		'RectangleContainerBlock', 
-		'UMLStartBlock', 
+		'AWSAndroidBlock3',
+		'AWSiOSBlock3',
+		'AWSJavaBlock3',
+		'AWSJavaScript',
+		'AWSNetBlock3',
+		'AWSNodeJSBlock3',
+		'AWSPHPBlock3',
+		'AWSPythonBlock3',
+		'AWSRubyBlock3',
+		'AWSXamarin',
+		'AWSCLIBlock3',
+		'AWSEclipseToolkitBlock3',
+		'AWSVisualStudioToolkitBlock3',
+		'AWSWindowsPowershellToolkitBlock3',
+		'DefaultTextBlock',
+		'RectangleContainerBlock',
+		'UMLStartBlock',
 		'UMLEndBlock',
 		'DefaultTextBlockNew',
 		'UMLHForkJoinBlock',
@@ -85,37 +85,37 @@ LucidImporter = {};
 
 //	stencils with hardcoded opacity
 	var hardOpacity = [
-		'VennPlainColor1', 
-		'VennPlainColor2', 
-		'VennPlainColor3', 
-		'VennPlainColor4', 
-		'VennPlainColor5', 
-		'VennPlainColor6', 
-		'VennPlainColor7', 
-		'VennPlainColor8', 
-		'VennGradientColor1', 
-		'VennGradientColor2', 
-		'VennGradientColor3', 
-		'VennGradientColor4', 
-		'VennGradientColor5', 
-		'VennGradientColor6', 
-		'VennGradientColor7', 
+		'VennPlainColor1',
+		'VennPlainColor2',
+		'VennPlainColor3',
+		'VennPlainColor4',
+		'VennPlainColor5',
+		'VennPlainColor6',
+		'VennPlainColor7',
+		'VennPlainColor8',
+		'VennGradientColor1',
+		'VennGradientColor2',
+		'VennGradientColor3',
+		'VennGradientColor4',
+		'VennGradientColor5',
+		'VennGradientColor6',
+		'VennGradientColor7',
 		'VennGradientColor8'
 	];
 
 	//stencils to rotate counter clockwise 90 degrees
 	var rccw = [
-		'AEUSBBlock', 
-		'AGSCutandpasteBlock', 
-		'iOSDeviceiPadLandscape', 
+		'AEUSBBlock',
+		'AGSCutandpasteBlock',
+		'iOSDeviceiPadLandscape',
 		'iOSDeviceiPadProLandscape'
 	];
-	
+
 	//stencils to rotate clockwise 180 degrees
 	var rcw2 = [
 		'fpDoor'
 	];
-	
+
 	var edgeStyleMap = {
 						'None': 'none',
 						'Arrow': 'block;endFill=1',
@@ -244,7 +244,7 @@ LucidImporter = {};
 //			'AndroidIconPaste' NA
 			'AndroidIconTrash': s + 'ios7.icons.trashcan',
 			'AndroidIconEmail': s + 'mockup.misc.mail2',
-			'AndroidIconNew': s + 'ios7.misc.flagged', 
+			'AndroidIconNew': s + 'ios7.misc.flagged',
 //			'AndroidIconImage' NA
 //			'AndroidIconUndo' NA
 //			'AndroidIconSharing' NA
@@ -267,7 +267,7 @@ LucidImporter = {};
 			'iOSSlider': cs,
 			'iOSProgressBar': cs,
 			'iOSPageControls': cs,
-			'iOSStatusBar' : cs, 
+			'iOSStatusBar' : cs,
 			'iOSSearchBar' : cs,
 			'iOSNavBar' : cs,
 			'iOSTabs' : cs,
@@ -344,7 +344,7 @@ LucidImporter = {};
 			'UMLUseCaseBlock': 'shape=ellipse',
 			'UMLCircleContainerBlock': 'shape=ellipse;container=1',
 			'UMLRectangleContainerBlock': 'container=1',
-//UML State/Activity			
+//UML State/Activity
 			'UMLOptionLoopBlock' : s + 'sysml.package2;xSize=90;overflow=fill',
 			'UMLAlternativeBlock2' : s + 'sysml.package2;xSize=90;overflow=fill',
 			'UMLStartBlock' : 'shape=ellipse;fillColor=#000000',
@@ -395,7 +395,7 @@ LucidImporter = {};
 			'BPMNConversation' : cs,
 			'BPMNGateway' : cs,
 			'BPMNData' : cs,
-			'BPMNDataStore' : 'shape=datastore', 
+			'BPMNDataStore' : 'shape=datastore',
 			'BPMNAdvancedPoolBlock' : cs, //TODO
 			'BPMNAdvancedPoolBlockRotated' : cs, //TODO
 			'BPMNBlackPool' : cs,
@@ -412,7 +412,7 @@ LucidImporter = {};
 			'OrgBlock' : '',
 //Tables
 			'DefaultTableBlock' : cs, //TODO
-//Value Stream Mapping			
+//Value Stream Mapping
 //Processes
 			'VSMCustomerSupplierBlock' : s + 'lean_mapping.outside_sources',
 			'VSMDedicatedProcessBlock' : cs,
@@ -492,7 +492,7 @@ LucidImporter = {};
 			'AWSAmazonVPC(flowlogs)' : ss + 'aws3.flow_logs;verticalLabelPosition=bottom;align=center;verticalAlign=top',
 			'AWSAmazonVPC(VPCNATgateway)' : ss + 'aws3.vpc_nat_gateway;verticalLabelPosition=bottom;align=center;verticalAlign=top',
 			'AWSVPCPeering3' : ss + 'aws3.vpc_peering;verticalLabelPosition=bottom;align=center;verticalAlign=top',
-			
+
 //S3
 			'AWSSimpleStorageBlock2' : ss + 'aws3.s3;verticalLabelPosition=bottom;align=center;verticalAlign=top',
 			'AWSBucketBlock2' : ss + 'aws3.bucket;fontStyle=1;fontColor=#ffffff',
@@ -693,8 +693,8 @@ LucidImporter = {};
 			'AWSAWSIoT(thingutility)' : ss + 'aws3.utility;verticalLabelPosition=bottom;align=center;verticalAlign=top',
 			'AWSAWSIoT(thingwindfarm)' : ss + 'aws3.windfarm;verticalLabelPosition=bottom;align=center;verticalAlign=top',
 			'AWSAWSIoT(topic)' : ss + 'aws3.topic;verticalLabelPosition=bottom;align=center;verticalAlign=top',
-			
-//AWS General			
+
+//AWS General
 			'AWSCloudBlock2' : ss + 'aws3.cloud;verticalLabelPosition=bottom;align=center;verticalAlign=top',
 			'AWSVPCloudBlock3' : ss + 'aws3.virtual_private_cloud;verticalLabelPosition=bottom;align=center;verticalAlign=top',
 			'AWSUserBlock2' : ss + 'aws3.user;verticalLabelPosition=bottom;align=center;verticalAlign=top',
@@ -922,7 +922,7 @@ LucidImporter = {};
 			'AGSTunnelBlock' : ss + 'mscae.general.tunnel',
 			'AGSUserBlock' : ss + 'azure.user',
 			'AGSVideoBlock' : ss + 'mscae.general.video',
-// Azure VMS			
+// Azure VMS
 //			'AVMActiveDirectoryVMBlock' NA
 //			'AVMActiveDirectoryVMmultiBlock' NA
 //			'AVMAppServerVMBlock' NA
@@ -1241,7 +1241,7 @@ LucidImporter = {};
 			'NET_Virtual-PC' : s + 'networks.virtual_pc;fillColor=#29AAE1',
 			'NET_Terminal' : s + 'networks.terminal;fillColor=#29AAE1',
 			'NET_DataPipe' : s + 'networks.bus;fillColor=#29AAE1',
-			'NET_SlateDevice' : s + 'networks.tablet;fillColor=#29AAE1', 
+			'NET_SlateDevice' : s + 'networks.tablet;fillColor=#29AAE1',
 			'NET_TabletDevice' : s + 'networks.tablet;fillColor=#29AAE1',
 			'NET_Laptop' : s + 'networks.laptop;fillColor=#29AAE1',
 			'NET_PDA' : s + 'networks.mobile;fillColor=#29AAE1',
@@ -1447,7 +1447,7 @@ LucidImporter = {};
 			'EICommandMessageBlock' : cs,
 			'EIDocumentMessageBlock' : cs,
 			'EIEventMessageBlock' : cs,
-			'EIRequestReplyBlock' : cs, 
+			'EIRequestReplyBlock' : cs,
 			'EIReturnAddressBlock' : cs,
 			'EICorrelationIDBlock' : cs,
 			'EIMessageSequenceBlock' : cs,
@@ -1539,7 +1539,7 @@ LucidImporter = {};
 			'fpOpening' : 'shape=rect',
 			'fpDoor' : cs,
 			'fpDoubleDoor' : cs,
-//Stairs			
+//Stairs
 			'fpStairs' : s + 'floorplan.stairs;direction=north',
 			'fpStairsDirectional' : s + 'floorplan.stairs;direction=north;verticalAlign=bottom',
 //			'fpStairsCurved' NA
@@ -1576,7 +1576,7 @@ LucidImporter = {};
 			'fpChairBarstool' : 'shape=ellipse',
 //Cubicles - Prebuilt
 //Tables - Prebuilt
-//Cabinets - we don't have corresponding stencils, just rounded rectangles			
+//Cabinets - we don't have corresponding stencils, just rounded rectangles
 			'fpCabinetBasic' : '',
 //			'fpCabinetCornerLarge' NA
 			'fpCabinetDoubleWide' : '',
@@ -1817,7 +1817,7 @@ LucidImporter = {};
 //			'PEButterflyValveBlock' NA
 			'PEButterflyValve2Block' : s + 'pid2valves.valve;flipH=1;valveType=butterfly;verticalLabelPosition=bottom;verticalAlign=top',
 			'PEBallValveBlock' : s + 'pid2valves.valve;valveType=ball;verticalLabelPosition=bottom;verticalAlign=top',
-			'PEDiaphragmBlock' : s + 'pid2valves.valve;valveType=ball;verticalLabelPosition=bottom;verticalAlign=top', 
+			'PEDiaphragmBlock' : s + 'pid2valves.valve;valveType=ball;verticalLabelPosition=bottom;verticalAlign=top',
 			'PEPlugValveBlock' : s + 'pid2valves.valve;valveType=ball;verticalLabelPosition=bottom;verticalAlign=top',
 			'PECheckValveBlock' : s + 'pid2valves.valve;valveType=check;verticalLabelPosition=bottom;verticalAlign=top',
 			'PECheckValve2Block' : s + 'pid2valves.valve;valveType=check;verticalLabelPosition=bottom;verticalAlign=top',
@@ -1878,7 +1878,7 @@ LucidImporter = {};
 			'iOS7AlertDialog' : cs, //TODO
 			'iOS7ProgressBar' : s + 'ios7ui.downloadBar', //TODO
 			'iOS7Slider' : s + 'ios7ui.searchBox', //TODO
-			'iOS7SearchBar' : s + 'ios7ui.searchBox', 
+			'iOS7SearchBar' : s + 'ios7ui.searchBox',
 			'iOS7Button' : '',
 			'iOS7TextField' : '',
 			'iOS7TextView' : '',
@@ -1984,7 +1984,7 @@ LucidImporter = {};
 //			'iOS7ActivityUse as wallpaper' NA
 //UI Containers
 			'UI2BrowserBlock' : cs,
-			'UI2WindowBlock' : cs, 
+			'UI2WindowBlock' : cs,
 			'UI2DialogBlock' : cs,
 			'UI2AreaBlock' : '',
 			'UI2ElementBlock' : '',
@@ -2159,14 +2159,14 @@ LucidImporter = {};
 			'Image_iphone_indicator' : 'fillColor=#e8878E;gradientColor=#BD1421;strokeColor=#ffffff',
 			'Image_iphone_thread_count' : ''
 	};
-	
+
 	function convertText(props)
 	{
 		var text = (props.Text != null) ? props.Text :
 			((props.Value != null) ? props.Value :
 			props.Lane_0);
 		var text2 = null;
-		
+
 		if (text == null && props.State != null)
 		{
 			if (props.State.t != null)
@@ -2216,7 +2216,7 @@ LucidImporter = {};
 				text.t = text.t.replace(/>/g, '&gt;');
 				return text.t;
 			}
-			
+
 			if (text.Value != null)
 			{
 				if (text.Value.t != null)
@@ -2227,20 +2227,20 @@ LucidImporter = {};
 				}
 			}
 		}
-		
-		return (text2 != null) ? text2 : ''; 
+
+		return (text2 != null) ? text2 : '';
 	};
-		
+
 	function getAction(obj)
 	{
 		if (obj.Action != null)
 		{
 			return obj.Action;
 		}
-		
+
 		return obj;
 	};
-		
+
 	function getTextM(properties)
 	{
 		if (properties.Text != null)
@@ -2270,81 +2270,81 @@ LucidImporter = {};
 
 		return null;
 	}
-	
+
 	function getLabelStyle(properties)
 	{
 		var style = getFontSize(properties) +
-				getFontColor(properties) + 
+				getFontColor(properties) +
 				getFontStyle(properties) +
-				getTextAlignment(properties) + 
+				getTextAlignment(properties) +
 				getTextLeftSpacing(properties) +
-				getTextRightSpacing(properties) + 
+				getTextRightSpacing(properties) +
 				getTextTopSpacing(properties) +
-				getTextBottomSpacing(properties) + 
+				getTextBottomSpacing(properties) +
 				getTextGlobalSpacing(properties) +
 				getTextVerticalAlignment(properties);
-		
-		return style;  
+
+		return style;
 	}
-	
+
 	function getFontSize(properties)
 	{
 		//adds font size
 		var isV = false;
-		
+
 		var m = getTextM(properties);
-		
+
 		if (m != null)
 		{
 			var i = 0;
-			
+
 			while ((!isV) && (i < m.length))
 			{
 				var currM = m[i];
-				
+
 				if (currM.n == 's')
 				{
 					if (currM.v != null)
 					{
 						isV = true;
-						
+
 						return 'fontSize=' + Math.round(currM.v * scale) + ';';
 					}
 				}
 				i++;
 			}
 		}
-		
+
 		if (isV == 0)
 		{
 			return 'fontSize=' + defaultFontSize + ';';
 		}
-		
+
 		return '';
 	}
-	
+
 	function getFontColor(properties)
 	{
 		//adds font color
 		var isC = false;
 		var m = getTextM(properties);
-		
+
 		if (m != null)
 		{
 			var i = 0;
-			
+
 			while ((!isC) && (i < m.length))
 			{
 				var currM = m[i];
-				
+
 				if (currM.n == 'c')
 				{
 					if (currM.v != null)
 					{
 						isC = true;
-						
+
 						var currV = currM.v;
-						
+
 						if (currV.charAt(0) != '#')
 						{
 							currV = '#' + currV;
@@ -2355,32 +2355,32 @@ LucidImporter = {};
 						return mxConstants.STYLE_FONTCOLOR + '=' + currV + ';';
 					}
 				}
-				
+
 				i++;
 			}
 		}
-		
+
 		return '';
 	}
-	
+
 	function getFontStyle(properties)
 	{
 		var m = getTextM(properties);
-		
+
 		if (m != null)
 		{
 			var fontStyle = 0;
 			//check for bold text
 			var isBT = false;
-			
+
 			if (m != null)
 			{
 				var i = 0;
-				
+
 				while ((!isBT) && (i < m.length))
 				{
 					var currM = m[i];
-					
+
 					if (currM.n == 'b')
 					{
 						if (currM.v != null && currM.v)
@@ -2389,22 +2389,22 @@ LucidImporter = {};
 							fontStyle += 1;
 						}
 					}
-					
+
 					i++;
 				}
 			}
-				
+
 			//check for italic text
 			var isIT = false;
-			
+
 			if (m != null)
 			{
 				var i = 0;
-				
+
 				while ((!isIT) && (i < m.length))
 				{
 					var currM = m[i];
-					
+
 					if (currM.n == 'i')
 					{
 						if (currM.v != null && currM.v)
@@ -2413,22 +2413,22 @@ LucidImporter = {};
 							fontStyle += 2;
 						}
 					}
-					
+
 					i++;
 				}
 			}
-				
+
 			//check for underline text
 			var isUT = false;
-			
+
 			if (m != null)
 			{
 				var i = 0;
-				
+
 				while ((!isUT) && (i < m.length))
 				{
 					var currM = m[i];
-					
+
 					if (currM.n == 'u')
 					{
 						if (currM.v != null && currM.v)
@@ -2437,33 +2437,33 @@ LucidImporter = {};
 							fontStyle += 4;
 						}
 					}
-					
+
 					i++;
 				}
 			}
-			
+
 			if (fontStyle > 0)
 			{
 				return 'fontStyle=' + fontStyle + ';';
 			}
 		}
-		
+
 		return '';
 	}
-	
+
 	function getTextAlignment(properties)
 	{
 		var m = getTextM(properties);
-		
+
 		//adds text alignment
 		if (m != null)
 		{
 			var i = 0;
-			
+
 			while (i < m.length)
 			{
 				var currM = m[i];
-				
+
 				if (currM.n == 'a')
 				{
 					if (currM.v != null)
@@ -2471,27 +2471,27 @@ LucidImporter = {};
 						return 'align=' + currM.v + ';';
 					}
 				}
-				
+
 				i++;
 			}
 		}
-		
+
 		return '';
 	}
-	
+
 	function getTextLeftSpacing(properties)
 	{
 		var m = getTextM(properties);
-		
+
 		if (m != null)
 		{
 			//adds left spacing
 			var i = 0;
-			
+
 			while (i < m.length)
 			{
 				var currM = m[i];
-				
+
 				if (currM.v != null)
 				{
 					if (currM.n == 'il')
@@ -2501,7 +2501,7 @@ LucidImporter = {};
 					else
 					{
 						var align = getTextAlignment(properties);
-					
+
 						if (currM.n == 's' && align != 'align=center;' && align != '')
 						{
 							// TODO: Fix condition to apply this only when necessary
@@ -2509,11 +2509,11 @@ LucidImporter = {};
 						}
 					}
 				}
-					
+
 				i++;
 			}
 		}
-		
+
 		return '';
 	}
 
@@ -2522,46 +2522,46 @@ LucidImporter = {};
 		//adds right spacing
 		var isIR = false;
 		var m = getTextM(properties);
-		
+
 		if (m != null)
 		{
 			var i = 0;
-			
+
 			while ((!isIR) && (i < m.length))
 			{
 				var currM = m[i];
-				
+
 				if (currM.n == 'ir')
 				{
 					if (currM.v != null)
 					{
 						isIR = true;
-						
+
 						return 'spacingRight=' + currM.v + ';';
 					}
 				}
-				
+
 				i++;
 			}
 		}
-		
+
 		return '';
 	}
-	
+
 	function getTextTopSpacing(properties)
 	{
 		//adds top spacing
 		var isMT = false;
 		var m = getTextM(properties);
-		
+
 		if (m != null)
 		{
 			var i = 0;
-			
+
 			while ((!isMT) && (i < m.length))
 			{
 				var currM = m[i];
-				
+
 				if (currM.n == 'mt')
 				{
 					if (currM.v != null)
@@ -2570,28 +2570,28 @@ LucidImporter = {};
 						return 'spacingTop=' + currM.v + ';';
 					}
 				}
-				
+
 				i++;
 			}
 		}
 
 		return '';
 	}
-	
+
 	function getTextBottomSpacing(properties)
 	{
 		//adds bottom spacing
 		var isMB = false;
 		var m = getTextM(properties);
-		
+
 		if (m != null)
 		{
 			var i = 0;
-			
+
 			while ((!isMB) && (i < m.length))
 			{
 				var currM = m[i];
-				
+
 				if (currM.n == 'mb')
 				{
 					if (currM.v != null)
@@ -2600,14 +2600,14 @@ LucidImporter = {};
 						return 'spacingBottom=' + currM.v + ';';
 					}
 				}
-				
+
 				i++;
 			}
 		}
-		
+
 		return '';
 	}
-	
+
 	function getTextGlobalSpacing(properties)
 	{
 		//adds global spacing
@@ -2615,10 +2615,10 @@ LucidImporter = {};
 		{
 				return 'spacing=' + parseInt(properties.InsetMargin) + ';';
 		}
-	
+
 		return '';
 	}
-	
+
 	function getTextVerticalAlignment(properties)
 	{
 		// adds text vertical alignment
@@ -2629,10 +2629,10 @@ LucidImporter = {};
 				return 'verticalAlign=' + properties.Text_VAlign + ';';
 			}
 		}
-		
+
 		return createStyle(mxConstants.STYLE_VERTICAL_ALIGN, properties.TextVAlign, 'middle');
 	}
-	
+
 	function getStrokeColor(properties, action)
 	{
 		if (mxUtils.indexOf(hardStroke, action.Class) < 0)
@@ -2653,7 +2653,7 @@ LucidImporter = {};
 				return createStyle(mxConstants.STYLE_STROKECOLOR, properties.FillColor.substring(0, 7), '#FFFFFF');
 			}
 		}
-		
+
 		return '';
 	}
 
@@ -2661,7 +2661,7 @@ LucidImporter = {};
 	{
 		var style = '';
 		var incl = mxUtils.indexOf(hardOpacity, action.Class) >= 0;
-		
+
 		if (!incl)
 		{
 			style += createStyle(mxConstants.STYLE_OPACITY, properties.Opacity, '100');
@@ -2675,7 +2675,7 @@ LucidImporter = {};
 				style += 'strokeOpacity=' + Math.round(parseInt(sOpac) / 2.55) + ';';
 			}
 		}
-		
+
 		if (typeof properties.FillColor === 'string' && !incl)
 		{
 			if (properties.FillColor.length > 7)
@@ -2684,7 +2684,7 @@ LucidImporter = {};
 				style += 'fillOpacity=' + Math.round(parseInt(fOpac) / 2.55) + ';';
 			}
 		}
-		
+
 		return style;
 	}
 
@@ -2705,7 +2705,7 @@ LucidImporter = {};
 				return 'rounded=1;absoluteArcSize=1;arcSize=8;';
 			}
 		}
-		
+
 		return '';
 	}
 
@@ -2716,10 +2716,10 @@ LucidImporter = {};
 		{
 			// KNOWN: TextRotation currently ignored
 			var deg = mxUtils.toDegree(parseFloat(properties.Rotation));
-			
+
 			// Fixes the case for horizontal swimlanes where we use horizontal=0
 			// and Lucid uses rotation
-			
+
 			if (action.Class == 'AdvancedSwimLaneBlockRotated')
 			{
 				deg += 90;
@@ -2738,33 +2738,33 @@ LucidImporter = {};
 				cell.geometry.rotate90();
 				cell.geometry.rotate90();
 			}
-			
+
 			if (deg != 0)
 			{
 				return 'rotation=' + deg + ';';
 			}
 		}
-		
+
 		return '';
 	}
-	
+
 	function getFlipH(properties)
 	{
 		if (properties.FlipX)
 		{
 			return 'flipH=1;';
 		}
-		
+
 		return '';
 	}
-	
+
 	function getFlipV(properties)
 	{
 		if (properties.FlipY)
 		{
 			return 'flipV=1;';
 		}
-		
+
 		return '';
 	}
 
@@ -2775,7 +2775,7 @@ LucidImporter = {};
 		{
 			return mxConstants.STYLE_SHADOW + '=1;';
 		}
-		
+
 		return '';
 	}
 
@@ -2803,10 +2803,10 @@ LucidImporter = {};
 				}
 			}
 		}
-		
+
 		return '';
 	}
-	
+
 	function getStrokeStyle(properties)
 	{
 		// Stroke style
@@ -2826,15 +2826,15 @@ LucidImporter = {};
 		{
 			return 'dashed=1;dashPattern=1 1;';
 		}
-		
+
 		return '';
 	}
-	
+
 	function getStrokeWidth(properties)
 	{
 		return createStyle(mxConstants.STYLE_STROKEWIDTH, parseFloat(properties.LineWidth) * scale, '1');
 	}
-	
+
 	function getImage(properties, action)
 	{
 		// Converts images
@@ -2842,18 +2842,18 @@ LucidImporter = {};
 		{
 			return 'image=' + properties.URL + ';';
 		}
-		
+
 		return '';
 	}
-	
+
 	function updateCell(cell, obj)
 	{
 		var a = getAction(obj);
-		
+
 		if (a != null)
 		{
 			var s = styleMap[a.Class];
-			
+
 			if (s != null)
 			{
 				cell.style += s + ';';
@@ -2862,37 +2862,37 @@ LucidImporter = {};
 			{
 //				console.log('no mapping', a.Class);
 			}
-			
+
 			var p = (a.Properties != null) ? a.Properties : a;
 
 			if (p != null)
 			{
 				//adds label
 				cell.value = convertText(p);
-				
-				
+
+
 				cell.style += 	getFontSize(p) +
-								getFontColor(p) + 
+								getFontColor(p) +
 								getFontStyle(p) +
-								getTextAlignment(p, cell) + 
+								getTextAlignment(p, cell) +
 								getTextLeftSpacing(p) +
-								getTextRightSpacing(p) + 
+								getTextRightSpacing(p) +
 								getTextTopSpacing(p) +
-								getTextBottomSpacing(p) + 
+								getTextBottomSpacing(p) +
 								getTextGlobalSpacing(p) +
-								getTextVerticalAlignment(p) + 
-								getStrokeColor(p, a) + 
-								getOpacity(p, a) + 
+								getTextVerticalAlignment(p) +
+								getStrokeColor(p, a) +
+								getOpacity(p, a) +
 								getRounded(p, a, cell) +
-								getRotation(p, a, cell) + 
-								getFlipH(p) + 
+								getRotation(p, a, cell) +
+								getFlipH(p) +
 								getFlipV(p) +
 								getShadow(p) +
 								getFillColor(p, a)  +
-								getStrokeStyle(p) + 
-								getStrokeWidth(p) + 
+								getStrokeStyle(p) +
+								getStrokeWidth(p) +
 								getImage(p, a);
-				
+
 				// Edge style
 				if (cell.edge)
 				{
@@ -2904,13 +2904,13 @@ LucidImporter = {};
 					{
 						cell.style += 'rounded=0;';
 					}
-					
+
 					if (p.Shape != 'diagonal')
 					{
 						if (p.ElbowPoints != null)
 						{
 							cell.geometry.points = [];
-							
+
 							for (var i = 0; i < p.ElbowPoints.length; i++)
 							{
 								cell.geometry.points.push(new mxPoint(Math.round(p.ElbowPoints[i].x * scale + dx),
@@ -2931,7 +2931,7 @@ LucidImporter = {};
 						else if (p.Endpoint1.Block != null && p.Endpoint1.Block != null)
 						{
 							cell.style += 'edgeStyle=orthogonalEdgeStyle;';
-	
+
 							if (p.Shape == 'curve')
 							{
 								cell.style += 'curved=1;';
@@ -2943,12 +2943,12 @@ LucidImporter = {};
 					{
 						cell.style += 'startArrow=' + edgeStyleMap[p.Endpoint1.Style] + ';';
 					}
-					
+
 					if (p.Endpoint2.Style != null)
 					{
 						cell.style += 'endArrow=' + edgeStyleMap[p.Endpoint2.Style].replace(/startSize/g, 'endSize') + ';';
 					}
-					
+
 					// Anchor points and arrows
 					// TODO: Convert waypoints, elbowPoints
 					updateEndpoint(cell, p.Endpoint1, true);
@@ -2957,7 +2957,7 @@ LucidImporter = {};
 			}
 		}
 	};
-	
+
 	function createVertex(obj)
 	{
 		var p = getAction(obj).Properties;
@@ -2967,7 +2967,7 @@ LucidImporter = {};
 		{
 			b.h = b.h - 20;
 		}
-		
+
 		v = new mxCell('', new mxGeometry(Math.round(b.x * scale + dx), Math.round(b.y * scale + dy),
 				Math.round(b.w * scale), Math.round(b.h * scale)), vertexStyle);
 	    v.vertex = true;
@@ -2975,32 +2975,32 @@ LucidImporter = {};
 
 	    return v;
 	};
-	
+
 	function createEdge(obj)
 	{
 		var e = new mxCell('', new mxGeometry(0, 0, 100, 100), edgeStyle);
 		e.geometry.relative = true;
 		e.edge = true;
 		updateCell(e, obj);
-		
+
 		// Adds text labels
 		var a = getAction(obj);
 		var p = a.Properties;
 		var ta = (p != null) ? p.TextAreas : obj.TextAreas;
-		
+
 		if (ta != null)
 		{
 			var count = 0;
-			
+
 			while (ta['t' + count] != null)
 			{
 				var tmp = ta['t' + count];
 				e = insertLabel(tmp, e);
 				count++;
 			}
-			
+
 			var count = 1;
-			
+
 			while (ta['m' + count] != null)
 			{
 				var tmp = ta['m' + count];
@@ -3014,13 +3014,13 @@ LucidImporter = {};
 			}
 
 			var ta = (p != null) ? p.TextAreas : obj.TextAreas;
-			
+
 			if (ta.Message != null)
 			{
 				e = insertLabel(ta.Message, e, obj);
 			}
 		}
-		
+
 		return e;
 	}
 
@@ -3031,22 +3031,22 @@ LucidImporter = {};
 		lab.geometry.relative = true
 		lab.vertex = true;
 		e.insert(lab);
-		
+
 		return e;
 	};
-	
+
 	function createStyle(key, prop, defaultValue, fn)
 	{
 		if (prop != null && fn != null)
 		{
 			prop = fn(prop);
 		}
-		
+
 		if (prop != null && prop != defaultValue)
 		{
 			return key + '=' + prop + ';';
 		}
-		
+
 		return '';
 	};
 
@@ -3074,7 +3074,7 @@ LucidImporter = {};
 		{
 			var obj = groups[key];
 			obj.id = key;
-			
+
 			if (obj.Members != null)
 			{
 				for (var key2 in obj.Members)
@@ -3082,12 +3082,12 @@ LucidImporter = {};
 					hidden = hideObj(key2, groups, hidden);
 				}
 			}
-		
+
 		}
-		
+
 		return hidden;
 	};
-	
+
 	function importLucidPage(graph, g, dx, dy, crop, noSelection)
 	{
 		graph.getModel().beginUpdate();
@@ -3100,14 +3100,14 @@ LucidImporter = {};
 			//collect IDs that are part of groups and hidden
 			var hidden = [];
 			var i = 0;
-			
+
 			if (g.Groups != null)
 			{
 				for (var key in g.Groups)
 				{
 					var obj = g.Groups[key];
 					obj.id = key;
-					
+
 					if (obj.Hidden == true && obj.Members != null)
 					{
 						if (mxUtils.indexOf(hidden, key) < 0)
@@ -3122,7 +3122,7 @@ LucidImporter = {};
 					}
 				}
 			}
-			
+
 			// Vertices first (populates lookup table for connecting edges)
 			if (g.Blocks != null)
 			{
@@ -3130,11 +3130,11 @@ LucidImporter = {};
 				{
 					var obj = g.Blocks[key];
 					obj.id = key;
-					
+
 					if (mxUtils.indexOf(hidden, key) < 0)
 					{
 						var created = false;
-						
+
 						if (styleMap[obj.Class] != null)
 						{
 							if (styleMap[obj.Class] == 'mxCompositeShape')
@@ -3144,7 +3144,7 @@ LucidImporter = {};
 								created = true;
 							}
 						}
-						
+
 						if (!created)
 						{
 						    lookup[obj.id] = createVertex(obj);
@@ -3158,7 +3158,7 @@ LucidImporter = {};
 				for (var i = 0; i < g.Objects.length; i++)
 				{
 					var obj = g.Objects[i];
-					
+
 					if (obj.Action != null && styleMap[obj.Action.Class] == 'mxCompositeShape')
 					{
 						lookup[obj.id] = addCompositeShape(obj, select, graph);
@@ -3167,17 +3167,17 @@ LucidImporter = {};
 					{
 					    lookup[obj.id] = createVertex(obj);
 					}
-					
+
 					queue.push(obj);
 				}
 			}
-				
+
 			// Sorts all cells by ZOrder
 			queue.sort(function(a, b)
 			{
 				a = getAction(a);
 				b = getAction(b);
-				
+
 				if (a.Properties != null)
 				{
 					if (b.Properties != null)
@@ -3185,37 +3185,37 @@ LucidImporter = {};
 						return a.Properties.ZOrder - b.Properties.ZOrder;
 					}
 				}
-				
+
 				return 0;
 			});
-			
+
 			function addLine(obj, p)
 			{
 				var src = (p.Endpoint1.Block != null) ? lookup[p.Endpoint1.Block] : null;
 				var trg = (p.Endpoint2.Block != null) ? lookup[p.Endpoint2.Block] : null;
 				var e = createEdge(obj);
-				
+
 				if (src == null && p.Endpoint1 != null)
 				{
 					e.geometry.setTerminalPoint(new mxPoint(Math.round(p.Endpoint1.x * scale),
 						Math.round(p.Endpoint1.y * scale)), true);
 				}
-				
+
 				if (trg == null && p.Endpoint2 != null)
 				{
 					e.geometry.setTerminalPoint(new mxPoint(Math.round(p.Endpoint2.x * scale),
 						Math.round(p.Endpoint2.y * scale)), false);
 				}
-				
+
 				select.push(graph.addCell(e, null, null, src, trg));
 			};
-			
+
 			// Inserts cells in ZOrder and connects edges via lookup
 			for (var i = 0; i < queue.length; i++)
 			{
 				var obj = queue[i];
 				var v = lookup[obj.id];
-				
+
 				if (v != null)
 				{
 					select.push(graph.addCell(v));
@@ -3226,7 +3226,7 @@ LucidImporter = {};
 					addLine(obj, p);
 				}
 			}
-			
+
 			if (g.Lines != null)
 			{
 				for (var key in g.Lines)
@@ -3238,7 +3238,7 @@ LucidImporter = {};
 					}
 				}
 			}
-			
+
 			if (crop && dx != null && dy != null)
 			{
 				if (graph.isGridEnabled())
@@ -3246,9 +3246,9 @@ LucidImporter = {};
 					dx = graph.snap(dx);
 					dy = graph.snap(dy);
 				}
-				
+
 				var bounds = graph.getBoundingBoxFromGeometry(select, true);
-				
+
 				if (bounds != null)
 				{
 					graph.moveCells(select, dx - bounds.x, dy - bounds.y);
@@ -3262,7 +3262,7 @@ LucidImporter = {};
 		{
 			graph.getModel().endUpdate();
 		}
-		
+
 	};
 
 	function createGraph()
@@ -3276,23 +3276,23 @@ LucidImporter = {};
         graph.getModel().maintainEdgeParent = false;
         return graph;
 	};
-	
+
 	LucidImporter.importState = function(state)
 	{
 		var xml = ['<?xml version=\"1.0\" encoding=\"UTF-8\"?>', '<mxfile>'];
-		
+
 		// Extracts and sorts all pages
 		var pages = [];
 
 		if (state.state != null)
 		{
 			state = JSON.parse(state.state);
-			
+
 			for (var id in state.Pages)
 			{
 				pages.push(state.Pages[id]);
 			}
-			
+
 			pages.sort(function(a, b)
 			{
 			    if (a.Properties.Order < b.Properties.Order)
@@ -3313,28 +3313,28 @@ LucidImporter = {};
 		{
 			pages.push(state);
 		}
-		
+
 		var graph = createGraph();
 		var codec = new mxCodec();
-		
+
 		for (var i = 0; i < pages.length; i++)
 		{
             xml.push('<diagram');
-            
+
             if (pages[i].Properties != null && pages[i].Properties.Title != null)
             {
             	xml.push(' name="' + mxUtils.htmlEntities(pages[i].Properties.Title) + '"');
             }
-            
+
 			importLucidPage(graph, pages[i], null, null, null, true);
             var node = codec.encode(graph.getModel());
             graph.getModel().clear();
 
             xml.push('>' + Graph.prototype.compress(mxUtils.getXml(node)) + '</diagram>');
 		}
-		
+
 		xml.push('</mxfile>');
-		
+
 		return xml.join('');
 	};
 
@@ -3344,33 +3344,33 @@ LucidImporter = {};
 	   	dummy.vertex = true;
 	   	v.insert(dummy);
 	   	cells = [dummy];
-	   	
+
 		var e = sb.cloneCell(edge);
 		cell.insertEdge(e, false);
 		dummy.insertEdge(e, true);
 		cells.push(e);
 		select.push(graph.addCell(e, null, null, null, null));
 	};
-   	
+
 	function addFloatingEdge(x1, y1, x2, y2, edge, select, graph, cells, v)
 	{
 	   	var dummy1 = new mxCell('', new mxGeometry(x1, y1, 0, 0), 'strokeColor=none;fillColor=none;');
 	   	dummy1.vertex = true;
 	   	v.insert(dummy1);
 	   	cells = [dummy1];
-	   	
+
 	   	var dummy2 = new mxCell('', new mxGeometry(x2, y2, 0, 0), 'strokeColor=none;fillColor=none;');
 	   	dummy2.vertex = true;
 	   	v.insert(dummy2);
 	   	cells = [dummy2];
-	   	
+
 		var e = sb.cloneCell(edge);
 		dummy1.insertEdge(e, true);
 		dummy2.insertEdge(e, false);
 		cells.push(e);
 		select.push(graph.addCell(e, null, null, null, null));
 	};
-   	
+
 	function addCompositeShape(obj, select, graph)
 	{
 		var a = getAction(obj);
@@ -3381,30 +3381,30 @@ LucidImporter = {};
 		var h = Math.round(b.h * scale);
 		var x = Math.round(b.x * scale + dx);
 		var y = Math.round(b.y * scale + dy);
-		
+
 		v = new mxCell('', new mxGeometry(x, y, w, h), vertexStyle);
 	    v.vertex = true;
 
 	    var cls = (obj.Class != null) ? obj.Class : (a != null) ? a.Class : null;
-	    
+
 		switch (cls)
 		{
 			case 'BraceNoteBlock' :
 			case 'UI2BraceNoteBlock' :
-								
+
 				var isRightBrace = false;
-				
+
 				if (p.BraceDirection != null)
 				{
 					if (p.BraceDirection == 'Right')
 					{
 						isRightBrace = true;
-					}				
+					}
 				}
-				
+
 				var brace = null;
 				var label = null;
-				
+
 				if (isRightBrace)
 				{
 					brace = new mxCell('', new mxGeometry(w - h * 0.125, 0,	h * 0.125, h), 'shape=curlyBracket;rounded=1;');
@@ -3415,40 +3415,40 @@ LucidImporter = {};
 					brace = new mxCell('', new mxGeometry(0, 0,	h * 0.125, h), 'shape=curlyBracket;rounded=1;flipH=1;');
 					label = new mxCell('', new mxGeometry(h * 0.125, 0,	w - h * 0.125, h), 'strokeColor=none;fillColor=none;');
 				}
-				
+
 				v.style = "strokeColor=none;fillColor=none;"
-				v.style += 	getRotation(p, a, v); 
-					
+				v.style += 	getRotation(p, a, v);
+
 				brace.vertex = true;
 				v.insert(brace);
 
-				brace.style += 	getStrokeColor(p, a) + 
-								getOpacity(p, a) + 
+				brace.style += 	getStrokeColor(p, a) +
+								getOpacity(p, a) +
 								getShadow(p) +
-								getStrokeStyle(p) + 
-								getStrokeWidth(p); 
+								getStrokeStyle(p) +
+								getStrokeWidth(p);
 
 
 				label.vertex = true;
 				label.value = convertText(p);
 				v.insert(label);
-				
+
 				label.style += 	getFontSize(p) +
-								getFontColor(p) + 
+								getFontColor(p) +
 								getFontStyle(p) +
-								getTextAlignment(p, label) + 
+								getTextAlignment(p, label) +
 								getTextLeftSpacing(p) +
-								getTextRightSpacing(p) + 
+								getTextRightSpacing(p) +
 								getTextTopSpacing(p) +
-								getTextBottomSpacing(p) + 
+								getTextBottomSpacing(p) +
 								getTextGlobalSpacing(p) +
-								getTextVerticalAlignment(p); 
+								getTextVerticalAlignment(p);
 				break;
-				
+
 			case 'AdvancedSwimLaneBlockRotated' :
 			case 'AdvancedSwimLaneBlock' :
 				var lanesNum = 0;
-				
+
 				if (p.Lanes != null)
 				{
 					lanesNum = p.Lanes.length;
@@ -3457,56 +3457,56 @@ LucidImporter = {};
 				v.style = "strokeColor=none;fillColor=none;"
 				var totalOffset = 0; //relative
 				var lane = new Array();
-				
+
 				for (var i = 0; i < lanesNum; i++)
 				{
 					var currOffset = parseFloat(p.Lanes[i].p);
-					
+
 					lane.push(new mxCell('', new mxGeometry(w * totalOffset, 0,	w * currOffset, h), 'shape=swimlane;startSize=25;'));
-					
+
 					lane[i].vertex = true;
 					v.insert(lane[i]);
 					lane[i].value = convertText(p["Lane_" + i]);
 					lane[i].style += 	getFontSize(p["Lane_" + i]) +
-									getFontColor(p["Lane_" + i]) + 
+									getFontColor(p["Lane_" + i]) +
 									getFontStyle(p["Lane_" + i]) +
-									getTextAlignment(p["Lane_" + i], lane[i]) + 
+									getTextAlignment(p["Lane_" + i], lane[i]) +
 									getTextLeftSpacing(p["Lane_" + i]) +
-									getTextRightSpacing(p["Lane_" + i]) + 
+									getTextRightSpacing(p["Lane_" + i]) +
 									getTextTopSpacing(p["Lane_" + i]) +
-									getTextBottomSpacing(p["Lane_" + i]) + 
+									getTextBottomSpacing(p["Lane_" + i]) +
 									getTextGlobalSpacing(p["Lane_" + i]) +
-									getTextVerticalAlignment(p["Lane_" + i]) + 
-									getStrokeColor(p, a) + 
-									getOpacity(p, a) + 
+									getTextVerticalAlignment(p["Lane_" + i]) +
+									getStrokeColor(p, a) +
+									getOpacity(p, a) +
 									getRounded(p, a, lane[i]) +
-									getRotation(p, a, lane[i]) + 
-									getFlipH(p) + 
+									getRotation(p, a, lane[i]) +
+									getFlipH(p) +
 									getFlipV(p) +
 									getShadow(p) +
 									getFillColor(p, a)  +
-									getStrokeStyle(p) + 
-									getStrokeWidth(p); 
+									getStrokeStyle(p) +
+									getStrokeWidth(p);
 
 					totalOffset += currOffset;
 				}
-				
+
 				break;
-				
+
 			case 'AndroidDevice' :
 				if (p.AndroidDeviceName != null)
 				{
-					
+
 					v.style = "fillColor=#000000;strokeColor=#000000;";
 					var background = null;
 					var keyboard = null;
 					var statusBar = null;
-					
+
 					if (p.AndroidDeviceName == 'Tablet' || p.AndroidDeviceName == 'Mini Tablet')
 					{
 						v.style += "shape=mxgraph.android.tab2;"
 						background = new mxCell('', new mxGeometry(w * 0.112, h * 0.077, w * 0.77, h * 0.85), '');
-						
+
 						if (p.KeyboardShown)
 						{
 							keyboard = new mxCell('', new mxGeometry(w * 0.112, h * 0.727, w * 0.77, h * 0.2), 'shape=mxgraph.android.keyboard;');
@@ -3521,21 +3521,21 @@ LucidImporter = {};
 					{
 						v.style += "shape=mxgraph.android.phone2;"
 						background = new mxCell('', new mxGeometry(w * 0.04, h * 0.092, w * 0.92, h * 0.816), '');
-						
+
 						if (p.KeyboardShown)
 						{
 							keyboard = new mxCell('', new mxGeometry(w * 0.04, h * 0.708, w * 0.92, h * 0.2), 'shape=mxgraph.android.keyboard;');
 						}
-						
+
 						if (!p.FullScreen)
 						{
 							statusBar = new mxCell('', new mxGeometry(w * 0.04, h * 0.092, w * 0.92, h * 0.03), 'shape=mxgraph.android.statusBar;strokeColor=#33b5e5;fillColor=#000000;fontColor=#33b5e5;fontSize=' + h * 0.015 + ';');
 						}
 					}
-					
+
 					background.vertex = true;
 					v.insert(background);
-					
+
 					if (p.Scheme == "Dark")
 					{
 						background.style += "fillColor=#111111;"
@@ -3544,7 +3544,7 @@ LucidImporter = {};
 					{
 						background.style += "fillColor=#ffffff;"
 					}
-					
+
 					if (keyboard != null)
 					{
 						keyboard.vertex = true;
@@ -3557,9 +3557,9 @@ LucidImporter = {};
 						v.insert(statusBar);
 					}
 				}
-				
+
 				break;
-				
+
 			case 'AndroidAlertDialog' :
 				var dialog = new mxCell('', new mxGeometry(0, 0, w, 30), 'strokeColor=none;fillColor=none;spacingLeft=9;');
 				dialog.vertex = true;
@@ -3597,9 +3597,9 @@ LucidImporter = {};
 					cancelButton.style += 'strokeColor=#E2E2E2;';
 					okButton.style += 'strokeColor=#E2E2E2;';
 				}
-				
+
 				break;
-				
+
 			case 'AndroidDateDialog' :
 			case 'AndroidTimeDialog' :
 				var dialog = new mxCell('', new mxGeometry(0, 0, w, 30), 'strokeColor=none;fillColor=none;spacingLeft=9;');
@@ -3643,7 +3643,7 @@ LucidImporter = {};
 				prevDate2.style += getLabelStyle(p.Label_0);
 
 				var prevDate3 = null;
-				
+
 				if (obj.Class == 'AndroidDateDialog')
 				{
 					prevDate3 = new mxCell('', new mxGeometry(w * 0.625, 50, w * 0.2, 15), 'strokeColor=none;fillColor=none;');
@@ -3668,9 +3668,9 @@ LucidImporter = {};
 				v.insert(date1);
 				date1.value = convertText(p.Label_4);
 				date1.style += getLabelStyle(p.Label_4);
-				
+
 				var sep = null;
-				
+
 				if (obj.Class == 'AndroidTimeDialog')
 				{
 					sep = new mxCell('', new mxGeometry(w * 0.3, 65, w * 0.1, 15), 'strokeColor=none;fillColor=none;');
@@ -3679,7 +3679,7 @@ LucidImporter = {};
 					sep.value = convertText(p.Label_Colon);
 					sep.style += getLabelStyle(p.Label_Colon);
 				}
-				
+
 				var date2 = new mxCell('', new mxGeometry(w * 0.125, 65, w * 0.2, 15), 'strokeColor=none;fillColor=none;');
 				date2.vertex = true;
 				v.insert(date2);
@@ -3716,7 +3716,7 @@ LucidImporter = {};
 				v.insert(nextDate3);
 				nextDate3.value = convertText(p.Label_8);
 				nextDate3.style += getLabelStyle(p.Label_8);
-				
+
 				var triangle4 = new mxCell('', new mxGeometry(w * 0.5 - 4, 99, 8, 4), 'shape=triangle;direction=south;');
 				triangle4.vertex = true;
 				v.insert(triangle4);
@@ -3751,41 +3751,41 @@ LucidImporter = {};
 					triangle5.style += 'strokeColor=none;fillColor=#939393;';
 					triangle6.style += 'strokeColor=none;fillColor=#939393;';
 				}
-				
+
 				break;
-				
+
 			case 'AndroidListItems' :
 				var itemFullH = h;
 				var startH = 0;
-				
+
 				if (p.ShowHeader)
 				{
 					startH = 8;
-					
+
 					var header = new mxCell('', new mxGeometry(0, 0, w, startH), 'strokeColor=none;fillColor=none;');
 					header.vertex = true;
 					v.insert(header);
 					header.value = convertText(p.Header);
 					header.style += getLabelStyle(p.Header);
-					
+
 					itemFullH -= startH;
-					
+
 					var lineH = new mxCell('', new mxGeometry(0, startH - 2, w, 4), 'shape=line;strokeColor=#999999;');
 					lineH.vertex = true;
 					v.insert(lineH);
 
 				}
-				
+
 				var numItems = parseInt(p.Items);
-				
+
 				if (numItems > 0)
 				{
 					itemFullH = itemFullH / numItems;
 				}
-				
+
 				var item = new Array();
 				var line = new Array();
-				
+
 				for (var i = 0; i < numItems; i++)
 				{
 					item[i] = new mxCell('', new mxGeometry(0, startH + i * itemFullH, w, itemFullH), 'strokeColor=none;fillColor=none;');
@@ -3793,13 +3793,13 @@ LucidImporter = {};
 					v.insert(item[i]);
 					item[i].value = convertText(p["Item_" + i]);
 					item[i].style += getLabelStyle(p["Item_" + i]);
-					
+
 					if (i > 0)
 					{
 						line[i] = new mxCell('', new mxGeometry(0, startH + i * itemFullH - 2, w, 4), 'shape=line;');
 						line[i].vertex = true;
 						v.insert(line[i]);
-						
+
 						if (p.Scheme == 'Dark')
 						{
 							line[i].style += 'strokeColor=#ffffff;';
@@ -3810,7 +3810,7 @@ LucidImporter = {};
 						}
 					}
 				}
-				
+
 				if (p.Scheme == 'Dark')
 				{
 					v.style += 'strokeColor=none;fillColor=#111111;';
@@ -3819,21 +3819,21 @@ LucidImporter = {};
 				{
 					v.style += 'strokeColor=none;fillColor=#ffffff;';
 				}
-				
+
 				break;
-				
+
 			case 'AndroidTabs' :
 				var numTabs = parseInt(p.Tabs);
 				var tabFullW = w;
-				
+
 				if (numTabs > 0)
 				{
 					tabFullW = tabFullW / numTabs;
 				}
-				
+
 				var tab = new Array();
 				var line = new Array();
-				
+
 				for (var i = 0; i < numTabs; i++)
 				{
 					tab[i] = new mxCell('', new mxGeometry(i * tabFullW, 0, tabFullW, h), 'strokeColor=none;fillColor=none;');
@@ -3841,13 +3841,13 @@ LucidImporter = {};
 					v.insert(tab[i]);
 					tab[i].value = convertText(p["Tab_" + i]);
 					tab[i].style += getLabelStyle(p["Tab_" + i]);
-					
+
 					if (i > 0)
 					{
 						line[i] = new mxCell('', new mxGeometry(i * tabFullW - 2, h * 0.2, 4, h * 0.6), 'shape=line;direction=north;');
 						line[i].vertex = true;
 						v.insert(line[i]);
-						
+
 						if (p.Scheme == 'Dark')
 						{
 							line[i].style += 'strokeColor=#484848;';
@@ -3871,13 +3871,13 @@ LucidImporter = {};
 				{
 					v.style += 'strokeColor=none;fillColor=#DDDDDD;';
 				}
-				
+
 				break;
-				
+
 			case 'AndroidProgressBar' :
 				v = new mxCell('', new mxGeometry(Math.round(x), Math.round(y + h * 0.25), Math.round(w), Math.round(h * 0.5)), vertexStyle);
 			    v.vertex = true;
-				
+
 				var progressBar = new mxCell('', new mxGeometry(0, 0, w * p.BarPosition, Math.round(h * 0.5)), 'strokeColor=none;fillColor=#33B5E5;');
 				progressBar.vertex = true;
 				v.insert(progressBar);
@@ -3890,9 +3890,9 @@ LucidImporter = {};
 				{
 					v.style += 'strokeColor=none;fillColor=#BBBBBB;';
 				}
-				
+
 				break;
-				
+
 			case 'AndroidImageBlock' :
 				if (p.Scheme == 'Dark')
 				{
@@ -3902,9 +3902,9 @@ LucidImporter = {};
 				{
 					v.style += 'shape=mxgraph.mockup.graphics.simpleIcon;strokeColor=#939393;fillColor=#ffffff;';
 				}
-				
+
 				break;
-				
+
 			case 'AndroidTextBlock' :
 				if (p.Scheme == 'Dark')
 				{
@@ -3928,15 +3928,15 @@ LucidImporter = {};
 						v.style += 'fillColor=#ffffff;strokeColor=none;';
 					}
 				}
-				
+
 				v.value = convertText(p.Label);
 				v.style += getLabelStyle(p.Label);
-				
+
 				break;
 
 			case 'AndroidActionBar' :
 				v.style += 'strokeColor=none;';
-				
+
 				switch (p.BarBackground)
 				{
 					case 'Blue' :
@@ -3952,11 +3952,11 @@ LucidImporter = {};
 						v.style += 'fillColor=#ffffff;';
 						break;
 				}
-				
+
 				if (p.HighlightShow)
 				{
 					var highlight = null;
-					
+
 					if (p.HighlightTop)
 					{
 						highlight = new mxCell('', new mxGeometry(0, 0, w, 2), 'strokeColor=none;');
@@ -3982,7 +3982,7 @@ LucidImporter = {};
 							break;
 					}
 				}
-				
+
 				if (p.VlignShow)
 				{
 					var vLine = new mxCell('', new mxGeometry(20, 5, 2, h - 10), 'shape=line;direction=north;');
@@ -3999,9 +3999,9 @@ LucidImporter = {};
 							break;
 					}
 				}
-				
+
 				break;
-				
+
 			case 'AndroidButton' :
 				v.value = convertText(p.Label);
 				v.style += getLabelStyle(p.Label) + 'shape=partialRectangle;left=0;right=0;';
@@ -4014,9 +4014,9 @@ LucidImporter = {};
 				{
 					v.style += 'fillColor=#DFE0DF;strokeColor=#C6C5C6;top=0;';
 				}
-				
+
 				break;
-				
+
 			case 'AndroidTextBox' :
 				v.value = convertText(p.Label);
 				v.style += getLabelStyle(p.Label);
@@ -4033,7 +4033,7 @@ LucidImporter = {};
 				{
 					v.style += 'fillColor=#ffffff;strokeColor=none;';
 				}
-				
+
 				if (p.TextFocused)
 				{
 					underline.style += 'strokeColor=#33B5E5;';
@@ -4042,12 +4042,12 @@ LucidImporter = {};
 				{
 					underline.style += 'strokeColor=#A9A9A9;';
 				}
-				
+
 				break;
-				
+
 			case 'AndroidRadioButton' :
 				var dot = null;
-				
+
 				if (p.Checked)
 				{
 					dot = new mxCell('', new mxGeometry(w * 0.15, h * 0.15, w * 0.7, h * 0.7), 'shape=ellipse;fillColor=#33B5E5;strokeWidth=0.6;');
@@ -4058,7 +4058,7 @@ LucidImporter = {};
 				if (p.Scheme == 'Dark')
 				{
 					v.style += 'shape=ellipse;strokeWidth=0.6;strokeColor=#272727;';
-					
+
 					if (p.Checked)
 					{
 						dot.style += 'strokeColor=#1F5C73;';
@@ -4072,7 +4072,7 @@ LucidImporter = {};
 				else
 				{
 					v.style += 'shape=ellipse;strokeWidth=0.6;fillColor=#ffffff;strokeColor=#5C5C5C;';
-					
+
 					if (p.Checked)
 					{
 						dot.style += 'strokeColor=#999999;';
@@ -4080,7 +4080,7 @@ LucidImporter = {};
 				}
 
 				break;
-				
+
 			case 'AndroidCheckBox' :
 				var check = null;
 				if (p.Checked)
@@ -4100,7 +4100,7 @@ LucidImporter = {};
 				}
 
 				break;
-				
+
 			case 'AndroidToggle' :
 				if (p.Scheme == 'Dark')
 				{
@@ -4124,27 +4124,27 @@ LucidImporter = {};
 						v.style += 'shape=mxgraph.android.switch_off;fillColor=#E6E6E6;';
 					}
 				}
-				
+
 				break;
-				
+
 			case 'AndroidSlider' :
 				v.style += 'shape=mxgraph.android.progressScrubberFocused;dx=' + p.BarPosition + ';fillColor=#33b5e5;';
-				
+
 				break;
-				
+
 			case 'iOSSegmentedControl' :
 				var numTabs = parseInt(p.Tabs);
 				var tabFullW = w;
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 				if (numTabs > 0)
 				{
 					tabFullW = tabFullW / numTabs;
 				}
-				
+
 				var tab = new Array();
 				var line = new Array();
-				
+
 				for (var i = 0; i < numTabs; i++)
 				{
 					tab[i] = new mxCell('', new mxGeometry(i * tabFullW, 0, tabFullW, h), 'strokeColor=' + p.FillColor + ';');
@@ -4152,7 +4152,7 @@ LucidImporter = {};
 					v.insert(tab[i]);
 					tab[i].value = convertText(p["Tab_" + i]);
 					tab[i].style += getLabelStyle(p["Tab_" + i]);
-					
+
 					if (p.Selected == i)
 					{
 						tab[i].style += getFillColor(p, a);
@@ -4167,13 +4167,13 @@ LucidImporter = {};
 
 			case 'iOSSlider' :
 				v.style += 'shape=mxgraph.ios7ui.slider;strokeColor=' + p.FillColor + ';fillColor=#ffffff;strokeWidth=2;barPos=' + p.BarPosition * 100 + ';';
-				
+
 				break;
 
 			case 'iOSProgressBar':
 				v = new mxCell('', new mxGeometry(Math.round(x), Math.round(y + h * 0.25), Math.round(w), Math.round(h * 0.5)), vertexStyle + 'strokeColor=none;fillColor=#B5B5B5;');
 			    v.vertex = true;
-				
+
 				var progressBar = new mxCell('', new mxGeometry(0, 0, w * p.BarPosition, Math.round(h * 0.5)), 'strokeColor=none;' + getFillColor(p, a));
 				progressBar.vertex = true;
 				v.insert(progressBar);
@@ -4182,7 +4182,7 @@ LucidImporter = {};
 
 			case 'iOSPageControls' :
 				v.style += 'shape=mxgraph.ios7ui.pageControl;' + getFillColor(p, a) + 'strokeColor=#D6D6D6;';
-				
+
 				break;
 
 			case 'iOSStatusBar' :
@@ -4192,29 +4192,29 @@ LucidImporter = {};
 				text1.vertex = true;
 				v.insert(text1);
 				text1.style += getLabelStyle(p.Text);
-				
+
 				var text2 = new mxCell(convertText(p.Carrier), new mxGeometry(w * 0.09, 0, w * 0.2, h), 'strokeColor=none;fillColor=none;');
 				text2.vertex = true;
 				v.insert(text2);
 				text2.style += getLabelStyle(p.Carrier);
-				
+
 				break;
-				
+
 			case 'iOSSearchBar' :
 				v.style += 'strokeColor=none;' +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getRounded(p, a, v) +
 					getLabelStyle(p.Search);
-				
+
 				v.value = convertText(p.Search);
-				
+
 				var icon1 = new mxCell('', new mxGeometry(w * 0.3, h * 0.3, h * 0.4, h * 0.4), 'shape=mxgraph.ios7.icons.looking_glass;strokeColor=#000000;fillColor=none;');
 				icon1.vertex = true;
 				v.insert(icon1);
-				
+
 				break;
-				
+
 			case 'iOSNavBar' :
 				v.style += 'shape=partialRectangle;top=0;right=0;left=0;strokeColor=#979797;' + getFillColor(p, a) + getOpacity(p, a) + getLabelStyle(p.Title);
 				v.value = convertText(p.Title);
@@ -4223,52 +4223,52 @@ LucidImporter = {};
 				text1.vertex = true;
 				v.insert(text1);
 				text1.style += getLabelStyle(p.LeftText);
-				
+
 				var text2 = new mxCell(convertText(p.RightText), new mxGeometry(w * 0.65, 0, w * 0.3, h), 'strokeColor=none;fillColor=none;');
 				text2.vertex = true;
 				v.insert(text2);
 				text2.style += getLabelStyle(p.RightText);
-				
+
 				var icon1 = new mxCell('', new mxGeometry(w * 0.02, h * 0.2, h * 0.3, h * 0.5), 'shape=mxgraph.ios7.misc.left;strokeColor=#007AFF;strokeWidth=2;');
 				icon1.vertex = true;
 				v.insert(icon1);
-				
+
 				break;
-				
+
 			case 'iOSTabs' :
 				var numTabs = parseInt(p.Tabs);
 				var tabFullW = w;
 				v.style += 'shape=partialRectangle;right=0;left=0;bottom=0;strokeColor=#979797;' + getFillColor(p, a) + getOpacity(p, a);
-				
+
 				if (numTabs > 0)
 				{
 					tabFullW = tabFullW / numTabs;
 				}
-				
+
 				var tab = new Array();
 				var line = new Array();
-				
+
 				for (var i = 0; i < numTabs; i++)
 				{
 					tab[i] = new mxCell('', new mxGeometry(i * tabFullW, 0, tabFullW, h), 'strokeColor=none;');
 					tab[i].vertex = true;
 					v.insert(tab[i]);
 					tab[i].value = convertText(p["Tab_" + i]);
-					
+
 					tab[i].style += getFontSize(p["Tab_" + i]);
 
-					tab[i].style += 
-									getFontColor(p["Tab_" + i]) + 
+					tab[i].style +=
+									getFontColor(p["Tab_" + i]) +
 									getFontStyle(p["Tab_" + i]) +
-									getTextAlignment(p["Tab_" + i]) + 
+									getTextAlignment(p["Tab_" + i]) +
 									getTextLeftSpacing(p["Tab_" + i]) +
-									getTextRightSpacing(p["Tab_" + i]) + 
+									getTextRightSpacing(p["Tab_" + i]) +
 									getTextTopSpacing(p["Tab_" + i]) +
-									getTextBottomSpacing(p["Tab_" + i]) + 
+									getTextBottomSpacing(p["Tab_" + i]) +
 									getTextGlobalSpacing(p["Tab_" + i]);
-					
+
 					tab[i].style += 'verticalAlign=bottom;';
-					
+
 					if (p.Selected == i)
 					{
 						tab[i].style += 'fillColor=#BBBBBB;';
@@ -4380,9 +4380,9 @@ LucidImporter = {};
 				v.insert(line2);
 
 				v.style += getFillColor(p, a) + getOpacity(p, a) + 'strokeColor=none;';
-				
+
 				break;
-				
+
 			case 'iOSTimePicker' :
 				var firstDate1 = new mxCell('', new mxGeometry(0, 0, w * 0.25, h * 0.2), 'strokeColor=none;fillColor=none;');
 				firstDate1.vertex = true;
@@ -4457,9 +4457,9 @@ LucidImporter = {};
 				v.insert(line2);
 
 				v.style += getFillColor(p, a) + getOpacity(p, a) + 'strokeColor=none;';
-				
+
 				break;
-				
+
 			case 'iOSCountdownPicker' :
 				var firstDate3 = new mxCell('', new mxGeometry(w * 0.45, 0, w * 0.2, h * 0.2), 'strokeColor=none;fillColor=none;');
 				firstDate3.vertex = true;
@@ -4524,119 +4524,119 @@ LucidImporter = {};
 				v.insert(line2);
 
 				v.style += getFillColor(p, a) + getOpacity(p, a) + 'strokeColor=none;';
-				
+
 				break;
-				
+
 			case 'iOSBasicCell' :
 				v.style += 'shape=partialRectangle;left=0;top=0;right=0;fillColor=#ffffff;strokeColor=#C8C7CC;spacing=0;align=left;spacingLeft=' + (p.SeparatorInset * scale) + ';';
 				v.style += getFontSize(p.text) +
-					getFontColor(p.text) + 
+					getFontColor(p.text) +
 					getFontStyle(p.text) +
 					getTextVerticalAlignment(p.text);
 
 				v.value = convertText(p.text);
-				
-				switch (p.AccessoryIndicatorType) 
+
+				switch (p.AccessoryIndicatorType)
 				{
 					case 'Disclosure' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.91, h * 0.35, h * 0.15, h * 0.3), 'shape=mxgraph.ios7.misc.right;strokeColor=#D2D2D6;');
 						icon1.vertex = true;
 						v.insert(icon1);
-						
+
 						break;
-						
+
 					case 'DetailDisclosure' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.91, h * 0.35, h * 0.15, h * 0.3), 'shape=mxgraph.ios7.misc.right;strokeColor=#D2D2D6;');
 						icon1.vertex = true;
 						v.insert(icon1);
-						
+
 						var icon2 = new mxCell('', new mxGeometry(w * 0.79, h * 0.25, h * 0.5, h * 0.5), 'shape=mxgraph.ios7.icons.info;strokeColor=#007AFF;fillColor=#ffffff;');
 						icon2.vertex = true;
 						v.insert(icon2);
-						
+
 						break;
-						
+
 					case 'DetailIndicator' :
 						var icon2 = new mxCell('', new mxGeometry(w * 0.87, h * 0.25, h * 0.5, h * 0.5), 'shape=mxgraph.ios7.icons.info;strokeColor=#007AFF;fillColor=#ffffff;');
 						icon2.vertex = true;
 						v.insert(icon2);
-						
+
 						break;
-						
+
 					case 'CheckMark' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.89, h * 0.37, h * 0.4, h * 0.26), 'shape=mxgraph.ios7.misc.check;strokeColor=#007AFF;strokeWidth=2;');
 						icon1.vertex = true;
 						v.insert(icon1);
-						
+
 						break;
 				}
 
 				break;
-				
+
 			case 'iOSSubtitleCell' :
 				v.style += 'shape=partialRectangle;left=0;top=0;right=0;fillColor=#ffffff;strokeColor=#C8C7CC;align=left;spacing=0;verticalAlign=top;spacingLeft=' + (p.SeparatorInset * scale) + ';';
 				v.style += getFontSize(p.subtext) +
-					getFontColor(p.subtext) + 
+					getFontColor(p.subtext) +
 					getFontStyle(p.subtext);
 
 				v.value = convertText(p.subtext);
-				
+
 				var subtext = new mxCell('', new mxGeometry(0, h * 0.4, w, h * 0.6), 'fillColor=none;strokeColor=none;spacing=0;align=left;verticalAlign=bottom;spacingLeft=' + (p.SeparatorInset * scale) + ';');
 				subtext.vertex = true;
 				v.insert(subtext);
 				subtext.style += getFontSize(p.text) +
-					getFontColor(p.text) + 
+					getFontColor(p.text) +
 					getFontStyle(p.text);
 				subtext.value = convertText(p.text);
 
-				switch (p.AccessoryIndicatorType) 
+				switch (p.AccessoryIndicatorType)
 				{
 					case 'Disclosure' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.91, h * 0.35, h * 0.15, h * 0.3), 'shape=mxgraph.ios7.misc.right;strokeColor=#D2D2D6;');
 						icon1.vertex = true;
 						v.insert(icon1);
-						
+
 						break;
-						
+
 					case 'DetailDisclosure' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.91, h * 0.35, h * 0.15, h * 0.3), 'shape=mxgraph.ios7.misc.right;strokeColor=#D2D2D6;');
 						icon1.vertex = true;
 						v.insert(icon1);
-						
+
 						var icon2 = new mxCell('', new mxGeometry(w * 0.79, h * 0.25, h * 0.5, h * 0.5), 'shape=mxgraph.ios7.icons.info;strokeColor=#007AFF;fillColor=#ffffff;');
 						icon2.vertex = true;
 						v.insert(icon2);
-						
+
 						break;
-						
+
 					case 'DetailIndicator' :
 						var icon2 = new mxCell('', new mxGeometry(w * 0.87, h * 0.25, h * 0.5, h * 0.5), 'shape=mxgraph.ios7.icons.info;strokeColor=#007AFF;fillColor=#ffffff;');
 						icon2.vertex = true;
 						v.insert(icon2);
-						
+
 						break;
-						
+
 					case 'CheckMark' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.89, h * 0.37, h * 0.4, h * 0.26), 'shape=mxgraph.ios7.misc.check;strokeColor=#007AFF;strokeWidth=2;');
 						icon1.vertex = true;
 						v.insert(icon1);
-						
+
 						break;
 				}
 
 				break;
-				
+
 			case 'iOSRightDetailCell' :
 				v.style += 'shape=partialRectangle;left=0;top=0;right=0;fillColor=#ffffff;strokeColor=#C8C7CC;align=left;spacing=0;verticalAlign=middle;spacingLeft=' + (p.SeparatorInset * scale) + ';';
 				v.style += getFontSize(p.subtext) +
-					getFontColor(p.subtext) + 
+					getFontColor(p.subtext) +
 					getFontStyle(p.subtext);
 
 				v.value = convertText(p.subtext);
-				
+
 				var subtext = null;
-				
-				switch (p.AccessoryIndicatorType) 
+
+				switch (p.AccessoryIndicatorType)
 				{
 					case 'Disclosure' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.91, h * 0.35, h * 0.15, h * 0.3), 'shape=mxgraph.ios7.misc.right;strokeColor=#D2D2D6;');
@@ -4646,12 +4646,12 @@ LucidImporter = {};
 						subtext = new mxCell('', new mxGeometry(w * 0.55, 0, w * 0.3, h), 'fillColor=none;strokeColor=none;spacing=0;align=right;');
 
 						break;
-						
+
 					case 'DetailDisclosure' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.91, h * 0.35, h * 0.15, h * 0.3), 'shape=mxgraph.ios7.misc.right;strokeColor=#D2D2D6;');
 						icon1.vertex = true;
 						v.insert(icon1);
-						
+
 						var icon2 = new mxCell('', new mxGeometry(w * 0.79, h * 0.25, h * 0.5, h * 0.5), 'shape=mxgraph.ios7.icons.info;strokeColor=#007AFF;fillColor=#ffffff;');
 						icon2.vertex = true;
 						v.insert(icon2);
@@ -4659,7 +4659,7 @@ LucidImporter = {};
 						subtext = new mxCell('', new mxGeometry(w * 0.45, 0, w * 0.3, h), 'fillColor=none;strokeColor=none;spacing=0;align=right;');
 
 						break;
-						
+
 					case 'DetailIndicator' :
 						var icon2 = new mxCell('', new mxGeometry(w * 0.87, h * 0.25, h * 0.5, h * 0.5), 'shape=mxgraph.ios7.icons.info;strokeColor=#007AFF;fillColor=#ffffff;');
 						icon2.vertex = true;
@@ -4668,7 +4668,7 @@ LucidImporter = {};
 						subtext = new mxCell('', new mxGeometry(w * 0.52, 0, w * 0.3, h), 'fillColor=none;strokeColor=none;spacing=0;align=right;');
 
 						break;
-						
+
 					case 'CheckMark' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.89, h * 0.37, h * 0.4, h * 0.26), 'shape=mxgraph.ios7.misc.check;strokeColor=#007AFF;strokeWidth=2;');
 						icon1.vertex = true;
@@ -4677,7 +4677,7 @@ LucidImporter = {};
 						subtext = new mxCell('', new mxGeometry(w * 0.55, 0, w * 0.3, h), 'fillColor=none;strokeColor=none;spacing=0;align=right;');
 
 						break;
-						
+
 					default :
 						subtext = new mxCell('', new mxGeometry(w * 0.65, 0, w * 0.3, h), 'fillColor=none;strokeColor=none;spacing=0;align=right;');
 				}
@@ -4685,21 +4685,21 @@ LucidImporter = {};
 				subtext.vertex = true;
 				v.insert(subtext);
 				subtext.style += getFontSize(p.text) +
-					getFontColor(p.text) + 
+					getFontColor(p.text) +
 					getFontStyle(p.text);
 				subtext.value = convertText(p.text);
 
 
 				break;
-				
+
 			case 'iOSLeftDetailCell' :
 				v.style += 'shape=partialRectangle;left=0;top=0;right=0;fillColor=#ffffff;strokeColor=#C8C7CC;';
-				
+
 				var text = new mxCell('', new mxGeometry(0, 0, w * 0.25, h), 'fillColor=none;strokeColor=none;spacing=0;align=right;verticalAlign=middle;spacingRight=3;');
 				text.vertex = true;
 				v.insert(text);
 				text.style += getFontSize(p.subtext) +
-					getFontColor(p.subtext) + 
+					getFontColor(p.subtext) +
 					getFontStyle(p.subtext);
 				text.value = convertText(p.subtext);
 
@@ -4707,55 +4707,55 @@ LucidImporter = {};
 				subtext.vertex = true;
 				v.insert(subtext);
 				subtext.style += getFontSize(p.text) +
-					getFontColor(p.text) + 
+					getFontColor(p.text) +
 					getFontStyle(p.text);
 				subtext.value = convertText(p.text);
 
-				switch (p.AccessoryIndicatorType) 
+				switch (p.AccessoryIndicatorType)
 				{
 					case 'Disclosure' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.91, h * 0.35, h * 0.15, h * 0.3), 'shape=mxgraph.ios7.misc.right;strokeColor=#D2D2D6;');
 						icon1.vertex = true;
 						v.insert(icon1);
-						
+
 						break;
-						
+
 					case 'DetailDisclosure' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.91, h * 0.35, h * 0.15, h * 0.3), 'shape=mxgraph.ios7.misc.right;strokeColor=#D2D2D6;');
 						icon1.vertex = true;
 						v.insert(icon1);
-						
+
 						var icon2 = new mxCell('', new mxGeometry(w * 0.79, h * 0.25, h * 0.5, h * 0.5), 'shape=mxgraph.ios7.icons.info;strokeColor=#007AFF;fillColor=#ffffff;');
 						icon2.vertex = true;
 						v.insert(icon2);
-						
+
 						break;
-						
+
 					case 'DetailIndicator' :
 						var icon2 = new mxCell('', new mxGeometry(w * 0.87, h * 0.25, h * 0.5, h * 0.5), 'shape=mxgraph.ios7.icons.info;strokeColor=#007AFF;fillColor=#ffffff;');
 						icon2.vertex = true;
 						v.insert(icon2);
-						
+
 						break;
-						
+
 					case 'CheckMark' :
 						var icon1 = new mxCell('', new mxGeometry(w * 0.89, h * 0.37, h * 0.4, h * 0.26), 'shape=mxgraph.ios7.misc.check;strokeColor=#007AFF;strokeWidth=2;');
 						icon1.vertex = true;
 						v.insert(icon1);
-						
+
 						break;
 				}
 
 				break;
-				
+
 			case 'iOSTableGroupedSectionBreak' :
 				v.style += 'shape=partialRectangle;left=0;right=0;fillColor=#EFEFF4;strokeColor=#C8C7CC;';
-				
+
 				var text1 = new mxCell('', new mxGeometry(0, 0, w, h * 0.4), 'fillColor=none;strokeColor=none;spacing=10;align=left;');
 				text1.vertex = true;
 				v.insert(text1);
 				text1.style += getFontSize(p.text) +
-					getFontColor(p.text) + 
+					getFontColor(p.text) +
 					getFontStyle(p.text);
 				text1.value = convertText(p.text);
 
@@ -4763,49 +4763,49 @@ LucidImporter = {};
 				text2.vertex = true;
 				v.insert(text2);
 				text2.style += getFontSize(p["bottom-text"]) +
-					getFontColor(p["bottom-text"]) + 
+					getFontColor(p["bottom-text"]) +
 					getFontStyle(p["bottom-text"]);
 				text2.value = convertText(p["bottom-text"]);
 
 				break;
-				
+
 			case 'iOSTablePlainHeaderFooter' :
 				v.style += 'fillColor=#F7F7F7;strokeColor=none;align=left;spacingLeft=5;spacing=0;';
 				v.style += getFontSize(p.text) +
-					getFontColor(p.text) + 
+					getFontColor(p.text) +
 					getFontStyle(p.text);
 				v.value = convertText(p.text);
-				
+
 				break;
-				
+
 			case 'SMPage' :
 				if (p.Group)
 				{
 					v.style += 'strokeColor=none;fillColor=none;'
-						
+
 					var item1 = new mxCell('', new mxGeometry(0, 0, w * 0.9, h * 0.9), 'part=1;');
 					item1.vertex = true;
 					v.insert(item1);
-					
-					item1.style += 	getStrokeColor(p, a) + 
+
+					item1.style += 	getStrokeColor(p, a) +
 						getFillColor(p, a) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
-						getStrokeWidth(p); 
+						getStrokeWidth(p);
 
 					var item2 = new mxCell('', new mxGeometry(w * 0.1, h * 0.1, w * 0.9, h * 0.9), 'part=1;');
 					item2.vertex = true;
 					v.insert(item2);
-					
-					item2.style += 	getStrokeColor(p, a) + 
+
+					item2.style += 	getStrokeColor(p, a) +
 						getFillColor(p, a) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
 						getStrokeWidth(p) +
 						getLabelStyle(p);
-					
+
 					item2.value = convertText(p.Text);
-					
+
 					if (p.Future)
 					{
 						item1.style += 'dashed=1;';
@@ -4818,19 +4818,19 @@ LucidImporter = {};
 					{
 						v.style += 'dashed=1;';
 					}
-					
-					v.style += 	getStrokeColor(p, a) + 
+
+					v.style += 	getStrokeColor(p, a) +
 						getFillColor(p, a) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
-						getStrokeWidth(p) + 
+						getStrokeWidth(p) +
 						getLabelStyle(p);
-				
+
 					v.value = convertText(p.Text);
 				}
-				
+
 				break;
-				
+
 			case 'SMHome' :
 			case 'SMPrint' :
 			case 'SMSearch' :
@@ -4846,15 +4846,15 @@ LucidImporter = {};
 			case 'SMForm' :
 			case 'SMGame' :
 			case 'SMUpload' :
-				
-				v.style += 	getStrokeColor(p, a) + 
+
+				v.style += 	getStrokeColor(p, a) +
 				getFillColor(p, a) +
-				getOpacity(p, a) + 
+				getOpacity(p, a) +
 				getShadow(p) +
 				getStrokeWidth(p);
 
 				var item1 = null;
-				
+
 				switch (obj.Class)
 				{
 					case 'SMHome' :
@@ -4886,7 +4886,7 @@ LucidImporter = {};
 						break;
 					case 'SMChart' :
 						var fc = getFillColor(p, a);
-						
+
 						if (fc == '')
 						{
 							fc = '#ffffff;'
@@ -4895,7 +4895,7 @@ LucidImporter = {};
 						{
 							fc = fc.replace('fillColor=', '');
 						}
-						
+
 						item1 = new mxCell('', new mxGeometry(w * 0.5 - h * 0.35, h * 0.15, h * 0.7, h * 0.7), 'part=1;shape=mxgraph.ios7.icons.pie_chart;fillColor=#e6e6e6;fillOpacity=50;strokeWidth=4;strokeColor=' + fc);
 						break;
 					case 'SMCloud' :
@@ -4914,44 +4914,44 @@ LucidImporter = {};
 						item1 = new mxCell('', new mxGeometry(w * 0.5 - h * 0.4, h * 0.2, h * 0.8, h * 0.6), 'part=1;shape=mxgraph.mscae.enterprise.backup_online;fillColor=#e6e6e6;opacity=50;strokeColor=none;');
 						break;
 				}
-					
+
 				item1.vertex = true;
 				v.insert(item1);
-				
+
 				item1.style += 	getLabelStyle(p);
 				item1.value = convertText(p.Text);
-				
+
 				break;
 			case 'UMLMultiplicityBlock' :
 				v.style += 'strokeColor=none;fillColor=none;'
-					
+
 					var item1 = new mxCell('', new mxGeometry(w * 0.1, 0, w * 0.9, h * 0.9), 'part=1;');
 					item1.vertex = true;
 					v.insert(item1);
-					
-					item1.style += 	getStrokeColor(p, a) + 
+
+					item1.style += 	getStrokeColor(p, a) +
 						getFillColor(p, a) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
-						getStrokeWidth(p); 
+						getStrokeWidth(p);
 
 					var item2 = new mxCell('', new mxGeometry(0, h * 0.1, w * 0.9, h * 0.9), 'part=1;');
 					item2.vertex = true;
 					v.insert(item2);
-					
-					item2.style += 	getStrokeColor(p, a) + 
+
+					item2.style += 	getStrokeColor(p, a) +
 						getFillColor(p, a) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
 						getStrokeWidth(p) +
 						getLabelStyle(p.Text);
-					
+
 					item2.value = convertText(p.Text);
-				
+
 				break;
 
-			case 'UMLConstraintBlock' :				
-				
+			case 'UMLConstraintBlock' :
+
 				var brace1 = new mxCell('', new mxGeometry(0, 0,	h * 0.25, h), 'shape=curlyBracket;rounded=1;');
 				brace1.vertex = true;
 				v.insert(brace1);
@@ -4964,43 +4964,43 @@ LucidImporter = {};
 				label.vertex = true;
 				label.value = convertText(p);
 				v.insert(label);
-				
+
 				v.style = "strokeColor=none;fillColor=none;"
-				v.style += 	getRotation(p, a, v); 
-					
+				v.style += 	getRotation(p, a, v);
 
-				brace1.style += getStrokeColor(p, a) + 
-								getOpacity(p, a) + 
-								getShadow(p) +
-								getStrokeStyle(p) + 
-								getStrokeWidth(p); 
 
-				brace2.style += getStrokeColor(p, a) + 
-								getOpacity(p, a) + 
+				brace1.style += getStrokeColor(p, a) +
+								getOpacity(p, a) +
 								getShadow(p) +
-								getStrokeStyle(p) + 
-								getStrokeWidth(p); 
+								getStrokeStyle(p) +
+								getStrokeWidth(p);
+
+				brace2.style += getStrokeColor(p, a) +
+								getOpacity(p, a) +
+								getShadow(p) +
+								getStrokeStyle(p) +
+								getStrokeWidth(p);
 
 				label.style += 	getFontSize(p) +
-								getFontColor(p) + 
+								getFontColor(p) +
 								getFontStyle(p) +
-								getTextAlignment(p) + 
+								getTextAlignment(p) +
 								getTextLeftSpacing(p) +
-								getTextRightSpacing(p) + 
+								getTextRightSpacing(p) +
 								getTextTopSpacing(p) +
-								getTextBottomSpacing(p) + 
+								getTextBottomSpacing(p) +
 								getTextGlobalSpacing(p) +
-								getTextVerticalAlignment(p); 
+								getTextVerticalAlignment(p);
 				break;
 
-			case 'UMLTextBlock' : 
+			case 'UMLTextBlock' :
 				v.style += 'strokeColor=none;' +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeStyle(p) + 
+					getStrokeStyle(p) +
 					getStrokeWidth(p) +
 					getLabelStyle(p.Text);
-				
+
 				v.value = convertText(p.Text);
 
 				break;
@@ -5018,46 +5018,46 @@ LucidImporter = {};
 					case 1:
 						v.style += getFillColor(p, a) +
 							getStrokeColor(p, a) +
-							getOpacity(p, a) + 
+							getOpacity(p, a) +
 							getShadow(p) +
-							getStrokeStyle(p) + 
+							getStrokeStyle(p) +
 							getStrokeWidth(p) +
 							getLabelStyle(p.Text);
-					
+
 						v.value = convertText(p.Text);
 						break
 					case 2:
 						v.style += 'shape=ext;double=1;' +
 							getFillColor(p, a) +
 							getStrokeColor(p, a) +
-							getOpacity(p, a) + 
+							getOpacity(p, a) +
 							getShadow(p) +
-							getStrokeStyle(p) + 
+							getStrokeStyle(p) +
 							getStrokeWidth(p) +
 							getLabelStyle(p.Text);
-				
+
 						v.value = convertText(p.Text);
 						break
 					case 3:
 						v.style += 'shape=ext;dashed=1;dashPattern=2 1;' +
 							getFillColor(p, a) +
 							getStrokeColor(p, a) +
-							getOpacity(p, a) + 
+							getOpacity(p, a) +
 							getShadow(p) +
 							getStrokeWidth(p) +
 							getLabelStyle(p.Text);
-					
+
 						v.value = convertText(p.Text);
 						break
 					case 4:
 						v.style += 'shape=ext;strokeWidth=2;' +
 							getFillColor(p, a) +
 							getStrokeColor(p, a) +
-							getOpacity(p, a) + 
+							getOpacity(p, a) +
 							getShadow(p) +
-							getStrokeStyle(p) + 
+							getStrokeStyle(p) +
 							getLabelStyle(p.Text);
-					
+
 						v.value = convertText(p.Text);
 						break
 				}
@@ -5095,25 +5095,25 @@ LucidImporter = {};
 							item1.geometry.offset = new mxPoint(4, 5);
 							break;
 					}
-					
+
 					if (p.bpmnTaskType == 1)
 					{
 						var sc = getFillColor(p, a);
 						var fc = getStrokeColor(p, a);
-							
+
 						fc = fc.replace('strokeColor', 'fillColor');
 						sc = sc.replace('fillColor', 'strokeColor');
-						
+
 						if (fc == '')
 						{
 							fc = 'fillColor=#000000;'
 						}
-						
+
 						if (sc == '')
 						{
 							sc = 'strokeColor=#ffffff;'
 						}
-						
+
 						item1.style += sc + fc + 'part=1;';
 
 					}
@@ -5121,27 +5121,27 @@ LucidImporter = {};
 					{
 						item1.style += getFillColor(p, a) + getStrokeColor(p, a) + 'part=1;';
 					}
-					
+
 					item1.geometry.relative = true;
 					item1.vertex = true;
 					v.insert(item1);
 				}
 
 				var numIcons = 0;
-				
+
 				if (p.bpmnActivityMarker1 != 0)
 				{
 					numIcons++;
 				}
-				
+
 				if (p.bpmnActivityMarker2 != 0)
 				{
 					numIcons++;
 				}
-				
+
 				var iconX = 0;
 				var iconY = h - 20;
-				
+
 				if (numIcons == 1)
 				{
 					iconX = -7.5;
@@ -5180,12 +5180,12 @@ LucidImporter = {};
 							item1.geometry.offset = new mxPoint(iconX, -17);
 							var fc = getStrokeColor(p, a);
 							fc = fc.replace('strokeColor', 'fillColor');
-							
+
 							if (fc == '')
 							{
 								fc = 'fillColor=#000000;'
 							}
-							
+
 							item1.style += fc;
 							break;
 						case 6:
@@ -5194,12 +5194,12 @@ LucidImporter = {};
 							item1.style += getFillColor(p, a) + getStrokeColor(p, a);
 							break;
 					}
-					
+
 					item1.geometry.relative = true;
 					item1.vertex = true;
 					v.insert(item1);
 				}
-				
+
 				if (numIcons == 2)
 				{
 					iconX = 5;
@@ -5234,12 +5234,12 @@ LucidImporter = {};
 							item1.geometry.offset = new mxPoint(iconX, -17);
 							var fc = getStrokeColor(p, a);
 							fc = fc.replace('strokeColor', 'fillColor');
-							
+
 							if (fc == '')
 							{
 								fc = 'fillColor=#000000;'
 							}
-							
+
 							item1.style += fc;
 							break;
 						case 6:
@@ -5255,27 +5255,27 @@ LucidImporter = {};
 				}
 
 				break;
-				
+
 			case 'BPMNEvent' :
 				v.style += 'shape=mxgraph.bpmn.shape;verticalLabelPosition=bottom;verticalAlign=top;' +
 					getFillColor(p, a) +
 					getStrokeColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeStyle(p) + 
-					getStrokeWidth(p) + 
+					getStrokeStyle(p) +
+					getStrokeWidth(p) +
 					getFontSize(p) +
-					getFontColor(p) + 
+					getFontColor(p) +
 					getFontStyle(p) +
-					getTextAlignment(p) + 
+					getTextAlignment(p) +
 					getTextLeftSpacing(p) +
-					getTextRightSpacing(p) + 
+					getTextRightSpacing(p) +
 					getTextTopSpacing(p) +
-					getTextBottomSpacing(p) + 
+					getTextBottomSpacing(p) +
 					getTextGlobalSpacing(p);
-			
+
 				v.value = convertText(p.Text);
-				
+
 				if (p.bpmnDashed == true)
 				{
 					switch (p.bpmnEventGroup)
@@ -5291,7 +5291,7 @@ LucidImporter = {};
 							break;
 					}
 				}
-				else 
+				else
 				{
 					switch (p.bpmnEventGroup)
 					{
@@ -5306,7 +5306,7 @@ LucidImporter = {};
 							break;
 					}
 				}
-				
+
 				switch(p.bpmnEventType)
 				{
 					case 1:
@@ -5345,9 +5345,9 @@ LucidImporter = {};
 					case 12:
 						v.style += 'symbol=terminate;';
 						break;
-					
+
 				}
-				
+
 				break;
 			case 'BPMNChoreography' :
 				break;
@@ -5355,13 +5355,13 @@ LucidImporter = {};
 				v.style += 'shape=hexagon;perimeter=hexagonPerimeter2;' +
 					getFillColor(p, a) +
 					getStrokeColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeStyle(p) + 
+					getStrokeStyle(p) +
 					getLabelStyle(p);
-		
+
 				v.value = convertText(p.Text);
-				
+
 				if (p.bpmnConversationType == 0)
 				{
 					v.style += getStrokeWidth(p);
@@ -5370,7 +5370,7 @@ LucidImporter = {};
 				{
 					v.style += 'strokeWidth=2;';
 				}
-				
+
 				if (p.bpmnIsSubConversation)
 				{
 					var item1 = new mxCell('', new mxGeometry(0.5, 1, 12, 12), 'shape=plus;part=1;');
@@ -5380,17 +5380,17 @@ LucidImporter = {};
 					item1.vertex = true;
 					v.insert(item1);
 				}
-				
+
 				break;
 			case 'BPMNGateway' :
-				v.style += 'shape=mxgraph.bpmn.shape;perimeter=rhombusPerimeter;background=gateway;' + 
+				v.style += 'shape=mxgraph.bpmn.shape;perimeter=rhombusPerimeter;background=gateway;' +
 					getFillColor(p, a) +
 					getStrokeColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeStyle(p) + 
+					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				switch (p.bpmnGatewayType)
 				{
 					case 0:
@@ -5420,12 +5420,12 @@ LucidImporter = {};
 				}
 				break;
 			case 'BPMNData' :
-				v.style += 'shape=note;size=14;' + 
+				v.style += 'shape=note;size=14;' +
 					getFillColor(p, a) +
 					getStrokeColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeStyle(p) + 
+					getStrokeStyle(p) +
 					getLabelStyle(p);
 
 				switch (p.bpmnDataType)
@@ -5448,7 +5448,7 @@ LucidImporter = {};
 						item1.vertex = true;
 						v.insert(item1);
 						v.style += 'verticalLabelPosition=bottom;verticalAlign=top;';
-						
+
 						var text1 = new mxCell('', new mxGeometry(0, 0, w, 20), 'strokeColor=none;fillColor=none;');
 						text1.geometry.offset = new mxPoint(0, 14);
 						text1.geometry.relative = true;
@@ -5464,17 +5464,17 @@ LucidImporter = {};
 						item1.geometry.relative = true;
 						item1.vertex = true;
 						v.insert(item1);
-						
+
 						var fc = getStrokeColor(p, a);
 						fc = fc.replace('strokeColor', 'fillColor');
-						
+
 						if (fc == '')
 						{
 							fc = 'fillColor=#000000;'
 						}
-						
+
 						item1.style += fc;
-						
+
 						var text1 = new mxCell('', new mxGeometry(0, 0, w, 20), 'strokeColor=none;fillColor=none;');
 						text1.geometry.offset = new mxPoint(0, 14);
 						text1.geometry.relative = true;
@@ -5492,9 +5492,9 @@ LucidImporter = {};
 			case 'BPMNBlackPool' :
 				v.style += getFillColor(p, a) +
 					getStrokeColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeStyle(p) + 
+					getStrokeStyle(p) +
 					getLabelStyle(p);
 
 				v.value = convertText(p.Text);
@@ -5502,65 +5502,65 @@ LucidImporter = {};
 				var item1 = new mxCell('', new mxGeometry(0, 0, w, h), 'fillColor=#000000;strokeColor=none;opacity=30;');
 				item1.vertex = true;
 				v.insert(item1);
-				
+
 				break;
-				
+
 			case 'DFDExternalEntityBlock' :
-				
+
 				v.style += 'strokeColor=none;fillColor=none;'
-					
+
 					var item1 = new mxCell('', new mxGeometry(0, 0, w * 0.95, h * 0.95), 'part=1;');
 					item1.vertex = true;
 					v.insert(item1);
-					
-					item1.style += 	getStrokeColor(p, a) + 
+
+					item1.style += 	getStrokeColor(p, a) +
 						getFillColor(p, a) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
-						getStrokeWidth(p); 
+						getStrokeWidth(p);
 
 					var item2 = new mxCell('', new mxGeometry(w * 0.05, h * 0.05, w * 0.95, h * 0.95), 'part=1;');
 					item2.vertex = true;
 					v.insert(item2);
-					
-					item2.style += 	getStrokeColor(p, a) + 
+
+					item2.style += 	getStrokeColor(p, a) +
 						getFillColor(p, a) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
 						getStrokeWidth(p) +
 						getLabelStyle(p.Text);
-					
+
 					item2.value = convertText(p.Text);
-				
+
 				break;
-				
+
 			case 'GSDFDDataStoreBlock' :
-				
+
 				v.style += 'shape=partialRectangle;right=0;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getLabelStyle(p.Text);
-			
+
 				v.value = convertText(p.Text);
 
 				var item1 = new mxCell('', new mxGeometry(0, 0, w * 0.2, h), 'part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				
-				item1.style += 	getStrokeColor(p, a) + 
+
+				item1.style += 	getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeWidth(p) + 
+					getStrokeWidth(p) +
 					getLabelStyle(p.Number);
 
 				item1.value = convertText(p.Number);
 
 				break;
-				
+
 			case 'DefaultTableBlock' :
 				break;
 			case 'VSMDedicatedProcessBlock' :
@@ -5576,19 +5576,19 @@ LucidImporter = {};
 					v.value = convertText(p.Resources);
 				}
 
-				
-				v.style += 	getStrokeColor(p, a) + 
+
+				v.style += 	getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeWidth(p) + 
+					getStrokeWidth(p) +
 					getFontSize(p) +
-					getFontColor(p) + 
+					getFontColor(p) +
 					getFontStyle(p) +
-					getTextAlignment(p) + 
+					getTextAlignment(p) +
 					getTextLeftSpacing(p) +
-					getTextRightSpacing(p) + 
-					getTextBottomSpacing(p) + 
+					getTextRightSpacing(p) +
+					getTextBottomSpacing(p) +
 					getTextGlobalSpacing(p) +
 					getTextVerticalAlignment(p);
 
@@ -5599,12 +5599,12 @@ LucidImporter = {};
 					item1.geometry.offset = new mxPoint(4, -13);
 					item1.vertex = true;
 					v.insert(item1);
-					
-					item1.style += 	getStrokeColor(p, a) + 
+
+					item1.style += 	getStrokeColor(p, a) +
 						getFillColor(p, a) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
-						getStrokeWidth(p); 
+						getStrokeWidth(p);
 				}
 
 				var text1 = new mxCell('', new mxGeometry(0, 0, w, 15), 'strokeColor=none;fillColor=none;part=1;');
@@ -5614,82 +5614,82 @@ LucidImporter = {};
 				text1.style += getLabelStyle(p.Title);
 
 				break;
-				
+
 			case 'VSMSharedProcessBlock' :
 				v.style += 'shape=mxgraph.lean_mapping.manufacturing_process_shared;spacingTop=-5;verticalAlign=top;';
 
 				v.value = convertText(p.Text);
-				
-				v.style += 	getStrokeColor(p, a) + 
+
+				v.style += 	getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeWidth(p) + 
+					getStrokeWidth(p) +
 					getFontSize(p) +
-					getFontColor(p) + 
+					getFontColor(p) +
 					getFontStyle(p) +
-					getTextAlignment(p) + 
+					getTextAlignment(p) +
 					getTextLeftSpacing(p) +
-					getTextRightSpacing(p) + 
-					getTextBottomSpacing(p) + 
-					getTextTopSpacing(p) + 
+					getTextRightSpacing(p) +
+					getTextBottomSpacing(p) +
+					getTextTopSpacing(p) +
 					getTextGlobalSpacing(p)
-	
+
 				var text1 = new mxCell('', new mxGeometry(w * 0.1, h * 0.3, w * 0.8, h * 0.6), 'part=1;');
 				text1.vertex = true;
 				v.insert(text1);
 				text1.value = convertText(p.Resource);
-				text1.style += 	getStrokeColor(p, a) + 
+				text1.style += 	getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeWidth(p) + 
+					getStrokeWidth(p) +
 					getLabelStyle(p.Resource);
 
 				break;
-				
+
 			case 'VSMWorkcellBlock' :
 				v.style += 'shape=mxgraph.lean_mapping.work_cell;verticalAlign=top;spacingTop=-2;';
-				
-				v.style += 	getStrokeColor(p, a) + 
+
+				v.style += 	getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeWidth(p) + 
+					getStrokeWidth(p) +
 					getFontSize(p) +
-					getFontColor(p) + 
+					getFontColor(p) +
 					getFontStyle(p) +
-					getTextAlignment(p) + 
+					getTextAlignment(p) +
 					getTextLeftSpacing(p) +
-					getTextRightSpacing(p) + 
-					getTextBottomSpacing(p) + 
+					getTextRightSpacing(p) +
+					getTextBottomSpacing(p) +
 					getTextGlobalSpacing(p);
-		
+
 				v.value = convertText(p.Text);
 
 				break;
 			case 'VSMSafetyBufferStockBlock' :
 			case 'VSMDatacellBlock' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 				var itemFullH = h;
-				
+
 				var numItems = parseInt(p.Cells);
 
-				var st = getStrokeColor(p, a) + 
+				var st = getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeWidth(p) + 'part=1;'; 
+					getStrokeWidth(p) + 'part=1;';
 
 				if (numItems > 0)
 				{
 					itemFullH = itemFullH / numItems;
 				}
-				
+
 				var item = new Array();
 				var line = new Array();
-				
+
 				for (var i = 1; i <= numItems; i++)
 				{
 					item[i] = new mxCell('', new mxGeometry(0, (i - 1) * itemFullH, w, itemFullH), st);
@@ -5698,97 +5698,97 @@ LucidImporter = {};
 					item[i].value = convertText(p["cell_" + i]);
 					item[i].style += getLabelStyle(p["cell_" + i]);
 				}
-				
+
 				break;
-			case 'VSMInventoryBlock' : 
+			case 'VSMInventoryBlock' :
 				v.style += 'shape=mxgraph.lean_mapping.inventory_box;verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
-					getStrokeWidth(p) + 
+					getStrokeWidth(p) +
 					getFontSize(p) +
-					getFontColor(p) + 
+					getFontColor(p) +
 					getFontStyle(p) +
-					getTextAlignment(p) + 
+					getTextAlignment(p) +
 					getTextLeftSpacing(p) +
-					getTextRightSpacing(p) + 
+					getTextRightSpacing(p) +
 					getTextTopSpacing(p) +
-					getTextBottomSpacing(p) + 
+					getTextBottomSpacing(p) +
 					getTextGlobalSpacing(p);
 				v.value = convertText(p.Text);
-		
+
 				break;
 			case 'VSMSupermarketBlock' :
 				v.style += 'strokeColor=none;' + getFillColor(p, a);
-				
+
 				var itemFullH = h;
-				
+
 				var numItems = parseInt(p.Cells);
 
-				var st = getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
-					getStrokeWidth(p) + 'part=1;fillColor=none;'; 
+				var st = getStrokeColor(p, a) +
+					getOpacity(p, a) +
+					getStrokeWidth(p) + 'part=1;fillColor=none;';
 
 				if (numItems > 0)
 				{
 					itemFullH = itemFullH / numItems;
 				}
-				
+
 				var item = new Array();
 				var text = new Array();
-				
+
 				for (var i = 1; i <= numItems; i++)
 				{
 					item[i] = new mxCell('', new mxGeometry(w * 0.5, (i - 1) * itemFullH, w * 0.5, itemFullH), 'shape=partialRectangle;left=0;' + st);
 					item[i].vertex = true;
 					v.insert(item[i]);
-					
+
 					text[i] = new mxCell('', new mxGeometry(0, (i - 1) * itemFullH, w, itemFullH), 'strokeColor=none;fillColor=none;part=1;');
 					text[i].vertex = true;
 					v.insert(text[i]);
 					text[i].value = convertText(p["cell_" + i]);
 					text[i].style += getLabelStyle(p["cell_" + i]);
 				}
-				
+
 				break;
-			case 'VSMFIFOLaneBlock' : 
+			case 'VSMFIFOLaneBlock' :
 				v.style += 'shape=mxgraph.lean_mapping.fifo_sequence_flow;fontStyle=0;fontSize=18';
 				v.value = 'FIFO';
 				break;
 			case 'VSMGoSeeProductionBlock' :
 				v.style += 'shape=ellipse;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('', new mxGeometry(w * 0.17, h * 0.2, 13, 6), 'shape=mxgraph.lean_mapping.go_see_production_scheduling;flipH=1;part=1;whiteSpace=wrap;html=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += getStrokeColor(p, a) + 
+				item1.style += getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getStrokeWidth(p);
-				
+
 				break;
 			case 'VSMProductionKanbanBatchBlock' :
 				v.style += 'strokeColor=none;fillColor=none;'
 
 				var st = 'shape=card;size=18;flipH=1;part=1;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getStrokeWidth(p);
-				
+
 				var item1 = new mxCell('', new mxGeometry(w * 0.1, 0, w * 0.9, h * 0.8), 'shape=mxgraph.lean_mapping.go_see_production_scheduling;flipH=1;part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += st; 
+				item1.style += st;
 
 				var item2 = new mxCell('', new mxGeometry(w * 0.05, h * 0.1, w * 0.9, h * 0.8), 'shape=mxgraph.lean_mapping.go_see_production_scheduling;flipH=1;part=1;');
 				item2.vertex = true;
@@ -5800,7 +5800,7 @@ LucidImporter = {};
 				v.insert(item3);
 				item3.style += st +
 					getLabelStyle(p);
-				
+
 				item3.value = convertText(p.Text);
 
 				break;
@@ -5808,7 +5808,7 @@ LucidImporter = {};
 				break;
 			case 'AWSRoundedRectangleContainerBlock2' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 				if (p.Spotfleet)
 				{
 					var item1 = new mxCell('', new mxGeometry(0, 0, w, h - 20), 'resizeWidth=1;resizeHeight=1;fillColor=none;align=center;verticalAlign=bottom;spacing=2;rounded=1;arcSize=10;');
@@ -5816,12 +5816,12 @@ LucidImporter = {};
 					item1.geometry.relative = true;
 					item1.vertex = true;
 					v.insert(item1);
-					item1.style += getStrokeColor(p, a) + 
-						getLabelStyle(p.Title) + 
-						getStrokeStyle(p) + 
+					item1.style += getStrokeColor(p, a) +
+						getLabelStyle(p.Title) +
+						getStrokeStyle(p) +
 						getStrokeWidth(p);
 					item1.value = convertText(p.Title);
-					
+
 					var item2 = new mxCell('', new mxGeometry(0, 0, 35, 40), 'strokeColor=none;shape=mxgraph.aws3.spot_instance;fillColor=#f58536;');
 					item2.geometry.relative = true;
 					item2.geometry.offset = new mxPoint(30, 0);
@@ -5835,12 +5835,12 @@ LucidImporter = {};
 					item1.geometry.relative = true;
 					item1.vertex = true;
 					v.insert(item1);
-					item1.style += getStrokeColor(p, a) + 
-						getLabelStyle(p.Title) + 
-						getStrokeStyle(p) + 
+					item1.style += getStrokeColor(p, a) +
+						getLabelStyle(p.Title) +
+						getStrokeStyle(p) +
 						getStrokeWidth(p);
 					item1.value = convertText(p.Title);
-					
+
 					var item2 = new mxCell('', new mxGeometry(0, 0, 30, 40), 'strokeColor=none;shape=mxgraph.aws3.elastic_beanstalk;fillColor=#759C3E;');
 					item2.geometry.relative = true;
 					item2.geometry.offset = new mxPoint(30, 0);
@@ -5854,12 +5854,12 @@ LucidImporter = {};
 					item1.geometry.relative = true;
 					item1.vertex = true;
 					v.insert(item1);
-					item1.style += getStrokeColor(p, a) + 
-						getLabelStyle(p.Title) + 
-						getStrokeStyle(p) + 
+					item1.style += getStrokeColor(p, a) +
+						getLabelStyle(p.Title) +
+						getStrokeStyle(p) +
 						getStrokeWidth(p);
 					item1.value = convertText(p.Title);
-					
+
 					var item2 = new mxCell('', new mxGeometry(0, 0, 32, 40), 'strokeColor=none;shape=mxgraph.aws3.ec2;fillColor=#F58534;');
 					item2.geometry.relative = true;
 					item2.geometry.offset = new mxPoint(30, 0);
@@ -5873,12 +5873,12 @@ LucidImporter = {};
 					item1.geometry.relative = true;
 					item1.vertex = true;
 					v.insert(item1);
-					item1.style += getStrokeColor(p, a) + 
-						getLabelStyle(p.Title) + 
-						getStrokeStyle(p) + 
+					item1.style += getStrokeColor(p, a) +
+						getLabelStyle(p.Title) +
+						getStrokeStyle(p) +
 						getStrokeWidth(p);
 					item1.value = convertText(p.Title);
-					
+
 					var item2 = new mxCell('', new mxGeometry(0, 0, 32, 40), 'strokeColor=none;shape=mxgraph.aws3.permissions;fillColor=#146EB4;');
 					item2.geometry.relative = true;
 					item2.geometry.offset = new mxPoint(30, 0);
@@ -5892,12 +5892,12 @@ LucidImporter = {};
 					item1.geometry.relative = true;
 					item1.vertex = true;
 					v.insert(item1);
-					item1.style += getStrokeColor(p, a) + 
-						getLabelStyle(p.Title) + 
-						getStrokeStyle(p) + 
+					item1.style += getStrokeColor(p, a) +
+						getLabelStyle(p.Title) +
+						getStrokeStyle(p) +
 						getStrokeWidth(p);
 					item1.value = convertText(p.Title);
-					
+
 					var item2 = new mxCell('', new mxGeometry(0, 0, 60, 40), 'strokeColor=none;shape=mxgraph.aws3.virtual_private_cloud;fillColor=#146EB4;');
 					item2.geometry.relative = true;
 					item2.geometry.offset = new mxPoint(30, 0);
@@ -5911,12 +5911,12 @@ LucidImporter = {};
 					item1.geometry.relative = true;
 					item1.vertex = true;
 					v.insert(item1);
-					item1.style += getStrokeColor(p, a) + 
-						getLabelStyle(p.Title) + 
-						getStrokeStyle(p) + 
+					item1.style += getStrokeColor(p, a) +
+						getLabelStyle(p.Title) +
+						getStrokeStyle(p) +
 						getStrokeWidth(p);
 					item1.value = convertText(p.Title);
-					
+
 					var item2 = new mxCell('', new mxGeometry(0, 0, 60, 40), 'strokeColor=none;shape=mxgraph.aws3.cloud;fillColor=#F58534;');
 					item2.geometry.relative = true;
 					item2.geometry.offset = new mxPoint(30, 0);
@@ -5930,12 +5930,12 @@ LucidImporter = {};
 					item1.geometry.relative = true;
 					item1.vertex = true;
 					v.insert(item1);
-					item1.style += getStrokeColor(p, a) + 
-						getLabelStyle(p.Title) + 
-						getStrokeStyle(p) + 
+					item1.style += getStrokeColor(p, a) +
+						getLabelStyle(p.Title) +
+						getStrokeStyle(p) +
 						getStrokeWidth(p);
 					item1.value = convertText(p.Title);
-					
+
 					var item2 = new mxCell('', new mxGeometry(0, 0, 25, 40), 'strokeColor=none;shape=mxgraph.aws3.corporate_data_center;fillColor=#7D7C7C;');
 					item2.geometry.relative = true;
 					item2.geometry.offset = new mxPoint(30, 0);
@@ -5945,61 +5945,61 @@ LucidImporter = {};
 				else
 				{
 					v.style = 'resizeWidth=1;resizeHeight=1;fillColor=none;align=center;verticalAlign=bottom;spacing=2;rounded=1;arcSize=10;' +
-						getStrokeColor(p, a) + 
-						getLabelStyle(p.Title) + 
-						getStrokeStyle(p) + 
+						getStrokeColor(p, a) +
+						getLabelStyle(p.Title) +
+						getStrokeStyle(p) +
 						getStrokeWidth(p);
-					
+
 					v.value = convertText(p.Title);
 				}
 
 				break;
 			case 'AWSElasticComputeCloudBlock2' :
 				v.style += 'strokeColor=none;shape=mxgraph.aws3.ec2;verticalLabelPosition=bottom;align=center;verticalAlign=top;' +
-					getLabelStyle(p.Title) + 
-					getFillColor(p, a) + 
-					getOpacity(p, a) + 
+					getLabelStyle(p.Title) +
+					getFillColor(p, a) +
+					getOpacity(p, a) +
 					getShadow(p);
-				
+
 				v.value = convertText(p.Title);
-				
+
 				break;
-				
+
 			case 'AWSRoute53Block2' :
 				v.style += 'strokeColor=none;shape=mxgraph.aws3.route_53;verticalLabelPosition=bottom;align=center;verticalAlign=top;' +
-					getLabelStyle(p.Title) + 
-					getFillColor(p, a) + 
-					getOpacity(p, a) + 
+					getLabelStyle(p.Title) +
+					getFillColor(p, a) +
+					getOpacity(p, a) +
 					getShadow(p);
-				
+
 				v.value = convertText(p.Title);
-				
+
 				break;
-				
+
 			case 'AWSRDBSBlock2' :
 				v.style += 'strokeColor=none;shape=mxgraph.aws3.rds;verticalLabelPosition=bottom;align=center;verticalAlign=top;' +
-					getLabelStyle(p.Title) + 
-					getFillColor(p, a) + 
-					getOpacity(p, a) + 
+					getLabelStyle(p.Title) +
+					getFillColor(p, a) +
+					getOpacity(p, a) +
 					getShadow(p);
-				
+
 				v.value = convertText(p.Title);
-				
+
 				break;
-				
+
 			case 'NET_RingNetwork' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 			   	var cell = new mxCell('', new mxGeometry(w * 0.25, h * 0.25, w * 0.5, h * 0.5), 'html=1;shape=ellipse;perimeter=ellipsePerimeter;strokeColor=#29AAE1;strokeWidth=2;');
 			   	cell.vertex = true;
 			   	v.insert(cell);
 			   	var cells = [cell];
 			   	cell.style += getFillColor(p, a);
-			   	
+
 			   	var edge = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=none;rounded=0;endArrow=none;dashed=0;html=1;strokeColor=#29AAE1;strokeWidth=2;');
 			   	edge.geometry.relative = true;
 		    	edge.edge = true;
-		    	
+
 		    	addRouterEdge(w * 0.5, 0, edge, select, graph, cells, v, cell);
 		    	addRouterEdge(w * 0.855, h * 0.145, edge, select, graph, cells, v, cell);
 		    	addRouterEdge(w, h * 0.5, edge, select, graph, cells, v, cell);
@@ -6009,10 +6009,10 @@ LucidImporter = {};
 		    	addRouterEdge(0, h * 0.5, edge, select, graph, cells, v, cell);
 		    	addRouterEdge(w * 0.145, h * 0.145, edge, select, graph, cells, v, cell);
 				break;
-				
+
 			case 'NET_Ethernet' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 			   	var cell = new mxCell('', new mxGeometry(0, h * 0.5 - 10, w, 20), 'shape=mxgraph.networks.bus;gradientColor=none;gradientDirection=north;fontColor=#ffffff;perimeter=backbonePerimeter;backboneSize=20;fillColor=#29AAE1;strokeColor=#29AAE1;');
 			   	cell.vertex = true;
 			   	v.insert(cell);
@@ -6024,55 +6024,55 @@ LucidImporter = {};
 
 			   	var cells = [cell];
 		    	var stepX = w / p.NumTopNodes;
-		    	
+
 			   	for (var i = 0; i < p.NumTopNodes; i++)
 			   	{
 			   		addRouterEdge(stepX * 0.5 + i * stepX, 0, edge, select, graph, cells, v, cell);
 			   	}
-			   	
+
 		    	stepX = w / p.NumBottomNodes;
-		    	
+
 			   	for (var i = 0; i < p.NumBottomNodes; i++)
 			   	{
 			   		addRouterEdge(stepX * 0.5 + i * stepX, h, edge, select, graph, cells, v, cell);
 			   	}
-			   	
+
 				break;
-				
+
 			case 'EE_OpAmp' :
-				v.style += 'shape=mxgraph.electrical.abstract.operational_amp_1;' + 
-					getStrokeColor(p, a) + 
+				v.style += 'shape=mxgraph.electrical.abstract.operational_amp_1;' +
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Title);
-				
+
 				if (p.ToggleCharge)
 				{
 					v.style += 'flipV=1;';
 				}
-				
+
 				break;
-				
+
 			case 'EIMessageChannelBlock' :
 			case 'EIDatatypeChannelBlock' :
 			case 'EIInvalidMessageChannelBlock' :
 			case 'EIDeadLetterChannelBlock' :
 			case 'EIGuaranteedDeliveryBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				if (obj.Class == 'EIMessageChannelBlock')
 				{
 					var item1 = new mxCell('', new mxGeometry(0.5, 0.5, w * 0.9, 20), 'shape=mxgraph.eip.messageChannel;fillColor=#818181;part=1;');
@@ -6098,71 +6098,71 @@ LucidImporter = {};
 					var item1 = new mxCell('', new mxGeometry(0.5, 0.5, 20, 27), 'shape=cylinder;fillColor=#818181;part=1;');
 					item1.geometry.offset = new mxPoint( -10, -7);
 				}
-				
+
 				item1.geometry.relative = true;
 				item1.vertex = true;
 				v.insert(item1);
 
-				item1.style += 
-					getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
+					getOpacity(p, a) +
 					getStrokeWidth(p);
 
 			   	var edge = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=none;rounded=0;endArrow=block;dashed=0;html=1;strokeColor=#818181;strokeWidth=1;endFill=1;endSize=6;');
 			   	edge.geometry.relative = true;
 		    	edge.edge = true;
-		    	
+
 		    	addFloatingEdge(w * 0.15, h * 0.25, w * 0.85, h * 0.25, edge, select, graph, cells, v, cell);
-		    	
+
 				break;
 
 			case 'EIChannelAdapterBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('', new mxGeometry(0, h * 0.07, w * 0.21, h * 0.86), 'fillColor=#FFFF33;part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
+					getOpacity(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p);
-				
+
 				var item2 = new mxCell('', new mxGeometry(w * 0.26, h * 0.09, w * 0.2, h * 0.82), 'shape=mxgraph.eip.channel_adapter;fillColor=#4CA3D9;part=1;');
 				item2.vertex = true;
 				v.insert(item2);
-				item2.style += 
-					getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
+				item2.style +=
+					getStrokeColor(p, a) +
+					getOpacity(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p);
-				
+
 				var item3 = new mxCell('', new mxGeometry(1, 0.5, w * 0.35, 20), 'shape=mxgraph.eip.messageChannel;fillColor=#818181;part=1;');
 				item3.geometry.relative = true;
 				item3.geometry.offset = new mxPoint( - w * 0.4, -10);
 				item3.vertex = true;
 				v.insert(item3);
-				item3.style += 
-					getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
+				item3.style +=
+					getStrokeColor(p, a) +
+					getOpacity(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p);
-				
+
 				edge1 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.5;entryX=0;entryY=0.5;endArrow=none;dashed=0;html=1;strokeWidth=1;endFill=1;endSize=2;');
 		    	edge1.geometry.relative = true;
 		    	edge1.edge = true;
 		    	item1.insertEdge(edge1, true);
 		    	item2.insertEdge(edge1, false);
-				edge1.style += getStrokeColor(p, a); 
+				edge1.style += getStrokeColor(p, a);
 
 				select.push(graph.addCell(edge1, null, null, null, null));
 
@@ -6173,41 +6173,41 @@ LucidImporter = {};
 		    	item3.insertEdge(edge2, false);
 
 				select.push(graph.addCell(edge2, null, null, null, null));
-				
+
 				break;
-				
+
 			case 'EIMessageBlock' :
 			case 'EICommandMessageBlock' :
 			case 'EIDocumentMessageBlock' :
 			case 'EIEventMessageBlock' :
 				v.style += 'strokeColor=none;fillColor=none;verticalLabelPosition=bottom;verticalAlign=top;' +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('', new mxGeometry(0, 0, 17, 17), 'shape=ellipse;fillColor=#808080;part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
-				
+
 				var messagesNum = p.Messages;
 				var oneH = (h - 17) / messagesNum;
 				var item2 = new Array();
 				var edge = new Array();
-				
+
 				for (var i = 0; i < messagesNum; i++)
 				{
 					var currY = oneH * (i + 1) - 3;
  					item2[i] = new mxCell('', new mxGeometry(w - 20, currY, 20, 20), 'part=1;');
 					item2[i].vertex = true;
 					v.insert(item2[i]);
-					
-					item2[i].style += 
-						getStrokeColor(p, a) + 
+
+					item2[i].style +=
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p);
@@ -6238,202 +6238,202 @@ LucidImporter = {};
 			    	edge[i].edge = true;
 			    	item1.insertEdge(edge[i], false);
 			    	item2[i].insertEdge(edge[i], true);
-					edge[i].style += 
-						getStrokeColor(p, a) + 
+					edge[i].style +=
+						getStrokeColor(p, a) +
 						getStrokeWidth(p);
 
 					var wp = new Array();
 					wp.push(new mxPoint(x + 8.5, y + currY + 10));
-					
+
 					edge[i].geometry.points = wp;
 					select.push(graph.addCell(edge[i], null, null, null, null));
 				}
 
 				break;
-				
+
 			case 'EIMessageEndpointBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('', new mxGeometry(w * 0.45, h * 0.25, w * 0.3, h * 0.5), 'part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-	
-				item1.style += 
-					getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
+
+				item1.style +=
+					getStrokeColor(p, a) +
+					getOpacity(p, a) +
 					getStrokeWidth(p);
-	
+
 			   	var edge = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=none;rounded=0;endArrow=block;dashed=0;html=1;strokeColor=#818181;strokeWidth=1;endFill=1;endSize=6;');
 			   	edge.geometry.relative = true;
 		    	edge.edge = true;
-		    	
+
 		    	addFloatingEdge(0, h * 0.5, w * 0.4, h * 0.5, edge, select, graph, cells, v, cell);
-		    	
+
 				break;
 			case 'EIPublishSubscribeChannelBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 			   	var edge1 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=none;rounded=0;endArrow=block;dashed=0;html=1;strokeColor=#818181;strokeWidth=1;endFill=1;endSize=6;');
 			   	edge1.geometry.relative = true;
 		    	edge1.edge = true;
 		    	addFloatingEdge(w * 0.05, h * 0.5, w * 0.85, h * 0.5, edge1, select, graph, cells, v, cell);
-		    	
+
 			   	var edge2 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=elbowEdgeStyle;rounded=0;endArrow=block;dashed=0;html=1;strokeColor=#818181;strokeWidth=1;endFill=1;endSize=6;');
 			   	edge2.geometry.relative = true;
 		    	edge2.edge = true;
 		    	addFloatingEdge(w * 0.05, h * 0.5, w * 0.85, h * 0.15, edge2, select, graph, cells, v, cell);
-		    	
+
 			   	var edge3 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=elbowEdgeStyle;rounded=0;endArrow=block;dashed=0;html=1;strokeColor=#818181;strokeWidth=1;endFill=1;endSize=6;');
 			   	edge3.geometry.relative = true;
 		    	edge3.edge = true;
 		    	addFloatingEdge(w * 0.05, h * 0.5, w * 0.85, h * 0.85, edge3, select, graph, cells, v, cell);
-	    	
+
 				break;
-				
+
 			case 'EIMessageBusBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 			   	var edge1 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=none;rounded=0;endArrow=block;dashed=0;html=1;strokeWidth=1;endFill=1;endSize=4;startArrow=block;startFill=1;startSize=4;');
 			   	edge1.geometry.relative = true;
 		    	edge1.edge = true;
 		    	edge1.style += getStrokeColor(p, a);
 		    	addFloatingEdge(w * 0.05, h * 0.5, w * 0.95, h * 0.5, edge1, select, graph, cells, v, cell);
-		    	
+
 			   	var edge2 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=elbowEdgeStyle;rounded=0;endArrow=block;dashed=0;html=1;strokeWidth=1;endFill=1;endSize=4;startArrow=block;startFill=1;startSize=4;');
 			   	edge2.geometry.relative = true;
 		    	edge2.edge = true;
 		    	edge2.style += getStrokeColor(p, a);
 		    	addFloatingEdge(w * 0.3, h * 0.1, w * 0.3, h * 0.5, edge2, select, graph, cells, v, cell);
-		    	
+
 			   	var edge3 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=elbowEdgeStyle;rounded=0;endArrow=block;dashed=0;html=1;strokeWidth=1;endFill=1;endSize=4;startArrow=block;startFill=1;startSize=4;');
 			   	edge3.geometry.relative = true;
 		    	edge3.edge = true;
 		    	edge3.style += getStrokeColor(p, a);
 		    	addFloatingEdge(w * 0.7, h * 0.1, w * 0.7, h * 0.5, edge3, select, graph, cells, v, cell);
-		    	
+
 			   	var edge4 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=elbowEdgeStyle;rounded=0;endArrow=block;dashed=0;html=1;strokeWidth=1;endFill=1;endSize=4;startArrow=block;startFill=1;startSize=4;');
 			   	edge4.geometry.relative = true;
 		    	edge4.edge = true;
 		    	edge4.style += getStrokeColor(p, a);
 		    	addFloatingEdge(w * 0.5, h * 0.5, w * 0.5, h * 0.9, edge4, select, graph, cells, v, cell);
-	    	
+
 				break;
-				
+
 			case 'EIRequestReplyBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('', new mxGeometry(w * 0.2, h * 0.21, w * 0.16, h * 0.24), 'part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
+					getOpacity(p, a) +
 					getStrokeWidth(p);
 
 			   	var edge1 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=none;rounded=0;endArrow=block;dashed=0;html=1;strokeColor=#818181;strokeWidth=1;endFill=1;endSize=6;');
 			   	edge1.geometry.relative = true;
 		    	edge1.edge = true;
-		    	
+
 		    	addFloatingEdge(w * 0.45, h * 0.33, w * 0.8, h * 0.33, edge1, select, graph, cells, v, cell);
-		    	
+
 				var item2 = new mxCell('', new mxGeometry(w * 0.64, h * 0.55, w * 0.16, h * 0.24), 'part=1;');
 				item2.vertex = true;
 				v.insert(item2);
-				item2.style += 
-					getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
+				item2.style +=
+					getStrokeColor(p, a) +
+					getOpacity(p, a) +
 					getStrokeWidth(p);
 
 			   	var edge2 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=none;rounded=0;endArrow=block;dashed=0;html=1;strokeColor=#818181;strokeWidth=1;endFill=1;endSize=6;');
 			   	edge2.geometry.relative = true;
 		    	edge2.edge = true;
-		    	
+
 		    	addFloatingEdge(w * 0.55, h * 0.67, w * 0.2, h * 0.67, edge2, select, graph, cells, v, cell);
-		    	
+
 				break;
 
 			case 'EIReturnAddressBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('', new mxGeometry(w * 0.1, h * 0.15, w * 0.8, h * 0.7), 'part=1;shape=mxgraph.eip.retAddr;fillColor=#FFE040;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
+					getOpacity(p, a) +
 					getStrokeWidth(p);
-				
+
 				break;
-				
+
 			case 'EICorrelationIDBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('', new mxGeometry(w * 0.04, h * 0.06, w * 0.18, h * 0.28), 'shape=ellipse;fillColor=#808080;part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 				item2 = new mxCell('', new mxGeometry(w * 0.2, h * 0.56, w * 0.2, h * 0.32), 'part=1;');
 				item2.vertex = true;
 				v.insert(item2);
-				item2.style += 
-					getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
+				item2.style +=
+					getStrokeColor(p, a) +
+					getOpacity(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p);
 
@@ -6445,28 +6445,28 @@ LucidImporter = {};
 		    	edge1.edge = true;
 		    	item1.insertEdge(edge1, false);
 		    	item2.insertEdge(edge1, true);
-				edge1.style += 
-					getStrokeColor(p, a) + 
+				edge1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 
 				var wp = new Array();
 				wp.push(new mxPoint(x + w * 0.13, y + h * 0.72));
-				
+
 				edge1.geometry.points = wp;
 				select.push(graph.addCell(edge1, null, null, null, null));
-	
+
 				var item3 = new mxCell('', new mxGeometry(w * 0.6, h * 0.06, w * 0.18, h * 0.28), 'shape=ellipse;fillColor=#808080;part=1;');
 				item3.vertex = true;
 				v.insert(item3);
-				item3.style += 
-					getStrokeColor(p, a) + 
+				item3.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 				item4 = new mxCell('', new mxGeometry(w * 0.76, h * 0.56, w * 0.2, h * 0.32), 'part=1;');
 				item4.vertex = true;
 				v.insert(item4);
-				item4.style += 
-					getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
+				item4.style +=
+					getStrokeColor(p, a) +
+					getOpacity(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p);
 
@@ -6478,132 +6478,132 @@ LucidImporter = {};
 		    	edge2.edge = true;
 		    	item3.insertEdge(edge2, false);
 		    	item4.insertEdge(edge2, true);
-				edge2.style += 
-					getStrokeColor(p, a) + 
+				edge2.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 
 				var wp2 = new Array();
 				wp2.push(new mxPoint(x + w * 0.69, y + h * 0.72));
-				
+
 				edge2.geometry.points = wp2;
 				select.push(graph.addCell(edge2, null, null, null, null));
-	
+
 				edge3 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=1;endSize=6;part=1;');
 		    	edge3.geometry.relative = true;
 		    	edge3.edge = true;
 		    	item1.insertEdge(edge3, false);
 		    	item3.insertEdge(edge3, true);
-				edge3.style += 
-					getStrokeColor(p, a) + 
+				edge3.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 
 				select.push(graph.addCell(edge3, null, null, null, null));
-				
+
 				break;
 
 			case 'EIMessageSequenceBlock' :
-				
+
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('1', new mxGeometry(w * 0.2, h * 0.4, w * 0.1, h * 0.19), 'fontStyle=1;fontSize=' + defaultFontSize + ';part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
-				
+
 				var item2 = new mxCell('2', new mxGeometry(w * 0.45, h * 0.4, w * 0.1, h * 0.19), 'fontStyle=1;fontSize=' + defaultFontSize + ';part=1;');
 				item2.vertex = true;
 				v.insert(item2);
-				item2.style += 
-					getStrokeColor(p, a) + 
+				item2.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
-				
+
 				var item3 = new mxCell('3', new mxGeometry(w * 0.7, h * 0.4, w * 0.1, h * 0.19), 'fontStyle=1;fontSize=' + defaultFontSize + ';part=1;');
 				item3.vertex = true;
 				v.insert(item3);
-				item3.style += 
-					getStrokeColor(p, a) + 
+				item3.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
-				
+
 				var edge1 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'curved=1;endArrow=block;html=1;endSize=3;part=1;');
 				item1.insertEdge(edge1, false);
 				item2.insertEdge(edge1, true);
-				
+
 				edge1.geometry.points = [new mxPoint(x + w * 0.375, y + h * 0.15)];
 				edge1.geometry.relative = true;
 				edge1.edge = true;
-				edge1.style += 
-					getStrokeColor(p, a) + 
+				edge1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 				select.push(graph.addCell(edge1, null, null, null, null));
-				
+
 				var edge2 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'curved=1;endArrow=block;html=1;endSize=3;part=1;');
 				item2.insertEdge(edge2, false);
 				item3.insertEdge(edge2, true);
 				edge2.geometry.points = [new mxPoint(x + w * 0.675, y + h * 0.15)];
 				edge2.geometry.relative = true;
 				edge2.edge = true;
-				edge2.style += 
-					getStrokeColor(p, a) + 
+				edge2.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 				select.push(graph.addCell(edge2, null, null, null, null));
-				
+
 				break;
-				
+
 			case 'EIMessageExpirationBlock' :
-				
+
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('', new mxGeometry(w * 0.3, h * 0.2, w * 0.4, h * 0.6), 'shape=mxgraph.ios7.icons.clock;flipH=1;part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
-				
+
 				break;
-				
+
 			case 'EIMessageBrokerBlock' :
 				v.style += 'strokeColor=none;fillColor=none;verticalLabelPosition=bottom;verticalAlign=top;' +
 					getFontSize(p) +
-					getFontColor(p) + 
+					getFontColor(p) +
 					getFontStyle(p) +
-					getTextAlignment(p); 
-				
+					getTextAlignment(p);
+
 				v.value = convertText(p.Text);
 
 				var item1 = new mxCell('', new mxGeometry(w * 0.38, h * 0.42, w * 0.24, h * 0.16), 'part=1;fillColor=#aefe7d;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 
 				var item2 = new mxCell('', new mxGeometry(w * 0.38, 0, w * 0.24, h * 0.16), 'part=1;');
 				item2.vertex = true;
 				v.insert(item2);
-				item2.style += 
-					getFillColor(p, a) + 
-					getStrokeColor(p, a) + 
+				item2.style +=
+					getFillColor(p, a) +
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 
 				var item3 = new mxCell('', new mxGeometry(w * 0.76, h * 0.23, w * 0.24, h * 0.16), 'part=1;');
@@ -6635,136 +6635,136 @@ LucidImporter = {};
 				item1.insertEdge(edge1, false);
 				item2.insertEdge(edge1, true);
 				edge1.edge = true;
-				edge1.style += 
-					getStrokeColor(p, a) + 
+				edge1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 				select.push(graph.addCell(edge1, null, null, null, null));
-				
+
 				var edge2 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'endArrow=none;part=1;');
 				item1.insertEdge(edge2, false);
 				item3.insertEdge(edge2, true);
 				edge2.edge = true;
-				edge2.style += 
-					getStrokeColor(p, a) + 
+				edge2.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 				select.push(graph.addCell(edge2, null, null, null, null));
-				
+
 				var edge3 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'endArrow=none;part=1;');
 				item1.insertEdge(edge3, false);
 				item4.insertEdge(edge3, true);
 				edge3.edge = true;
-				edge3.style += 
-					getStrokeColor(p, a) + 
+				edge3.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 				select.push(graph.addCell(edge3, null, null, null, null));
-				
+
 				var edge4 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'endArrow=none;part=1;');
 				item1.insertEdge(edge4, false);
 				item5.insertEdge(edge4, true);
 				edge4.edge = true;
-				edge4.style += 
-					getStrokeColor(p, a) + 
+				edge4.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 				select.push(graph.addCell(edge4, null, null, null, null));
-				
+
 				var edge5 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'endArrow=none;part=1;');
 				item1.insertEdge(edge5, false);
 				item6.insertEdge(edge5, true);
 				edge5.edge = true;
-				edge5.style += 
-					getStrokeColor(p, a) + 
+				edge5.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 				select.push(graph.addCell(edge5, null, null, null, null));
-				
+
 				var edge6 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'endArrow=none;part=1;');
 				item1.insertEdge(edge6, false);
 				item7.insertEdge(edge6, true);
 				edge6.edge = true;
-				edge6.style += 
-					getStrokeColor(p, a) + 
+				edge6.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 				select.push(graph.addCell(edge6, null, null, null, null));
 
 				break;
-			case 'EIDurableSubscriberBlock' :	
+			case 'EIDurableSubscriberBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 			   	var edge1 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=elbowEdgeStyle;rounded=0;endArrow=block;endFill=1;endSize=6;');
 			   	edge1.geometry.relative = true;
 		    	edge1.edge = true;
 		    	addFloatingEdge(w * 0.05, h * 0.5, w * 0.6, h * 0.25, edge1, select, graph, cells, v, cell);
-		    	
+
 			   	var edge2 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=elbowEdgeStyle;rounded=0;endArrow=block;endFill=1;endSize=6;');
 			   	edge2.geometry.relative = true;
 		    	edge2.edge = true;
 		    	addFloatingEdge(w * 0.05, h * 0.5, w * 0.6, h * 0.75, edge2, select, graph, cells, v, cell);
-		    	
+
 				var item1 = new mxCell('', new mxGeometry(w * 0.7, h * 0.1, w * 0.15, h * 0.32), 'shape=mxgraph.eip.durable_subscriber;part=1;fillColor=#818181;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 
 				break;
-				
+
 			case 'EIControlBusBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('', new mxGeometry(w * 0.25, h * 0.25, w * 0.5, h * 0.5), 'shape=mxgraph.eip.control_bus;part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
-	
+
 				break;
-				
+
 			case 'EIMessageHistoryBlock' :
 				v.style += 'strokeColor=none;fillColor=none;verticalLabelPosition=bottom;verticalAlign=top;' +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('', new mxGeometry(0, 0, 17, 17), 'shape=ellipse;fillColor=#808080;part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
-				
+
 				var item3 = new mxCell('', new mxGeometry(w - 45, 30, 30, 20), 'shape=mxgraph.mockup.misc.mail2;fillColor=#FFE040;part=1;');
 				item3.vertex = true;
 				v.insert(item3);
-				item3.style += 
-					getStrokeColor(p, a) + 
+				item3.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
-				
+
 				edge3 = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0;exitY=0.5;endArrow=none;dashed=0;html=1;');
 		    	edge3.geometry.relative = true;
 		    	edge3.edge = true;
 		    	item1.insertEdge(edge3, false);
 		    	item3.insertEdge(edge3, true);
-				edge3.style += 
-					getStrokeColor(p, a) + 
+				edge3.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 
 				edge3.geometry.points = [new mxPoint(x + 8.5, y + 40)];
@@ -6775,11 +6775,11 @@ LucidImporter = {};
 				v.insert(item4);
 				item4.value = convertText(p.message_0);
 				item4.style += getLabelStyle(p.message_0);
-				
-				item4.style += 
-					getStrokeColor(p, a) + 
+
+				item4.style +=
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p);
@@ -6790,8 +6790,8 @@ LucidImporter = {};
 
 		    	item1.insertEdge(edge4, false);
 		    	item4.insertEdge(edge4, true);
-				edge4.style += 
-					getStrokeColor(p, a) + 
+				edge4.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
 
 				edge4.geometry.points = [new mxPoint(x + 8.5, y + h - 10)];
@@ -6801,7 +6801,7 @@ LucidImporter = {};
 				var oneH = (h - 75) / messagesNum;
 				var item2 = new Array();
 				var edge = new Array();
-				
+
 				for (var i = 0; i < messagesNum; i++)
 				{
 					var currY = oneH * (i + 1) + 30;
@@ -6810,39 +6810,39 @@ LucidImporter = {};
 					item2[i].value = convertText(p['message_' + (i + 1)]);
 					item2.style += getLabelStyle(p['message_' + (i + 1)]);
 					v.insert(item2[i]);
-					
-					item2[i].style += 
-						getStrokeColor(p, a) + 
+
+					item2[i].style +=
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p);
-	
+
 					edge[i] = new mxCell('', new mxGeometry(0, 0, 0, 0), 'edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0;exitY=0.5;endArrow=none;dashed=0;html=1;');
 			    	edge[i].geometry.relative = true;
 			    	edge[i].edge = true;
 			    	item3.insertEdge(edge[i], false);
 			    	item2[i].insertEdge(edge[i], true);
-					edge[i].style += 
-						getStrokeColor(p, a) + 
+					edge[i].style +=
+						getStrokeColor(p, a) +
 						getStrokeWidth(p);
-	
+
 					var wp = new Array();
 					wp.push(new mxPoint(x + w - 30, y + currY + 10));
-					
+
 					edge[i].geometry.points = wp;
 					select.push(graph.addCell(edge[i], null, null, null, null));
 				}
-	
+
 				break;
-				
+
 			case 'Equation' :
 				break;
 			case 'fpDoor' :
 				v.style += 'shape=mxgraph.floorplan.doorRight;' +
-					getStrokeColor(p, a) + 
-					getOpacity(p, a) + 
+					getStrokeColor(p, a) +
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeWidth(p) +
 					getRotation(p, a, v)
@@ -6852,37 +6852,37 @@ LucidImporter = {};
 				{
 					v.style += 'flipV=1;'
 				}
-				
+
 				break;
-				
+
 			case 'fpDoubleDoor' :
 				v.style += 'shape=mxgraph.floorplan.doorDouble;' +
-				getStrokeColor(p, a) + 
-				getOpacity(p, a) + 
+				getStrokeColor(p, a) +
+				getOpacity(p, a) +
 				getShadow(p) +
 				getStrokeWidth(p) +
-				getRotation(p, a, v) + 
+				getRotation(p, a, v) +
 				getStrokeStyle(p);
 
 			if (p.DoorAngle > 0)
 			{
 				v.style += 'flipV=1;'
 			}
-			
+
 				break;
-				
+
 			case 'fpRestroomLights' :
 				v.style += 'strokeColor=none;fillColor=none;' +
-					getRotation(p, a, v); 
-				
+					getRotation(p, a, v);
+
 				var item1 = new mxCell('', new mxGeometry(0, 0, w, h * 0.25), 'part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeStyle(p);
 
@@ -6890,67 +6890,67 @@ LucidImporter = {};
 				var lightOffset = w * 0.02;
 				var lightW = (w - lightOffset * 2) / p.LightCount;
 				var trueW = lightW * 0.8;
-				
+
 				for (var i = 0; i < p.LightCount; i++)
 				{
 					item2[i] = new mxCell('', new mxGeometry(lightOffset + lightW * i + (lightW - trueW) / 2, h * 0.25, trueW, h * 0.75), 'part=1;shape=ellipse;');
 					item2[i].vertex = true;
 					v.insert(item2[i]);
-					item2[i].style += 
-						getStrokeColor(p, a) + 
+					item2[i].style +=
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
 						getStrokeStyle(p);
 				}
-				
+
 				break;
-				
+
 			case 'fpRestroomSinks' :
 				v.style += 'strokeColor=none;fillColor=none;' +
-				getRotation(p, a, v); 
-				
+				getRotation(p, a, v);
+
 				var item1 = new Array();
 				var sinkW = w / p.SinkCount;
-				
+
 				for (var i = 0; i < p.SinkCount; i++)
 				{
 					item1[i] = new mxCell('', new mxGeometry(sinkW * i, 0, sinkW, h), 'part=1;shape=mxgraph.floorplan.sink_2;');
 					item1[i].vertex = true;
 					v.insert(item1[i]);
-					item1[i].style += 
-						getStrokeColor(p, a) + 
+					item1[i].style +=
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
-						getOpacity(p, a) + 
+						getOpacity(p, a) +
 						getShadow(p) +
 						getStrokeStyle(p);
 				}
-				
+
 				break;
-				
+
 			case 'fpRestroomStalls' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 				var wallW = w * 0.1 / p.StallCount;
-				
+
 				var item1 = new mxCell('', new mxGeometry(0, 0, wallW, h), 'fillColor=#000000;part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += 
-					getStrokeColor(p, a) + 
+				item1.style +=
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
-				
+
 				var stallW = (w - wallW) / p.StallCount;
-				
+
 				var wall = new Array();
 				var toilet = new Array();
 				var door = new Array();
 				var paper = new Array();
-				
+
 				var fc = getStrokeColor(p, a);
-				
+
 				if (fc == '')
 				{
 					fc = '#000000;'
@@ -6959,15 +6959,15 @@ LucidImporter = {};
 				{
 					fc = fc.replace('stokreColor=', '');
 				}
-				
-				var wallStyle = 'part=1;fillColor=' + fc + 
-					getStrokeColor(p, a) + 
+
+				var wallStyle = 'part=1;fillColor=' + fc +
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
-				var otherStyle = 
-					getFillColor(p, a) + 
-					getStrokeColor(p, a) + 
+				var otherStyle =
+					getFillColor(p, a) +
+					getStrokeColor(p, a) +
 					getStrokeWidth(p);
-				
+
 				for (var i = 0; i < p.StallCount; i++)
 				{
 					wall[i] = new mxCell('', new mxGeometry((i + 1) * stallW, 0, wallW, h), wallStyle);
@@ -6978,31 +6978,31 @@ LucidImporter = {};
 					door[i].vertex = true;
 					v.insert(door[i]);
 					door[i].style += otherStyle;
-					
+
 					toilet[i] = new mxCell('', new mxGeometry(wallW + i * stallW + (stallW - wallW) * 0.2, 0, (stallW - wallW) * 0.6, (stallW - wallW) * 0.8), 'shape=mxgraph.floorplan.toilet;part=1;');
 					toilet[i].vertex = true;
 					v.insert(toilet[i]);
 					toilet[i].style += otherStyle;
-					
+
 					paper[i] = new mxCell('', new mxGeometry(wallW + i * stallW, h * 0.42, (stallW - wallW) * 0.15, (stallW - wallW) * 0.12), 'part=1;');
 					paper[i].vertex = true;
 					v.insert(paper[i]);
 					paper[i].style += otherStyle;
 				}
-				
+
 				break;
 			case 'PEOneToMany' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 		    	var edgeStyle = 'edgeStyle=none;endArrow=none;part=1;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeStyle(p);
 
 				var fc = getStrokeColor(p, a);
-				
+
 				if (fc == '')
 				{
 					fc = '#000000;'
@@ -7011,51 +7011,51 @@ LucidImporter = {};
 				{
 					fc = fc.replace('stokreColor=', '');
 				}
-				
+
 				var endStyle = 'shape=triangle;part=1;fillColor=' + fc +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeStyle(p);
-		    	
+
 			   	var edge1 = new mxCell('', new mxGeometry(0, 0, 0, 0), edgeStyle);
 			   	edge1.geometry.relative = true;
 		    	edge1.edge = true;
-		    	
+
 		    	addFloatingEdge(0, h * 0.5, w * 0.65, h * 0.5, edge1, select, graph, cells, v, cell);
-		    	
+
 		    	var itemH = h / p.numLines;
 		    	var edge2 = new Array();
 		    	var endArrow = new Array();
-		    	
+
 		    	for (var i = 0; i < p.numLines; i++)
 		    	{
 				   	edge2[i] = new mxCell('', new mxGeometry(0, 0, 0, 0), edgeStyle);
 				   	edge2[i].geometry.relative = true;
 			    	edge2[i].edge = true;
-			    	
+
 			    	addFloatingEdge(w * 0.65, h * 0.5, w * 0.96, (i + 0.5) * itemH, edge2[i], select, graph, cells, v, cell);
 
 			    	endArrow[i] = new mxCell('', new mxGeometry(w * 0.95, (i + 0.2) * itemH, w * 0.05, itemH * 0.6), endStyle);
 			    	endArrow[i].vertex = true;
 					v.insert(endArrow[i]);
 		    	}
-				
+
 				break;
-				
+
 			case 'PEMultilines' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 		    	var edgeStyle = 'edgeStyle=none;endArrow=none;part=1;' +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeStyle(p);
 
 				var fc = getStrokeColor(p, a);
-				
+
 				if (fc == '')
 				{
 					fc = '#000000;'
@@ -7064,45 +7064,45 @@ LucidImporter = {};
 				{
 					fc = fc.replace('stokreColor=', '');
 				}
-				
+
 				var endStyle = 'shape=triangle;part=1;fillColor=' + fc +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeStyle(p);
-		    	
+
 		    	var itemH = h / p.numLines;
 		    	var edge2 = new Array();
 		    	var endArrow = new Array();
-		    	
+
 		    	for (var i = 0; i < p.numLines; i++)
 		    	{
 				   	edge2[i] = new mxCell('', new mxGeometry(0, 0, 0, 0), edgeStyle);
 				   	edge2[i].geometry.relative = true;
 			    	edge2[i].edge = true;
-			    	
+
 			    	addFloatingEdge(0, (i + 0.5) * itemH, w * 0.96, (i + 0.5) * itemH, edge2[i], select, graph, cells, v, cell);
 
 			    	endArrow[i] = new mxCell('', new mxGeometry(w * 0.95, (i + 0.2) * itemH, w * 0.05, itemH * 0.6), endStyle);
 			    	endArrow[i].vertex = true;
 					v.insert(endArrow[i]);
 		    	}
-				
+
 				break;
-				
+
 			case 'PEVesselBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
 					getStrokeColor(p, a) +
 					getFillColor(p,a) +
 					getStrokeWidth(p) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-					
+
 					v.value = convertText(p.Text);
-				
+
 				switch (p.vesselType)
 				{
 					case 1 :
@@ -7112,19 +7112,19 @@ LucidImporter = {};
 						v.style += 'shape=hexagon;perimeter=hexagonPerimeter2;size=0.10;direction=south;';
 						break;
 				}
-				
+
 				break;
-				
+
 			case 'PEClosedTankBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
 					getStrokeColor(p, a) +
 					getFillColor(p,a) +
 					getStrokeWidth(p) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-					
+
 					v.value = convertText(p.Text);
 
 				if (p.peakedRoof == 1 && p.stumpType == 0)
@@ -7135,19 +7135,19 @@ LucidImporter = {};
 				{
 					v.style += 'shape=mxgraph.pid.vessels.tank_(boot);';
 				}
-				
+
 				break;
-				
+
 			case 'PEColumnBlock' :
 				v.style += 'verticalLabelPosition=bottom;verticalAlign=top;' +
 					getStrokeColor(p, a) +
 					getFillColor(p,a) +
 					getStrokeWidth(p) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p);
-					
+
 					v.value = convertText(p.Text);
 
 				if (p.columnType == 0)
@@ -7158,63 +7158,63 @@ LucidImporter = {};
 				{
 					v.style += 'shape=mxgraph.pid.vessels.tank;';
 				}
-				
+
 				break;
-				
+
 			case 'PECompressorTurbineBlock' :
-				v.style += 'strokeColor=none;fillColor=none;' + 
-					getRotation(p, a, v) + 
+				v.style += 'strokeColor=none;fillColor=none;' +
+					getRotation(p, a, v) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
-				var st = 
-					getStrokeColor(p, a) + 
+
+				var st =
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getShadow(p) +
 					getStrokeStyle(p);
-				
+
 				var item1 = new mxCell('', new mxGeometry(0, h * 0.2, w, h * 0.6), 'part=1;shape=trapezoid;perimeter=trapezoidPerimeter;direction=south;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += st; 
+				item1.style += st;
 
 				st += 'endSize=4;endArrow=block;endFill=1;';
-				
+
 				if (p.compressorType == 0)
 				{
 				   	var edge1 = new mxCell('', new mxGeometry(0, 0, 0, 0), '');
 				   	edge1.geometry.relative = true;
 			    	edge1.edge = true;
-					edge1.style += st; 
-			    	
+					edge1.style += st;
+
 			    	addFloatingEdge(0, 0, 0, h * 0.2, edge1, select, graph, cells, v, cell);
-					
+
 				   	var edge2 = new mxCell('', new mxGeometry(0, 0, 0, 0), '');
 				   	edge2.geometry.relative = true;
 			    	edge2.edge = true;
-					edge2.style += st; 
-			    	
+					edge2.style += st;
+
 			    	addFloatingEdge(w, h * 0.67, w, h, edge2, select, graph, cells, v, cell);
 				}
 				else
 				{
-					
+
 					item1.style += 'flipH=1;'
 				   	var edge1 = new mxCell('', new mxGeometry(0, 0, 0, 0), '');
 				   	edge1.geometry.relative = true;
 			    	edge1.edge = true;
-					edge1.style += st; 
-			    	
+					edge1.style += st;
+
 			    	addFloatingEdge(0, 0, 0, h * 0.33, edge1, select, graph, cells, v, cell);
-					
+
 				   	var edge2 = new mxCell('', new mxGeometry(0, 0, 0, 0), '');
 				   	edge2.geometry.relative = true;
 			    	edge2.edge = true;
-					edge2.style += st; 
-			    	
+					edge2.style += st;
+
 			    	addFloatingEdge(w, h * 0.8, w, h, edge2, select, graph, cells, v, cell);
 				}
 
@@ -7223,35 +7223,35 @@ LucidImporter = {};
 				   	var edge3 = new mxCell('', new mxGeometry(0, 0, 0, 0), '');
 				   	edge3.geometry.relative = true;
 			    	edge3.edge = true;
-					edge3.style += st; 
-			    	
+					edge3.style += st;
+
 			    	addFloatingEdge(w * 0.2, h * 0.5, w * 0.8, h * 0.5, edge3, select, graph, cells, v, cell);
 		    	}
-		    	
+
 				break;
-				
+
 			case 'PEMotorDrivenTurbineBlock' :
-				var st = 
-					getStrokeColor(p, a) + 
+				var st =
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
-					getOpacity(p, a) + 
+					getOpacity(p, a) +
 					getStrokeStyle(p);
-				
-				v.style += 'shape=ellipse;' + 
+
+				v.style += 'shape=ellipse;' +
 					getShadow(p) +
 					getRotation(p, a, v) +
 					getLabelStyle(p);
-				
+
 				v.value = convertText(p.Text);
-				
+
 				var item1 = new mxCell('', new mxGeometry(w * 0.2, h * 0.2, w * 0.6, h * 0.6), 'part=1;shape=trapezoid;perimeter=trapezoidPerimeter;direction=south;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style += st; 
-			
+				item1.style += st;
+
 				break;
-				
+
 			case 'PEFanBlades2Block' :
 				break;
 			case 'PECentrifugalPumpBlock' :
@@ -7263,15 +7263,15 @@ LucidImporter = {};
 			case 'PESharedIndicator2Block' :
 			case 'PEProgrammableIndicatorBlock' :
 				var st = getOpacity(p, a);
-				
+
 				v.style += st +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p) +
 					getRotation(p, a, v);
-				
+
 				switch(obj.Class)
 				{
 					case 'PEIndicatorBlock' :
@@ -7293,7 +7293,7 @@ LucidImporter = {};
 						v.style += 'shape=mxgraph.pid2inst.progLogCont;';
 						break;
 				}
-				
+
 				if (obj.Class == 'PEIndicator2Block' || obj.Class == 'PESharedIndicator2Block')
 				{
 					//scale labels to width
@@ -7302,15 +7302,15 @@ LucidImporter = {};
 					v.insert(item1);
 					item1.style += st +
 						getLabelStyle(p.TopText);
-					
+
 					item1.value = convertText(p.TopText);
-					
+
 					var item2 = new mxCell('', new mxGeometry(0, w * 0.5, w, w * 0.5), 'part=1;strokeColor=none;fillColor=none;');
 					item2.vertex = true;
 					v.insert(item2);
-					item2.style += st; 
+					item2.style += st;
 						getLabelStyle(p.BotText);
-					
+
 					item2.value = convertText(p.BotText);
 				}
 				else
@@ -7321,18 +7321,18 @@ LucidImporter = {};
 					v.insert(item1);
 					item1.style += st +
 						getLabelStyle(p.TopText);
-					
+
 					item1.value = convertText(p.TopText);
-					
+
 					var item2 = new mxCell('', new mxGeometry(0, h * 0.5, w, h * 0.5), 'part=1;strokeColor=none;fillColor=none;');
 					item2.vertex = true;
 					v.insert(item2);
-					item2.style += st; 
+					item2.style += st;
 						getLabelStyle(p.BotText);
-					
+
 					item2.value = convertText(p.BotText);
 				}
-				
+
 				switch(p.instrumentLocation)
 				{
 					case 0 :
@@ -7348,17 +7348,17 @@ LucidImporter = {};
 						v.style += 'mounting=local;';
 						break;
 				}
-				
+
 				break;
-				
+
 			case 'PEGateValveBlock' :
 			case 'PEGlobeValveBlock' :
 			case 'PEAngleValveBlock' :
 			case 'PEAngleGlobeValveBlock' :
 			case 'PEPoweredValveBlock' :
-				
+
 				var actuator = false;
-				
+
 				if (obj.Class == 'PEPoweredValveBlock')
 				{
 					if (p.poweredHandOperated != 1)
@@ -7380,7 +7380,7 @@ LucidImporter = {};
 					var b = p.BoundingBox;
 
 					var oldH = b.h;
-					
+
 					if (obj.Class == 'PEAngleValveBlock' || obj.Class == 'PEAngleGlobeValveBlock')
 					{
 						b.h = b.h * 0.7;
@@ -7389,48 +7389,48 @@ LucidImporter = {};
 					{
 						b.h = b.h * 0.6;
 					}
-					
+
 					v = new mxCell('', new mxGeometry(Math.round(b.x * scale + dx), Math.round((b.y + oldH - b.h) * scale + dy),
 							Math.round(b.w * scale), Math.round(b.h * scale)), '');
 				    v.vertex = true;
 				    updateCell(v, obj);
 				}
-				
+
 				if (obj.Class == 'PEPoweredValveBlock')
 				{
-					v.style += 'shape=mxgraph.pid2valves.valve;verticalLabelPosition=bottom;verticalAlign=top;' + 
+					v.style += 'shape=mxgraph.pid2valves.valve;verticalLabelPosition=bottom;verticalAlign=top;' +
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getShadow(p) +
 						getRotation(p, a, v);
-					
+
 						if (p.poweredHandOperated == 1)
 						{
 							v.style += 'valveType=gate;actuator=powered;';
-							
+
 							var item1 = new mxCell('', new mxGeometry(w * 0.325, 0, w * 0.35, h * 0.35), 'part=1;strokeColor=none;fillColor=none;spacingTop=2;');
 							item1.vertex = true;
 							v.insert(item1);
 							item1.style += st +
 								getOpacity(p, a) +
-								getStrokeColor(p, a) + 
+								getStrokeColor(p, a) +
 								getFillColor(p, a) +
 								getStrokeWidth(p) +
 								getStrokeStyle(p) +
 								getShadow(p) +
 								'fontSize=6;' +
-								getFontColor(p.PoweredText) + 
+								getFontColor(p.PoweredText) +
 								getFontStyle(p.PoweredText) +
-								getTextAlignment(p.PoweredText) + 
+								getTextAlignment(p.PoweredText) +
 								getTextLeftSpacing(p.PoweredText) +
-								getTextRightSpacing(p.PoweredText) + 
-								getTextBottomSpacing(p.PoweredText) + 
+								getTextRightSpacing(p.PoweredText) +
+								getTextBottomSpacing(p.PoweredText) +
 								getTextGlobalSpacing(p.PoweredText) +
 								getTextVerticalAlignment(p.PoweredText);
-							
+
 							item1.value = convertText(p.PoweredText);
 						}
 						else
@@ -7442,50 +7442,50 @@ LucidImporter = {};
 				{
 					v.style += 'verticalLabelPosition=bottom;verticalAlign=top;shape=mxgraph.pid2valves.valve;' +
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getShadow(p) +
 						getRotation(p, a, v) +
 						getFontSize(p) +
-						getFontColor(p) + 
+						getFontColor(p) +
 						getFontStyle(p) +
-						getTextAlignment(p); 
-					
+						getTextAlignment(p);
+
 					v.value = convertText(p.Text);
-					
+
 					switch (obj.Class)
 					{
 						case 'PEGateValveBlock' :
 								v.style += 'valveType=gate;';
 							break;
-							
+
 						case 'PEGlobeValveBlock' :
 								v.style += 'valveType=globe;';
 							break;
-							
+
 						case 'PEAngleValveBlock' :
 								v.style += 'valveType=angle;';
 							break;
-							
+
 						case 'PEAngleGlobeValveBlock' :
 								v.style += 'valveType=angleGlobe;flipH=1;';
 							break;
 					}
-					
+
 					if (p.handOperated == 1)
 					{
 						v.style += 'actuator=man;';
 					}
 				}
-				
+
 				break;
 
 			case 'UI2BrowserBlock' :
 				v.style += 'shape=mxgraph.mockup.containers.browserWindow;mainText=;' +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
@@ -7502,15 +7502,15 @@ LucidImporter = {};
 					{
 						var item3 = new mxCell('', new mxGeometry(1, 0, 20, h - 110), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=95;direction=north;resizeHeight=1;');
 					}
-					
+
 				   	item3.geometry.relative = true;
 				   	item3.geometry.offset = new mxPoint(-20, 110);
 					item3.vertex = true;
 					v.insert(item3);
-					
+
 					v.style += 'spacingRight=20;';
 				}
-				
+
 				if (p.hScroll == 1)
 				{
 					if (p.vScroll == 1)
@@ -7521,25 +7521,25 @@ LucidImporter = {};
 					{
 						var item4 = new mxCell('', new mxGeometry(0, 1, w, 20), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=5;resizeWidth=1;');
 					}
-					
+
 				   	item4.geometry.relative = true;
 				   	item4.geometry.offset = new mxPoint(0, -20);
 					item4.vertex = true;
 					v.insert(item4);
 				}
-				
+
 				break;
 			case 'UI2WindowBlock' :
 				v.style += 'shape=mxgraph.mockup.containers.window;mainText=;align=center;verticalAlign=top;spacing=5;' +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p) +
 					getRotation(p, a, v) +
 					getFontSize(p.Title) +
-					getFontColor(p.Title) + 
+					getFontColor(p.Title) +
 					getFontStyle(p.Title);
 
 				v.value = convertText(p.Title);
@@ -7554,15 +7554,15 @@ LucidImporter = {};
 					{
 						var item3 = new mxCell('', new mxGeometry(1, 0, 20, h - 30), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=95;direction=north;resizeHeight=1;');
 					}
-					
+
 				   	item3.geometry.relative = true;
 				   	item3.geometry.offset = new mxPoint(-20, 30);
 					item3.vertex = true;
 					v.insert(item3);
-					
+
 					v.style += 'spacingRight=20;';
 				}
-				
+
 				if (p.hScroll == 1)
 				{
 					if (p.vScroll == 1)
@@ -7573,18 +7573,18 @@ LucidImporter = {};
 					{
 						var item4 = new mxCell('', new mxGeometry(0, 1, w, 20), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=5;resizeWidth=1;');
 					}
-					
+
 				   	item4.geometry.relative = true;
 				   	item4.geometry.offset = new mxPoint(0, -20);
 					item4.vertex = true;
 					v.insert(item4);
 				}
-				
+
 				break;
 			case 'UI2DialogBlock' :
-				v.style += 
+				v.style +=
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
@@ -7599,7 +7599,7 @@ LucidImporter = {};
 				v.insert(item1);
 				item1.style += st +
 					getLabelStyle(p.Title);
-				
+
 				item1.value = convertText(p.Title);
 
 				var item2 = new mxCell('', new mxGeometry(1, 0.5, 20, 20), 'part=1;shape=ellipse;strokeColor=#008cff;resizable=0;fillColor=none;html=1;');
@@ -7618,15 +7618,15 @@ LucidImporter = {};
 					{
 						var item3 = new mxCell('', new mxGeometry(1, 0, 20, h - 30), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=95;direction=north;resizeHeight=1;');
 					}
-					
+
 				   	item3.geometry.relative = true;
 				   	item3.geometry.offset = new mxPoint(-20, 30);
 					item3.vertex = true;
 					v.insert(item3);
-					
+
 					v.style += 'spacingRight=20;';
 				}
-				
+
 				if (p.hScroll == 1)
 				{
 					if (p.vScroll == 1)
@@ -7637,27 +7637,27 @@ LucidImporter = {};
 					{
 						var item4 = new mxCell('', new mxGeometry(0, 1, w, 20), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=5;resizeWidth=1;');
 					}
-					
+
 				   	item4.geometry.relative = true;
 				   	item4.geometry.offset = new mxPoint(0, -20);
 					item4.vertex = true;
 					v.insert(item4);
 				}
-				
+
 				break;
 			case 'UI2AccordionBlock' :
-				v.style += 
+				v.style +=
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p) +
 					getRotation(p, a, v);
-				
+
 				var item1 = new Array();
 				var itemH = 25;
-				
+
 				for (var i = 0; i <= (p.Panels - 1); i++)
 				{
 					if (i < (p.Selected - 1))
@@ -7665,9 +7665,9 @@ LucidImporter = {};
 						item1[i] = new mxCell('', new mxGeometry(0, i * itemH, w, itemH), 'part=1;fillColor=#000000;fillOpacity=25;');
 						item1[i].vertex = true;
 						v.insert(item1[i]);
-						item1[i].style += 
+						item1[i].style +=
 							getLabelStyle(p['Panel_' + (i + 1)]);
-						
+
 						item1[i].value = convertText(p['Panel_' + (i + 1)]);
 					}
 					else if (i == (p.Selected - 1))
@@ -7675,9 +7675,9 @@ LucidImporter = {};
 						item1[i] = new mxCell('', new mxGeometry(0, i * itemH, w, itemH), 'part=1;fillColor=none;');
 						item1[i].vertex = true;
 						v.insert(item1[i]);
-						item1[i].style += 
+						item1[i].style +=
 							getLabelStyle(p['Panel_' + (i + 1)]);
-						
+
 						item1[i].value = convertText(p['Panel_' + (i + 1)]);
 					}
 					else
@@ -7685,9 +7685,9 @@ LucidImporter = {};
 						item1[i] = new mxCell('', new mxGeometry(0, h - (p.Panels - p.Selected) * itemH + (i - p.Selected) * itemH, w, itemH), 'part=1;fillColor=#000000;fillOpacity=25;');
 						item1[i].vertex = true;
 						v.insert(item1[i]);
-						item1[i].style += 
+						item1[i].style +=
 							getLabelStyle(p['Panel_' + (i + 1)]);
-						
+
 						item1[i].value = convertText(p['Panel_' + (i + 1)]);
 					}
 
@@ -7696,15 +7696,15 @@ LucidImporter = {};
 						item1[i].style += 'align=left;spacingLeft=5;';
 					}
 				}
-				
+
 				var fc2 = getStrokeColor(p, a);
 				fc2 = fc2.replace('strokeColor', 'fillColor2');
-				
+
 				if (fc2 == '')
 				{
 					fc2 = 'fillColor2=#000000;'
 				}
-				
+
 				if (p.vScroll == 1)
 				{
 					if (p.hScroll == 1)
@@ -7715,22 +7715,22 @@ LucidImporter = {};
 					{
 						var item2 = new mxCell('', new mxGeometry(1, 0, 20, h - p.Selected * itemH - (p.Panels - p.Selected) * itemH), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=95;direction=north;resizeHeight=1;');
 					}
-					
+
 				   	item2.geometry.relative = true;
 				   	item2.geometry.offset = new mxPoint(-20, p.Selected * itemH);
 					item2.vertex = true;
 					v.insert(item2);
-					
+
 					v.style += 'spacingRight=20;';
-					
+
 					item2.style += fc2 +
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p);
 				}
-				
+
 				if (p.hScroll == 1)
 				{
 					if (p.vScroll == 1)
@@ -7741,20 +7741,20 @@ LucidImporter = {};
 					{
 						var item3 = new mxCell('', new mxGeometry(0, 1, w, 20), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=5;resizeWidth=1;');
 					}
-					
+
 				   	item3.geometry.relative = true;
 				   	item3.geometry.offset = new mxPoint(0, -20 - (p.Panels - p.Selected) * itemH);
 					item3.vertex = true;
 					v.insert(item3);
 
-					item3.style += fc2 + 
+					item3.style += fc2 +
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p);
 				}
-				
+
 				if (p.vScroll == 1)
 				{
 					item4 = new mxCell('', new mxGeometry(0, p.Selected * itemH, w - 20, h - p.Selected * itemH -20 - (p.Panels - p.Selected) * itemH), 'part=1;fillColor=none;strokeColor=none;');
@@ -7765,16 +7765,16 @@ LucidImporter = {};
 				}
 				item4.vertex = true;
 				v.insert(item4);
-				item4.style += 
+				item4.style +=
 					getLabelStyle(p['Content_1']);
-				
+
 				if (item4.style.indexOf(';align=') < 0)
 				{
 					item4.style += 'align=left;spacingLeft=5;';
 				}
-				
+
 				item4.value = convertText(p['Content_1']);
-				
+
 				break;
 			case 'UI2TabBarContainerBlock' :
 				v.style += 'strokeColor=none;fillColor=none;';
@@ -7785,19 +7785,19 @@ LucidImporter = {};
 				var itemS = 3; // tab spacing
 				var itemW = (w + itemS) / (p.Tabs + 1);
 				var startW = 10;
-					
+
 				var bg = new mxCell('', new mxGeometry(0, itemH, w, h - itemH), 'part=1;');
 				bg.vertex = true;
 				v.insert(bg);
-				bg.style += 
+				bg.style +=
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p) +
 					getRotation(p, a, v);
-				
+
 				for (var i = 0; i <= (p.Tabs - 1); i++)
 				{
 					if (i == (p.Selected - 1))
@@ -7805,15 +7805,15 @@ LucidImporter = {};
 						item2[i] = new mxCell('', new mxGeometry(startW + i * itemW, 0, itemW - itemS, itemH), '');
 						item2[i].vertex = true;
 						v.insert(item2[i]);
-						item2[i].style += 
+						item2[i].style +=
 							getOpacity(p, a) +
-							getStrokeColor(p, a) + 
+							getStrokeColor(p, a) +
 							getFillColor(p, a) +
 							getStrokeWidth(p) +
 							getStrokeStyle(p) +
 							getShadow(p) +
 							getLabelStyle(p['Tab_' + (i + 1)]);
-						
+
 						item2[i].value = convertText(p['Tab_' + (i + 1)]);
 					}
 					else
@@ -7821,20 +7821,20 @@ LucidImporter = {};
 						item1[i] = new mxCell('', new mxGeometry(startW + i * itemW, 0, itemW - itemS, itemH), 'strokeColor=none;');
 						item1[i].vertex = true;
 						v.insert(item1[i]);
-						item1[i].style += 
+						item1[i].style +=
 							getOpacity(p, a) +
 							getFillColor(p, a) +
 							getShadow(p);
-						
+
 						item2[i] = new mxCell('', new mxGeometry(0, 0, itemW - itemS, itemH), 'fillColor=#000000;fillOpacity=25;');
 						item2[i].vertex = true;
 						item1[i].insert(item2[i]);
-						item2[i].style += 
-							getStrokeColor(p, a) + 
+						item2[i].style +=
+							getStrokeColor(p, a) +
 							getStrokeWidth(p) +
 							getStrokeStyle(p) +
 							getLabelStyle(p['Tab_' + (i + 1)]);
-						
+
 						item2[i].value = convertText(p['Tab_' + (i + 1)]);
 					}
 
@@ -7843,15 +7843,15 @@ LucidImporter = {};
 						item2[i].style += 'align=left;spacingLeft=2;';
 					}
 				}
-				
+
 				var fc2 = getStrokeColor(p, a);
 				fc2 = fc2.replace('strokeColor', 'fillColor2');
-				
+
 				if (fc2 == '')
 				{
 					fc2 = 'fillColor2=#000000;'
 				}
-				
+
 				if (p.vScroll == 1)
 				{
 					if (p.hScroll == 1)
@@ -7862,22 +7862,22 @@ LucidImporter = {};
 					{
 						var item2 = new mxCell('', new mxGeometry(1, 0, 20, h - itemH), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=95;direction=north;resizeHeight=1;');
 					}
-					
+
 				   	item2.geometry.relative = true;
 				   	item2.geometry.offset = new mxPoint(-20, itemH);
 					item2.vertex = true;
 					v.insert(item2);
-					
+
 					v.style += 'spacingRight=20;';
-					
+
 					item2.style += fc2 +
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p);
 				}
-				
+
 				if (p.hScroll == 1)
 				{
 					if (p.vScroll == 1)
@@ -7888,22 +7888,22 @@ LucidImporter = {};
 					{
 						var item3 = new mxCell('', new mxGeometry(0, 1, w, 20), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=5;resizeWidth=1;');
 					}
-					
+
 				   	item3.geometry.relative = true;
 				   	item3.geometry.offset = new mxPoint(0, -20);
 					item3.vertex = true;
 					v.insert(item3);
 
-					item3.style += fc2 + 
+					item3.style += fc2 +
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p);
 				}
-				
+
 				break;
-				
+
 			case 'UI2TabBar2ContainerBlock' :
 				v.style += 'strokeColor=none;fillColor=none;';
 
@@ -7912,19 +7912,19 @@ LucidImporter = {};
 				var itemH = 25; // tab height
 				var itemS = 3; // tab spacing
 				var itemW = (w + itemS) / p.Tabs; //tab width (including spacing)
-					
+
 				var bg = new mxCell('', new mxGeometry(0, itemH, w, h - itemH), 'part=1;');
 				bg.vertex = true;
 				v.insert(bg);
-				bg.style += 
+				bg.style +=
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p) +
 					getRotation(p, a, v);
-				
+
 				for (var i = 0; i <= (p.Tabs - 1); i++)
 				{
 					if (i == (p.Selected - 1))
@@ -7932,15 +7932,15 @@ LucidImporter = {};
 						item2[i] = new mxCell('', new mxGeometry(i * itemW, 0, itemW - itemS, itemH), '');
 						item2[i].vertex = true;
 						v.insert(item2[i]);
-						item2[i].style += 
+						item2[i].style +=
 							getOpacity(p, a) +
-							getStrokeColor(p, a) + 
+							getStrokeColor(p, a) +
 							getFillColor(p, a) +
 							getStrokeWidth(p) +
 							getStrokeStyle(p) +
 							getShadow(p) +
 							getLabelStyle(p['Tab_' + (i + 1)]);
-						
+
 						item2[i].value = convertText(p['Tab_' + (i + 1)]);
 					}
 					else
@@ -7948,20 +7948,20 @@ LucidImporter = {};
 						item1[i] = new mxCell('', new mxGeometry(i * itemW, 0, itemW - itemS, itemH), 'strokeColor=none;');
 						item1[i].vertex = true;
 						v.insert(item1[i]);
-						item1[i].style += 
+						item1[i].style +=
 							getOpacity(p, a) +
 							getFillColor(p, a) +
 							getShadow(p);
-						
+
 						item2[i] = new mxCell('', new mxGeometry(0, 0, itemW - itemS, itemH), 'fillColor=#000000;fillOpacity=25;');
 						item2[i].vertex = true;
 						item1[i].insert(item2[i]);
-						item2[i].style += 
-							getStrokeColor(p, a) + 
+						item2[i].style +=
+							getStrokeColor(p, a) +
 							getStrokeWidth(p) +
 							getStrokeStyle(p) +
 							getLabelStyle(p['Tab_' + (i + 1)]);
-						
+
 						item2[i].value = convertText(p['Tab_' + (i + 1)]);
 					}
 
@@ -7970,15 +7970,15 @@ LucidImporter = {};
 						item2[i].style += 'align=left;spacingLeft=2;';
 					}
 				}
-				
+
 				var fc2 = getStrokeColor(p, a);
 				fc2 = fc2.replace('strokeColor', 'fillColor2');
-				
+
 				if (fc2 == '')
 				{
 					fc2 = 'fillColor2=#000000;'
 				}
-				
+
 				if (p.vScroll == 1)
 				{
 					if (p.hScroll == 1)
@@ -7989,22 +7989,22 @@ LucidImporter = {};
 					{
 						var item2 = new mxCell('', new mxGeometry(1, 0, 20, h - itemH), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=95;direction=north;resizeHeight=1;');
 					}
-					
+
 				   	item2.geometry.relative = true;
 				   	item2.geometry.offset = new mxPoint(-20, itemH);
 					item2.vertex = true;
 					v.insert(item2);
-					
+
 					v.style += 'spacingRight=20;';
-					
+
 					item2.style += fc2 +
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p);
 				}
-				
+
 				if (p.hScroll == 1)
 				{
 					if (p.vScroll == 1)
@@ -8015,22 +8015,22 @@ LucidImporter = {};
 					{
 						var item3 = new mxCell('', new mxGeometry(0, 1, w, 20), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=5;resizeWidth=1;');
 					}
-					
+
 				   	item3.geometry.relative = true;
 				   	item3.geometry.offset = new mxPoint(0, -20);
 					item3.vertex = true;
 					v.insert(item3);
 
-					item3.style += fc2 + 
+					item3.style += fc2 +
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p);
 				}
-				
+
 				break;
-				
+
 			case 'UI2VTabBarContainerBlock' :
 				v.style += 'strokeColor=none;fillColor=none;';
 
@@ -8040,19 +8040,19 @@ LucidImporter = {};
 				var itemH = 25 + itemS; // tab height (including spacing)
 				var itemW = 80; //tab width
 				var startH = 10;
-					
+
 				var bg = new mxCell('', new mxGeometry(itemW, 0, w - itemW, h), 'part=1;');
 				bg.vertex = true;
 				v.insert(bg);
-				bg.style += 
+				bg.style +=
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p) +
 					getRotation(p, a, v);
-				
+
 				for (var i = 0; i <= (p.Tabs - 1); i++)
 				{
 					if (i == (p.Selected - 1))
@@ -8060,15 +8060,15 @@ LucidImporter = {};
 						item2[i] = new mxCell('', new mxGeometry(0, startH + i * itemH, itemW, itemH - itemS), '');
 						item2[i].vertex = true;
 						v.insert(item2[i]);
-						item2[i].style += 
+						item2[i].style +=
 							getOpacity(p, a) +
-							getStrokeColor(p, a) + 
+							getStrokeColor(p, a) +
 							getFillColor(p, a) +
 							getStrokeWidth(p) +
 							getStrokeStyle(p) +
 							getShadow(p) +
 							getLabelStyle(p['Tab_' + (i + 1)]);
-						
+
 						item2[i].value = convertText(p['Tab_' + (i + 1)]);
 					}
 					else
@@ -8076,20 +8076,20 @@ LucidImporter = {};
 						item1[i] = new mxCell('', new mxGeometry(0, startH + i * itemH, itemW, itemH - itemS), 'strokeColor=none;');
 						item1[i].vertex = true;
 						v.insert(item1[i]);
-						item1[i].style += 
+						item1[i].style +=
 							getOpacity(p, a) +
 							getFillColor(p, a) +
 							getShadow(p);
-						
+
 						item2[i] = new mxCell('', new mxGeometry(0, 0, itemW, itemH - itemS), 'fillColor=#000000;fillOpacity=25;');
 						item2[i].vertex = true;
 						item1[i].insert(item2[i]);
-						item2[i].style += 
-							getStrokeColor(p, a) + 
+						item2[i].style +=
+							getStrokeColor(p, a) +
 							getStrokeWidth(p) +
 							getStrokeStyle(p) +
 							getLabelStyle(p['Tab_' + (i + 1)]);
-						
+
 						item2[i].value = convertText(p['Tab_' + (i + 1)]);
 					}
 
@@ -8098,15 +8098,15 @@ LucidImporter = {};
 						item2[i].style += 'align=left;spacingLeft=2;';
 					}
 				}
-				
+
 				var fc2 = getStrokeColor(p, a);
 				fc2 = fc2.replace('strokeColor', 'fillColor2');
-				
+
 				if (fc2 == '')
 				{
 					fc2 = 'fillColor2=#000000;'
 				}
-				
+
 				if (p.vScroll == 1)
 				{
 					if (p.hScroll == 1)
@@ -8117,22 +8117,22 @@ LucidImporter = {};
 					{
 						var item2 = new mxCell('', new mxGeometry(1, 0, 20, h), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=95;direction=north;resizeHeight=1;');
 					}
-					
+
 				   	item2.geometry.relative = true;
 				   	item2.geometry.offset = new mxPoint(-20, 0);
 					item2.vertex = true;
 					v.insert(item2);
-					
+
 					v.style += 'spacingRight=20;';
-					
+
 					item2.style += fc2 +
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p);
 				}
-				
+
 				if (p.hScroll == 1)
 				{
 					if (p.vScroll == 1)
@@ -8143,219 +8143,219 @@ LucidImporter = {};
 					{
 						var item3 = new mxCell('', new mxGeometry(itemW, 1, w - itemW, 20), 'part=1;shape=mxgraph.mockup.navigation.scrollBar;barPos=5;resizeWidth=1;');
 					}
-					
+
 				   	item3.geometry.relative = true;
 				   	item3.geometry.offset = new mxPoint(0, -20);
 					item3.vertex = true;
 					v.insert(item3);
 
-					item3.style += fc2 + 
+					item3.style += fc2 +
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p);
 				}
-				
+
 				break;
 			case 'UI2CheckBoxBlock' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 				var itemH = h / p.Options;
 				var item1 = new Array(); //checkbox
 				var item2 = new Array(); //checkmark
-				
+
 				for (var i = 0; i < p.Options; i++)
 				{
 					item1[i] = new mxCell('', new mxGeometry(0, i * itemH + itemH * 0.5 - 5, 10, 10), 'labelPosition=right;part=1;verticalLabelPosition=middle;align=left;verticalAlign=middle;spacingLeft=3;');
 					item1[i].vertex = true;
 					v.insert(item1[i]);
-					item1[i].style += 
+					item1[i].style +=
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getShadow(p) +
 						getLabelStyle(p['Option_' + (i + 1)]);
-					
+
 					if (p.Selected[i + 1] != null)
 					{
 						if (p.Selected[i + 1] == 1)
 						{
 							var fc = getStrokeColor(p, a);
 							fc = fc.replace('strokeColor', 'fillColor');
-							
+
 							if (fc == '')
 							{
 								fc = 'fillColor=#000000;'
 							}
-							
+
 							item2[i] = new mxCell('', new mxGeometry(2, 2, 6, 6), 'shape=mxgraph.mscae.general.checkmark;part=1;');
 							item2[i].vertex = true;
 							item1[i].insert(item2[i]);
-							item2[i].style += fc + 
+							item2[i].style += fc +
 								getOpacity(p, a) +
-								getStrokeColor(p, a) + 
+								getStrokeColor(p, a) +
 								getStrokeWidth(p) +
 								getStrokeStyle(p);
 						}
 					}
-					
+
 					item1[i].value = convertText(p['Option_' + (i + 1)]);
 				}
-				
+
 				break;
 			case 'UI2HorizontalCheckBoxBlock' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 				var itemW = w / p.Options;
 				var item1 = new Array(); //checkbox
 				var item2 = new Array(); //checkmark
-				
+
 				for (var i = 0; i < p.Options; i++)
 				{
 					item1[i] = new mxCell('', new mxGeometry(i * itemW, h * 0.5 - 5, 10, 10), 'labelPosition=right;part=1;verticalLabelPosition=middle;align=left;verticalAlign=middle;spacingLeft=3;');
 					item1[i].vertex = true;
 					v.insert(item1[i]);
-					item1[i].style += 
+					item1[i].style +=
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getShadow(p) +
 						getLabelStyle(p['Option_' + (i + 1)]);
-					
+
 					if (p.Selected[i + 1] != null)
 					{
 						if (p.Selected[i + 1] == 1)
 						{
 							var fc = getStrokeColor(p, a);
 							fc = fc.replace('strokeColor', 'fillColor');
-							
+
 							if (fc == '')
 							{
 								fc = 'fillColor=#000000;'
 							}
-							
+
 							item2[i] = new mxCell('', new mxGeometry(2, 2, 6, 6), 'shape=mxgraph.mscae.general.checkmark;part=1;');
 							item2[i].vertex = true;
 							item1[i].insert(item2[i]);
-							item2[i].style += fc + 
+							item2[i].style += fc +
 								getOpacity(p, a) +
-								getStrokeColor(p, a) + 
+								getStrokeColor(p, a) +
 								getStrokeWidth(p) +
 								getStrokeStyle(p);
 						}
 					}
-					
+
 					item1[i].value = convertText(p['Option_' + (i + 1)]);
 				}
-				
+
 				break;
 			case 'UI2RadioBlock' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 				var itemH = h / p.Options;
 				var item1 = new Array(); //checkbox
 				var item2 = new Array(); //checkmark
-				
+
 				for (var i = 0; i < p.Options; i++)
 				{
 					item1[i] = new mxCell('', new mxGeometry(0, i * itemH + itemH * 0.5 - 5, 10, 10), 'shape=ellipse;labelPosition=right;part=1;verticalLabelPosition=middle;align=left;verticalAlign=middle;spacingLeft=3;');
 					item1[i].vertex = true;
 					v.insert(item1[i]);
-					item1[i].style += 
+					item1[i].style +=
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getShadow(p) +
 						getLabelStyle(p['Option_' + (i + 1)]);
-					
+
 					if (p.Selected != null)
 					{
 						if (p.Selected == (i + 1))
 						{
 							var fc = getStrokeColor(p, a);
 							fc = fc.replace('strokeColor', 'fillColor');
-							
+
 							if (fc == '')
 							{
 								fc = 'fillColor=#000000;'
 							}
-							
+
 							item2[i] = new mxCell('', new mxGeometry(2.5, 2.5, 5, 5), 'shape=ellipse;');
 							item2[i].vertex = true;
 							item1[i].insert(item2[i]);
-							item2[i].style += fc + 
+							item2[i].style += fc +
 								getOpacity(p, a) +
-								getStrokeColor(p, a) + 
+								getStrokeColor(p, a) +
 								getStrokeWidth(p) +
 								getStrokeStyle(p);
 						}
 					}
-					
+
 					item1[i].value = convertText(p['Option_' + (i + 1)]);
 				}
-				
+
 				break;
 			case 'UI2HorizontalRadioBlock' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 				var itemW = w / p.Options;
 				var item1 = new Array(); //checkbox
 				var item2 = new Array(); //checkmark
-				
+
 				for (var i = 0; i < p.Options; i++)
 				{
 					item1[i] = new mxCell('', new mxGeometry(i * itemW, h * 0.5 - 5, 10, 10), 'shape=ellipse;labelPosition=right;part=1;verticalLabelPosition=middle;align=left;verticalAlign=middle;spacingLeft=3;');
 					item1[i].vertex = true;
 					v.insert(item1[i]);
-					item1[i].style += 
+					item1[i].style +=
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getShadow(p) +
 						getLabelStyle(p['Option_' + (i + 1)]);
-					
+
 					if (p.Selected != null)
 					{
 						if (p.Selected == (i + 1))
 						{
 							var fc = getStrokeColor(p, a);
 							fc = fc.replace('strokeColor', 'fillColor');
-							
+
 							if (fc == '')
 							{
 								fc = 'fillColor=#000000;'
 							}
-							
+
 							item2[i] = new mxCell('', new mxGeometry(2, 2, 6, 6), 'shape=ellipse;part=1;');
 							item2[i].vertex = true;
 							item1[i].insert(item2[i]);
-							item2[i].style += fc + 
+							item2[i].style += fc +
 								getOpacity(p, a) +
-								getStrokeColor(p, a) + 
+								getStrokeColor(p, a) +
 								getStrokeWidth(p) +
 								getStrokeStyle(p);
 						}
 					}
-					
+
 					item1[i].value = convertText(p['Option_' + (i + 1)]);
 				}
-				
+
 				break;
-				
+
 			case 'UI2HSliderBlock' :
 			case 'UI2VSliderBlock' :
 				v.style += 'shape=mxgraph.mockup.forms.horSlider;sliderStyle=basic;handleStyle=handle;' +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
@@ -8365,41 +8365,41 @@ LucidImporter = {};
 				{
 					v.style += 'direction=south;';
 				}
-				
+
 				v.style += 'sliderPos=' + (p.ScrollVal * 100) + ';';
-				
+
 				break;
-				
+
 			case 'UI2DatePickerBlock' :
 				v.style += 'strokeColor=none;fillColor=none;';
-				
+
 				var item1 = new mxCell('', new mxGeometry(0, 0, w * 0.6, h), 'part=1;');
 				item1.vertex = true;
 				v.insert(item1);
-				item1.style +=  
+				item1.style +=
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p) +
 					getLabelStyle(p.Date);
-				
+
 				item1.value = convertText(p.Date);
 
 				var fc = getStrokeColor(p, a);
 				fc = fc.replace('strokeColor', 'fillColor');
-				
+
 				if (fc == '')
 				{
 					fc = 'fillColor=#000000;'
 				}
-				
+
 				var item2 = new mxCell('', new mxGeometry(w * 0.75, 0, w * 0.25, h), 'part=1;shape=mxgraph.gmdl.calendar;');
 				item2.vertex = true;
 				v.insert(item2);
-				item2.style += fc +  
+				item2.style += fc +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
@@ -8408,49 +8408,49 @@ LucidImporter = {};
 				break;
 
 			case 'UI2SearchBlock' :
-				v.style += 'shape=mxgraph.mockup.forms.searchBox;mainText=;flipH=1;align=left;spacingLeft=26;' + 
+				v.style += 'shape=mxgraph.mockup.forms.searchBox;mainText=;flipH=1;align=left;spacingLeft=26;' +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p) +
 					getFontSize(p.Search) +
-					getFontColor(p.Search) + 
+					getFontColor(p.Search) +
 					getFontStyle(p.Search);
-				
+
 				v.value = convertText(p.Search);
-				
+
 				break;
 
 			case 'UI2NumericStepperBlock' :
 				var fc = getStrokeColor(p, a);
 				fc = fc.replace('strokeColor', 'fillColor');
-				
+
 				if (fc == '')
 				{
 					fc = 'fillColor=#000000;'
 				}
-				
-				v.style += 'shape=mxgraph.mockup.forms.spinner;spinLayout=right;spinStyle=normal;adjStyle=triangle;mainText=;align=left;spacingLeft=8;' + fc + 
+
+				v.style += 'shape=mxgraph.mockup.forms.spinner;spinLayout=right;spinStyle=normal;adjStyle=triangle;mainText=;align=left;spacingLeft=8;' + fc +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p) +
 					getFontSize(p.Number) +
-					getFontColor(p.Number) + 
+					getFontColor(p.Number) +
 					getFontStyle(p.Number);
-				
+
 				v.value = convertText(p.Number);
-				
+
 				break;
-				
+
 			case 'UI2TableBlock' :
 				break;
 			case 'UI2ButtonBarBlock' :
 				v.style +=
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p);
@@ -8458,7 +8458,7 @@ LucidImporter = {};
 				var item1 = new Array();
 				var item2 = new Array();
 				var itemW = w / p.Buttons;
-					
+
 				for (var i = 0; i <= (p.Buttons - 1); i++)
 				{
 					if (i == (p.Selected - 1))
@@ -8466,15 +8466,15 @@ LucidImporter = {};
 						item2[i] = new mxCell('', new mxGeometry(i * itemW, 0, itemW, h), '');
 						item2[i].vertex = true;
 						v.insert(item2[i]);
-						item2[i].style += 
+						item2[i].style +=
 							getOpacity(p, a) +
-							getStrokeColor(p, a) + 
+							getStrokeColor(p, a) +
 							getFillColor(p, a) +
 							getStrokeWidth(p) +
 							getStrokeStyle(p) +
 							getShadow(p) +
 							getLabelStyle(p['Button_' + (i + 1)]);
-						
+
 						item2[i].value = convertText(p['Button_' + (i + 1)]);
 					}
 					else
@@ -8482,38 +8482,38 @@ LucidImporter = {};
 						item1[i] = new mxCell('', new mxGeometry(i * itemW, 0, itemW, h), 'strokeColor=none;');
 						item1[i].vertex = true;
 						v.insert(item1[i]);
-						item1[i].style += 
+						item1[i].style +=
 							getOpacity(p, a) +
 							getFillColor(p, a) +
 							getShadow(p);
-						
+
 						item2[i] = new mxCell('', new mxGeometry(0, 0, itemW, h), 'fillColor=#000000;fillOpacity=25;');
 						item2[i].vertex = true;
 						item1[i].insert(item2[i]);
-						item2[i].style += 
-							getStrokeColor(p, a) + 
+						item2[i].style +=
+							getStrokeColor(p, a) +
 							getStrokeWidth(p) +
 							getStrokeStyle(p) +
 							getLabelStyle(p['Button_' + (i + 1)]);
-						
+
 						item2[i].value = convertText(p['Button_' + (i + 1)]);
 					}
 				}
-				
+
 				break;
-				
+
 			case 'UI2VerticalButtonBarBlock' :
 				v.style +=
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p);
-	
+
 				var item1 = new Array();
 				var item2 = new Array();
 				var itemH = h / p.Buttons;
-					
+
 				for (var i = 0; i <= (p.Buttons - 1); i++)
 				{
 					if (i == (p.Selected - 1))
@@ -8521,15 +8521,15 @@ LucidImporter = {};
 						item2[i] = new mxCell('', new mxGeometry(0, i * itemH, w, itemH), '');
 						item2[i].vertex = true;
 						v.insert(item2[i]);
-						item2[i].style += 
+						item2[i].style +=
 							getOpacity(p, a) +
-							getStrokeColor(p, a) + 
+							getStrokeColor(p, a) +
 							getFillColor(p, a) +
 							getStrokeWidth(p) +
 							getStrokeStyle(p) +
 							getShadow(p) +
 							getLabelStyle(p['Button_' + (i + 1)]);
-						
+
 						item2[i].value = convertText(p['Button_' + (i + 1)]);
 					}
 					else
@@ -8537,29 +8537,29 @@ LucidImporter = {};
 						item1[i] = new mxCell('', new mxGeometry(0, i * itemH, w, itemH), 'strokeColor=none;');
 						item1[i].vertex = true;
 						v.insert(item1[i]);
-						item1[i].style += 
+						item1[i].style +=
 							getOpacity(p, a) +
 							getFillColor(p, a) +
 							getShadow(p);
-						
+
 						item2[i] = new mxCell('', new mxGeometry(0, 0, w, itemH), 'fillColor=#000000;fillOpacity=25;');
 						item2[i].vertex = true;
 						item1[i].insert(item2[i]);
-						item2[i].style += 
-							getStrokeColor(p, a) + 
+						item2[i].style +=
+							getStrokeColor(p, a) +
 							getStrokeWidth(p) +
 							getStrokeStyle(p) +
 							getLabelStyle(p['Button_' + (i + 1)]);
-						
+
 						item2[i].value = convertText(p['Button_' + (i + 1)]);
 					}
 				}
-				
+
 				break;
 			case 'UI2LinkBarBlock' :
 				v.style += 'strokeColor=none;fillColor=none;' +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p);
@@ -8567,16 +8567,16 @@ LucidImporter = {};
 				var item1 = new Array();
 				var item2 = new Array();
 				var itemW = w / p.Links;
-					
+
 				for (var i = 0; i < (p.Links); i++)
 				{
 					if (i != 0)
 					{
 						item2[i] = new mxCell('', new mxGeometry(i * itemW, 0, itemW, h), 'shape=partialRectangle;top=0;bottom=0;right=0;fillColor=none;');
-						item2[i].style += 
+						item2[i].style +=
 							getOpacity(p, a) +
 							getShadow(p) +
-							getStrokeColor(p, a) + 
+							getStrokeColor(p, a) +
 							getStrokeWidth(p) +
 							getStrokeStyle(p);
 					}
@@ -8584,21 +8584,21 @@ LucidImporter = {};
 					{
 						item2[i] = new mxCell('', new mxGeometry(i * itemW, 0, itemW, h), 'fillColor=none;strokeColor=none;');
 					}
-					
+
 					item2[i].vertex = true;
 					v.insert(item2[i]);
-					item2[i].style += 
+					item2[i].style +=
 						getLabelStyle(p['Link_' + (i + 1)]);
-					
+
 					item2[i].value = convertText(p['Link_' + (i + 1)]);
 				}
-				
+
 				break;
-				
+
 			case 'UI2BreadCrumbsBlock' :
 				v.style += 'strokeColor=none;fillColor=none;' +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p);
@@ -8606,18 +8606,18 @@ LucidImporter = {};
 				var item1 = new Array();
 				var item2 = new Array();
 				var itemW = w / p.Links;
-					
+
 				for (var i = 0; i < (p.Links); i++)
 				{
 					item1[i] = new mxCell('', new mxGeometry(i * itemW, 0, itemW, h), 'fillColor=none;strokeColor=none;');
 					item1[i].vertex = true;
 					v.insert(item1[i]);
-					item1[i].style += 
+					item1[i].style +=
 						getLabelStyle(p['Link_' + (i + 1)]);
-					
+
 					item1[i].value = convertText(p['Link_' + (i + 1)]);
 				}
-				
+
 				for (var i = 1; i < (p.Links); i++)
 				{
 					item2[i] = new mxCell('', new mxGeometry(i / p.Links, 0.5, 6, 10), 'shape=mxgraph.ios7.misc.right;');
@@ -8626,7 +8626,7 @@ LucidImporter = {};
 					item2[i].vertex = true;
 					v.insert(item2[i]);
 				}
-				
+
 				break;
 			case 'UI2MenuBarBlock' :
 				v.style += 'strokeColor=none;' +
@@ -8636,7 +8636,7 @@ LucidImporter = {};
 
 				var item1 = new Array();
 				var itemW = w / (p.Buttons + 1);
-					
+
 				for (var i = 0; i <= (p.Buttons - 1); i++)
 				{
 					if (i != (p.Selected - 1))
@@ -8647,56 +8647,56 @@ LucidImporter = {};
 					{
 						item1[i] = new mxCell('', new mxGeometry(0, 0, itemW, h), 'fillColor=#000000;fillOpacity=25;strokeColor=none;resizeHeight=1;');
 					}
-					
+
 					item1[i].geometry.relative = true;
 					item1[i].geometry.offset = new mxPoint(i * itemW, 0);
 					item1[i].vertex = true;
 					v.insert(item1[i]);
-					item1[i].style += 
+					item1[i].style +=
 						getLabelStyle(p['MenuItem_' + (i + 1)]);
-					
+
 					item1[i].value = convertText(p['MenuItem_' + (i + 1)]);
 				}
-				
+
 				break;
 			case 'UI2AtoZBlock' :
-				v.style += 'fillColor=none;strokeColor=none;' + 
+				v.style += 'fillColor=none;strokeColor=none;' +
 					getLabelStyle(p['Text_0']);
-				
+
 				v.value = '0-9 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z';
-				
+
 				break;
 
 			case 'UI2PaginationBlock' :
-				v.style += 'fillColor=none;strokeColor=none;' + 
+				v.style += 'fillColor=none;strokeColor=none;' +
 					getLabelStyle(p.Text_prev);
-			
+
 				v.value = convertText(p.Text_prev) + ' ';
-				
+
 				for (var i = 0; i < p.Links; i++)
 				{
 					v.value += convertText(p['Link_' + (i + 1)]) + ' ';
 				}
-				
+
 				v.value += convertText(p.Text_next);
-				
+
 				break;
-				
+
 			case 'UI2ContextMenuBlock' :
 				v.style +=
 					getOpacity(p, a) +
-					getFillColor(p, a) + 
-					getStrokeColor(p, a) + 
+					getFillColor(p, a) +
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p);
-				
+
 				var item = new Array();
 				var icon = new Array();
 				var shortcut = new Array();
 				var itemH = h / p.Lines;
-				var st = null; 
-				
+				var st = null;
+
 				for (var i = 0; i < p.Lines; i++)
 				{
 					//add label
@@ -8704,20 +8704,20 @@ LucidImporter = {};
 					{
 						if (st == null)
 						{
-							st = '' + 
+							st = '' +
 								getFontSize(p['Item_' + (i + 1)]) +
-								getFontColor(p['Item_' + (i + 1)]) + 
+								getFontColor(p['Item_' + (i + 1)]) +
 								getFontStyle(p['Item_' + (i + 1)]);
 						}
-						
+
 						item[i] = new mxCell('', new mxGeometry(0, i * h / p.Lines, w, itemH), 'strokeColor=none;fillColor=none;spacingLeft=20;align=left;html=1;');
 						item[i].vertex = true;
 						v.insert(item[i]);
-						item[i].style += st; 
-						
+						item[i].style += st;
+
 						item[i].value = convertText(p['Item_' + (i + 1)]);
 					}
-					
+
 					//add icon
 					if (p.Icons[(i + 1)] != null && item[i] != null)
 					{
@@ -8737,89 +8737,89 @@ LucidImporter = {};
 							icon[i].geometry.relative = true;
 							icon[i].vertex = true;
 							item[i].insert(icon[i]);
-							
+
 							var fc = getStrokeColor(p, a);
 							fc = fc.replace('strokeColor', 'fillColor');
-							
+
 							if (fc == '')
 							{
 								fc = 'fillColor=#000000;'
 							}
-							
+
 							icon[i].style += fc;
 						}
 					}
-					
+
 					//add shortcut
 					if (p['Shortcut_' + (i + 1)] != null)
 					{
 						if (st == null)
 						{
-							st = '' + 
+							st = '' +
 								getFontSize(p['Shortcut_' + (i + 1)]) +
-								getFontColor(p['Shortcut_' + (i + 1)]) + 
+								getFontColor(p['Shortcut_' + (i + 1)]) +
 								getFontStyle(p['Shortcut_' + (i + 1)]);
 						}
-						
+
 						shortcut[i] = new mxCell('', new mxGeometry(w * 0.6, i * h / p.Lines, w * 0.4, itemH), 'strokeColor=none;fillColor=none;spacingRight=3;align=right;html=1;');
 						shortcut[i].vertex = true;
 						v.insert(shortcut[i]);
-						shortcut[i].style += st; 
-						
+						shortcut[i].style += st;
+
 						shortcut[i].value = convertText(p['Shortcut_' + (i + 1)]);
 					}
-					
+
 					//add line
 					if (p.Dividers[(i + 1)] != null)
 					{
 						item[i] = new mxCell('', new mxGeometry(w * 0.05, i * h / p.Lines, w * 0.9, itemH), 'shape=line;strokeWidth=0.25;');
 						item[i].vertex = true;
 						v.insert(item[i]);
-						item[i].style += getStrokeColor(p, a); 
+						item[i].style += getStrokeColor(p, a);
 					}
 				}
-				
+
 				break;
 			case 'UI2TreePaneBlock' :
 				break;
-				
+
 			case 'UI2ProgressBarBlock' :
 				v.style += 'shape=mxgraph.mockup.misc.progressBar;fillColor2=#888888;barPos=' + (p.ScrollVal * 100) + ';';
-				
+
 				break;
-				
+
 			case 'UI2TooltipSquareBlock' :
 				v.style += 'html=1;shape=callout;flipV=1;base=13;size=7;position=0.5;position2=0.66;rounded=1;arcSize=' + (p.RoundCorners) + ';' +
 					getOpacity(p, a) +
-					getFillColor(p, a) + 
-					getStrokeColor(p, a) + 
+					getFillColor(p, a) +
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p) +
 					getLabelStyle(p.Tip);
-				
+
 				v.value = convertText(p.Tip);
-				
+
 				break;
 			case 'UI2CalloutBlock' :
 				v.style += 'shape=ellipse;' +
 					getOpacity(p, a) +
-					getFillColor(p, a) + 
-					getStrokeColor(p, a) + 
+					getFillColor(p, a) +
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getShadow(p) +
 					getLabelStyle(p.Txt);
-				
+
 				v.value = convertText(p.Txt);
-				
-				
+
+
 				break;
-				
+
 			case 'UI2AlertBlock' :
-				v.style += 
+				v.style +=
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
@@ -8834,12 +8834,12 @@ LucidImporter = {};
 				v.insert(item1);
 				item1.style += st +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getFillColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p.Title);
-				
+
 				item1.value = convertText(p.Title);
 
 				var item2 = new mxCell('', new mxGeometry(1, 0.5, 20, 20), 'part=1;shape=ellipse;strokeColor=#008cff;resizable=0;fillColor=none;html=1;');
@@ -8852,9 +8852,9 @@ LucidImporter = {};
 				var bh = 20;
 				var bs = 10;
 				var totalW = bw * p.Buttons + (bs * p.Buttons - 1)
-				
+
 				item3 = new Array();
-				
+
 				for (var i = 0; i < p.Buttons; i++)
 				{
 					item3[i] = new mxCell('', new mxGeometry(0.5, 1, bw, bh), 'part=1;html=1;');
@@ -8864,44 +8864,44 @@ LucidImporter = {};
 					v.insert(item3[i]);
 					item3[i].style +=
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getLabelStyle(p['Button_' + (i + 1)]);
-					
+
 					item3[i].value = convertText(p['Button_' + (i + 1)]);
 				}
-				
+
 				break;
-				
+
 			case 'UMLClassBlock' :
 				if (p.Simple == 0)
 				{
 					var st = getFillColor(p, a);
 					var th = Math.round(p.TitleHeight * scale);
 					st = st.replace('fillColor', 'swimlaneFillColor');
-					
+
 					if (st == '')
 					{
 						st = 'swimlaneFillColor=#ffffff;'
 					}
-					
+
 					v.style += 'swimlane;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;' + st +
 						'startSize=' + th + ';' +
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getLabelStyle(p.Title);
-						
+
 					v.value = convertText(p.Title);
-					
+
 					var item = new Array();
 					var divider = new Array();
 					var currH = th / h;
-					
+
 					for (var i = 0; i <= p.Attributes; i++)
 					{
 						if (i > 0)
@@ -8910,9 +8910,9 @@ LucidImporter = {};
 							divider[i].vertex = true;
 							v.insert(divider[i]);
 						}
-						
+
 						var itemH = 0;
-						
+
 						if (i < p.Attributes)
 						{
 							itemH = p['Text' + (i + 1) + 'Percent'];
@@ -8922,48 +8922,48 @@ LucidImporter = {};
 						{
 							itemH = 1 - currH;
 						}
-						
+
 						item[i] = new mxCell('', new mxGeometry(0, 0, w, Math.round((h - th) * itemH)), 'part=1;resizeHeight=0;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;');
 						item[i].vertex = true;
 						v.insert(item[i]);
 						item[i].style += st +
 							getOpacity(p, a) +
 							getFontSize(p['Text' + (i + 1)]) +
-							getFontColor(p['Text' + (i + 1)]) + 
+							getFontColor(p['Text' + (i + 1)]) +
 							getFontStyle(p['Text' + (i + 1)]);
-						
+
 						item[i].value = convertText(p['Text' + (i + 1)]);
 					}
 				}
 				else
 				{
-					v.style += 
+					v.style +=
 						getOpacity(p, a) +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getFillColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getLabelStyle(p.Title);
-						
+
 					v.value = convertText(p.Title);
 				}
 
 				break;
-			 	
+
 			case 'ERDEntityBlock' :
 				var st = getFillColor(p, a);
 				var th = p.Name_h * scale;
 				st = st.replace('fillColor', 'swimlaneFillColor');
-				
+
 				if (st == '')
 				{
 					st = 'swimlaneFillColor=#ffffff;'
 				}
-				
+
 				v.style += 'swimlane;childLayout=stackLayout;horizontal=1;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;' + st +
 					'startSize=' + th + ';' +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p.Name);
@@ -8976,22 +8976,22 @@ LucidImporter = {};
 				{
 					v.style += getFillColor(p, a);
 				}
-				
+
 				v.value = convertText(p.Name);
-				
+
 				var item = new Array();
 				var currH = th / h;
-				
+
 				for (var i = 0; i < p.Fields; i++)
 				{
 					var itemH = 0;
-					
+
 					item[i] = new mxCell('', new mxGeometry(0, 0, w, p['Field' + (i + 1) + '_h'] * scale), 'part=1;resizeHeight=0;strokeColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;');
 					item[i].vertex = true;
 					v.insert(item[i]);
 					item[i].style += st +
 						getFontSize(p['Field' + (i + 1)]) +
-						getFontColor(p['Field' + (i + 1)]) + 
+						getFontColor(p['Field' + (i + 1)]) +
 						getFontStyle(p['Field' + (i + 1)]);
 
 					if (p.AltRows == 1 && (i % 2 != 0))
@@ -9000,29 +9000,29 @@ LucidImporter = {};
 					}
 					else
 					{
-						item[i].style += 'fillColor=none;' + 
+						item[i].style += 'fillColor=none;' +
 							getOpacity(p, a);
 					}
 
 					item[i].value = convertText(p['Field' + (i + 1)]);
 				}
-				
+
 				break;
-				
+
 			case 'ERDEntityBlock2' :
 				var st = getFillColor(p, a);
 				var th = p.Name_h * scale;
 				st = st.replace('fillColor', 'swimlaneFillColor');
-				
+
 				if (st == '')
 				{
 					st = 'swimlaneFillColor=#ffffff;'
 				}
-				
+
 				v.style += 'swimlane;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;' + st +
 					'startSize=' + th + ';' +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p.Name);
@@ -9035,19 +9035,19 @@ LucidImporter = {};
 				{
 					v.style += getFillColor(p, a);
 				}
-				
+
 				v.value = convertText(p.Name);
-				
+
 				var item = new Array();
 				var key = new Array();
 				var currH = th;
 				var keyW = 30;
-				
+
 				if (p.Column1 != null)
 				{
 					keyW = p.Column1 * scale;
 				}
-				
+
 				for (var i = 0; i < p.Fields; i++)
 				{
 					var itemH = 0;
@@ -9057,7 +9057,7 @@ LucidImporter = {};
 					v.insert(key[i]);
 					key[i].style += st +
 						getFontSize(p['Key' + (i + 1)]) +
-						getFontColor(p['Key' + (i + 1)]) + 
+						getFontColor(p['Key' + (i + 1)]) +
 						getFontStyle(p['Key' + (i + 1)]);
 
 					if (p.AltRows == 1 && (i % 2 != 0))
@@ -9066,21 +9066,21 @@ LucidImporter = {};
 					}
 					else
 					{
-						key[i].style += 'fillColor=none;' + 
+						key[i].style += 'fillColor=none;' +
 							getOpacity(p, a);
 					}
 
 					key[i].value = convertText(p['Key' + (i + 1)]);
-					
+
 					item[i] = new mxCell('', new mxGeometry(keyW, currH, w - keyW, p['Field' + (i + 1) + '_h'] * scale), 'shape=partialRectangle;top=0;right=0;bottom=0;part=1;resizeHeight=0;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;');
 					item[i].vertex = true;
 					v.insert(item[i]);
 					item[i].style += st +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getFontSize(p['Field' + (i + 1)]) +
-						getFontColor(p['Field' + (i + 1)]) + 
+						getFontColor(p['Field' + (i + 1)]) +
 						getFontStyle(p['Field' + (i + 1)]);
 
 					if (p.AltRows == 1 && (i % 2 != 0))
@@ -9089,31 +9089,31 @@ LucidImporter = {};
 					}
 					else
 					{
-						item[i].style += 'fillColor=none;' + 
+						item[i].style += 'fillColor=none;' +
 							getOpacity(p, a);
 					}
 
 					item[i].value = convertText(p['Field' + (i + 1)]);
-					
+
 					currH += p['Key' + (i + 1) + '_h'] * scale;
 				}
-				
+
 				break;
-				
+
 			case 'ERDEntityBlock3' :
 				var st = getFillColor(p, a);
 				var th = p.Name_h * scale;
 				st = st.replace('fillColor', 'swimlaneFillColor');
-				
+
 				if (st == '')
 				{
 					st = 'swimlaneFillColor=#ffffff;'
 				}
-				
+
 				v.style += 'swimlane;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;' + st +
 					'startSize=' + th + ';' +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p.Name);
@@ -9126,19 +9126,19 @@ LucidImporter = {};
 				{
 					v.style += getFillColor(p, a);
 				}
-				
+
 				v.value = convertText(p.Name);
-				
+
 				var item = new Array();
 				var key = new Array();
 				var currH = th;
 				var keyW = 30;
-				
+
 				if (p.Column1 != null)
 				{
 					keyW = p.Column1 * scale;
 				}
-				
+
 				for (var i = 0; i < p.Fields; i++)
 				{
 					var itemH = 0;
@@ -9148,7 +9148,7 @@ LucidImporter = {};
 					v.insert(key[i]);
 					key[i].style += st +
 						getFontSize(p['Field' + (i + 1)]) +
-						getFontColor(p['Field' + (i + 1)]) + 
+						getFontColor(p['Field' + (i + 1)]) +
 						getFontStyle(p['Field' + (i + 1)]);
 
 					if (p.AltRows == 1 && (i % 2 != 0))
@@ -9157,21 +9157,21 @@ LucidImporter = {};
 					}
 					else
 					{
-						key[i].style += 'fillColor=none;' + 
+						key[i].style += 'fillColor=none;' +
 							getOpacity(p, a);
 					}
 
 					key[i].value = convertText(p['Field' + (i + 1)]);
-					
+
 					item[i] = new mxCell('', new mxGeometry(keyW, currH, w - keyW, p['Type' + (i + 1) + '_h'] * scale), 'shape=partialRectangle;top=0;right=0;bottom=0;part=1;resizeHeight=0;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;');
 					item[i].vertex = true;
 					v.insert(item[i]);
 					item[i].style += st +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getFontSize(p['Type' + (i + 1)]) +
-						getFontColor(p['Type' + (i + 1)]) + 
+						getFontColor(p['Type' + (i + 1)]) +
 						getFontStyle(p['Type' + (i + 1)]);
 
 					if (p.AltRows == 1 && (i % 2 != 0))
@@ -9180,30 +9180,30 @@ LucidImporter = {};
 					}
 					else
 					{
-						item[i].style += 'fillColor=none;' + 
+						item[i].style += 'fillColor=none;' +
 							getOpacity(p, a);
 					}
 
 					item[i].value = convertText(p['Type' + (i + 1)]);
-					
+
 					currH += p['Field' + (i + 1) + '_h'] * scale;
 				}
-				
+
 				break;
 			case 'ERDEntityBlock4' :
 				var st = getFillColor(p, a);
 				var th = p.Name_h * scale;
 				st = st.replace('fillColor', 'swimlaneFillColor');
-				
+
 				if (st == '')
 				{
 					st = 'swimlaneFillColor=#ffffff;'
 				}
-				
+
 				v.style += 'swimlane;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;' + st +
 					'startSize=' + th + ';' +
 					getOpacity(p, a) +
-					getStrokeColor(p, a) + 
+					getStrokeColor(p, a) +
 					getStrokeWidth(p) +
 					getStrokeStyle(p) +
 					getLabelStyle(p.Name);
@@ -9216,26 +9216,26 @@ LucidImporter = {};
 				{
 					v.style += getFillColor(p, a);
 				}
-				
+
 				v.value = convertText(p.Name);
-				
+
 				var item = new Array();
 				var key = new Array();
 				var type = new Array();
 				var currH = th;
 				var keyW = 30;
 				var typeW = 40;
-				
+
 				if (p.Column1 != null)
 				{
 					keyW = p.Column1 * scale;
 				}
-				
+
 				if (p.Column2 != null)
 				{
 					typeW = p.Column2 * scale;
 				}
-				
+
 				for (var i = 0; i < p.Fields; i++)
 				{
 					var itemH = 0;
@@ -9245,7 +9245,7 @@ LucidImporter = {};
 					v.insert(key[i]);
 					key[i].style += st +
 						getFontSize(p['Key' + (i + 1)]) +
-						getFontColor(p['Key' + (i + 1)]) + 
+						getFontColor(p['Key' + (i + 1)]) +
 						getFontStyle(p['Key' + (i + 1)]);
 
 					if (p.AltRows == 1 && (i % 2 != 0))
@@ -9254,21 +9254,21 @@ LucidImporter = {};
 					}
 					else
 					{
-						key[i].style += 'fillColor=none;' + 
+						key[i].style += 'fillColor=none;' +
 							getOpacity(p, a);
 					}
 
 					key[i].value = convertText(p['Key' + (i + 1)]);
-					
+
 					item[i] = new mxCell('', new mxGeometry(keyW, currH, w - keyW - typeW, p['Field' + (i + 1) + '_h'] * scale), 'shape=partialRectangle;top=0;right=0;bottom=0;part=1;resizeHeight=0;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;');
 					item[i].vertex = true;
 					v.insert(item[i]);
 					item[i].style += st +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getFontSize(p['Field' + (i + 1)]) +
-						getFontColor(p['Field' + (i + 1)]) + 
+						getFontColor(p['Field' + (i + 1)]) +
 						getFontStyle(p['Field' + (i + 1)]);
 
 					if (p.AltRows == 1 && (i % 2 != 0))
@@ -9277,21 +9277,21 @@ LucidImporter = {};
 					}
 					else
 					{
-						item[i].style += 'fillColor=none;' + 
+						item[i].style += 'fillColor=none;' +
 							getOpacity(p, a);
 					}
 
 					item[i].value = convertText(p['Field' + (i + 1)]);
-					
+
 					type[i] = new mxCell('', new mxGeometry(w - typeW, currH, typeW, p['Type' + (i + 1) + '_h'] * scale), 'shape=partialRectangle;top=0;right=0;bottom=0;part=1;resizeHeight=0;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;');
 					type[i].vertex = true;
 					v.insert(type[i]);
 					type[i].style += st +
-						getStrokeColor(p, a) + 
+						getStrokeColor(p, a) +
 						getStrokeWidth(p) +
 						getStrokeStyle(p) +
 						getFontSize(p['Type' + (i + 1)]) +
-						getFontColor(p['Type' + (i + 1)]) + 
+						getFontColor(p['Type' + (i + 1)]) +
 						getFontStyle(p['Type' + (i + 1)]);
 
 					if (p.AltRows == 1 && (i % 2 != 0))
@@ -9300,15 +9300,15 @@ LucidImporter = {};
 					}
 					else
 					{
-						type[i].style += 'fillColor=none;' + 
+						type[i].style += 'fillColor=none;' +
 							getOpacity(p, a);
 					}
 
 					type[i].value = convertText(p['Type' + (i + 1)]);
-					
+
 					currH += p['Key' + (i + 1) + '_h'] * scale;
 				}
-				
+
 				break;
 		}
 

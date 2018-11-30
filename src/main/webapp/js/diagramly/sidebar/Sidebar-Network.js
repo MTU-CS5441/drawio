@@ -10,7 +10,7 @@
 		var s1 = 'fontColor=#0066CC;';
 		var gn = 'mxgraph.networks';
 		var dt = 'computer network ';
-		
+
 		this.addPaletteFunctions('network', 'Network', false,
 		[
 			this.addDataEntry(dt + 'ring bus', 100, 100, 'Ring Bus',
@@ -78,5 +78,5 @@
 			this.createVertexTemplateEntry(s0 + s + 'wireless_modem;', 100, 85, '', 'Wireless Modem', null, null, this.getTagsForStencil(gn, 'wireless_modem', dt).join(' '))
 		]);
 	};
-	
+
 })();

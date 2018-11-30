@@ -9,7 +9,7 @@
 		var s3 = mxConstants.STYLE_VERTICAL_LABEL_POSITION + '=bottom;' + mxConstants.STYLE_VERTICAL_ALIGN + '=top;html=1;strokeWidth=2;shape=';
 		var gn = 'mxgraph.flowchart';
 		var dt = '';
-		
+
 		this.addPaletteFunctions('flowchart', mxResources.get('flowchart'), false,
 		[
 			this.createVertexTemplateEntry(s + 'annotation_1;align=left;', w * 0.5, h, '', 'Annotation', null, null, this.getTagsForStencil(gn, 'annotation_1', dt).join(' ')),
@@ -48,5 +48,5 @@
 			this.createVertexTemplateEntry(mxConstants.STYLE_VERTICAL_LABEL_POSITION + '=bottom;' + mxConstants.STYLE_VERTICAL_ALIGN + '=top;html=1;strokeWidth=2;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;', w, h * 0.7, '', 'Transfer', null, null, this.getTagsForStencil(gn, 'transfer', dt).join(' '))
 		]);
 };
-		
+
 })();

@@ -210,23 +210,23 @@ mxWebColaLayout.prototype.adjustChildOffsets = function(model, groupCell, isUndo
 {
   if (groupCell.children == null || groupCell.children.length == 0)
     return;
-  
+
   var groupBounds = model.getGeometry(groupCell);
   var offsetX = groupBounds.x;
   var offsetY = groupBounds.y;
   var cellsToVisit = [];
   cellsToVisit = cellsToVisit.concat(groupCell.children);
-  
+
   while (cellsToVisit.length > 0)
   {
     var child = cellsToVisit.shift();
-    
+
     if (child.isVertex())
     {
       if (this.layout.isLeafOrCollapsed(child))
       {
         var geometry = model.getGeometry(child);
-        
+
         if (geometry != null && typeof geometry != "undefined")
         {
 //          geometry = geometry.clone();
@@ -278,24 +278,24 @@ mxWebColaLayout.prototype.updateGraph = function(isUndoable = false, initial = f
   {
     var cells = model.cells;
     var view = this.graph.getView();
-    
+
     // scan leaves and edges
     for (var id in cells)
     {
       var cell = cells[id];
       var state = view.getState(cell);
       var bounds = view.getBoundingBox(state, true);
-      
+
       if (cell.isVertex() && this.layout.isLeafOrCollapsed(cell))
       {
         var nodeId = this.layout.cellToNode[id];
-        
+
         if (typeof nodeId == "undefined")
           continue;
-        
+
         var node = this.layout.adaptor._nodes[nodeId];
         var geometry = model.getGeometry(cell);
-        
+
         if (geometry != null)
         {
           // First run creates a temporary geometry that can
@@ -306,7 +306,7 @@ mxWebColaLayout.prototype.updateGraph = function(isUndoable = false, initial = f
           {
             this.originalGeometries.put(cell, geometry);
             geometry = geometry.clone();
-            
+
     	        if (model.isVertex(cell))
     	        {
   	        	  if (this.layout.isInZeroConnectedGroup(cell))
@@ -319,11 +319,11 @@ mxWebColaLayout.prototype.updateGraph = function(isUndoable = false, initial = f
 	          }
     	        }
           }
-          
+
           // anchor top-left corners at (0, 0)
           geometry.x = node.bounds.x - minX;
           geometry.y = node.bounds.y - minY;
-          
+
           if (isUndoable)
           {
         	    // Restores original geometry for the change to be detected
@@ -365,7 +365,7 @@ mxWebColaLayout.prototype.updateGraph = function(isUndoable = false, initial = f
           {
             this.originalGeometries.put(cell, geometry);
             geometry = geometry.clone();
-            
+
     	        if (model.isVertex(cell))
     	        {
     	        	  if (this.layout.isInZeroConnectedGroup(cell))

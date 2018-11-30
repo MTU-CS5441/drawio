@@ -40,7 +40,7 @@ mxShapeMockupBarChart.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupBarChart.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -141,7 +141,7 @@ mxShapeMockupColumnChart.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupColumnChart.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -241,7 +241,7 @@ mxShapeMockupLineChart.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupLineChart.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -337,7 +337,7 @@ mxShapeMockupPieChart.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupPieChart.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -399,7 +399,7 @@ mxShapeMockupPieChart.prototype.foreground = function(c, x, y, w, h)
 		var x1 = w * 0.5 - w * Math.sin(startAngle) * 0.5;
 		var y1 = h * 0.5 - h * Math.cos(startAngle) * 0.5;
 		var x2 = w * 0.5 - w * Math.sin(endAngle) * 0.5;
-		var y2 = h * 0.5 - h * Math.cos(endAngle) * 0.5;		
+		var y2 = h * 0.5 - h * Math.cos(endAngle) * 0.5;
 		var largeArc = 1;
 		var sweep = 1;
 
@@ -446,7 +446,7 @@ mxShapeMockupIconGrid.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupIconGrid.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -532,7 +532,7 @@ mxShapeMockupBubbleChart.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupBubbleChart.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -570,38 +570,38 @@ mxShapeMockupBubbleChart.prototype.bars = function(c, x, y, w, h)
 	c.setFillColor(barFill1);
 
 	var cx = w * 0.4;
-	var cy = h * 0.45; 
+	var cy = h * 0.45;
 	var r = Math.min(h, w) * 0.14;
 	c.ellipse(cx - r, cy - r, 2 * r, 2 * r);
 	c.fillAndStroke();
 
 	cx = w * 0.1;
-	cy = h * 0.8; 
+	cy = h * 0.8;
 	r = Math.min(h, w) * 0.1;
 	c.ellipse(cx - r, cy - r, 2 * r, 2 * r);
 	c.fillAndStroke();
 
 	cx = w * 0.7;
-	cy = h * 0.7; 
+	cy = h * 0.7;
 	r = Math.min(h, w) * 0.22;
 	c.ellipse(cx - r, cy - r, 2 * r, 2 * r);
 	c.fillAndStroke();
 
 	c.setFillColor(barFill2);
 	cx = w * 0.15;
-	cy = h * 0.25; 
+	cy = h * 0.25;
 	r = Math.min(h, w) * 0.19;
 	c.ellipse(cx - r, cy - r, 2 * r, 2 * r);
 	c.fillAndStroke();
 
 	cx = w * 0.48;
-	cy = h * 0.7; 
+	cy = h * 0.7;
 	r = Math.min(h, w) * 0.12;
 	c.ellipse(cx - r, cy - r, 2 * r, 2 * r);
 	c.fillAndStroke();
 
 	cx = w * 0.74;
-	cy = h * 0.17; 
+	cy = h * 0.17;
 	r = Math.min(h, w) * 0.1;
 	c.ellipse(cx - r, cy - r, 2 * r, 2 * r);
 	c.fillAndStroke();
@@ -658,7 +658,7 @@ mxShapeMockupGauge.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupGauge.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -820,7 +820,7 @@ mxShapeMockupPlotChart.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupPlotChart.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1010,7 +1010,7 @@ mxShapeMockupGanttChart.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupGanttChart.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1136,7 +1136,7 @@ mxShapeMockupSimpleIcon.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupSimpleIcon.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1145,7 +1145,7 @@ mxShapeMockupSimpleIcon.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	c.rect(0, 0, w, h);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(0, 0);
 	c.lineTo(w, h);
@@ -1179,7 +1179,7 @@ mxShapeMockupGraphicsAnchor.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupGraphicsAnchor.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1219,7 +1219,7 @@ mxShapeMockupGraphicsRRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupGraphicsRRect.prototype.paintVertexShape = function(c, x, y, w, h)

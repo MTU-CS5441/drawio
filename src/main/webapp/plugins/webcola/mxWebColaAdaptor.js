@@ -323,10 +323,10 @@ mxWebColaAdaptor.prototype.graphToLayout = function(graph, movableVertices)
   var model = graph.getModel();
   var cells = model.cells;
   var view = graph.getView();
-  
+
   // Ignores cells that have no states
   var tmp = {};
-  
+
   for (var id in cells)
   {
 	  if (view.getState(cells[id]) != null)
@@ -334,9 +334,9 @@ mxWebColaAdaptor.prototype.graphToLayout = function(graph, movableVertices)
 		  tmp[id] = cells[id];
 	  }
   }
-  
+
   cells = tmp;
-  
+
   var nodeCells = {};
   var linkCells = {};
   var cellIds = {};
@@ -501,7 +501,7 @@ mxWebColaAdaptor.prototype.createLink = function(sourceId, targetId, cellIds)
  * @param sourceId ID of the edge's source vertex cell
  * @param targetId ID of the edge's target vertex cell
  * @param cellIds cell ID to WebCola's node ID mapping
- * @returns a WebCola link corresponding to the edge [sourceId, targetId] 
+ * @returns a WebCola link corresponding to the edge [sourceId, targetId]
  * in WebCola node IDs
  */
 {
@@ -521,7 +521,7 @@ mxWebColaAdaptor.prototype.computeVertexDegrees = function()
 {
   var model = this.graph.getModel();
   var cells = model.cells;
-  
+
   // compute individual vertex degrees
   for (var id in cells)
   {
@@ -533,13 +533,13 @@ mxWebColaAdaptor.prototype.computeVertexDegrees = function()
     	  var targetId = cell.target.id;
     	  var source = cells[sourceId];
     	  var target = cells[targetId];
-    	  
+
     	  if (sourceId == targetId)
       {
     		 // self-loops are irrelevant
-         continue;    		  
+         continue;
     	  }
-    	  
+
     	  var sourceDegree = this.vertexDegrees.get(source);
     	  if (typeof sourceDegree == "undefined")
       {

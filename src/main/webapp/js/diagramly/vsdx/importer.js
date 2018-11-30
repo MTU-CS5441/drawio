@@ -20,7 +20,7 @@ var com;
                     this.RESPONSE_DIAGRAM_START = "";
                     this.RESPONSE_DIAGRAM_END = "</diagram>";
                     this.RESPONSE_HEADER = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><mxfile>";
-                    
+
                     /**
                      * Stores the vertexes imported.
                      */
@@ -37,7 +37,7 @@ var com;
                      * Stores the parents of the shapes imported.
                      */
                     this.parentsMap = ({});
-                    
+
                     this.layersMap = ({});
                     /**
                      * Set to true if you want to display spline debug data
@@ -55,17 +55,17 @@ var com;
 
                 		return mxVsdxCodec.vsdxPlaceholder;
                 };
-                
+
                 mxVsdxCodec.parsererrorNS_$LI$ = function ()
                 {
             		if (mxVsdxCodec.parsererrorNS == null)
             		{
             			mxVsdxCodec.parsererrorNS = "";
-            			
-            			if (window.DOMParser) 
+
+            			if (window.DOMParser)
             			{
 	            			var parser = new DOMParser();
-	            			
+
 	            			try
 	            			{
 	            				mxVsdxCodec.parsererrorNS = parser.parseFromString('<', 'text/xml').getElementsByTagName("parsererror")[0].namespaceURI;
@@ -79,13 +79,13 @@ var com;
 
             		return mxVsdxCodec.parsererrorNS;
                 };
-                
-                mxVsdxCodec.parseXml = function (xml) 
+
+                mxVsdxCodec.parseXml = function (xml)
                 {
                 	try
                 	{
                 		var doc = mxUtils.parseXml(xml);
-                		
+
                 		if (doc.getElementsByTagNameNS(mxVsdxCodec.parsererrorNS, 'parsererror').length > 0)
                 		{
                 			return null;
@@ -95,20 +95,20 @@ var com;
                 			return doc;
             			}
                 	}
-                	catch (e) 
+                	catch (e)
                 	{
                 		//IE11 throw an exception on XML syntax error
-                		return null; 
+                		return null;
                 	}
                 };
-                
+
                 //TODO Optimize this function
-                mxVsdxCodec.decodeUTF16LE = function ( binaryStr ) 
+                mxVsdxCodec.decodeUTF16LE = function ( binaryStr )
                 {
                     var cp = "";
-                    for( var i = 0; i < binaryStr.length; i+=2) 
+                    for( var i = 0; i < binaryStr.length; i+=2)
                     {
-                        cp += String.fromCharCode( 
+                        cp += String.fromCharCode(
                              binaryStr.charCodeAt(i) |
                             ( binaryStr.charCodeAt(i+1) << 8 )
                         );
@@ -116,8 +116,8 @@ var com;
 
                     return cp ;
                 }
-                
-                mxVsdxCodec.prototype.scaleGraph = function(graph, scale) 
+
+                mxVsdxCodec.prototype.scaleGraph = function(graph, scale)
                 {
                     if (scale !== 1) {
                         var model = graph.getModel();
@@ -149,7 +149,7 @@ var com;
                         }
                     }
                 };
-                
+
                 /**
                  * Parses the input VSDX format and uses the information to populate
                  * the specified graph.
@@ -168,7 +168,7 @@ var com;
                     var docData = ({});
                     var mediaData = ({});
 
-                    var allDone = function () 
+                    var allDone = function ()
                     {
 	                    var path = mxVsdxCodec.vsdxPlaceholder + "/document.xml";
 	                    var rootDoc = (function (m, k) { return m[k] ? m[k] : null; })(docData, path);
@@ -221,7 +221,7 @@ var com;
 	                    var dateAfter = new Date();
                        	//console.log("File processed in " + (dateAfter - dateBefore) + "ms");
 	                    //console.log(xmlBuilder.str);
-	                    if (callback) 
+	                    if (callback)
 	                    {
 	                    		callback(xmlBuilder.str);
 	                    }
@@ -230,10 +230,10 @@ var com;
                     var dateBefore = new Date();
                     var filesCount = 0;
                     var processedFiles = 0;
-                    
-                    var doneCheck = function() 
+
+                    var doneCheck = function()
                     {
-	                    	if (processedFiles == filesCount) 
+	                    	if (processedFiles == filesCount)
 	                    	{
 	                    		var dateAfter = new Date();
 		                         //console.log(processedFiles + " File extracted in " + (dateAfter - dateBefore) + "ms");
@@ -244,8 +244,8 @@ var com;
 		                    	catch(e)
 		                    	{
 		                    		console.log(e);
-		                    		
-		                    		if (onerror != null) 
+
+		                    		if (onerror != null)
 		                    		{
 		                    			onerror();
 		                    		}
@@ -257,9 +257,9 @@ var com;
 
 	                    	}
                     };
-                    
-                    JSZip.loadAsync(file)                                   
-                    .then(function(zip) 
+
+                    JSZip.loadAsync(file)
+                    .then(function(zip)
                     {
                     	if (Object.keys(zip.files).length == 0)
                     	{
@@ -272,16 +272,16 @@ var com;
                     	{
 	                        var dateAfter = new Date();
 	                       	//console.log(" (loaded in " + (dateAfter - dateBefore) + "ms)");
-	                       	
-	                        zip.forEach(function (relativePath, zipEntry) 
-	                        {  
+
+	                        zip.forEach(function (relativePath, zipEntry)
+	                        {
 	        					var filename = zipEntry.name;
 	                        	var name = filename.toLowerCase();
 	        					var nameLen = name.length;
 	                            if (name.indexOf('.xml') == nameLen - 4 || name.indexOf('.xml.rels') == nameLen - 9) //xml files
 	                            {
 	                            	filesCount++;
-	        	                    zipEntry.async("string").then(function (str) 
+	        	                    zipEntry.async("string").then(function (str)
 	        	                  	{
         	                    		if (!(str.length === 0)) {
 	        	    						//UTF-8 BOM causes exception while parsing, so remove it
@@ -290,18 +290,18 @@ var com;
                                         	{
 	                                            str = str.substring(1);
                                         	}
-	                                        
+
 	                                        var doc = mxVsdxCodec.parseXml(str);
-	                                        
-	                                        if (doc == null) 
+
+	                                        if (doc == null)
 	                                        {
 	                                        	if (str.charCodeAt(1) === 0 && str.charCodeAt(3) === 0 && str.charCodeAt(5) === 0)
                                         		{
 	                                        		doc = mxVsdxCodec.parseXml(mxVsdxCodec.decodeUTF16LE(str));
                                         		}
-	                                        	//TODO add any other non-standard encoding that may be needed 
+	                                        	//TODO add any other non-standard encoding that may be needed
 	                                        }
-	                                        
+
 	                                        if (doc != null)
                                         	{
 		                                        doc.vsdxFileName = filename;
@@ -309,23 +309,23 @@ var com;
                                         	}
 	                                    }
 		        	                    	processedFiles++;
-		
+
 		        	                    	doneCheck();
 	        	                   	});
 	                            }
 	                            else if (name.indexOf(mxVsdxCodec.vsdxPlaceholder + "/media") === 0)//binary files
 	                           	{
 	                            	filesCount++;
-	                            	if ((function (str, searchString) { var pos = str.length - searchString.length; var lastIndex = str.indexOf(searchString, pos); return lastIndex !== -1 && lastIndex === pos; })(name, ".emf")) 
+	                            	if ((function (str, searchString) { var pos = str.length - searchString.length; var lastIndex = str.indexOf(searchString, pos); return lastIndex !== -1 && lastIndex === pos; })(name, ".emf"))
 	                            	{
                             			var emfDone = function()
                             			{
                             				processedFiles++;
-                            				
+
 		        	                    	doneCheck();
                             			}
-                            			
-	                            		if (JSZip.support.blob && window.EMF_CONVERT_URL) 
+
+	                            		if (JSZip.support.blob && window.EMF_CONVERT_URL)
 	                            		{
 	                            			zipEntry.async("blob").then(function (emfBlob)
 			           	                  	{
@@ -336,17 +336,17 @@ var com;
 	                        					var xhr = new XMLHttpRequest();
 	                        					xhr.open('POST', EMF_CONVERT_URL);
 	                        					xhr.responseType = 'blob';
-	                        					
+
 	                        					xhr.onreadystatechange = mxUtils.bind(this, function()
 	                        					{
 	                        						if (xhr.readyState == 4)
-	                        						{	
+	                        						{
 	                        							if (xhr.status >= 200 && xhr.status <= 299)
 	                        							{
 	                        								try
 	                        								{
 	                        									var reader = new FileReader();
-	                        									reader.readAsDataURL(xhr.response); 
+	                        									reader.readAsDataURL(xhr.response);
 	                        									reader.onloadend = function() {
 	                        									    mediaData[filename] = reader.result.substr(22); //data:image/png;base64, is 23 character
 		                        									emfDone();
@@ -364,7 +364,7 @@ var com;
 	                        							}
 	                        						}
 	                        					});
-	                        					
+
 	                        					xhr.send(formData);
 			           	                  	});
 	                            		}
@@ -374,12 +374,12 @@ var com;
                             			}
 	                            	}
 	                            	else if ((function (str, searchString) { var pos = str.length - searchString.length; var lastIndex = str.indexOf(searchString, pos); return lastIndex !== -1 && lastIndex === pos; })(name, ".bmp")) {
-	                            		if (JSZip.support.uint8array) 
+	                            		if (JSZip.support.uint8array)
 	                            		{
-			                            	zipEntry.async("uint8array").then(function (bmpData) 
+			                            	zipEntry.async("uint8array").then(function (bmpData)
 			           	                  	{
 			                            		var bitmap = new BmpDecoder(bmpData);
-			                            		
+
 			                            		var c = document.createElement("canvas");
 			                            		c.width = bitmap.width;
 			                              	  	c.height = bitmap.height;
@@ -387,7 +387,7 @@ var com;
 			                            		ctx.putImageData(bitmap.imageData, 0, 0);
 			                            		var jpgData = c.toDataURL("image/jpeg");
 	                                            /* put */ (mediaData[filename] = jpgData.substr(23)); //23 is the length of "data:image/jpeg;base64,"
-	
+
 			        	                    	processedFiles++;
 			        	                    	doneCheck();
 			           	                   	});
@@ -395,14 +395,14 @@ var com;
 	                            	}
 	                            	else
 	                            	{
-		                            	zipEntry.async("base64").then(function (base64Str) 
+		                            	zipEntry.async("base64").then(function (base64Str)
 		           	                  	{
 	//	                                    if ((function (str, searchString) { var pos = str.length - searchString.length; var lastIndex = str.indexOf(searchString, pos); return lastIndex !== -1 && lastIndex === pos; })(name, ".bmp")) {
-	//	                                        try 
+	//	                                        try
 	//	                                        {
 	//	    	                            		//convert BMP files to PNG
 	//		                                    	var bmpImg = new Image();
-	//		                                        
+	//
 	//		                                        bmpImg.onload = function() {
 	//		                                            var c = document.createElement("canvas");
 	//		                                            c.width = bmpImg.width;
@@ -410,21 +410,21 @@ var com;
 	//		                                            var ctx = c.getContext("2d");
 	//		                                            ctx.drawImage(bmpImg, 0, 0);
 	//		                                            var jpgData = c.toDataURL("image/jpeg");
-	//		                                            
+	//
 	//		                                            /* put */ (mediaData[filename] = jpgData.substr(23)); //23 is the length of "data:image/jpeg;base64,"
-	//		                                            
+	//
 	//		                                            processedFiles++;
 	//		                                            doneCheck();
 	//		                                        };
-	//	
+	//
 	//		                                        bmpImg.src = "data:image/bmp;base64," + base64Str;
 	//	                                        }
 	//	                                        catch (e) {} //conversion failed. Nothing can be done!
 	//	                                    }
-	//	                                    else 
+	//	                                    else
 	//	                                    {
 			                                    /* put */ (mediaData[filename] = base64Str);
-			                                	
+
 			        	                    	processedFiles++;
 			        	                    	doneCheck();
 	//	                                    }
@@ -439,7 +439,7 @@ var com;
                     		{
                     			onerror(e);
                     		}
-                    });                    
+                    });
                 };
                 mxVsdxCodec.prototype.createMxGraph = function () {
                     var graph = new mxGraph();
@@ -455,7 +455,7 @@ var com;
                     var node = codec.encode(graph.getModel());
                     node.setAttribute("style", "default-style2");
                     var modelString = mxUtils.getXml(node);
-                    
+
                     var output = "";
                     if (page != null) {
                         //var pageName_1 = org.apache.commons.lang3.StringEscapeUtils.escapeXml11(page.getPageName());
@@ -463,7 +463,7 @@ var com;
                         var pageName_1 = mxUtils.htmlEntities(page.getPageName());
                         output += "<diagram name=\"" + pageName_1 + "\">";
                     }
-                    
+
                     output += Graph.prototype.compress(modelString);
                     return output;
                 };
@@ -577,23 +577,23 @@ var com;
                 	//add page layers
                 	var layers = page.getLayers();
                 	this.layersMap[0] = graph.getDefaultParent();
-                	
+
                 	if (layers.length > 1)
             		{
                 		for (var k = 1; k < layers.length; k++)
 	            		{
                 			var layer = layers[k];
-                			var layerCell = new mxCell();		
+                			var layerCell = new mxCell();
                 			layerCell.setVisible(layer.Visible == 1);
 
                 			if (layer.Lock == 1)
                 			{
                 				layerCell.setStyle("locked=1;");
                 			}
-                			
+
                 			//TODO handlle color and other properties
                 			layerCell.setValue(layer.Name);
-                			
+
                 			this.layersMap[k] = layerCell;
                     		graph.addCell(layerCell, graph.model.root, k);
 	            		}
@@ -823,14 +823,14 @@ var com;
                         }
                         ;
                     }
-                    
+
                     /* put */ (function (m, k, v) { if (m.entries == null)
                     m.entries = []; for (var i = 0; i < m.entries.length; i++)
                     if (m.entries[i].key.equals != null && m.entries[i].key.equals(k) || m.entries[i].key === k) {
                         m.entries[i].value = v;
                         return;
                     } m.entries.push({ key: k, value: v, getKey: function () { return this.key; }, getValue: function () { return this.value; } }); })(this.vertexMap, new com.mxgraph.io.vsdx.ShapePageId(pageId, shape.getId()), group);
-                    
+
                     return group;
                 };
                 mxVsdxCodec.rotatedEdgePoint = function (pt, rotation, cx, cy) {
@@ -897,26 +897,26 @@ var com;
                     }
                     return null;
                 };
-                
-                
-                mxVsdxCodec.calculateAbsolutePoint = function (cell) 
+
+
+                mxVsdxCodec.calculateAbsolutePoint = function (cell)
                 {
                     var x = 0, y = 0;
                     while (cell != null)
                     {
                         var geo = cell.geometry;
 
-                        if (geo != null) 
+                        if (geo != null)
                         {
                             x += geo.x;
-                            y += geo.y;                
+                            y += geo.y;
                         }
                         cell = cell.parent;
                     }
 
                     return new mxPoint(x, y);
                 }
-                
+
 
                 /**
                  * Adds a connected edge to the graph.
@@ -961,9 +961,9 @@ var com;
                         if (m.entries[i].key.equals != null && m.entries[i].key.equals(k) || m.entries[i].key === k) {
                             return m.entries[i].value;
                         } return null; })(this.vertexMap, new com.mxgraph.io.vsdx.ShapePageId(pageId, sourceSheet)) : null;
-                    
+
                     var removeFirstPt = true;
-                    if (source == null) 
+                    if (source == null)
                     {
                         source = graph.insertVertex(parent, null, null, Math.floor(Math.round(beginXY.x * 100) / 100), Math.floor(Math.round(beginXY.y * 100) / 100), 0, 0);
                     }
@@ -983,7 +983,7 @@ var com;
                 	{
                     	removeFirstPt = false;
                 	}
-                    
+
                     var toConstraint = null;
                     var toSheet = connect.getTargetToSheet();
                     var target = toSheet != null ? (function (m, k) { if (m.entries == null)
@@ -991,9 +991,9 @@ var com;
                         if (m.entries[i].key.equals != null && m.entries[i].key.equals(k) || m.entries[i].key === k) {
                             return m.entries[i].value;
                         } return null; })(this.vertexMap, new com.mxgraph.io.vsdx.ShapePageId(pageId, toSheet)) : null;
-                    
+
                     var removeLastPt = true;
-                    if (target == null) 
+                    if (target == null)
                     {
                         target = graph.insertVertex(parent, null, null, Math.floor(Math.round(endXY.x * 100) / 100), Math.floor(Math.round(endXY.y * 100) / 100), 0, 0);
                     }
@@ -1009,11 +1009,11 @@ var com;
                                         / trgGeo.height);
                         //TODO toConstraint rotation support
             		}
-                    else 
+                    else
                     {
                     	removeLastPt = false;
                     }
-                    
+
                     var styleMap = edgeShape.getStyleFromEdgeShape(parentHeight);
                     var edge;
                     var rotation = edgeShape.getRotation();
@@ -1033,45 +1033,45 @@ var com;
                         edge = graph.insertEdge(parent, null, edgeShape.getTextLabel(), source, target, com.mxgraph.io.vsdx.mxVsdxUtils.getStyleString(styleMap, "="));
                         var lblOffset = edgeShape.getLblEdgeOffset(graph.getView(), points);
                         edge.getGeometry().offset = (lblOffset);
-                        
+
                         //add entry/exit points when edge, src, and trg are not rotated
                         if (fromConstraint != null)
             			{
             				graph.setConnectionConstraint(edge, source, true,
             						new mxConnectionConstraint(fromConstraint, false));
             			}
-                        
+
                         if (removeFirstPt)
                     	{
 	                        points.shift();
                     	}
-                        
+
             			if (toConstraint != null)
             			{
             				graph.setConnectionConstraint(edge, target, false,
             						new mxConnectionConstraint(toConstraint, false));
             			}
-            			
+
             			if (removeLastPt)
         				{
 	        				points.pop();
                         }
                     }
                     var edgeGeometry = graph.getModel().getGeometry(edge);
-                    
+
                     //when source.parent != target.parent the front end will change the edge parent to parent 1 but waypoints are not corrected
                     if (source.parent != target.parent && parent != null && parent.id != 1 && source.parent.id == 1)
                 	{
                     	var accX = 0;
                     	var accY = 0;
-                    	
+
                     	var prnt = parent;
-                    	
-                    	do 
+
+                    	do
                     	{
                         	var prntGeo = prnt.geometry;
-                        	
-                            if (prntGeo != null) 
+
+                            if (prntGeo != null)
                             {
                             	accX += prntGeo.x;
                             	accY += prntGeo.y;
@@ -1079,16 +1079,16 @@ var com;
                             prnt = prnt.parent;
                     	}
                     	while(prnt != null);
-                    	
+
                     	edge.parent = source.parent;
-                    	
+
                     	for (var i = 0; i < points.length; i++)
                 		{
                     		points[i].x += accX;
                     		points[i].y += accY;
                 		}
                 	}
-                    
+
                     edgeGeometry.points = (points);
                     if (styleMap.hasOwnProperty("curved") && (function (o1, o2) { if (o1 && o1.equals) {
                         return o1.equals(o2);
@@ -1259,7 +1259,7 @@ var com;
                 mxVssxCodec.prototype.decodeVssx = function (file, callback, charset) {
                 	var _this = this;
                     var library = { str: "<mxlibrary>[", toString: function () { return this.str; } };
-                    this.decodeVsdx(file, function(shapesInPages) 
+                    this.decodeVsdx(file, function(shapesInPages)
             		{
                         /* append */ (function (sb) { return sb.str = sb.str.concat(shapesInPages); })(library);
                         var masterShapes = _this.vsdxModel.getMasterShapes();
@@ -1277,29 +1277,29 @@ var com;
                                         var shapeGraph = this_1.createMxGraph();
                                         var shapeElem = master.getMasterShape().getShape();
                                         var shape = new com.mxgraph.io.vsdx.VsdxShape(page, shapeElem, !page.isEdge(shapeElem), masterShapes, null, this_1.vsdxModel);
-                                        
+
                                         var scale = 1;
-                                        
+
                                         if (master.pageSheet != null)
                                     	{
                                         	 var dScaleV = 1, pScaleV = 1;
                                         	 var dScale = master.pageSheet["DrawingScale"];
-                                             
-                                        	 if (dScale != null) 
+
+                                        	 if (dScale != null)
                                              {
                                         		 dScaleV = parseFloat(dScale.getAttribute("V")) || 1;
                                              }
-                                             
+
                                         	 var pScale = master.pageSheet["PageScale"];
-                                             
-                                        	 if (pScale != null) 
+
+                                        	 if (pScale != null)
                                              {
                                         		 pScaleV = parseFloat(pScale.getAttribute("V")) || 1;
                                              }
-                                        	 
+
                                         	 scale = pScaleV / dScaleV;
                                     	}
-                                        
+
                                         var cell = null;
                                         if (shape.isVertex()) {
                                             /* clear */ this_1.edgeShapeMap.entries = [];
@@ -1544,7 +1544,7 @@ var com;
                             try {
                                 if (val != null && !(val.length === 0)) {
                                     var fVal = parseFloat(val);
-                                    
+
                                     if (isFinite(fVal))
                                     	return fVal;
                                 }
@@ -2382,16 +2382,16 @@ var com;
                     mxVsdxGeometryList.prototype.hasGeom = function () {
                         return !(this.geomList.length == 0);
                     };
-                    
+
                     mxVsdxGeometryList.prototype.getGeoCount = function () {
                     	var count = 0;
-                		
-                		for (var i = 0; i < this.geomList.length; i++) 
+
+                		for (var i = 0; i < this.geomList.length; i++)
                 		{
-                			if (!this.geomList[i].isNoShow()) 
+                			if (!this.geomList[i].isNoShow())
                 				count++;
                 		}
-                		
+
                 		return count;
                 	};
                     /*private*/ mxVsdxGeometryList.prototype.rotatedPoint = function (pt, cos, sin) {
@@ -2616,13 +2616,13 @@ var com;
                                     }
                                     ;
                                 }
-                            } 
+                            }
                             else if (child.nodeType == 1 && child.nodeName == "PageSheet")
                         	{
                             	this.pageSheet = {};
                             	var cells = com.mxgraph.io.vsdx.mxVsdxUtils.getDirectChildNamedElements(child, "Cell");
-                                
-                            	for (var i = 0; i < cells.length; i++) 
+
+                            	for (var i = 0; i < cells.length; i++)
                                 {
                                     this.pageSheet[cells[i].getAttribute("N")] = cells[i];
                                 }
@@ -3102,22 +3102,22 @@ var com;
                                     /* put */ (this.cellElements[n] = cellElem);
                                 }
                             }
-                            
+
                             var sections = com.mxgraph.io.vsdx.mxVsdxUtils.getDirectChildNamedElements(pageSheet, "Section");
-                            for (var i134 = 0; i134 < sections.length; i134++) 
+                            for (var i134 = 0; i134 < sections.length; i134++)
                             {
                             	var secElem = sections[i134];
                             	var n = secElem.getAttribute("N");
-                            	
+
                             	if (n == "Layer")
                         		{
                             		 var layers = com.mxgraph.io.vsdx.mxVsdxUtils.getDirectChildNamedElements(secElem, "Row");
-                            		 
+
                             		 for (var i135 = 0; i135 < layers.length; i135++)
                         			 {
                             			 var layerAtts = com.mxgraph.io.vsdx.mxVsdxUtils.getDirectChildNamedElements(layers[i135], "Cell");
                             			 var layerObj = {};
-                            			 
+
                             			 for (var i136 = 0; i136 < layerAtts.length; i136++)
                             			 {
                             				 layerObj[layerAtts[i136].getAttribute("N")] = layerAtts[i136].getAttribute("V");
@@ -4883,7 +4883,7 @@ var com;
                         	g = g.length == 1 ? '0' + g : g;
                         	var b = this.blue.toString(16);
                         	b = b.length == 1 ? '0' + b : b;
-                        	
+
                             return "#" + r + g + b;
                         };
                         Color.prototype.getGradientClr = function () {
@@ -8341,16 +8341,16 @@ var com;
                     function Shape(shape, model) {
                     	//BUG in JSweet, fields default values and explicit assignments are not the same (defaults are before super() and assignments are after)!
                     	var _this = this;
-                    	
+
                         _this.text = null;
                         _this.fields = null;
                         _this.geom = null;
                         _this.imageData = null;
                         _this.theme = null;
                         _this.quickStyleVals = null;
-                        
+
                         _this = _super.call(this, shape, model) || this;
-                        
+
                         /**
                          * List of paragraphs in this shape
                          */
@@ -8395,12 +8395,12 @@ var com;
                          * Last fld IX referenced in the Text Element.
                          */
                         _this.fld = "0";
-                        
+
                         _this.width = _this.getScreenNumericalValue$org_w3c_dom_Element$double(/* get */ (function (m, k) { return m[k] ? m[k] : null; })(_this.cellElements, com.mxgraph.io.vsdx.mxVsdxConstants.WIDTH), 0);
                         _this.height = _this.getScreenNumericalValue$org_w3c_dom_Element$double(/* get */ (function (m, k) { return m[k] ? m[k] : null; })(_this.cellElements, com.mxgraph.io.vsdx.mxVsdxConstants.HEIGHT), 0);
                         return _this;
                     }
-                    Shape.UNICODE_LINE_SEP_$LI$ = function () 
+                    Shape.UNICODE_LINE_SEP_$LI$ = function ()
                     {
                     	if (Shape.UNICODE_LINE_SEP == null)
                 		{
@@ -8739,12 +8739,12 @@ var com;
                                 return o1 === o2;
                             } })(bullet, "0")) {
                                 var entries = text.split("\n");
-                                
-                                if (!entries[entries.length - 1]) 
+
+                                if (!entries[entries.length - 1])
                                 {
                                 	entries.pop();
                                 }
-                                
+
                                 var ret = "";
                                 for (var index159 = 0; index159 < entries.length; index159++) {
                                     var entry = entries[index159];
@@ -9195,7 +9195,7 @@ var com;
                         _this.parentHeight = 0;
 
                         _this = _super.call(this, shape, model) || this;
-                        
+
                         /**
                          * Whether or not to assume HTML labels
                          */
@@ -9217,8 +9217,8 @@ var com;
                          */
                         _this.vertex = true;
                         _this.childShapes = ({});
-                        
-                        
+
+
                         var masterId = _this.getMasterId();
                         var masterShapeLocal = _this.getShapeMasterId();
                         if (masterId != null) {
@@ -10188,13 +10188,13 @@ var com;
                         })(/* get */ (function (m, k) { return m[k] ? m[k] : null; })(form, mxConstants.STYLE_SHAPE), "image;"))) {
                             /* put */ (this.styleMap[mxConstants.STYLE_WHITE_SPACE] = "wrap");
                         }
-                        
+
                         //this.styleMap.putAll(form);
                         for (var key in form)
                     	{
                         	this.styleMap[key] = form[key];
                     	}
-                        
+
                         if (this.isDashed()) {
                             /* put */ (this.styleMap[mxConstants.STYLE_DASHED] = "1");
                             var dashPattern = this.getDashPattern();
@@ -10787,7 +10787,7 @@ var com;
                                     this.styleDebug("No geom found");
                                     return result;
                                 }
-                                
+
                                 var enc = Graph.prototype.compress(parsedGeom);
                                 /* put */ (result[mxConstants.STYLE_SHAPE] = "stencil(" + enc + ")");
                             }
@@ -11396,7 +11396,7 @@ var com;
                  * Number of d.p. to round non-integers to
                  */
                 VsdxShape.maxDp = 2;
-                //TODO FIXME In online, matching fails which gives better results! 
+                //TODO FIXME In online, matching fails which gives better results!
                 VsdxShape.USE_SHAPE_MATCH = false;
                 VsdxShape.stencilTemplate = "<shape h=\"htemplate\" w=\"wtemplate\" aspect=\"variable\" strokewidth=\"inherit\"><connections></connections><background></background><foreground></foreground></shape>";
                 vsdx.VsdxShape = VsdxShape;

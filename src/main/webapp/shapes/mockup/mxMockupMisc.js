@@ -40,7 +40,7 @@ mxShapeMockupPlaybackControls.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupPlaybackControls.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -200,7 +200,7 @@ mxShapeMockupProgressBar.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupProgressBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -224,7 +224,7 @@ mxShapeMockupProgressBar.prototype.foreground = function(c, w, h)
 	var barPos = mxUtils.getValue(this.style, mxShapeMockupProgressBar.prototype.cst.BAR_POS, '80');
 	barPos = Math.min(barPos, 100);
 	barPos = Math.max(barPos, 0);
-	var deadzone = 0; 
+	var deadzone = 0;
 	var virRange = w - 2 * deadzone;
 	var truePos = deadzone + virRange * barPos / 100;
 
@@ -276,7 +276,7 @@ mxShapeMockupShoppingCart.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupShoppingCart.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -368,7 +368,7 @@ mxShapeMockupRating.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupRating.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -481,7 +481,7 @@ mxShapeMockupMail.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupMail.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -535,7 +535,7 @@ mxShapeMockupVolumeSlider.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupVolumeSlider.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -594,7 +594,7 @@ mxShapeMockupVolumeSlider.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.roundrect(barMin, videoBarStartY + controlBarHeight * 0.35, barEnd, controlBarHeight * 0.3, 5, 5);
 	c.fill();
 
-	
+
 	c.ellipse(barEnd - controlBarHeight * 0.25, videoBarStartY + controlBarHeight * 0.25, controlBarHeight * 0.5, controlBarHeight * 0.5);
 	c.fillAndStroke();
 
@@ -643,7 +643,7 @@ mxShapeMockupEdit.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupEdit.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -703,7 +703,7 @@ mxShapeMockupPrint.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupPrint.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -769,7 +769,7 @@ mxShapeMockupShare.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupShare.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -837,7 +837,7 @@ mxShapeMockupTrashcan.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupTrashcan.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -899,7 +899,7 @@ mxShapeMockupCopyright.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupCopyright.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -951,7 +951,7 @@ mxShapeMockupRegistered.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupRegistered.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1013,7 +1013,7 @@ mxShapeMockupVolume.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupVolume.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1036,14 +1036,14 @@ mxShapeMockupVolume.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w * 0.1, h * 0.7);
 	c.close();
 	c.fill();
-	
+
 	c.begin();
 	c.moveTo(w * 0.6, h * 0.4);
 	c.arcTo(w * 0.2, h * 0.2, 0, 0, 1, w * 0.6, h * 0.6);
 
 	c.moveTo(w * 0.7, h * 0.3);
 	c.arcTo(w * 0.3, h * 0.3, 0, 0, 1, w * 0.7, h * 0.7);
-	
+
 	c.moveTo(w * 0.8, h * 0.2);
 	c.arcTo(w * 0.4, h * 0.4, 0, 0, 1, w * 0.8, h * 0.8);
 	c.stroke();
@@ -1082,7 +1082,7 @@ mxShapeMockupRuler.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupRuler.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1104,16 +1104,16 @@ mxShapeMockupRuler.prototype.foreground = function(c, w, h)
 {
 	var facing = mxUtils.getValue(this.style, mxShapeMockupRuler.prototype.cst.ORIENTATION, mxShapeMockupRuler.prototype.cst.FACE_DOWN);
 	var unitSize = mxUtils.getValue(this.style, mxShapeMockupRuler.prototype.cst.UNIT_SIZE, '10');
-	
+
 	unitSize = Math.max(unitSize, 1);
-	
+
 	var currX = unitSize;
 	var i = 1;
 
 	if (facing === mxShapeMockupRuler.prototype.cst.FACE_DOWN)
 	{
 		c.begin();
-		
+
 		while (currX < w)
 		{
 			var remainder = i % 10;
@@ -1137,13 +1137,13 @@ mxShapeMockupRuler.prototype.foreground = function(c, w, h)
 			currX = currX + unitSize;
 			i = i + 1;
 		}
-		
+
 		c.stroke();
 	}
 	else if (facing === mxShapeMockupRuler.prototype.cst.FACE_UP)
 	{
 		c.begin();
-		
+
 		while (currX < w)
 		{
 			var remainder = i % 10;
@@ -1167,7 +1167,7 @@ mxShapeMockupRuler.prototype.foreground = function(c, w, h)
 			currX = currX + unitSize;
 			i = i + 1;
 		}
-		
+
 		c.stroke();
 	}
 };
@@ -1175,7 +1175,7 @@ mxShapeMockupRuler.prototype.foreground = function(c, w, h)
 mxCellRenderer.registerShape(mxShapeMockupRuler.prototype.cst.SHAPE_RULER, mxShapeMockupRuler);
 
 //**********************************************************************************************************************************************************
-//Advanced Ruler 
+//Advanced Ruler
 //**********************************************************************************************************************************************************
 /**
 * Extends mxShape.
@@ -1211,7 +1211,7 @@ mxShapeMockupRuler2.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupRuler2.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1236,18 +1236,18 @@ mxShapeMockupRuler2.prototype.foreground = function(c, x, y, w, h)
 	var dx = mxUtils.getValue(this.style, 'dx', '100');
 	var unitSize = dx / 10;
 	this.state.style['spacingLeft'] = Math.round(1000 * Math.max(0, Math.min(w, dx))) / 1000 - 4;
-	
+
 	unitSize = Math.max(unitSize, 1);
-	
+
 	c.setFontColor(fontColor);
-	
+
 	var currX = unitSize;
 	var i = 1;
 
 	if (facing === mxShapeMockupRuler2.prototype.cst.FACE_DOWN)
 	{
 		c.begin();
-		
+
 		while (currX < w)
 		{
 			var remainder = i % 10;
@@ -1256,15 +1256,15 @@ mxShapeMockupRuler2.prototype.foreground = function(c, x, y, w, h)
 			{
 				c.moveTo(currX, h - 10);
 				c.lineTo(currX, h);
-				
+
 				var unit = this.state.view.graph.getLabel(this.state.cell);
-				
+
 				if (!isNaN(unit))
 				{
 					c.stroke();
-					
+
 					var num = i * Math.round(100 * unit) / 1000;
-					
+
 					if (i != 10 && num != 0)
 					{
 						c.text(currX, (h - 10) * 0.5, 0, 0, num.toString(), mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
@@ -1286,13 +1286,13 @@ mxShapeMockupRuler2.prototype.foreground = function(c, x, y, w, h)
 			currX = currX + unitSize;
 			i = i + 1;
 		}
-		
+
 		c.stroke();
 	}
 	else if (facing === mxShapeMockupRuler2.prototype.cst.FACE_UP)
 	{
 		c.begin();
-		
+
 		while (currX < w)
 		{
 			var remainder = i % 10;
@@ -1303,13 +1303,13 @@ mxShapeMockupRuler2.prototype.foreground = function(c, x, y, w, h)
 				c.lineTo(currX, 0);
 
 				var unit = this.state.view.graph.getLabel(this.state.cell);
-				
+
 				if (!isNaN(unit))
 				{
 					c.stroke();
-					
+
 					var num = i * Math.round(100 * unit) / 1000;
-					
+
 					if (i != 10 && num != 0)
 					{
 						c.text(currX, (h + 10) * 0.5, 0, 0, num.toString(), mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
@@ -1331,7 +1331,7 @@ mxShapeMockupRuler2.prototype.foreground = function(c, x, y, w, h)
 			currX = currX + unitSize;
 			i = i + 1;
 		}
-		
+
 		c.stroke();
 	}
 };
@@ -1351,9 +1351,9 @@ Graph.handleFactory[mxShapeMockupRuler2.prototype.cst.SHAPE_RULER] = function(st
 				this.state.style['spacingLeft'] = Math.round(1000 * Math.max(0, Math.min(bounds.width, pt.x - bounds.x))) / 1000 - 4;
 				this.state.style['align'] = 'left';
 				this.state.style['verticalAlign'] = 'middle';
-				
+
 				var facing = mxUtils.getValue(this.state.style, 'rulerOrient', '1');
-				
+
 				if (facing == 'down')
 				{
 					this.state.style['spacingBottom'] = 10;
@@ -1364,7 +1364,7 @@ Graph.handleFactory[mxShapeMockupRuler2.prototype.cst.SHAPE_RULER] = function(st
 					this.state.style['spacingBottom'] = 0;
 					this.state.style['spacingTop'] = 10;
 				}
-					
+
 				this.state.style['spacingRight'] = 0;
 				this.state.style['spacing'] = 0;
 			})];
@@ -1401,7 +1401,7 @@ mxShapeMockupRevisionTable.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupRevisionTable.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1424,7 +1424,7 @@ mxShapeMockupRevisionTable.prototype.foreground = function(c, w, h)
 	var mainText = mxUtils.getValue(this.style, mxShapeMockupRevisionTable.prototype.cst.MAIN_TEXT, '').toString().split(',');
 	var textColor = mxUtils.getValue(this.style, mxShapeMockupRevisionTable.prototype.cst.TEXT_COLOR, '#999999');
 	var textSize = mxUtils.getValue(this.style, mxShapeMockupRevisionTable.prototype.cst.TEXT_SIZE, '17');
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.33);
 	c.lineTo(w, h * 0.33);
@@ -1435,10 +1435,10 @@ mxShapeMockupRevisionTable.prototype.foreground = function(c, w, h)
 	c.moveTo(w * 0.5, h * 0.33);
 	c.lineTo(w * 0.5, h);
 	c.stroke();
-	
+
 	c.setFontSize(textSize);
 	c.setFontColor(textColor);
-	
+
 	c.text(w * 0.5, h * 0.165, 0, 0, mainText[0], mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
 	c.text(w * 0.0625, h * 0.5, 0, 0, mainText[1], mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
 	c.text(w * 0.3125, h * 0.5, 0, 0, mainText[2], mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
@@ -1482,14 +1482,14 @@ mxShapeMockupStatusBar.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupStatusBar.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
 	w = Math.max(w, 105);
-	
+
 	this.background(c, w, h);
 	c.setShadow(false);
 	this.foreground(c, w, h);
@@ -1508,7 +1508,7 @@ mxShapeMockupStatusBar.prototype.foreground = function(c, w, h)
 	var mainText = mxUtils.getValue(this.style, mxShapeMockupStatusBar.prototype.cst.MAIN_TEXT, '').toString().split(',');
 	var textColor = mxUtils.getValue(this.style, mxShapeMockupStatusBar.prototype.cst.TEXT_COLOR, '#999999');
 	var textSize = mxUtils.getValue(this.style, mxShapeMockupStatusBar.prototype.cst.TEXT_SIZE, '17');
-	
+
 	c.setFillColor(fillColor2);
 	c.roundrect(5, h * 0.5 - 10, (w - 75) * 0.46, 20, 5, 5);
 	c.fill();
@@ -1517,13 +1517,13 @@ mxShapeMockupStatusBar.prototype.foreground = function(c, w, h)
 	c.fill();
 	c.roundrect(15 + (w - 75) * 0.69, h * 0.5 - 10, (w - 75) * 0.276, 20, 5, 5);
 	c.fill();
-	
+
 	c.setFontSize(textSize);
 	c.setFontColor(textColor);
 	c.text(10, h * 0.5, 0, 0, mainText[0], mxConstants.ALIGN_LEFT, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
 	c.text(10 + (w - 75) * 0.575, h * 0.5, 0, 0, mainText[1], mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
 	c.text(15 + (w - 75) * 0.828, h * 0.5, 0, 0, mainText[2], mxConstants.ALIGN_CENTER, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
-	
+
 	c.setStrokeColor(strokeColor2);
 	c.ellipse(w - 25, h * 0.5 - 10, 20, 20);
 	c.stroke();
@@ -1568,7 +1568,7 @@ mxShapeMockupPin.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupPin.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1632,7 +1632,7 @@ mxShapeMockupMiscRRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupMiscRRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1669,7 +1669,7 @@ mxShapeMockupMiscAnchor.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupMiscAnchor.prototype.paintVertexShape = function(c, x, y, w, h)

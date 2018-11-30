@@ -5,7 +5,7 @@ Draw.loadPlugin(function(ui)
 {
 	// Adds resource for action
 	mxResources.parse('toggleFlow=Toggle Flow...');
-	
+
 	// Max number of edges per page
 	var pageSize = 20;
 
@@ -13,9 +13,9 @@ Draw.loadPlugin(function(ui)
 	ui.menus.createPopupMenu = function(menu, cell, evt)
 	{
 		uiCreatePopupMenu.apply(this, arguments);
-		
+
 		var graph = ui.editor.graph;
-		
+
 		if (graph.model.isEdge(graph.getSelectionCell()))
 		{
 			this.addMenuItems(menu, ['-', 'toggleFlow'], null, evt);
@@ -33,13 +33,13 @@ Draw.loadPlugin(function(ui)
 			{
 				var state = ui.editor.graph.view.getState(cells[i]);
 				var paths = state.shape.node.getElementsByTagName('path');
-				
+
 				if (paths.length > 1)
 				{
 					if (paths[1].getAttribute('class') == 'mxEdgeFlow')
 					{
 						paths[1].removeAttribute('class');
-		
+
 						if (mxUtils.getValue(state.style, mxConstants.STYLE_DASHED, '0') != '1')
 						{
 							paths[1].removeAttribute('stroke-dasharray');
@@ -48,7 +48,7 @@ Draw.loadPlugin(function(ui)
 					else
 					{
 						paths[1].setAttribute('class', 'mxEdgeFlow');
-		
+
 						if (mxUtils.getValue(state.style, mxConstants.STYLE_DASHED, '0') != '1')
 						{
 							paths[1].setAttribute('stroke-dasharray', '8');
@@ -58,18 +58,18 @@ Draw.loadPlugin(function(ui)
 			}
 		}
 	};
-	
+
 	// Adds action
 	ui.actions.addAction('toggleFlow', function()
 	{
 		var cell = ui.editor.graph.getSelectionCell();
-		
+
 		if (ui.editor.graph.model.isEdge(cell))
 		{
 			toggleFlow(ui.editor.graph.getSelectionCells());
 		}
 	});
-	
+
 	// Click handler for chromeless mode
 	if (ui.editor.isChromelessView())
 	{
@@ -81,7 +81,7 @@ Draw.loadPlugin(function(ui)
 			}
 		};
 	}
-	
+
 	try
 	{
 		var style = document.createElement('style')

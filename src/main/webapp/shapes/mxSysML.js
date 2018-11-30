@@ -10,14 +10,14 @@ function mxShapeSysMLComposite()
 {
 	mxCylinder.call(this);
 };
-	
+
 mxUtils.extend(mxShapeSysMLComposite, mxShape);
 
 mxShapeSysMLComposite.prototype.isHtmlAllowed = function()
 {
 	return false;
 };
-	
+
 
 
 mxShapeSysMLComposite.prototype.paintForeground = function(c, x, y, w, h)
@@ -27,23 +27,23 @@ mxShapeSysMLComposite.prototype.paintForeground = function(c, x, y, w, h)
 		var shape = mxCellRenderer.defaultShapes[this.style['symbol0']];
 
 		c.save();
-			
+
 		var tmp = new shape();
 		tmp.style = this.style;
 		shape.prototype.paintVertexShape.call(tmp, c, x, y, w, h);
 		c.restore();
 
 		c.setDashed(false);
-			
+
 		// Draws the symbols defined in the style. The symbols are
 		// numbered from 1...n. Possible postfixes are align,
 		// verticalAlign, spacing, arcSpacing, width, height
 		var counter = 1;
-			
+
 		do
 		{
 			shape = mxCellRenderer.defaultShapes[this.style['symbol' + counter]];
-				
+
 			if (shape != null)
 			{
 				var align = this.style['symbol' + counter + 'Align'];
@@ -54,16 +54,16 @@ mxShapeSysMLComposite.prototype.paintForeground = function(c, x, y, w, h)
 				var vspacing = this.style['symbol' + counter + 'VSpacing'] || 0;
 				var arcspacing = this.style['symbol' + counter + 'ArcSpacing'];
 				var direction = this.style['symbol' + counter + 'Direction'];
-					
+
 				if (arcspacing != null)
 				{
 					spacing += this.getArcSize(w + this.strokewidth, h + this.strokewidth) * arcspacing;
 					vspacing += this.getArcSize(w + this.strokewidth, h + this.strokewidth) * arcspacing;
 				}
-					
+
 				var x2 = x;
 				var y2 = y;
-					
+
 				if (align == mxConstants.ALIGN_CENTER)
 				{
 					x2 += (w - width) / 2;
@@ -76,7 +76,7 @@ mxShapeSysMLComposite.prototype.paintForeground = function(c, x, y, w, h)
 				{
 					x2 += spacing;
 				}
-					
+
 				if (valign == mxConstants.ALIGN_MIDDLE)
 				{
 					y2 += (h - height) / 2;
@@ -89,9 +89,9 @@ mxShapeSysMLComposite.prototype.paintForeground = function(c, x, y, w, h)
 				{
 					y2 += vspacing;
 				}
-					
+
 				c.save();
-			
+
 				var tmp = new shape();
 
 				tmp.style = mxUtils.clone(this.style);
@@ -100,7 +100,7 @@ mxShapeSysMLComposite.prototype.paintForeground = function(c, x, y, w, h)
 				shape.prototype.paintVertexShape.call(tmp, c, x2, y2, width, height);
 				c.restore();
 			}
-				
+
 			counter++;
 		}
 		while (shape != null);
@@ -135,12 +135,12 @@ mxShapeSysMLPackage.prototype.cst = {
 };
 
 mxShapeSysMLPackage.prototype.customProperties = [
-	{name: 'labelX', dispName: 'Header Width', type: 'float', min:0, defVal:90} 
+	{name: 'labelX', dispName: 'Header Width', type: 'float', min:0, defVal:90}
 ];
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLPackage.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -161,9 +161,9 @@ mxShapeSysMLPackage.prototype.foreground = function(c, x, y, w, h)
 {
 	var xSize = parseInt(mxUtils.getValue(this.style, mxShapeSysMLPackage.prototype.cst.LABEL_X, '90'));
 	var ySize = 20;
-	
+
 	xSize = Math.min(xSize, w);
-	
+
 	if (xSize > ySize)
 	{
 		c.begin();
@@ -188,7 +188,7 @@ Graph.handleFactory[mxShapeSysMLPackage.prototype.cst.PACKAGE] = function(state)
 			{
 				this.state.style['labelX'] = Math.round(100 * Math.max(0, Math.min(bounds.width, pt.x - bounds.x))) / 100;
 			})];
-	
+
 	return handles;
 
 }
@@ -219,12 +219,12 @@ mxShapeSysMLPackage2.prototype.cst = {
 };
 
 mxShapeSysMLPackage2.prototype.customProperties = [
-	{name: 'labelX', dispName: 'Header Width', type: 'float', min:0, defVal:90} 
+	{name: 'labelX', dispName: 'Header Width', type: 'float', min:0, defVal:90}
 ];
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLPackage2.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -245,9 +245,9 @@ mxShapeSysMLPackage2.prototype.foreground = function(c, x, y, w, h)
 {
 	var xSize = parseInt(mxUtils.getValue(this.style, mxShapeSysMLPackage2.prototype.cst.LABEL_X, '90'));
 	var ySize = 20;
-	
+
 	xSize = Math.min(xSize, w);
-	
+
 	if (xSize > ySize)
 	{
 		c.begin();
@@ -274,7 +274,7 @@ Graph.handleFactory[mxShapeSysMLPackage2.prototype.cst.PACKAGE2] = function(stat
 			{
 				this.state.style['labelX'] = Math.round(100 * Math.max(0, Math.min(bounds.width, pt.x - bounds.x))) / 100;
 			})];
-	
+
 	return handles;
 
 }
@@ -307,7 +307,7 @@ mxShapeSysMLNone.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLNone.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -344,7 +344,7 @@ mxShapeSysMLRect.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -383,7 +383,7 @@ mxShapeSysMLPortOne.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLPortOne.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -422,7 +422,7 @@ mxShapeSysMLPortTwo.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLPortTwo.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -461,7 +461,7 @@ mxShapeSysMLPortThree.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLPortThree.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -543,7 +543,7 @@ mxShapeSysMLPortFour.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLPortFour.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -603,24 +603,24 @@ mxShapeSysMLItemFlow.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLItemFlow.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	var flowDir = mxUtils.getValue(this.style, mxShapeSysMLItemFlow.prototype.cst.FLOW_DIR, 'none').toLowerCase();
 	var flowType = mxUtils.getValue(this.style, mxShapeSysMLItemFlow.prototype.cst.FLOW_TYPE, 'none');
-	
+
 	if (flowDir === 'n')
 	{
 		c.rect(x, y + 10, w, h - 10);
 		c.fillAndStroke();
 
 		c.setShadow(false);
-		
+
 		c.rect(x + w * 0.5 - 10, y, 20, 20);
 		c.fillAndStroke();
-		
+
 		if (flowType === 'in')
 		{
 			this.drawDown(c, x + w * 0.5 - 5, y + 2, 10, 16);
@@ -636,7 +636,7 @@ mxShapeSysMLItemFlow.prototype.paintVertexShape = function(c, x, y, w, h)
 		c.fillAndStroke();
 
 		c.setShadow(false);
-		
+
 		c.rect(x + w * 0.5 - 10, y + h - 20, 20, 20);
 		c.fillAndStroke();
 
@@ -655,10 +655,10 @@ mxShapeSysMLItemFlow.prototype.paintVertexShape = function(c, x, y, w, h)
 		c.fillAndStroke();
 
 		c.setShadow(false);
-		
+
 		c.rect(x, y + h * 0.5 - 10, 20, 20);
 		c.fillAndStroke();
-		
+
 		if (flowType === 'in')
 		{
 			this.drawRight(c, x + 2, y + h * 0.5 - 5, 16, 10);
@@ -674,10 +674,10 @@ mxShapeSysMLItemFlow.prototype.paintVertexShape = function(c, x, y, w, h)
 		c.fillAndStroke();
 
 		c.setShadow(false);
-		
+
 		c.rect(x + w - 20, y + h * 0.5 - 10, 20, 20);
 		c.fillAndStroke();
-		
+
 		if (flowType === 'in')
 		{
 			this.drawLeft(c, x + w - 18, y + h * 0.5 - 5, 16, 10);
@@ -770,7 +770,7 @@ mxShapeSysMLItemFlowLeft.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLItemFlowLeft.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -824,7 +824,7 @@ mxShapeSysMLItemFlowRight.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLItemFlowRight.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -878,7 +878,7 @@ mxShapeSysMLNestedPort.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLNestedPort.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -925,7 +925,7 @@ mxMarker.addMarker('sysMLReqInt', function(c, shape, type, pe, unitX, unitY, siz
 	var nx = unitX * (size + sw + 1);
 	var ny = unitY * (size + sw + 1);
 	var a = size / 2;
-	
+
 	return function()
 	{
 		var fillColor = mxUtils.getValue(shape.style, mxConstants.STYLE_FILLCOLOR, 'none');
@@ -943,7 +943,7 @@ mxMarker.addMarker('sysMLProvInt', function(c, shape, type, pe, unitX, unitY, si
 	var nx = unitX * (size + sw + 1);
 	var ny = unitY * (size + sw + 1);
 	var a = size / 2;
-	
+
 	return function()
 	{
 		var fillColor = mxUtils.getValue(shape.style, mxConstants.STYLE_FILLCOLOR, 'none');
@@ -983,16 +983,16 @@ mxShapeSysMLParametricDiagram.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLParametricDiagram.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.roundrect(x, y, w, h, 10, 10);
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	if (h > 60)
 	{
 		c.rect(x, y + h * 0.25 - 10, 20, 20);
@@ -1032,16 +1032,16 @@ mxShapeSysMLConstraintProperty.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLConstraintProperty.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.rect(x, y, w, h);
 	c.fillAndStroke();
-	
+
 	c.setShadow(false);
-	
+
 	if (h > 60)
 	{
 		c.rect(x, y + 50, 20, 20);
@@ -1081,18 +1081,18 @@ mxShapeSysMLCallBehaviorAction.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLCallBehaviorAction.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.roundrect(x, y, w, h, 10, 10);
 	c.fillAndStroke();
-	
+
 	if ((h > 30) && (w > 40))
 	{
 		c.setShadow(false);
-		
+
 		this.drawSymb(c, x + w - 30, y + h - 30, 20, 20);
 	}
 };
@@ -1139,7 +1139,7 @@ mxShapeSysMLAcceptEventAction.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLAcceptEventAction.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1184,7 +1184,7 @@ mxShapeSysMLTimeEvent.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLTimeEvent.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1228,7 +1228,7 @@ mxShapeSysMLSendSignalAction.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLSendSignalAction.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1273,17 +1273,17 @@ mxShapeSysMLActivityFinal.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLActivityFinal.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.ellipse(x, y, w, h);
 	c.fillAndStroke();
-	
+
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
 	c.setFillColor(strokeColor);
-	
+
 	c.ellipse(x + 5, y + 5, w - 10, h - 10);
 	c.fillAndStroke();
 };
@@ -1318,7 +1318,7 @@ mxShapeSysMLActivityParameterNode.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLActivityParameterNode.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1341,9 +1341,9 @@ mxShapeSysMLActivityParameterNode.prototype.paintVertexShape = function(c, x, y,
 
 	var xSize = 50;
 	var ySize = 20;
-	
+
 	xSize = Math.min(xSize, w);
-	
+
 	if (xSize > ySize)
 	{
 		c.begin();
@@ -1355,7 +1355,7 @@ mxShapeSysMLActivityParameterNode.prototype.paintVertexShape = function(c, x, y,
 		c.close();
 		c.fillAndStroke();
 	}
-	
+
 	c.rect(0, h * 0.35 - 10, 20, 20);
 	c.fillAndStroke();
 	c.rect(0, h * 0.65 - 10, 20, 20);
@@ -1394,7 +1394,7 @@ mxShapeSysMLControlOperator.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLControlOperator.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1415,9 +1415,9 @@ mxShapeSysMLControlOperator.prototype.foreground = function(c, x, y, w, h)
 {
 	var xSize = 130;
 	var ySize = 20;
-	
+
 	xSize = Math.min(xSize, w);
-	
+
 	if (xSize > ySize)
 	{
 		c.begin();
@@ -1459,18 +1459,18 @@ mxShapeSysMLFlowFinal.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLFlowFinal.prototype.paintVertexShape = function(c, x, y, w, h)
 {
 	c.translate(x, y);
-	
+
 	c.ellipse(0, 0, w, h);
 	c.fillAndStroke();
 
 	c.setShadow(false);
-	
+
 	c.begin();
 	c.moveTo(w * 0.145, h * 0.145);
 	c.lineTo(w * 0.855, h * 0.855);
@@ -1509,7 +1509,7 @@ mxShapeSysMLIsControl.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLIsControl.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1554,7 +1554,7 @@ mxShapeSysMLIsStream.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLIsStream.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1567,7 +1567,7 @@ mxShapeSysMLIsStream.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.setFillColor(strokeColor);
 	c.rect(0, h * 0.5 - 10, 10, 20);
 	c.fillAndStroke();
-	
+
 	c.setFillColor(fillColor);
 	c.roundrect(10, 0, w - 20, h, 10, 10);
 	c.fillAndStroke();
@@ -1607,7 +1607,7 @@ mxShapeSysMLIsActStream.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLIsActStream.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1620,9 +1620,9 @@ mxShapeSysMLIsActStream.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	var xSize = 40;
 	var ySize = 20;
-	
+
 	xSize = Math.min(xSize, w);
-	
+
 	if (xSize > ySize)
 	{
 		c.begin();
@@ -1634,7 +1634,7 @@ mxShapeSysMLIsActStream.prototype.paintVertexShape = function(c, x, y, w, h)
 		c.close();
 		c.fillAndStroke();
 	}
-	
+
 	c.rect(w - 20, h * 0.5 - 10, 20, 20);
 	c.fillAndStroke();
 };
@@ -1669,7 +1669,7 @@ mxShapeSysMLParameterSet.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLParameterSet.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1725,7 +1725,7 @@ mxShapeSysMLParameterActivitySet.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLParameterActivitySet.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1738,9 +1738,9 @@ mxShapeSysMLParameterActivitySet.prototype.paintVertexShape = function(c, x, y, 
 
 	var xSize = 50;
 	var ySize = 20;
-	
+
 	xSize = Math.min(xSize, w);
-	
+
 	if (xSize > ySize)
 	{
 		c.begin();
@@ -1752,9 +1752,9 @@ mxShapeSysMLParameterActivitySet.prototype.paintVertexShape = function(c, x, y, 
 		c.close();
 		c.fillAndStroke();
 	}
-	
+
 	c.setShadow(false);
-	
+
 	if (h > 70)
 	{
 		c.rect(0, h * 0.5 - 28, 15, 56);
@@ -1763,7 +1763,7 @@ mxShapeSysMLParameterActivitySet.prototype.paintVertexShape = function(c, x, y, 
 		c.fillAndStroke();
 		c.rect(4, h * 0.5 + 4, 15, 20);
 		c.fillAndStroke();
-	
+
 		c.rect(w - 15, h * 0.5 - 28, 15, 56);
 		c.fillAndStroke();
 		c.rect(w - 19, h * 0.5 - 24, 15, 20);
@@ -1803,7 +1803,7 @@ mxShapeSysMLProbability.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLProbability.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1859,7 +1859,7 @@ mxShapeSysMLActivityProbability.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLActivityProbability.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1872,9 +1872,9 @@ mxShapeSysMLActivityProbability.prototype.paintVertexShape = function(c, x, y, w
 
 	var xSize = 40;
 	var ySize = 20;
-	
+
 	xSize = Math.min(xSize, w);
-	
+
 	if (xSize > ySize)
 	{
 		c.begin();
@@ -1886,9 +1886,9 @@ mxShapeSysMLActivityProbability.prototype.paintVertexShape = function(c, x, y, w
 		c.close();
 		c.fillAndStroke();
 	}
-	
+
 	c.setShadow(false);
-	
+
 	if (h > 70)
 	{
 		c.rect(w - 15, h * 0.25 - 28, 15, 56);
@@ -1937,7 +1937,7 @@ mxShapeSysMLObjectFlowRight.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLObjectFlowRight.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1980,7 +1980,7 @@ mxShapeSysMLObjectFlowLeft.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLObjectFlowLeft.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2023,7 +2023,7 @@ mxShapeSysMLActivityPartition.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLActivityPartition.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2036,7 +2036,7 @@ mxShapeSysMLActivityPartition.prototype.paintVertexShape = function(c, x, y, w, 
 	c.moveTo(w, 0);
 	c.lineTo(w, h);
 	c.stroke();
-	
+
 };
 
 mxCellRenderer.registerShape(mxShapeSysMLActivityPartition.prototype.cst.ACT_PART, mxShapeSysMLActivityPartition);
@@ -2069,7 +2069,7 @@ mxShapeSysMLContinuation.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLContinuation.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2079,7 +2079,7 @@ mxShapeSysMLContinuation.prototype.paintVertexShape = function(c, x, y, w, h)
 	if (w > h)
 	{
 		var r = h * 0.5;
-	
+
 		c.begin();
 		c.moveTo(w - r, 0);
 		c.arcTo(r, r, 0, 0, 1, w - r, h);
@@ -2091,7 +2091,7 @@ mxShapeSysMLContinuation.prototype.paintVertexShape = function(c, x, y, w, h)
 	else
 	{
 		var r = w * 0.5;
-		
+
 		c.begin();
 		c.moveTo(0, h - r);
 		c.arcTo(r, r, 0, 0, 0, w, h - r);
@@ -2132,7 +2132,7 @@ mxShapeSysMLCoregion.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLCoregion.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2140,9 +2140,9 @@ mxShapeSysMLCoregion.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.translate(x, y);
 
 	var brack = 10;
-	
+
 	brack = Math.min(brack, h);
-	
+
 	c.begin();
 	c.moveTo(0, brack);
 	c.lineTo(0, 0);
@@ -2205,7 +2205,7 @@ mxShapeSysMLDimension.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLDimension.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2306,7 +2306,7 @@ mxShapeSysMLCompositeState.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLCompositeState.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2355,7 +2355,7 @@ mxShapeSysMLRegion.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLRegion.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2374,7 +2374,7 @@ mxShapeSysMLRegion.prototype.background = function(c, x, y, w, h, tabH, tabW)
 	var strokeW = parseInt(mxUtils.getValue(this.style, mxConstants.STYLE_STROKEWIDTH, '1'));
 	c.roundrect(0, tabH, w, h - tabH, 10, 10);
 	c.fillAndStroke();
-	
+
 	c.setStrokeWidth(strokeW * 2);
 	c.rect(15, 0, tabW, tabH);
 	c.fillAndStroke();
@@ -2420,7 +2420,7 @@ mxShapeSysMLSimpleState.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLSimpleState.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2476,7 +2476,7 @@ mxShapeSysMLStateMachine.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLStateMachine.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2500,7 +2500,7 @@ mxShapeSysMLStateMachine.prototype.foreground = function(c, x, y, w, h)
 
 	c.ellipse(w - 20, h * 0.5 - 10, 20, 20);
 	c.stroke();
-	
+
 	c.ellipse(w - 17, h * 0.5 - 7, 14, 14);
 	c.fillAndStroke();
 };
@@ -2535,7 +2535,7 @@ mxShapeSysMLX.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLX.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2580,7 +2580,7 @@ mxShapeSysMLSubmachineState.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLSubmachineState.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2604,7 +2604,7 @@ mxShapeSysMLSubmachineState.prototype.foreground = function(c, x, y, w, h)
 
 	c.ellipse(w - 20, h * 0.5 - 10, 20, 20);
 	c.stroke();
-	
+
 	c.ellipse(w - 17, h * 0.5 - 7, 14, 14);
 	c.fillAndStroke();
 };
@@ -2639,7 +2639,7 @@ mxShapeSysMLUseCaseExtensionPoints.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeSysMLUseCaseExtensionPoints.prototype.paintVertexShape = function(c, x, y, w, h)

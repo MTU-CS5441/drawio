@@ -38,7 +38,7 @@ mxShapeArrows2Arrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2Arrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -68,10 +68,10 @@ mxShapeArrows2Arrow.prototype.getLabelBounds = function(rect)
 	{
 		var w = rect.width;
 		var h = rect.height;
-		
+
 		var dy, dx;
 		var direction = this.direction || mxConstants.DIRECTION_EAST;
-		
+
 		if (mxUtils.getValue(this.style, "flipH", false))
 		{
 			if (direction == mxConstants.DIRECTION_WEST)
@@ -79,7 +79,7 @@ mxShapeArrows2Arrow.prototype.getLabelBounds = function(rect)
 			else if (direction == mxConstants.DIRECTION_EAST)
 				direction = mxConstants.DIRECTION_WEST;
 		}
-		
+
 		if (mxUtils.getValue(this.style, "flipV", false))
 		{
 			if (direction == mxConstants.DIRECTION_NORTH)
@@ -87,8 +87,8 @@ mxShapeArrows2Arrow.prototype.getLabelBounds = function(rect)
 			else if (direction == mxConstants.DIRECTION_SOUTH)
 				direction = mxConstants.DIRECTION_NORTH;
 		}
-		
-		
+
+
 		if (direction == mxConstants.DIRECTION_NORTH
 				|| direction == mxConstants.DIRECTION_SOUTH)
 		{
@@ -100,7 +100,7 @@ mxShapeArrows2Arrow.prototype.getLabelBounds = function(rect)
 			dy = h * 0.5 * Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.style, 'dy', this.dy))));
 			dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 		}
-		
+
 		if (direction == mxConstants.DIRECTION_EAST)
 		{
 			return new mxRectangle(rect.x, rect.y + dy, w - dx, h - 2 * dy);
@@ -118,7 +118,7 @@ mxShapeArrows2Arrow.prototype.getLabelBounds = function(rect)
 			return new mxRectangle(rect.x + dy, rect.y, w - 2 * dy, h - dx);
 		}
 	}
-	
+
 	return rect;
 };
 
@@ -139,7 +139,7 @@ Graph.handleFactory[mxShapeArrows2Arrow.prototype.cst.ARROW] = function(state)
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(1, (((pt.y - bounds.y) / bounds.height) * 2)))) / 100;
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 			{
 				var notch = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))));
@@ -149,9 +149,9 @@ Graph.handleFactory[mxShapeArrows2Arrow.prototype.cst.ARROW] = function(state)
 			{
 				this.state.style['notch'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx)), pt.x - bounds.x))) / 100;
 			});
-	
+
 	handles.push(handle2);
-	
+
 	return handles;
 
 }
@@ -189,7 +189,7 @@ mxShapeArrows2TwoWayArrow.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2TwoWayArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -224,7 +224,7 @@ mxShapeArrows2TwoWayArrow.prototype.getLabelBounds = function(rect)
 						|| this.direction == mxConstants.DIRECTION_SOUTH;
 
 		var dy, dx;
-		
+
 		if (vertical)
 		{
 			dy = w * 0.5 * Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.style, 'dy', this.dy))));
@@ -235,7 +235,7 @@ mxShapeArrows2TwoWayArrow.prototype.getLabelBounds = function(rect)
 			dy = h * 0.5 * Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.style, 'dy', this.dy))));
 			dx = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx', this.dx))));
 		}
-		
+
 		if (vertical)
 		{
 			return new mxRectangle(rect.x + dy, rect.y + dx, w - 2 * dy, h - 2 * dx);
@@ -245,7 +245,7 @@ mxShapeArrows2TwoWayArrow.prototype.getLabelBounds = function(rect)
 			return new mxRectangle(rect.x + dx, rect.y + dy, w - 2 * dx, h - 2 * dy);
 		}
 	}
-	
+
 	return rect;
 };
 
@@ -266,7 +266,7 @@ Graph.handleFactory[mxShapeArrows2TwoWayArrow.prototype.cst.TWO_WAY_ARROW] = fun
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width / 2, bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(1, (((pt.y - bounds.y) / bounds.height) * 2)))) / 100;
 			})];
-	
+
 	return handles;
 
 }
@@ -308,7 +308,7 @@ mxShapeArrows2StylisedArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2StylisedArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -350,7 +350,7 @@ Graph.handleFactory[mxShapeArrows2StylisedArrow.prototype.cst.STYLISED_ARROW] = 
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width - 10, bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(1, (((pt.y - bounds.y) / bounds.height) * 2)))) / 100;
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 			{
 				var notch = Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx)), parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))));
@@ -360,9 +360,9 @@ Graph.handleFactory[mxShapeArrows2StylisedArrow.prototype.cst.STYLISED_ARROW] = 
 			{
 				this.state.style['notch'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx)), pt.x - bounds.x))) / 100;
 			});
-	
+
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['feather'], function(bounds)
 			{
 				var feather = Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.state.style, 'feather', this.dy))));
@@ -372,9 +372,9 @@ Graph.handleFactory[mxShapeArrows2StylisedArrow.prototype.cst.STYLISED_ARROW] = 
 			{
 				this.state.style['feather'] = Math.round(100 * Math.max(0, Math.min(1, (((pt.y - bounds.y) / bounds.height) * 2)))) / 100;
 			});
-	
+
 	handles.push(handle3);
-	
+
 	return handles;
 
 }
@@ -416,7 +416,7 @@ mxShapeArrows2SharpArrow.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2SharpArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -431,12 +431,12 @@ mxShapeArrows2SharpArrow.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dy1a = h * 0.5 * Math.max(0, Math.min(h, parseFloat(mxUtils.getValue(this.style, 'dy1', this.dy1))));
 
 	var x2 = 0;
-	
+
 	if (h != 0)
 	{
 		x2 = dx1a + dx2 * dy1a * 2 / h;
 	}
-	
+
 	c.begin();
 	c.moveTo(0, dy1);
 	c.lineTo(w - dx1, dy1);
@@ -469,7 +469,7 @@ Graph.handleFactory[mxShapeArrows2SharpArrow.prototype.cst.SHARP_ARROW] = functi
 				this.state.style['dx1'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy1'] = Math.round(100 * Math.max(0, Math.min(1, (((pt.y - bounds.y) / bounds.height) * 2)))) / 100;
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 			{
 				var notch = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))));
@@ -479,9 +479,9 @@ Graph.handleFactory[mxShapeArrows2SharpArrow.prototype.cst.SHARP_ARROW] = functi
 			{
 				this.state.style['notch'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'dx1', this.dx1)), pt.x - bounds.x))) / 100;
 			});
-	
+
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['dx2'], function(bounds)
 			{
 				var dx2 = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx2', this.dx2))));
@@ -491,9 +491,9 @@ Graph.handleFactory[mxShapeArrows2SharpArrow.prototype.cst.SHARP_ARROW] = functi
 			{
 				this.state.style['dx2'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), bounds.x + bounds.width - pt.x))) / 100;
 			});
-	
+
 	handles.push(handle3);
-	
+
 	return handles;
 
 }
@@ -540,7 +540,7 @@ mxShapeArrows2SharpArrow2.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2SharpArrow2.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -551,10 +551,10 @@ mxShapeArrows2SharpArrow2.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx1 = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx1', this.dx1))));
 
 	var dx2 = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx2', this.dx2))));
-	
+
 	var dy3 = h * 0.5 * Math.max(0, Math.min(1, parseFloat(mxUtils.getValue(this.style, 'dy3', this.dy3))));
 	var dx3 = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx3', this.dx3))));
-	
+
 	var notch = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'notch', this.notch))));
 
 	var dx1a = Math.max(0, Math.min(w, parseFloat(mxUtils.getValue(this.style, 'dx1', this.dx1))));
@@ -592,7 +592,7 @@ Graph.handleFactory[mxShapeArrows2SharpArrow2.prototype.cst.SHARP_ARROW2] = func
 				this.state.style['dx1'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy1'] = Math.round(100 * Math.max(0, Math.min(1, (((pt.y - bounds.y) / bounds.height) * 2)))) / 100;
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 			{
 				var notch = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))));
@@ -602,9 +602,9 @@ Graph.handleFactory[mxShapeArrows2SharpArrow2.prototype.cst.SHARP_ARROW2] = func
 			{
 				this.state.style['notch'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'dx1', this.dx1)), pt.x - bounds.x))) / 100;
 			});
-	
+
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['dx2'], function(bounds)
 			{
 				var dx2 = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx2', this.dx2))));
@@ -614,7 +614,7 @@ Graph.handleFactory[mxShapeArrows2SharpArrow2.prototype.cst.SHARP_ARROW2] = func
 			{
 				this.state.style['dx2'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), bounds.x + bounds.width - pt.x))) / 100;
 			});
-	
+
 	handles.push(handle3);
 
 	var handle4 = Graph.createHandle(state, ['dx3', 'dy3'], function(bounds)
@@ -671,7 +671,7 @@ mxShapeArrows2CalloutArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2CalloutArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -716,9 +716,9 @@ Graph.handleFactory[mxShapeArrows2CalloutArrow.prototype.cst.CALLOUT_ARROW] = fu
 			{
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2 - parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)), bounds.y + bounds.height / 2 - pt.y))) / 100;
-				
+
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 			{
 				var notch = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))));
@@ -730,7 +730,7 @@ Graph.handleFactory[mxShapeArrows2CalloutArrow.prototype.cst.CALLOUT_ARROW] = fu
 			});
 
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['arrowHead'], function(bounds)
 			{
 				var dx = 		Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
@@ -744,7 +744,7 @@ Graph.handleFactory[mxShapeArrows2CalloutArrow.prototype.cst.CALLOUT_ARROW] = fu
 			});
 
 	handles.push(handle3);
-	
+
 	return handles;
 }
 
@@ -786,7 +786,7 @@ mxShapeArrows2BendArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2BendArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -813,11 +813,11 @@ mxShapeArrows2BendArrow.prototype.paintVertexShape = function(c, x, y, w, h)
 	{
 		c.lineTo(dy * 2, arrowHead / 2 + dy);
 	}
-	
+
 	c.lineTo(dy * 2, h);
 	c.lineTo(dy, h - notch);
 	c.lineTo(0, h);
-	
+
 	if (rounded == '1')
 	{
 		c.lineTo(0, arrowHead / 2 + dy);
@@ -844,20 +844,20 @@ Graph.handleFactory[mxShapeArrows2BendArrow.prototype.cst.BEND_ARROW] = function
 				var arrowHead = Math.max(0, Math.min(bounds.height, parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead))));
 				var dx = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
 				var dy = Math.max(0, Math.min(arrowHead, parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy))));
-		
+
 				return new mxPoint(bounds.x + bounds.width - dx, bounds.y + arrowHead / 2 - dy);
 			}, function(bounds, pt)
 			{
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy)) * 2.2, bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)) / 2, bounds.y + parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)) / 2 - pt.y))) / 100;
-				
+
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 			{
 				var arrowHead = Math.max(0, Math.min(bounds.height, parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead))));
 				var dy = Math.max(0, Math.min(arrowHead, parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy))));
-				
+
 				var notch = Math.max(0, Math.min(bounds.height - arrowHead / 2 - dy, parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))));
 
 				return new mxPoint(bounds.x + dy, bounds.y + bounds.height - notch);
@@ -865,7 +865,7 @@ Graph.handleFactory[mxShapeArrows2BendArrow.prototype.cst.BEND_ARROW] = function
 			{
 				this.state.style['notch'] = Math.round(100 * Math.max(0, Math.min(bounds.height - parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)) / 2 - parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy)), bounds.y + bounds.height - pt.y))) / 100;
 			});
-	
+
 	handles.push(handle2);
 
 	var handle3 = Graph.createHandle(state, ['arrowHead'], function(bounds)
@@ -878,7 +878,7 @@ Graph.handleFactory[mxShapeArrows2BendArrow.prototype.cst.BEND_ARROW] = function
 			{
 				this.state.style['arrowHead'] = Math.round(100 * Math.max(2 * parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy)), Math.min(bounds.height, pt.y - bounds.y))) / 100;
 			});
-	
+
 	handles.push(handle3);
 
 	return handles;
@@ -921,7 +921,7 @@ mxShapeArrows2BendDoubleArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2BendDoubleArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -947,13 +947,13 @@ mxShapeArrows2BendDoubleArrow.prototype.paintVertexShape = function(c, x, y, w, 
 	{
 		c.lineTo(arrowHead / 2 + dy, arrowHead / 2 + dy);
 	}
-	
+
 	c.lineTo(arrowHead / 2 + dy, h - dx);
 	c.lineTo(arrowHead, h - dx);
 	c.lineTo(arrowHead / 2, h);
 	c.lineTo(0, h - dx);
 	c.lineTo(arrowHead / 2 - dy, h - dx);
-	
+
 	if (rounded == '1')
 	{
 		c.lineTo(arrowHead / 2 - dy, arrowHead / 2 + dy);
@@ -980,15 +980,15 @@ Graph.handleFactory[mxShapeArrows2BendDoubleArrow.prototype.cst.BEND_DOUBLE_ARRO
 				var arrowHead = Math.max(0, Math.min(Math.min(bounds.height, bounds.width) - parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx)), parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead))));
 				var dx = Math.max(0, Math.min(Math.min(bounds.width, bounds.height) - arrowHead, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
 				var dy = Math.max(0, Math.min(arrowHead, parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy))));
-		
+
 				return new mxPoint(bounds.x + bounds.width - dx, bounds.y + arrowHead / 2 - dy);
 			}, function(bounds, pt)
 			{
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(Math.min(bounds.width, bounds.height) - parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)) / 2, bounds.y + parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)) / 2 - pt.y))) / 100;
-				
+
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['arrowHead'], function(bounds)
 			{
 				var dx = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
@@ -999,7 +999,7 @@ Graph.handleFactory[mxShapeArrows2BendDoubleArrow.prototype.cst.BEND_DOUBLE_ARRO
 			{
 				this.state.style['arrowHead'] = Math.round(100 * Math.max(2 * parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy)), Math.min(Math.min(bounds.height, bounds.width) - parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx)), pt.y - bounds.y))) / 100;
 			});
-	
+
 	handles.push(handle2);
 
 	return handles;
@@ -1043,7 +1043,7 @@ mxShapeArrows2CalloutDoubleArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2CalloutDoubleArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1095,9 +1095,9 @@ Graph.handleFactory[mxShapeArrows2CalloutDoubleArrow.prototype.cst.CALLOUT_DOUBL
 			{
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width / 2 - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2 - parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)), bounds.y + bounds.height / 2 - pt.y))) / 100;
-				
+
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 			{
 				var notch = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))));
@@ -1109,7 +1109,7 @@ Graph.handleFactory[mxShapeArrows2CalloutDoubleArrow.prototype.cst.CALLOUT_DOUBL
 			});
 
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['arrowHead'], function(bounds)
 			{
 				var dx = 		Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
@@ -1123,7 +1123,7 @@ Graph.handleFactory[mxShapeArrows2CalloutDoubleArrow.prototype.cst.CALLOUT_DOUBL
 			});
 
 	handles.push(handle3);
-	
+
 	return handles;
 }
 
@@ -1164,7 +1164,7 @@ mxShapeArrows2CalloutQuadArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2CalloutQuadArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1230,9 +1230,9 @@ Graph.handleFactory[mxShapeArrows2CalloutQuadArrow.prototype.cst.CALLOUT_QUAD_AR
 			{
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(Math.min(bounds.width, bounds.height) / 2 - Math.max(parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead))), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), bounds.y + bounds.height / 2 - pt.y))) / 100;
-				
+
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 			{
 				var notch = Math.max(parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy)), Math.min(Math.min(bounds.width, bounds.height), parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))));
@@ -1244,7 +1244,7 @@ Graph.handleFactory[mxShapeArrows2CalloutQuadArrow.prototype.cst.CALLOUT_QUAD_AR
 			});
 
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['arrowHead'], function(bounds)
 			{
 				var dx = 		Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
@@ -1258,7 +1258,7 @@ Graph.handleFactory[mxShapeArrows2CalloutQuadArrow.prototype.cst.CALLOUT_QUAD_AR
 			});
 
 	handles.push(handle3);
-	
+
 	return handles;
 }
 
@@ -1301,7 +1301,7 @@ mxShapeArrows2CalloutDouble90Arrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2CalloutDouble90Arrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1354,9 +1354,9 @@ Graph.handleFactory[mxShapeArrows2CalloutDouble90Arrow.prototype.cst.CALLOUT_DOU
 			{
 				this.state.style['dx1'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'dx2', this.dx2)), bounds.height - parseFloat(mxUtils.getValue(this.state.style, 'dy2', this.dy2)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy1'] = Math.round(100 * Math.max(0, Math.min(parseFloat(mxUtils.getValue(this.state.style, 'dy2', this.dy2)) / 2 - parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)), bounds.y + parseFloat(mxUtils.getValue(this.state.style, 'dy2', this.dy2)) / 2 - pt.y))) / 100;
-				
+
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['dx2', 'dy2'], function(bounds)
 			{
 				var dx2 = Math.max(parseFloat(mxUtils.getValue(this.state.style, 'dy1', this.dy1)) + parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)), Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'dx1', this.dx1)), parseFloat(mxUtils.getValue(this.state.style, 'dx2', this.dx2))));
@@ -1370,7 +1370,7 @@ Graph.handleFactory[mxShapeArrows2CalloutDouble90Arrow.prototype.cst.CALLOUT_DOU
 			});
 
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['arrowHead'], function(bounds)
 			{
 				var dx1 = 		Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx1', this.dx1))));
@@ -1384,7 +1384,7 @@ Graph.handleFactory[mxShapeArrows2CalloutDouble90Arrow.prototype.cst.CALLOUT_DOU
 			});
 
 	handles.push(handle3);
-	
+
 	return handles;
 }
 
@@ -1424,7 +1424,7 @@ mxShapeArrows2QuadArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2QuadArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1481,9 +1481,9 @@ Graph.handleFactory[mxShapeArrows2QuadArrow.prototype.cst.QUAD_ARROW] = function
 			{
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(Math.min(bounds.width, bounds.height) / 2 - parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy)) - parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2 - parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)), bounds.y + bounds.height / 2 - pt.y))) / 100;
-				
+
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['arrowHead'], function(bounds)
 			{
 				var dx = 		Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
@@ -1497,7 +1497,7 @@ Graph.handleFactory[mxShapeArrows2QuadArrow.prototype.cst.QUAD_ARROW] = function
 			});
 
 	handles.push(handle2);
-	
+
 	return handles;
 }
 
@@ -1536,7 +1536,7 @@ mxShapeArrows2TriadArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2TriadArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1586,9 +1586,9 @@ Graph.handleFactory[mxShapeArrows2TriadArrow.prototype.cst.TRIAD_ARROW] = functi
 			{
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(Math.min(bounds.height - parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)), bounds.width / 2 - parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)) / 2), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)) / 2, bounds.y + bounds.height - pt.y))) / 100;
-				
+
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['arrowHead'], function(bounds)
 			{
 				var dx = 		Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
@@ -1602,7 +1602,7 @@ Graph.handleFactory[mxShapeArrows2TriadArrow.prototype.cst.TRIAD_ARROW] = functi
 			});
 
 	handles.push(handle2);
-	
+
 	return handles;
 }
 
@@ -1645,7 +1645,7 @@ mxShapeArrows2TailedArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2TailedArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1660,7 +1660,7 @@ mxShapeArrows2TailedArrow.prototype.paintVertexShape = function(c, x, y, w, h)
 	var arrowHead = Math.max(0, Math.min(h, parseFloat(mxUtils.getValue(this.style, 'arrowHead', this.arrowHead))));
 
 	var x2 = 0;
-	
+
 	if (dy2 != 0)
 	{
 		x2 = dx2 + dy2 * (dy2 - dy1) / dy2;
@@ -1700,9 +1700,9 @@ Graph.handleFactory[mxShapeArrows2TailedArrow.prototype.cst.TAILED_ARROW] = func
 			{
 				this.state.style['dx1'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'dx2', this.dx2)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy1'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2 - parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)), parseFloat(mxUtils.getValue(this.state.style, 'dy2', this.dy2)), bounds.y + bounds.height / 2 - pt.y))) / 100;
-				
+
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 			{
 				var notch = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))));
@@ -1714,7 +1714,7 @@ Graph.handleFactory[mxShapeArrows2TailedArrow.prototype.cst.TAILED_ARROW] = func
 			});
 
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['arrowHead'], function(bounds)
 			{
 				var dx1 = 		Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx1', this.dx1))));
@@ -1728,7 +1728,7 @@ Graph.handleFactory[mxShapeArrows2TailedArrow.prototype.cst.TAILED_ARROW] = func
 			});
 
 	handles.push(handle3);
-	
+
 	var handle4 = Graph.createHandle(state, ['dx2', 'dy2'], function(bounds)
 			{
 				var dx2 = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx2', this.dx2))));
@@ -1739,7 +1739,7 @@ Graph.handleFactory[mxShapeArrows2TailedArrow.prototype.cst.TAILED_ARROW] = func
 			{
 				this.state.style['dx2'] = Math.round(100 * Math.max(parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'dx1', this.dx1)) - parseFloat(mxUtils.getValue(this.state.style, 'dy2', this.dy2)) + parseFloat(mxUtils.getValue(this.state.style, 'dy1', this.dy1)) - 1, pt.x - bounds.x))) / 100;
 				this.state.style['dy2'] = Math.round(100 * Math.max(parseFloat(mxUtils.getValue(this.state.style, 'dy1', this.dy1)), Math.min(bounds.height / 2, bounds.y + bounds.height / 2 - pt.y))) / 100;
-				
+
 			});
 
 	handles.push(handle4);
@@ -1786,7 +1786,7 @@ mxShapeArrows2TailedNotchedArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2TailedNotchedArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1801,7 +1801,7 @@ mxShapeArrows2TailedNotchedArrow.prototype.paintVertexShape = function(c, x, y, 
 	var arrowHead = Math.max(0, Math.min(h, parseFloat(mxUtils.getValue(this.style, 'arrowHead', this.arrowHead))));
 
 	var x2 = 0;
-	
+
 	if (dy2 != 0)
 	{
 		x2 = dx2 + notch * (dy2 - dy1) / dy2;
@@ -1841,9 +1841,9 @@ Graph.handleFactory[mxShapeArrows2TailedNotchedArrow.prototype.cst.TAILED_NOTCHE
 			{
 				this.state.style['dx1'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))- parseFloat(mxUtils.getValue(this.state.style, 'dx2', this.dx2)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy1'] = Math.round(100 * Math.max(0, Math.min(bounds.height / 2 - parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)), parseFloat(mxUtils.getValue(this.state.style, 'dy2', this.dy2)), bounds.y + bounds.height / 2 - pt.y))) / 100;
-				
+
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 			{
 				var notch = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))));
@@ -1855,7 +1855,7 @@ Graph.handleFactory[mxShapeArrows2TailedNotchedArrow.prototype.cst.TAILED_NOTCHE
 			});
 
 	handles.push(handle2);
-	
+
 	var handle3 = Graph.createHandle(state, ['arrowHead'], function(bounds)
 			{
 				var dx1 = 		Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx1', this.dx1))));
@@ -1869,7 +1869,7 @@ Graph.handleFactory[mxShapeArrows2TailedNotchedArrow.prototype.cst.TAILED_NOTCHE
 			});
 
 	handles.push(handle3);
-	
+
 	var handle4 = Graph.createHandle(state, ['dx2', 'dy2'], function(bounds)
 			{
 				var dx2 = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx2', this.dx2))));
@@ -1880,7 +1880,7 @@ Graph.handleFactory[mxShapeArrows2TailedNotchedArrow.prototype.cst.TAILED_NOTCHE
 			{
 				this.state.style['dx2'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)) - parseFloat(mxUtils.getValue(this.state.style, 'dx1', this.dx1)), pt.x - bounds.x))) / 100;
 				this.state.style['dy2'] = Math.round(100 * Math.max(parseFloat(mxUtils.getValue(this.state.style, 'dy1', this.dy1)), Math.min(bounds.height / 2, bounds.y + bounds.height / 2 - pt.y))) / 100;
-				
+
 			});
 
 	handles.push(handle4);
@@ -1923,7 +1923,7 @@ mxShapeArrows2StripedArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2StripedArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1954,7 +1954,7 @@ mxShapeArrows2StripedArrow.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(notch * 0.32, dy);
 	c.close();
 	c.fillAndStroke();
-	
+
 };
 
 mxCellRenderer.registerShape(mxShapeArrows2StripedArrow.prototype.cst.STRIPED_ARROW, mxShapeArrows2StripedArrow);
@@ -1974,7 +1974,7 @@ Graph.handleFactory[mxShapeArrows2StripedArrow.prototype.cst.STRIPED_ARROW] = fu
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch)), bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(1, (((pt.y - bounds.y) / bounds.height) * 2)))) / 100;
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['notch'], function(bounds)
 			{
 				var notch = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'notch', this.notch))));
@@ -1984,9 +1984,9 @@ Graph.handleFactory[mxShapeArrows2StripedArrow.prototype.cst.STRIPED_ARROW] = fu
 			{
 				this.state.style['notch'] = Math.round(100 * Math.max(0, Math.min(bounds.width - parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx)), pt.x - bounds.x))) / 100;
 			});
-	
+
 	handles.push(handle2);
-	
+
 	return handles;
 
 }
@@ -2026,7 +2026,7 @@ mxShapeArrows2JumpInArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2JumpInArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2059,15 +2059,15 @@ Graph.handleFactory[mxShapeArrows2JumpInArrow.prototype.cst.JUMP_IN_ARROW] = fun
 				var arrowHead = Math.max(0, Math.min(bounds.height, parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead))));
 				var dx = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
 				var dy = Math.max(0, Math.min(arrowHead, parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy))));
-		
+
 				return new mxPoint(bounds.x + bounds.width - dx, bounds.y + arrowHead / 2 - dy);
 			}, function(bounds, pt)
 			{
 				this.state.style['dx'] = Math.round(100 * Math.max(0, Math.min(bounds.width, bounds.x + bounds.width - pt.x))) / 100;
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)) / 2, bounds.y + parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)) / 2 - pt.y))) / 100;
-				
+
 			})];
-			
+
 	var handle2 = Graph.createHandle(state, ['arrowHead'], function(bounds)
 			{
 				var dx = Math.max(0, Math.min(bounds.width, parseFloat(mxUtils.getValue(this.state.style, 'dx', this.dx))));
@@ -2078,7 +2078,7 @@ Graph.handleFactory[mxShapeArrows2JumpInArrow.prototype.cst.JUMP_IN_ARROW] = fun
 			{
 				this.state.style['arrowHead'] = Math.round(100 * Math.max(2 * parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy)), Math.min(bounds.height, pt.y - bounds.y))) / 100;
 			});
-	
+
 	handles.push(handle2);
 
 	return handles;
@@ -2119,7 +2119,7 @@ mxShapeArrows2UTurnArrow.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeArrows2UTurnArrow.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -2132,7 +2132,7 @@ mxShapeArrows2UTurnArrow.prototype.paintVertexShape = function(c, x, y, w, h)
 	var dx = (h - arrowHead / 2 + dy) / 2;
 
 	var dx2 = Math.max(0, parseFloat(mxUtils.getValue(this.style, 'dx2', this.dx2)));
-	
+
 	c.begin();
 	c.moveTo(dx, 0);
 	c.lineTo(dx + dx2, arrowHead * 0.5);
@@ -2163,7 +2163,7 @@ Graph.handleFactory[mxShapeArrows2UTurnArrow.prototype.cst.U_TURN_ARROW] = funct
 			}, function(bounds, pt)
 			{
 				this.state.style['dy'] = Math.round(100 * Math.max(0, Math.min(parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)) / 2, bounds.y + parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead)) / 2 - pt.y))) / 100;
-				
+
 			})];
 
 	var handle2 = Graph.createHandle(state, ['dx2'], function(bounds)
@@ -2171,7 +2171,7 @@ Graph.handleFactory[mxShapeArrows2UTurnArrow.prototype.cst.U_TURN_ARROW] = funct
 				var arrowHead = Math.max(0, Math.min(bounds.height, parseFloat(mxUtils.getValue(this.state.style, 'arrowHead', this.arrowHead))));
 				var dy = Math.max(0, Math.min(arrowHead, parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy))));
 				var dx = (bounds.height - arrowHead / 2 + dy) / 2;
-				
+
 				var dx2 = Math.max(0, Math.min(bounds.width - dx, parseFloat(mxUtils.getValue(this.state.style, 'dx2', this.dx2))));
 
 				return new mxPoint(bounds.x + dx + dx2, bounds.y + arrowHead / 2);
@@ -2182,7 +2182,7 @@ Graph.handleFactory[mxShapeArrows2UTurnArrow.prototype.cst.U_TURN_ARROW] = funct
 				var dx = (bounds.height - arrowHead / 2 + dy) / 2;
 				this.state.style['dx2'] = Math.round(100 * Math.max(0, Math.min(Math.max(bounds.width, dx), pt.x - bounds.x - dx))) / 100;
 			});
-	
+
 	handles.push(handle2);
 
 	var handle3 = Graph.createHandle(state, ['arrowHead'], function(bounds)
@@ -2196,7 +2196,7 @@ Graph.handleFactory[mxShapeArrows2UTurnArrow.prototype.cst.U_TURN_ARROW] = funct
 			{
 				this.state.style['arrowHead'] = Math.round(100 * Math.max(2 * parseFloat(mxUtils.getValue(this.state.style, 'dy', this.dy)), Math.min(bounds.height / 2, pt.y - bounds.y))) / 100;
 			});
-	
+
 	handles.push(handle3);
 
 	return handles;

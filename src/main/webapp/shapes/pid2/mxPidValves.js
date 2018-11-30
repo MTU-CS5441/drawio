@@ -109,7 +109,7 @@ mxShapePidValve.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapePidValve.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -132,7 +132,7 @@ mxShapePidValve.prototype.paintVertexShape = function(c, x, y, w, h)
 
 	c.translate(x, y);
 	c.setLineJoin('round');
-	
+
 	this.background(c, x, y, w, h, valveType, actuator, actH);
 	c.setShadow(false);
 	this.foreground(c, x, y, w, h, valveType, actuator, actH);
@@ -277,8 +277,8 @@ mxShapePidValve.prototype.drawActuatorFg = function(c, x, y, w, h, actuator)
 		this.drawBalDiaphActFg(c, w * 0.5, h * 0.6);
 		c.translate(- w * 0.25, - h * 0.1);
 	}
-	else if (actuator === mxShapePidValve.prototype.cst.SINGLE_ACTING || 
-			actuator === mxShapePidValve.prototype.cst.DOUBLE_ACTING || 
+	else if (actuator === mxShapePidValve.prototype.cst.SINGLE_ACTING ||
+			actuator === mxShapePidValve.prototype.cst.DOUBLE_ACTING ||
 			actuator === mxShapePidValve.prototype.cst.PILOT_CYLINDER)
 	{
 		c.translate(w * 0.35, 0);
@@ -303,7 +303,7 @@ mxShapePidValve.prototype.drawDiaphAct = function(c, w, h)
 	c.moveTo(w * 0.5, h * 0.2);
 	c.lineTo(w * 0.5, h);
 	c.stroke();
-	
+
 	c.begin();
 	c.moveTo(0, h * 0.2);
 	c.arcTo(w * 0.6, h * 0.4, 0, 0, 1, w, h * 0.2);
@@ -341,7 +341,7 @@ mxShapePidValve.prototype.drawCircleAct = function(c, w, h, actuator)
 	c.stroke();
 
 	var m = '';
-	
+
 	if (actuator === mxShapePidValve.prototype.cst.MOTOR)
 	{
 		m = 'M';
@@ -377,7 +377,7 @@ mxShapePidValve.prototype.drawSolenoidManResetAct = function(c, w, h)
 {
 	c.rect(0, 0, w * 0.61, h * 0.46);
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w * 0.56, h * 0.6);
 	c.lineTo(w * 0.78, h * 0.5);
@@ -385,7 +385,7 @@ mxShapePidValve.prototype.drawSolenoidManResetAct = function(c, w, h)
 	c.lineTo(w * 0.78, h * 0.7);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w * 0.305, h * 0.46);
 	c.lineTo(w * 0.305, h);
@@ -464,7 +464,7 @@ mxShapePidValve.prototype.drawPilotCylinderActBg = function(c, w, h)
 	c.moveTo(w * 0.46, h * 0.23);
 	c.lineTo(w * 0.77, h * 0.23);
 	c.stroke();
-	
+
 	c.rect(w * 0.77, h * 0.115, w * 0.23, h * 0.23);
 	c.fillAndStroke();
 
@@ -495,7 +495,7 @@ mxShapePidValve.prototype.drawSquareAct = function(c, w, h, actuator)
 	c.stroke();
 
 	var m = '';
-	
+
 	if (actuator === mxShapePidValve.prototype.cst.PILOT)
 	{
 		m = 'P';
@@ -516,7 +516,7 @@ mxShapePidValve.prototype.drawSquareAct = function(c, w, h, actuator)
 	{
 		m = 'K';
 	}
-	
+
 	c.setFontStyle(1);
 	c.setFontFamily('Helvetica');
 	c.setFontSize(Math.min(w, h) * 0.4);
@@ -528,7 +528,7 @@ mxShapePidValve.prototype.drawGateVariantFg = function(c, x, y, w, h, valveType,
 	var defState = mxUtils.getValue(this.style, mxShapePidValve.prototype.cst.DEFAULT_STATE, 'open');
 	var fillColor = mxUtils.getValue(this.style, mxConstants.STYLE_FILLCOLOR, '#ffffff');
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
-	
+
 	if (valveType === mxShapePidValve.prototype.cst.BALL)
 	{
 		c.ellipse(x + w * 0.3, y + actH + (h - actH) * 0.18, w * 0.4, (h - actH) * 0.64);
@@ -560,7 +560,7 @@ mxShapePidValve.prototype.drawAngleVariantFg = function(c, x, y, w, h, valveType
 	var defState = mxUtils.getValue(this.style, mxShapePidValve.prototype.cst.DEFAULT_STATE, 'open');
 	var fillColor = mxUtils.getValue(this.style, mxConstants.STYLE_FILLCOLOR, '#ffffff');
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
-	
+
 	if (valveType === mxShapePidValve.prototype.cst.ANGLE_GLOBE)
 	{
 		if (actuator === 'none')
@@ -763,12 +763,12 @@ mxShapePidValve.prototype.drawThreeWayValve = function(c, x, y, w, h)
 	c.lineTo(w * 0.5, h * 0.375);
 	c.lineTo(0, h * 0.75);
 	c.close();
-	
+
 	c.moveTo(w, 0);
 	c.lineTo(w * 0.5, h * 0.375);
 	c.lineTo(w, h * 0.75);
 	c.close();
-	
+
 	c.moveTo(w * 0.5, h * 0.375);
 	c.lineTo(w * 0.8, h);
 	c.lineTo(w * 0.2, h);
@@ -780,10 +780,10 @@ mxShapePidValve.prototype.drawThreeWayValve = function(c, x, y, w, h)
 
 mxShapePidValve.prototype.drawAngleBlowdownValve = function(c, x, y, w, h)
 {
-	
+
 };
 
-	
+
 mxShapePidValve.prototype.drawButterflyValve = function(c, x, y, w, h, actuator, actH)
 {
 	var fillColor = mxUtils.getValue(this.style, mxConstants.STYLE_FILLCOLOR, '#ffffff');
@@ -801,12 +801,12 @@ mxShapePidValve.prototype.drawButterflyValve = function(c, x, y, w, h, actuator,
 
 	c.moveTo(w * 0.05, hv * 0.05);
 	c.lineTo(w * 0.95, hv * 0.95);
-	
+
 	c.fillAndStroke();
 
 	c.ellipse(w * 0.4, hv * 0.33, w * 0.2, hv * 0.33);
 	c.fillAndStroke();
-	
+
 	c.translate(-x, -y);
 };
 
@@ -836,13 +836,13 @@ mxShapePidValve.prototype.drawCheckValve = function(c, x, y, w, h, actuator, act
 	c.setFillColor(strokeColor);
 	c.fillAndStroke();
 	c.setFillColor(fillColor);
-	
+
 	c.translate(-x, -y);
 };
 
 mxShapePidValve.prototype.isGateVariant = function(valveType)
 {
-	if (valveType === mxShapePidValve.prototype.cst.GATE || 
+	if (valveType === mxShapePidValve.prototype.cst.GATE ||
 			valveType === mxShapePidValve.prototype.cst.BALL ||
 			valveType === mxShapePidValve.prototype.cst.PLUG ||
 			valveType === mxShapePidValve.prototype.cst.NEEDLE ||
@@ -859,7 +859,7 @@ mxShapePidValve.prototype.isGateVariant = function(valveType)
 
 mxShapePidValve.prototype.isAngleVariant = function(valveType)
 {
-	if (valveType === mxShapePidValve.prototype.cst.ANGLE || 
+	if (valveType === mxShapePidValve.prototype.cst.ANGLE ||
 			valveType === mxShapePidValve.prototype.cst.ANGLE_GLOBE ||
 			valveType === mxShapePidValve.prototype.cst.THREE_WAY ||
 			valveType === mxShapePidValve.prototype.cst.ANGLE_BLOWDOWN)
@@ -874,7 +874,7 @@ mxShapePidValve.prototype.isAngleVariant = function(valveType)
 
 mxShapePidValve.prototype.isSquareVariant = function(actType)
 {
-	if (actType === mxShapePidValve.prototype.cst.PILOT || 
+	if (actType === mxShapePidValve.prototype.cst.PILOT ||
 			actType === mxShapePidValve.prototype.cst.SOLENOID ||
 			actType === mxShapePidValve.prototype.cst.POWERED ||
 			actType === mxShapePidValve.prototype.cst.DIGITAL ||
@@ -913,7 +913,7 @@ mxUtils.extend(mxShapePidIntBlockBleedValve, mxShapePidValve);
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapePidIntBlockBleedValve.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -928,7 +928,7 @@ mxShapePidIntBlockBleedValve.prototype.paintVertexShape = function(c, x, y, w, h
 
 	c.translate(x, y);
 	c.setLineJoin('round');
-	
+
 	this.background(c, x, y, w, h, actuator, actH);
 	c.setShadow(false);
 	this.foreground(c, x, y, w, h, actuator, actH);
@@ -976,7 +976,7 @@ mxShapePidIntBlockBleedValve.prototype.drawValveBg = function(c, x, y, w, h)
 	c.moveTo(w * 0.5, h * 0.23);
 	c.lineTo(w * 0.5, h * 0.5);
 	c.stroke();
-	
+
 	c.setFillColor(strokeColor);
 	c.begin();
 	c.moveTo(w * 0.3, h * 0.5);
@@ -984,7 +984,7 @@ mxShapePidIntBlockBleedValve.prototype.drawValveBg = function(c, x, y, w, h)
 	c.lineTo(w * 0.5, h * 0.75);
 	c.close();
 	c.fillAndStroke();
-	
+
 	c.begin();
 	c.moveTo(w * 0.3, h);
 	c.lineTo(w * 0.5, h * 0.75);
@@ -1067,8 +1067,8 @@ mxShapePidIntBlockBleedValve.prototype.drawActuatorFg = function(c, x, y, w, h, 
 		this.drawBalDiaphActFg(c, w * 0.5, h * 0.3524);
 		c.translate(- w * 0.25, - h * 0.0588);
 	}
-	else if (actuator === mxShapePidIntBlockBleedValve.prototype.cst.SINGLE_ACTING || 
-			actuator === mxShapePidIntBlockBleedValve.prototype.cst.DOUBLE_ACTING || 
+	else if (actuator === mxShapePidIntBlockBleedValve.prototype.cst.SINGLE_ACTING ||
+			actuator === mxShapePidIntBlockBleedValve.prototype.cst.DOUBLE_ACTING ||
 			actuator === mxShapePidIntBlockBleedValve.prototype.cst.PILOT_CYLINDER)
 	{
 		c.translate(w * 0.35, 0);
@@ -1102,7 +1102,7 @@ mxUtils.extend(mxShapePidAutoRecircValve, mxShape);
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapePidAutoRecircValve.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1123,7 +1123,7 @@ mxShapePidAutoRecircValve.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w * 0.92, h * 0.92);
 	c.moveTo(w * 0.12, h * 0.122);
 	c.lineTo(w * 0.8738, h * 0.8837);
-	
+
 	c.moveTo(w * 0.5, 0);
 	c.lineTo(w * 0.55, h * 0.05);
 	c.lineTo(w * 0.45, h * 0.15);
@@ -1132,10 +1132,10 @@ mxShapePidAutoRecircValve.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.lineTo(w * 0.55, h * 0.45);
 	c.lineTo(w * 0.49, h * 0.5);
 	c.stroke();
-	
+
 	var fillColor = mxUtils.getValue(this.style, mxConstants.STYLE_FILLCOLOR, '#ffffff');
 	var strokeColor = mxUtils.getValue(this.style, mxConstants.STYLE_STROKECOLOR, '#000000');
-	
+
 	c.begin();
 	c.moveTo(w * 0.8257, h * 0.7695);
 	c.lineTo(w * 0.8797, h * 0.888);

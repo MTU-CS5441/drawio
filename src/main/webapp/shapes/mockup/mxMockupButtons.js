@@ -42,7 +42,7 @@ mxShapeMockupMultiButton.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupMultiButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -90,7 +90,7 @@ mxShapeMockupMultiButton.prototype.background = function(c, x, y, w, h)
 		c.arcTo(w * 0.0372, h * 0.1111, 0, 0, 1, 0, h * 0.9);
 	}
 
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -142,14 +142,14 @@ mxShapeMockupButton.prototype.cst = {
 };
 
 mxShapeMockupButton.prototype.customProperties = [
-	{name: 'buttonStyle', dispName: 'Style', type: 'enum', defVal:'round', 
+	{name: 'buttonStyle', dispName: 'Style', type: 'enum', defVal:'round',
 		enumList: [{val: 'round', dispName: 'Round'}, {val: 'chevron', dispName: 'Chevron'}]
 	}
 ];
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -194,7 +194,7 @@ mxShapeMockupButton.prototype.background = function(c, x, y, w, h)
 		c.arcTo(w * 0.0372, h * 0.1111, 0, 0, 1, 0, h * 0.9);
 	}
 
-	c.close();	
+	c.close();
 	c.fillAndStroke();
 };
 
@@ -242,7 +242,7 @@ mxShapeMockupHorButtonBar.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupHorButtonBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -459,7 +459,7 @@ mxShapeMockupVerButtonBar.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupVerButtonBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -676,7 +676,7 @@ mxShapeMockupOnOffButton.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupOnOffButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -764,7 +764,7 @@ mxShapeMockupRRect.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupRRect.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -805,7 +805,7 @@ mxShapeMockupAnchor.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupAnchor.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -845,7 +845,7 @@ mxShapeMockupTopButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupTopButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -898,7 +898,7 @@ mxShapeMockupBottomButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupBottomButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -951,7 +951,7 @@ mxShapeMockupRightButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupRightButton.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -1004,7 +1004,7 @@ mxShapeMockupLeftButton.prototype.customProperties = [
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupLeftButton.prototype.paintVertexShape = function(c, x, y, w, h)

@@ -1,11 +1,11 @@
 /**
  * Copyright (c) 2006-2018, JGraph Ltd
  * Copyright (c) 2006-2018, Gaudenz Alder
- * 
+ *
  * Replaces Google Realtime with a diff sync algorithm.
- * 
+ *
  * Key differences to Google Realtime API:
- * 
+ *
  * - No presence API (no collaborator list)
  * - Slower updates (must save file first)
  * - No chat / selection via realtime
@@ -15,11 +15,11 @@ FileSync = function(file)
 {
 	this.ui = file.ui;
 	this.file = file;
-	
+
 	this.channelId = this.ui.drive.getChannelId(file.desc);
 	this.lastModified = new Date(file.desc.modifiedDate);
 	this.lastCheckedEtag = this.file.desc.etag;
-	
+
 	// Adds debug buttons
 	if (urlParams['dev'] == '1' && this.ui.buttonContainer != null)
 	{
@@ -33,16 +33,16 @@ FileSync = function(file)
 		this.checkButton.style.lineHeight = '28px';
 		this.checkButton.style.minWidth = '0px';
 		this.checkButton.style.cssFloat = 'left';
-		
+
 		mxUtils.write(this.checkButton, 'Check');
-		
+
 		mxEvent.addListener(this.checkButton, 'click', mxUtils.bind(this, function()
 		{
 			this.checkState(null, null, true);
 		}));
-		
+
 		this.ui.buttonContainer.appendChild(this.checkButton);
-		
+
 		this.syncButton = document.createElement('div');
 		this.syncButton.className = 'geBtn gePrimaryBtn';
 		this.syncButton.style.display = 'inline-block';
@@ -56,15 +56,15 @@ FileSync = function(file)
 		this.syncButton.style.lineHeight = '28px';
 		this.syncButton.style.minWidth = '0px';
 		this.syncButton.style.cssFloat = 'left';
-		
+
 		mxUtils.write(this.syncButton, 'Sync');
-		
+
 		mxEvent.addListener(this.syncButton, 'click', mxUtils.bind(this, function()
 		{
 			this.syncEnabled = !this.syncEnabled;
 			this.syncButton.style.borderColor = (this.syncEnabled) ? '#00ff00' : '#ff0000';
 			this.syncButton.style.background = this.syncButton.style.borderColor;
-			
+
 			if (this.syncEnabled)
 			{
 				this.ui.editor.setStatus('');
@@ -74,9 +74,9 @@ FileSync = function(file)
 
 			this.debug('syncEnabled', this.syncEnabled);
 		}));
-		
+
 		this.ui.buttonContainer.appendChild(this.syncButton);
-		
+
 		this.reloadButton = document.createElement('div');
 		this.reloadButton.className = 'geBtn gePrimaryBtn';
 		this.reloadButton.style.display = 'inline-block';
@@ -88,14 +88,14 @@ FileSync = function(file)
 		this.reloadButton.style.lineHeight = '28px';
 		this.reloadButton.style.minWidth = '0px';
 		this.reloadButton.style.cssFloat = 'left';
-		
+
 		mxUtils.write(this.reloadButton, 'Reload');
-		
+
 		mxEvent.addListener(this.reloadButton, 'click', mxUtils.bind(this, function()
 		{
 			this.reload();
 		}));
-		
+
 		this.ui.buttonContainer.appendChild(this.reloadButton);
 	}
 };
@@ -129,7 +129,7 @@ FileSync.prototype.cacheSize = 1000000;
 FileSync.prototype.syncEnabled = true;
 
 /**
- * Maximum number of retries before showing dialog. 
+ * Maximum number of retries before showing dialog.
  */
 FileSync.prototype.maxConflictRetries = 3;
 
@@ -189,10 +189,10 @@ FileSync.prototype.ignoreDesciptorChanged = false;
  */
 FileSync.prototype.start = function()
 {
-	if (this.channelId != null) 
+	if (this.channelId != null)
 	{
 		var pusher = this.ui.getPusher();
-		
+
 		if (pusher != null)
 		{
 			this.channel = pusher.subscribe(this.channelId);
@@ -200,7 +200,7 @@ FileSync.prototype.start = function()
 	}
 
 	this.installListeners();
-    
+
 	window.setTimeout(mxUtils.bind(this, function()
 	{
 		this.resetUpdateStatusThread();
@@ -228,7 +228,7 @@ FileSync.prototype.updateStatus = function()
 	{
 		// LATER: Write out modified date for more than 2 weeks ago
 		var str = this.ui.timeSince(new Date(this.lastModified));
-		
+
 		if (str == null)
 		{
 			str = mxResources.get('lessThanAMinute');
@@ -240,7 +240,7 @@ FileSync.prototype.updateStatus = function()
 			(this.file.isEditable() ? '' : '<div class="geStatusAlert" style="margin-left:8px;">' +
 			mxUtils.htmlEntities(mxResources.get('readOnly')) + '</div>'));
 		var links = (this.ui.statusContainer != null) ? this.ui.statusContainer.getElementsByTagName('div') : null;
-		
+
 		if (links.length > 0)
 		{
 			mxEvent.addListener(links[0], 'click', mxUtils.bind(this, function()
@@ -248,7 +248,7 @@ FileSync.prototype.updateStatus = function()
 				this.ui.actions.get('revisionHistory').funct();
 			}));
 		}
-		
+
 		this.triggerConsistencyCheck();
 	}
 };
@@ -269,11 +269,11 @@ FileSync.prototype.triggerConsistencyCheck = function()
 		{
 			// TODO: Implement consistency check via hashValue
 //			this.ui.editor.setStatus('Checking consistency...');
-//			
+//
 //			this.checkState(null, null, null, mxUtils.bind(this, function(isCompleted)
 //			{
 //				this.debug('consistency check complete', isCompleted, this.file.desc.etag, new Date());
-//				
+//
 //				if (isCompleted)
 //				{
 //					this.lastConsistencyCheck = new Date().getTime();
@@ -298,7 +298,7 @@ FileSync.prototype.resetUpdateStatusThread = function()
 	{
 		window.clearInterval(this.updateStatusThread);
 	}
-	
+
 	if (this.channel != null)
 	{
 		this.updateStatusThread = window.setInterval(mxUtils.bind(this, function()
@@ -324,7 +324,7 @@ FileSync.prototype.installListeners = function()
 			try
 			{
 				var msg = JSON.parse(data);
-				
+
 				if (msg != null)
 				{
 					if (msg.v != FileSync.PROTOCOL)
@@ -335,17 +335,17 @@ FileSync.prototype.installListeners = function()
 					{
 						// etags in these messages do not have double quotes
 						var etag = msg.etag;
-						
+
 						if (msg.type == 'desc')
 						{
 							this.ui.drive.loadDescriptor(this.file.desc.id, mxUtils.bind(this, function(resp)
 							{
 								console.log('desc changed', etag, resp.etag, this.file.desc.etag);
-								
+
 								if (etag != resp.etag)
 								{
 									// TODO: Descriptor must still be updated
-									this.mergeChanges(resp.etag);	
+									this.mergeChanges(resp.etag);
 								}
 								else if (resp.etag != this.file.desc.etag)
 								{
@@ -374,12 +374,12 @@ FileSync.prototype.installListeners = function()
 			}
 		}
 	});
-    
+
 	if (this.channel != null)
     {
     	this.channel.bind('changed', this.changeListener);
     }
-    
+
     // Sends notifications when descriptor changes
 	this.descriptorChangedListener = mxUtils.bind(this, function(sender, evt)
 	{
@@ -391,7 +391,7 @@ FileSync.prototype.installListeners = function()
 				'"v":"' + FileSync.PROTOCOL + '"}'));
 	    }
 	});
-	
+
     this.file.addListener('descriptorChanged', this.descriptorChangedListener);
 
     // Listens to online state changes
@@ -399,7 +399,7 @@ FileSync.prototype.installListeners = function()
 	{
 		this.mergeChanges();
 	});
-    
+
 	mxEvent.addListener(window, 'online', this.onlineListener);
 };
 
@@ -413,7 +413,7 @@ FileSync.prototype.showConflictStatus = function(error)
 	{
 		error();
 	}
-	
+
 	this.ui.spinner.stop();
 	this.file.clearAutosave();
 	this.ui.editor.setStatus('<div class="geStatusAlert geBlink" style="cursor:pointer;overflow:hidden;">' +
@@ -421,13 +421,13 @@ FileSync.prototype.showConflictStatus = function(error)
 			' <a href="https://desk.draw.io/support/solutions/articles/16000076743" target="_blank"><img border="0" ' +
 			'title="' + mxUtils.htmlEntities(mxResources.get('help')) + '" valign="bottom" src="' +
 			Editor.helpImage + '"/></a></div>');
-	
+
 	var links = (this.ui.statusContainer != null) ? this.ui.statusContainer.getElementsByTagName('div') : null;
-	
+
 	if (links != null && links.length > 0)
 	{
 		this.inConflictState = true;
-		
+
 		mxEvent.addListener(links[0], 'click', mxUtils.bind(this, function(evt)
 		{
 			if (mxEvent.getSource(evt).nodeName != 'a')
@@ -465,11 +465,11 @@ FileSync.prototype.keyAt = function(key, i)
 FileSync.prototype.encrypt = function(str, key)
 {
     var result = [];
-    
+
     for (var i = 0; i < str.length; i++)
     {
     	var index = this.chars.indexOf(str[i]);
-    	
+
     	if (index < 0)
     	{
     		result.push(str[i]);
@@ -479,7 +479,7 @@ FileSync.prototype.encrypt = function(str, key)
     		result.push(this.charAt(index + this.keyAt(key, i)));
     	}
     }
-    
+
     return result.join('');
 };
 
@@ -489,11 +489,11 @@ FileSync.prototype.encrypt = function(str, key)
 FileSync.prototype.decrypt = function(str, key)
 {
     var result = [];
-    
+
     for (var i = 0; i < str.length; i++)
     {
     	var index = this.chars.indexOf(str[i]);
-    	
+
     	if (index < 0)
     	{
     		result.push(str[i]);
@@ -503,7 +503,7 @@ FileSync.prototype.decrypt = function(str, key)
     		result.push(this.charAt(index - this.keyAt(key, i)));
     	}
     }
-    
+
     return result.join('');
 };
 
@@ -527,7 +527,7 @@ FileSync.prototype.mergeChanges = function(newEtag, success, error)
 			var url = 'https://www.googleapis.com/drive/v2/files/' + this.file.desc.id +
 				'/properties/diff0?fields=value&access_token=' + token;
 			//console.log('diff0 for etags', etag, newEtag);
-			
+
 			if (etag == newEtag)
 			{
 				if (success != null)
@@ -542,12 +542,12 @@ FileSync.prototype.mergeChanges = function(newEtag, success, error)
 					//console.log('diff0', req.getText());
 					var secret = null;
 			    	var key = null;
-	
+
 			    	// Checks if current etag can be reached using first diff
 			    	if (req.getStatus() >= 200 && req.getStatus() <= 299)
 			    	{
 		    			var obj = JSON.parse(req.getText());
-		    		
+
 		    			if (obj.value != null)
 		    			{
 			    			var tokens = obj.value.split(':');
@@ -588,7 +588,7 @@ FileSync.prototype.mergeChanges = function(newEtag, success, error)
 FileSync.prototype.mergeKeys = function(keys, secrets, etag, success, error)
 {
 	//console.log('mergeKeys', keys);
-	
+
 	if (!this.isMergeEnabled())
 	{
 		this.showConflictStatus(error);
@@ -596,7 +596,7 @@ FileSync.prototype.mergeKeys = function(keys, secrets, etag, success, error)
 	else
 	{
 		var cells = this.ui.editor.graph.getSelectionCells();
-	
+
 		mxUtils.get(this.cacheUrl + '?id=' + encodeURIComponent(this.channelId) +
 			'&keys=' + encodeURIComponent(keys.join(';')),
 			mxUtils.bind(this, function(req)
@@ -608,7 +608,7 @@ FileSync.prototype.mergeKeys = function(keys, secrets, etag, success, error)
 			{
 				var result = JSON.parse(req.getText());
 				//console.log('mergeKeys', keys, result);
-				
+
 				try
 				{
 					for (var i = result.length - 1; i >= 0; i--)
@@ -621,7 +621,7 @@ FileSync.prototype.mergeKeys = function(keys, secrets, etag, success, error)
 						else if (result[i].data != null)
 						{
 							var data = result[i].data;
-							
+
 							if (data.length == 0)
 							{
 								temp.push('');
@@ -650,7 +650,7 @@ FileSync.prototype.mergeKeys = function(keys, secrets, etag, success, error)
 			{
 				this.showConflictStatus(error);
 			}
-			
+
 	        /** TBD **/
 //	        if (debugFileSync)
 //			{
@@ -682,8 +682,8 @@ FileSync.prototype.merge = function(patches, etag, success, error)
 	this.ui.editor.graph.container.style.visibility = 'hidden';
 	var prev = this.file.changeListenerEnabled;
 	this.file.changeListenerEnabled = false;
-	
-	
+
+
 	var graph = this.ui.editor.graph;
 	var redraw = graph.cellRenderer.redraw;
 
@@ -695,46 +695,46 @@ FileSync.prototype.merge = function(patches, etag, success, error)
             state.view.graph.scrollCellToVisible(state.cell);
         	state.view.graph.cellEditor.resize();
         }
-        
+
         redraw.apply(this, arguments);
     };
-	
+
 	if (this.snapshot == null)
 	{
 		this.snapshot = this.ui.getPagesForNode(mxUtils.parseXml(this.file.initialData).documentElement);
 	}
-	
+
 	for (var i = 0; i < patches.length; i++)
 	{
 		this.snapshot = this.ui.patchPages(this.snapshot, patches[i]);
 		// FIXME: Check if this has side-effects
 		this.ui.pages = this.ui.patchPages(this.ui.pages, patches[i]);
 	}
-	
+
 	// Checks if current page was removed
 	if (this.ui.pages.length > 0 && mxUtils.indexOf(this.ui.pages, this.ui.currentPage) < 0)
 	{
 		this.ui.selectPage(this.ui.pages[0], true);
 	}
-	
+
 	// Restores previous state
 	graph.cellRenderer.redraw = redraw;
-	
+
 	this.file.changeListenerEnabled = prev;
 	this.ui.editor.graph.container.style.visibility = '';
 	this.ui.editor.graph.sizeDidChange();
 	this.ui.updateTabContainer();
-	
+
 	// Restores history state
 	this.ui.editor.undoManager.history = history;
 	this.ui.editor.undoManager.indexOfNextAdd = nextAdd;
 	this.ui.editor.undoManager.fireEvent(new mxEventObject(mxEvent.CLEAR));
-	
+
 	// Updates the etag in-place
 	this.lastModified = new Date();
 	this.file.desc.etag = etag;
 	console.log('updated etag', patches, etag);
-	
+
 	if (success != null)
 	{
 		success();
@@ -750,12 +750,12 @@ FileSync.prototype.checkState = function(prev, delta, showDialog, success, error
 	{
 		var node = mxUtils.parseXml(data).documentElement;
 		var tmp = this.ui.editor.extractGraphModel(node, true);
-		
+
 		if (tmp != null)
 		{
 			node = tmp;
 		}
-		
+
 		var diagrams = node.getElementsByTagName('diagram');
 
 		// mxfile contains user agent and must be ignored
@@ -765,31 +765,31 @@ FileSync.prototype.checkState = function(prev, delta, showDialog, success, error
 		{
 			var tmp = this.ui.editor.graph.decompress(
 				mxUtils.getTextContent(diagrams[i]));
-			
+
 			if (tmp != null && tmp.length > 0)
 			{
 				var model = mxUtils.parseXml(tmp).documentElement;
-				
+
 				for (var j = 0; j < model.attributes.length; j++)
 				{
 				    var attrib = model.attributes[j];
-				    
+
 				    if (mxUtils.indexOf(this.ui.viewStateWhitelist, attrib.name) < 0)
 				    {
 				    	model.removeAttribute(attrib.name);
 				    }
 				}
-				
+
 				// Dx/dy depend on window size and must be ignored
 				model.removeAttribute('dx');
 				model.removeAttribute('dy');
-				
+
 				var diagram = diagrams[i].cloneNode(false);
 				diagram.appendChild(model);
 				file.appendChild(diagram);
 			}
 		}
-		
+
 		return file;
 	});
 
@@ -797,7 +797,7 @@ FileSync.prototype.checkState = function(prev, delta, showDialog, success, error
 	{
 		var temp = this.ui.getFileData(true);
 		var local = parseFile(temp);
-		
+
 		// Loads content for comparing
 		this.ui.drive.executeRequest(gapi.client.drive.files.get({'fileId': this.file.getId(),
 			'fields': 'etag,downloadUrl', 'supportsTeamDrives': true}), mxUtils.bind(this, function(resp)
@@ -806,17 +806,17 @@ FileSync.prototype.checkState = function(prev, delta, showDialog, success, error
 			{
 				var etag = this.file.desc.etag.replace(/"/g,'').replace(/\//g,'_');
 				var newEtag = resp.etag.replace(/"/g,'').replace(/\//g,'_');
-	
+
 				if (etag == newEtag)
 				{
 					var token = gapi.auth.getToken().access_token;
 					var url = resp.downloadUrl + '&access_token=' + token;
-		
+
 					this.ui.loadUrl(url, mxUtils.bind(this, function(data)
 					{
 						this.ui.spinner.stop();
 						var remote = parseFile(data);
-	
+
 						if (!remote.isEqualNode(local))
 						{
 					        var data = //'desc:\n' + JSON.stringify(this.file.desc) +
@@ -833,12 +833,12 @@ FileSync.prototype.checkState = function(prev, delta, showDialog, success, error
 					        else
 					        {
 						        console.error('conflict' + data);
-		
+
 					        	if (this.checkButton != null)
 					        	{
 					        		this.checkButton.style.background = (showDialog) ? '' : 'red';
 					        	}
-					        	
+
 						        if (showDialog)
 						        {
 									this.ignoreChanges = true;
@@ -867,7 +867,7 @@ FileSync.prototype.checkState = function(prev, delta, showDialog, success, error
 					        	{
 					        		this.checkButton.style.background = '';
 					        	}
-								
+
 								if (showDialog)
 						        {
 									this.ui.alert('Consistent');
@@ -879,12 +879,12 @@ FileSync.prototype.checkState = function(prev, delta, showDialog, success, error
 				else
 				{
 					this.ui.spinner.stop();
-					
+
 					if (success != null)
 			        {
 						success(false);
 			        }
-					
+
 					console.log('state not checked due to pending update',
 						etag, newEtag, parseFile(this.ui.getFileData()));
 				}
@@ -892,7 +892,7 @@ FileSync.prototype.checkState = function(prev, delta, showDialog, success, error
 			else
 			{
 				this.ui.spinner.stop();
-				
+
 				if (success != null)
 		        {
 					success(false);
@@ -909,7 +909,7 @@ FileSync.prototype.checkState = function(prev, delta, showDialog, success, error
 FileSync.prototype.createDiffLookup = function(props)
 {
 	var diffs = {};
-	
+
 	// Generate lookup to iterate in order
 	if (props != null)
 	{
@@ -921,7 +921,7 @@ FileSync.prototype.createDiffLookup = function(props)
 			}
 		}
 	}
-	
+
 	return diffs;
 };
 
@@ -933,17 +933,17 @@ FileSync.prototype.findDiffs = function(diffs, etag)
 	var found = false;
 	var secrets = [];
 	var keys = [];
-	
+
 	// Generate list of keys to reach current etag and secrets
 	// to decrypt compressed diffs received from cache
 	for (var i = 0; i < this.maxDiffs && !found; i++)
 	{
 		var diff = diffs['diff' + i];
-		
+
 		if (diff != null)
 		{
 			var tokens = diff.split(':');
-			
+
 			if (tokens.length >= 3)
 			{
 				found = tokens[1] == etag;
@@ -958,7 +958,7 @@ FileSync.prototype.findDiffs = function(diffs, etag)
 	}
 
 	//console.log('findDiffs', diffs, etag, keys, secrets, found);
-	
+
 	return (found) ? {keys: keys, secrets: secrets} : null;
 };
 
@@ -980,15 +980,15 @@ FileSync.prototype.loadProperties = function(success, error)
 			{
 				var etag = this.file.desc.etag.replace(/"/g,'').replace(/\//g,'_');
 				var newEtag = resp.etag.replace(/"/g,'').replace(/\//g,'_');
-				
+
 				if (etag != newEtag)
 				{
 					//console.log('properties loaded', resp, etag, newEtag, success);
-	
+
 					var result = (this.channelId != null) ?
 						this.findDiffs(this.createDiffLookup(
 						resp.properties), etag) : null;
-					
+
 					if (result != null)
 					{
 						this.mergeKeys(result.keys, result.secrets, resp.etag, success, error);
@@ -1021,7 +1021,7 @@ FileSync.prototype.createProperties = function(cacheId, secret)
 	var etag = this.file.desc.etag.replace(/"/g,'').replace(/\//g,'_');
 	var props = [{'key': 'diff0', 'value': (cacheId != null) ?
 		(cacheId + ':' + etag + ':' + secret + ':' + secs) : null}];
-	
+
 	if (this.file.desc.properties != null)
 	{
 		for (var i = 0; i < this.file.desc.properties.length; i++)
@@ -1029,11 +1029,11 @@ FileSync.prototype.createProperties = function(cacheId, secret)
 			if (this.file.desc.properties[i].key.substring(0, 4) == 'diff')
 			{
 				var index = parseInt(this.file.desc.properties[i].key.substring(4)) + 1;
-				
+
 				if (index < this.maxDiffs)
 				{
 					var tokens = this.file.desc.properties[i].value.split(':');
-					
+
 					// Removes expired entries or all entries if diff-chain would be broken
 					props.push({'key': 'diff' + index, 'value': (tokens.length > 3 &&
 						secs - parseInt(tokens[3]) < this.cacheExpiry && cacheId != null) ?
@@ -1041,7 +1041,7 @@ FileSync.prototype.createProperties = function(cacheId, secret)
 				}
 			}
 		}
-		
+
 		// Creates a sync channel ID if one does not yet exist.
 		if (this.channelId == null)
 		{
@@ -1062,11 +1062,11 @@ FileSync.prototype.fileSaved = function(cacheId, secret, data)
 	this.conflictRetryCounter = 0;
 
 //	var chan = this.ui.drive.getChannelId(file.desc);
-//	
-//	if (this.channelId != chan && chan != null) 
+//
+//	if (this.channelId != chan && chan != null)
 //	{
 //		var pusher = this.ui.getPusher();
-//		
+//
 //		if (pusher != null)
 //		{
 //			if (this.channel != null)
@@ -1075,24 +1075,24 @@ FileSync.prototype.fileSaved = function(cacheId, secret, data)
 //				{
 //					this.channel.unbind('changed', this.changeListener);
 //				}
-//				
-//				if (this.channelId != null) 
+//
+//				if (this.channelId != null)
 //				{
 //					pusher.unsubscribe(this.channelId);
-//				}	
+//				}
 //			}
-//			
+//
 //			console.log('resubscribed to', chan);
 //			this.channelId = chan;
 //			this.channel = pusher.subscribe(this.channelId);
-//			
+//
 //			if (this.channel != null)
 //		    {
 //		    	this.channel.bind('changed', this.changeListener);
 //		    }
 //		}
 //	}
-	
+
 	if (this.channel != null)
 	{
 		if (this.syncEnabled && this.channelId != null)
@@ -1103,7 +1103,7 @@ FileSync.prototype.fileSaved = function(cacheId, secret, data)
 			{
 				this.snapshot = this.ui.getPagesForNode(mxUtils.parseXml(this.file.initialData).documentElement);
 			}
-			
+
 			// Compute delta between initial version and saved version
 			var pages = this.ui.getPagesForNode(mxUtils.parseXml(data).documentElement);
 			var delta = JSON.stringify(this.ui.diffPages(this.snapshot, pages));
@@ -1120,7 +1120,7 @@ FileSync.prototype.fileSaved = function(cacheId, secret, data)
 				'filesize', data.length, 'delta', delta, 'etag',
 				this.file.desc.etag);
 		}
-		
+
 		// Triggers autosave
 		if (this.file.isModified())
 		{
@@ -1139,7 +1139,7 @@ FileSync.prototype.fileSaved = function(cacheId, secret, data)
 FileSync.prototype.fileConflict = function(success, error)
 {
 	//console.log('fileConflict', this.conflictRetryCounter);
-	
+
 	// Workaround for broken if-match header (ie same etag results in conflict)
 	this.ui.drive.executeRequest(gapi.client.drive.files.get({'fileId': this.file.getId(),
 		'fields': 'etag', 'supportsTeamDrives': true}), mxUtils.bind(this, function(resp)
@@ -1164,7 +1164,7 @@ FileSync.prototype.fileConflict = function(success, error)
 					success();
 				}
 			});
-			
+
 			// Handles special case where etag is stale in drive which means it is processing a save
 			if (etag == currentEtag && this.conflictRetryCounter < this.maxConflictRetries)
 			{
@@ -1190,12 +1190,12 @@ FileSync.prototype.fileConflict = function(success, error)
 FileSync.prototype.debug = function()
 {
 	var args = ['FileSync'];
-	
+
 	for (var i = 0; i < arguments.length; i++)
     {
 		args.push(arguments[i]);
     }
-    
+
 	console.log.apply(console, args);
 };
 
@@ -1209,16 +1209,16 @@ FileSync.prototype.destroy = function(unloading)
 		this.channel.unbind('changed', this.changeListener);
 		this.changeListener = null;
 	}
-	
-	if ( this.channel != null && this.channelId != null) 
+
+	if ( this.channel != null && this.channelId != null)
 	{
 		var pusher = this.ui.getPusher();
-		
+
 		if (pusher != null)
 		{
 			pusher.unsubscribe(this.channelId);
 		}
-		
+
 		this.channel = null;
 	}
 
@@ -1227,19 +1227,19 @@ FileSync.prototype.destroy = function(unloading)
 		this.file.removeListener(this.descriptorChangedListener);
 		this.descriptorChangedListener = null;
 	}
-	
+
 	if (this.updateStatusThread != null)
 	{
 		window.clearInterval(this.updateStatusThread);
 		this.updateStatusThread = null;
 	}
-	
+
 	if (this.onlineListener != null)
 	{
 		mxEvent.removeListener(window, 'online', this.onlineListener);
 		this.onlineListener = null;
 	}
-	
+
 	if (this.checkButton != null && this.checkButton.parentNode != null)
 	{
 		this.checkButton.parentNode.removeChild(this.checkButton);
@@ -1251,7 +1251,7 @@ FileSync.prototype.destroy = function(unloading)
 		this.syncButton.parentNode.removeChild(this.syncButton);
 		this.syncButton = null;
 	}
-	
+
 	if (this.reloadButton != null && this.reloadButton.parentNode != null)
 	{
 		this.reloadButton.parentNode.removeChild(this.reloadButton);

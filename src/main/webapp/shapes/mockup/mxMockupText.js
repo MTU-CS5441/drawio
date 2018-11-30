@@ -32,7 +32,7 @@ mxShapeMockupLink.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupLink.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -90,7 +90,7 @@ mxShapeMockupLinkBar.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupLinkBar.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -305,7 +305,7 @@ mxShapeMockupCallout.prototype.customProperties = [
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupCallout.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -326,7 +326,7 @@ mxShapeMockupCallout.prototype.paintVertexShape = function(c, x, y, w, h)
 	c.translate(x, y);
 	c.setFontSize(textSize);
 	c.setFontColor(textColor);
-	var callH = textSize * 1.5; 
+	var callH = textSize * 1.5;
 
 	if (callDir === mxShapeMockupCallout.prototype.cst.DIR_NW)
 	{
@@ -486,7 +486,7 @@ mxShapeMockupStickyNote.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupStickyNote.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -571,7 +571,7 @@ mxShapeMockupBulletedList.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupBulletedList.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -606,19 +606,19 @@ mxShapeMockupBulletedList.prototype.foreground = function(c, w, h)
 
 		if (bulletStyle === mxShapeMockupBulletedList.prototype.cst.STYLE_NUM)
 		{
-			currText = (i + 1) + ') ' + mainText[i]; 
+			currText = (i + 1) + ') ' + mainText[i];
 		}
 		else if (bulletStyle === mxShapeMockupBulletedList.prototype.cst.STYLE_HYPHEN)
 		{
-			currText = '- ' + mainText[i]; 
+			currText = '- ' + mainText[i];
 		}
 		else if(bulletStyle === mxShapeMockupBulletedList.prototype.cst.STYLE_DOT)
 		{
-			currText = String.fromCharCode(8226) + ' ' + mainText[i]; 
+			currText = String.fromCharCode(8226) + ' ' + mainText[i];
 		}
 		else
 		{
-			currText = '  ' + mainText[i]; 
+			currText = '  ' + mainText[i];
 		}
 
 		c.text(10, i * fontSize * 1.5 + fontSize * 0.75, 0, 0, currText, mxConstants.ALIGN_LEFT, mxConstants.ALIGN_MIDDLE, 0, null, 0, 0, 0);
@@ -656,7 +656,7 @@ mxShapeMockupTextBox.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupTextBox.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -719,7 +719,7 @@ mxShapeMockupCaptcha.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupCaptcha.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -801,7 +801,7 @@ mxShapeMockupAlphanumeric.prototype.cst = {
 
 /**
  * Function: paintVertexShape
- * 
+ *
  * Paints the vertex shape.
  */
 mxShapeMockupAlphanumeric.prototype.paintVertexShape = function(c, x, y, w, h)
@@ -851,7 +851,7 @@ mxShapeMockupTextRRect.prototype.cst = {
 
 /**
 * Function: paintVertexShape
-* 
+*
 * Paints the vertex shape.
 */
 mxShapeMockupTextRRect.prototype.paintVertexShape = function(c, x, y, w, h)
