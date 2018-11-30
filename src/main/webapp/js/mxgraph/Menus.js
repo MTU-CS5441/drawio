@@ -30,7 +30,7 @@ Menus.prototype.defaultFontSize = '12';
 /**
  * Sets the default font size.
  */
-Menus.prototype.defaultMenuItems = ['file', 'edit', 'view', 'arrange', 'extras', 'help', 'exampleMenu'];
+Menus.prototype.defaultMenuItems = ['file', 'edit', 'view', 'arrange', 'extras', 'peers', 'help'];
 
 /**
  * Adds the label menu items to the given menu and parent.
@@ -487,9 +487,9 @@ Menus.prototype.init = function()
 	{
 		this.addMenuItems(menu, ['help', '-', 'about']);
 	})));
-	this.put('exampleMenu', new Menu(mxUtils.bind(this, function(menu, parent)
+	this.put('peers', new Menu(mxUtils.bind(this, function(menu, parent)
 	{
-		this.addMenuItems(menu, ['-']);
+		this.addMenuItems(menu, ['editPeerIPs']);
 	})));
 };
 

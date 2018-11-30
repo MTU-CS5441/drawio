@@ -739,4 +739,5 @@ venndiagrams=Venn Diagrams
 webEmailOrOther=Web, email or any other internet address
 webLink=Web Link
 wireframes=Wireframes
-exampleMenu=Example
+peers=Peers
+editPeerIPs=Edit Peer IPs
