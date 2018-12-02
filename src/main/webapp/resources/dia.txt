@@ -740,4 +740,5 @@ webEmailOrOther=Web, email or any other internet address
 webLink=Web Link
 wireframes=Wireframes
 peers=Peers
-editPeerIPs=Edit Peer IPs
+editPeerIDs=Edit Peer Ids
+sendDataToPeers=Send Data to Peers

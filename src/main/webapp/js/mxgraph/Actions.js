@@ -77,9 +77,9 @@ Actions.prototype.init = function()
 	this.addAction('preview', function() { mxUtils.show(graph, null, 10, 10); });
 
 	// Example Actions
-	this.addAction('editPeerIPs', function()
+	this.addAction('editPeerIDs', function()
 	{
-		var dlg = new EditPeerIPsDialog(ui);
+		var dlg = new EditPeerIDsDialog(ui);
 		ui.showDialog(dlg.container, 620, 420, true, false);
 		dlg.init();
 	});

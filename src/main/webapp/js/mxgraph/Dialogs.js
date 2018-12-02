@@ -844,10 +844,10 @@ EditDiagramDialog.showNewWindowOption = true;
 /**
  * Constructs a new edit file dialog.
  */
-var EditPeerIPsDialog = function(editorUi)
+var EditPeerIDsDialog = function(editorUi)
 {
 	var div = document.createElement('div');
-	div.style.textAlign = 'left';
+	div.style.textAlign = 'right';
 	var textarea = document.createElement('textarea');
 	textarea.setAttribute('wrap', 'off');
 	textarea.setAttribute('spellcheck', 'false');
@@ -862,8 +862,8 @@ var EditPeerIPsDialog = function(editorUi)
 
 	var i;
 	var ips = "";
-	for (i = 0; i < EditPeerIPsDialog.peerIPs.length; i++) {
-		ips += EditPeerIPsDialog.peerIPs[i] + "\n";
+	for (i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
+		ips += EditPeerIDsDialog.peerIDs[i] + "\n";
 	}
 
 	textarea.value = ips;
@@ -888,13 +888,32 @@ var EditPeerIPsDialog = function(editorUi)
 
 	var okBtn = mxUtils.button(mxResources.get('ok'), function()
 	{
-		EditPeerIPsDialog.peerIPs = mxUtils.trim(textarea.value).split("\n");
+		EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
 
 		editorUi.hideDialog();
 
 	});
 	okBtn.className = 'geBtn gePrimaryBtn';
 	div.appendChild(okBtn);
+
+	var sendBtn = mxUtils.button(mxResources.get('sendDataToPeers'), function()
+	{
+		EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
+		var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
+
+		for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
+			alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
+			var conn = EditPeerIDsDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
+
+			conn.on('open', function () {
+				alert("Sending '" + xml + "'");
+				conn.send(xml);
+			});
+		}
+
+	});
+	sendBtn.className = 'geBtn';
+	div.appendChild(sendBtn);
 
 	if (!editorUi.editor.cancelFirst)
 	{
@@ -904,7 +923,8 @@ var EditPeerIPsDialog = function(editorUi)
 	this.container = div;
 };
 
-EditPeerIPsDialog.peerIPs = new Array();
+EditPeerIDsDialog.peerIDs = new Array();
+EditPeerIDsDialog.peer = new Peer('peer1', {host: '141.219.195.144', port: 9111, path: '/'});
 
 /**
  * Constructs a new export dialog.
