@@ -25,7 +25,8 @@
   "dependencies": {
     "commander": "^2.15.1",
     "electron-log": "^2.2.14",
-    "paxos": "^13.0.1"
+    "paxos": "^13.0.1",
+    "peerjs": "^0.3.16"
   },
   "devDependencies": {
     "electron": "^2.0.14"
