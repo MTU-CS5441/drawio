@@ -742,3 +742,7 @@ wireframes=Wireframes
 peers=Peers
 editPeerIDs=Edit Peer Ids
 sendDataToPeers=Send Data to Peers
+editPeerConfig=Edit Peer Server Config
+peerID=Peer ID
+serverIP=Server IP
+serverPort=Server Port

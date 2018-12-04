@@ -76,10 +76,17 @@ Actions.prototype.init = function()
 	this.addAction('print...', function() { ui.showDialog(new PrintDialog(ui).container, 300, 180, true, true); }, null, 'sprite-print', Editor.ctrlKey + '+P');
 	this.addAction('preview', function() { mxUtils.show(graph, null, 10, 10); });
 
-	// Example Actions
+	// Peer Actions
 	this.addAction('editPeerIDs', function()
 	{
 		var dlg = new EditPeerIDsDialog(ui);
+		ui.showDialog(dlg.container, 620, 420, true, false);
+		dlg.init();
+	});
+
+	this.addAction('editPeerConfig', function()
+	{
+		var dlg = new PeerConfigDialog(ui);
 		ui.showDialog(dlg.container, 620, 420, true, false);
 		dlg.init();
 	});

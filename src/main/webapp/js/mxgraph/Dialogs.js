@@ -841,9 +841,122 @@ var EditDiagramDialog = function(editorUi)
  */
 EditDiagramDialog.showNewWindowOption = true;
 
-/**
- * Constructs a new edit file dialog.
- */
+var PeerConfigDialog = function(editorUi)
+{
+	var div = document.createElement('div');
+	div.style.textAlign = 'right';
+
+	var row, td;
+
+	var table = document.createElement('table');
+	var tbody = document.createElement('tbody');
+	table.style.cellPadding = '4px';
+
+	row = document.createElement('tr');
+	td = document.createElement('td');
+	mxUtils.write(td, mxResources.get('peerID'));
+	row.appendChild(td);
+	td = document.createElement('td');
+	var inputPeerId = document.createElement("input");
+	inputPeerId.setAttribute('type', 'text');
+	td.append(inputPeerId);
+	row.appendChild(td);
+	tbody.appendChild(row);
+
+	row = document.createElement('tr');
+	td = document.createElement('td');
+	mxUtils.write(td, mxResources.get('serverIP'));
+	row.appendChild(td);
+	td = document.createElement('td');
+	var inputServerIP = document.createElement("input");
+	inputServerIP.setAttribute('type', 'text');
+	td.append(inputServerIP);
+	row.appendChild(td);
+	tbody.appendChild(row);
+
+	row = document.createElement('tr');
+	td = document.createElement('td');
+	mxUtils.write(td, mxResources.get('serverPort'));
+	row.appendChild(td);
+	td = document.createElement('td');
+	var inputServerPort = document.createElement("input");
+	inputServerPort.setAttribute('type', 'text');
+	td.append(inputServerPort);
+	row.appendChild(td);
+	tbody.appendChild(row);
+
+	table.appendChild(tbody);
+	div.appendChild(table);
+
+	this.init = function()
+	{
+		inputPeerId.focus();
+	};
+
+
+	var cancelBtn = mxUtils.button(mxResources.get('cancel'), function()
+	{
+		editorUi.hideDialog();
+	});
+	cancelBtn.className = 'geBtn';
+
+	if (editorUi.editor.cancelFirst)
+	{
+		div.appendChild(cancelBtn);
+	}
+
+	var okBtn = mxUtils.button(mxResources.get('ok'), function()
+	{
+		var peerID = mxUtils.trim(inputPeerId.value);
+		var serverIP = mxUtils.trim(inputServerIP.value);
+		var serverPort = mxUtils.trim(inputServerPort.value);
+
+		alert("peerID " + peerID + " serverIP " + serverIP + " serverPort " + serverPort);
+
+		if(PeerConfigDialog.peer != null) {
+			PeerConfigDialog.peer.destroy();
+		}
+
+		PeerConfigDialog.peer = new Peer(peerID, {host: serverIP, port: serverPort, path: '/'});
+		PeerConfigDialog.peer.on('connection', function(conn) {
+			conn.on('open', function() {
+				conn.on('data', function(data) {
+					editorUi.editor.graph.model.beginUpdate();
+					try
+					{
+						editorUi.editor.setGraphXml(mxUtils.parseXml(data).documentElement);
+						// LATER: Why is hideDialog between begin-/endUpdate faster?
+					}
+					catch (e)
+					{
+						error = e;
+					}
+					finally
+					{
+						editorUi.editor.graph.model.endUpdate();
+					}
+				});
+			});
+		});
+
+		editorUi.hideDialog();
+
+	});
+	okBtn.className = 'geBtn gePrimaryBtn';
+	div.appendChild(okBtn);
+
+	if (!editorUi.editor.cancelFirst)
+	{
+		div.appendChild(cancelBtn);
+	}
+
+	this.container = div;
+};
+
+PeerConfigDialog.peerIDs = new Array();
+PeerConfigDialog.peer = null;//new Peer('peer1', {host: '141.219.195.86', port: 9111, path: '/'});
+
+
 var EditPeerIDsDialog = function(editorUi)
 {
 	var div = document.createElement('div');
@@ -898,17 +1011,21 @@ var EditPeerIDsDialog = function(editorUi)
 
 	var sendBtn = mxUtils.button(mxResources.get('sendDataToPeers'), function()
 	{
+		if(PeerConfigDialog.peer == null) {
+			return;
+		}
 		EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
 		var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
 
 		for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
 			alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
-			var conn = EditPeerIDsDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
+			var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
 
 			conn.on('open', function () {
 				alert("Sending '" + xml + "'");
 				conn.send(xml);
 			});
+			conn.close();
 		}
 
 	});
@@ -924,7 +1041,6 @@ var EditPeerIDsDialog = function(editorUi)
 };
 
 EditPeerIDsDialog.peerIDs = new Array();
-EditPeerIDsDialog.peer = new Peer('peer1', {host: '141.219.195.144', port: 9111, path: '/'});
 
 /**
  * Constructs a new export dialog.

@@ -489,7 +489,7 @@ Menus.prototype.init = function()
 	})));
 	this.put('peers', new Menu(mxUtils.bind(this, function(menu, parent)
 	{
-		this.addMenuItems(menu, ['editPeerIDs']);
+		this.addMenuItems(menu, ['editPeerConfig','editPeerIDs']);
 	})));
 };
 
