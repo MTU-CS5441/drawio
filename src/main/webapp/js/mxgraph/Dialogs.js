@@ -841,6 +841,10 @@ var EditDiagramDialog = function(editorUi)
  */
 EditDiagramDialog.showNewWindowOption = true;
 
+
+
+var lastXML = null;
+
 var PeerConfigDialog = function(editorUi)
 {
 	var div = document.createElement('div');
@@ -919,12 +923,18 @@ var PeerConfigDialog = function(editorUi)
 
 		PeerConfigDialog.peer = new Peer(peerID, {host: serverIP, port: serverPort, path: '/'});
 		PeerConfigDialog.peer.on('connection', function(conn) {
+			//alert("Connection request");
 			conn.on('open', function() {
+				//alert("Connection opened");
 				conn.on('data', function(data) {
+					alert("Recieving data");
 					editorUi.editor.graph.model.beginUpdate();
 					try
 					{
-						editorUi.editor.setGraphXml(mxUtils.parseXml(data).documentElement);
+						if(data != mxUtils.getPrettyXml(editorUi.editor.getGraphXml())){
+							editorUi.editor.setGraphXml(mxUtils.parseXml(data).documentElement);
+							lastXML = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
+						}
 						// LATER: Why is hideDialog between begin-/endUpdate faster?
 					}
 					catch (e)
@@ -960,7 +970,32 @@ PeerConfigDialog.editor = null;
 
 
 
-PushGraphToPeers.editor = null;
+
+// EditPeerIDsDialog.PushGraphToPeers = function(){
+
+// 	//EditPeerIDsDialog.peerIDs = mxUtils.trim(EditPeerIDsDialog.textarea.value).split("\n");
+// 	//var xml = mxUtils.getPrettyXml(PeerConfigDialog.editor.getGraphXml());
+// 	var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
+// 	//GraphViewer.ui.editor
+
+// 	alert("10: " + xml);
+
+// 	for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
+// 		alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
+// 	}
+
+// 	for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
+// 		alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
+// 		var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
+// 		alert("11");
+// 		conn.on('open', function () {
+// 			alert("Sending '" + xml + "'");
+// 			conn.send(xml);
+// 		});
+// 		conn.close();
+// 		alert("13")
+// 	}
+// };
 
 
 var EditPeerIDsDialog = function(editorUi)
@@ -996,31 +1031,7 @@ var EditPeerIDsDialog = function(editorUi)
 	};
 
 
-	var PushGraphToPeers = function(){
-
-		//EditPeerIDsDialog.peerIDs = mxUtils.trim(EditPeerIDsDialog.textarea.value).split("\n");
-		//var xml = mxUtils.getPrettyXml(PeerConfigDialog.editor.getGraphXml());
-		var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
-		//GraphViewer.ui.editor
-
-		alert("10: " + xml);
-
-		for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
-			alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
-		}
-
-		for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
-			alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
-			var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
-			alert("11");
-			conn.on('open', function () {
-				alert("Sending '" + xml + "'");
-				conn.send(xml);
-			});
-			conn.close();
-			alert("13")
-		}
-	};
+	//var PushGraphToPeers = null;
 
 
 	var cancelBtn = mxUtils.button(mxResources.get('cancel'), function()
@@ -1039,8 +1050,38 @@ var EditPeerIDsDialog = function(editorUi)
 		EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
 		//TODO
 		//mxEvent.addListener(editorUi.editor.graph, 'editingStopped', PushGraphToPeers);
-		PushGraphToPeers.editor = editorUi.editor
-		editorUi.editor.graph.model.addListener(mxEvent.END_EDIT, PushGraphToPeers());
+		//PushGraphToPeers.editor = editorUi.editor
+		editorUi.editor.graph.model.addListener(mxEvent.END_EDIT, function(){
+
+			if(PeerConfigDialog.peer == null) {
+				return;
+			}
+			//EditPeerIDsDialog.peerIDs = mxUtils.trim(EditPeerIDsDialog.textarea.value).split("\n");
+			//var xml = mxUtils.getPrettyXml(PeerConfigDialog.editor.getGraphXml());
+			var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
+			if(xml == lastXML){
+				return;
+			}
+			lastXML = xml;
+			//GraphViewer.ui.editor
+
+			//alert("10: " + xml);
+
+			for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
+				alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
+				var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
+				//alert("11");
+				//alert(EditPeerIDsDialog.peerIDs[i]);
+				//alert(conn);
+				conn.on('open', function () {
+					//alert("Sending '" + xml + "'");
+					conn.send(xml);
+				});
+				conn.close();
+				//alert("13")
+			}
+		}
+		);
 
 		editorUi.hideDialog();
 
@@ -1049,28 +1090,28 @@ var EditPeerIDsDialog = function(editorUi)
 	div.appendChild(okBtn);
 
 	//TODO
-	var sendBtn = mxUtils.button(mxResources.get('sendDataToPeers'), PushGraphToPeers);
+	var sendBtn = mxUtils.button(mxResources.get('sendDataToPeers'), 
 
-	// function()
-	// {
-	// 	if(PeerConfigDialog.peer == null) {
-	// 		return;
-	// 	}
-	// 	EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
-	// 	var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
+		function()
+		{
+			if(PeerConfigDialog.peer == null) {
+				return;
+			}
+			EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
+			var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
 
-	// 	for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
-	// 		alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
-	// 		var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
+			for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
+				alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
+				var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
 
-	// 		conn.on('open', function () {
-	// 			alert("Sending '" + xml + "'");
-	// 			conn.send(xml);
-	// 		});
-	// 		conn.close();
-	// 	}
+				conn.on('open', function () {
+					alert("Sending '" + xml + "'");
+					conn.send(xml);
+				});
+				conn.close();
+			}
 
-	// });
+		});
 	sendBtn.className = 'geBtn';
 	div.appendChild(sendBtn);
 
@@ -1083,6 +1124,11 @@ var EditPeerIDsDialog = function(editorUi)
 };
 
 EditPeerIDsDialog.peerIDs = new Array();
+
+
+
+
+
 
 /**
  * Constructs a new export dialog.
