@@ -5213,7 +5213,7 @@
 			// added to DOM then LaTeX does not work.
 			// This must be fixed to enable client-side export
 			// if math is enabled.
-//			document.body.appendChild(svgRoot);
+			//document.body.appendChild(svgRoot);
 			Editor.MathJaxRender(svgRoot);
 	      
 			window.setTimeout(mxUtils.bind(this, function()
@@ -5221,7 +5221,7 @@
 				MathJax.Hub.Queue(mxUtils.bind(this, function ()
 				{
 					// Removes from DOM
-//					svgRoot.parentNode.removeChild(svgRoot);
+					// svgRoot.parentNode.removeChild(svgRoot);
 					
 					callback();
 				}));
@@ -5408,12 +5408,12 @@
 		}
 
 		// LATER: Click on SVG content to start editing
-//		if (redirect != null)
-//		{
-//			// TODO: Ignore anchor tag source for click event
-//			svgRoot.setAttribute('style', 'cursor:pointer;');
-//			svgRoot.setAttribute('onclick', 'window.location.href=\'' + redirect + '\';'); 
-//		}
+		// if (redirect != null)
+		// {
+		//	// TODO: Ignore anchor tag source for click event
+		//	svgRoot.setAttribute('style', 'cursor:pointer;');
+		// 	svgRoot.setAttribute('onclick', 'window.location.href=\'' + redirect + '\';'); 
+		// }
 
 		if (callback != null)
 		{

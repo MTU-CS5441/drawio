@@ -955,26 +955,12 @@ var PeerConfigDialog = function(editorUi)
 
 PeerConfigDialog.peerIDs = new Array();
 PeerConfigDialog.peer = null;//new Peer('peer1', {host: '141.219.195.86', port: 9111, path: '/'});
+PeerConfigDialog.editor = null;
 
 
-var PushGraphToPeers = function(){
-	if(PeerConfigDialog.peer == null) {
-		return;
-	}
-	EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
-	var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
 
-	for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
-		alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
-		var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
 
-		conn.on('open', function () {
-			alert("Sending '" + xml + "'");
-			conn.send(xml);
-		});
-		conn.close();
-	}
-};
+PushGraphToPeers.editor = null;
 
 
 var EditPeerIDsDialog = function(editorUi)
@@ -993,6 +979,8 @@ var EditPeerIDsDialog = function(editorUi)
 	textarea.style.height = '360px';
 	textarea.style.marginBottom = '16px';
 
+	PeerConfigDialog.editor = editorUi.editor;
+
 	var i;
 	var ips = "";
 	for (i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
@@ -1005,6 +993,33 @@ var EditPeerIDsDialog = function(editorUi)
 	this.init = function()
 	{
 		textarea.focus();
+	};
+
+
+	var PushGraphToPeers = function(){
+
+		//EditPeerIDsDialog.peerIDs = mxUtils.trim(EditPeerIDsDialog.textarea.value).split("\n");
+		//var xml = mxUtils.getPrettyXml(PeerConfigDialog.editor.getGraphXml());
+		var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
+		//GraphViewer.ui.editor
+
+		alert("10: " + xml);
+
+		for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
+			alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
+		}
+
+		for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
+			alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
+			var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
+			alert("11");
+			conn.on('open', function () {
+				alert("Sending '" + xml + "'");
+				conn.send(xml);
+			});
+			conn.close();
+			alert("13")
+		}
 	};
 
 
@@ -1023,7 +1038,10 @@ var EditPeerIDsDialog = function(editorUi)
 	{
 		EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
 		//TODO
-		mxUtils.addListener(editorUi.editor.graph, 'editingStopped', PushGraphToPeers);
+		//mxEvent.addListener(editorUi.editor.graph, 'editingStopped', PushGraphToPeers);
+		PushGraphToPeers.editor = editorUi.editor
+		editorUi.editor.graph.model.addListener(mxEvent.END_EDIT, PushGraphToPeers());
+
 		editorUi.hideDialog();
 
 	});
@@ -2704,6 +2722,7 @@ var LayersWindow = function(editorUi, x, y, w, h)
 	graph.model.addListener(mxEvent.CHANGE, function()
 	{
 		refresh();
+		//TODO
 	});
 
 	graph.selectionModel.addListener(mxEvent.CHANGE, function()
