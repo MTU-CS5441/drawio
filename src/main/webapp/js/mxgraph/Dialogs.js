@@ -957,6 +957,26 @@ PeerConfigDialog.peerIDs = new Array();
 PeerConfigDialog.peer = null;//new Peer('peer1', {host: '141.219.195.86', port: 9111, path: '/'});
 
 
+var PushGraphToPeers = function(){
+	if(PeerConfigDialog.peer == null) {
+		return;
+	}
+	EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
+	var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
+
+	for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
+		alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
+		var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
+
+		conn.on('open', function () {
+			alert("Sending '" + xml + "'");
+			conn.send(xml);
+		});
+		conn.close();
+	}
+};
+
+
 var EditPeerIDsDialog = function(editorUi)
 {
 	var div = document.createElement('div');
@@ -1002,33 +1022,37 @@ var EditPeerIDsDialog = function(editorUi)
 	var okBtn = mxUtils.button(mxResources.get('ok'), function()
 	{
 		EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
-
+		//TODO
+		mxUtils.addListener(graph, 'editingStopped', PushGraphToPeers);
 		editorUi.hideDialog();
 
 	});
 	okBtn.className = 'geBtn gePrimaryBtn';
 	div.appendChild(okBtn);
 
-	var sendBtn = mxUtils.button(mxResources.get('sendDataToPeers'), function()
-	{
-		if(PeerConfigDialog.peer == null) {
-			return;
-		}
-		EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
-		var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
+	//TODO
+	var sendBtn = mxUtils.button(mxResources.get('sendDataToPeers'), PushGraphToPeers);
 
-		for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
-			alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
-			var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
+	// function()
+	// {
+	// 	if(PeerConfigDialog.peer == null) {
+	// 		return;
+	// 	}
+	// 	EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
+	// 	var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
 
-			conn.on('open', function () {
-				alert("Sending '" + xml + "'");
-				conn.send(xml);
-			});
-			conn.close();
-		}
+	// 	for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
+	// 		alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
+	// 		var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
 
-	});
+	// 		conn.on('open', function () {
+	// 			alert("Sending '" + xml + "'");
+	// 			conn.send(xml);
+	// 		});
+	// 		conn.close();
+	// 	}
+
+	// });
 	sendBtn.className = 'geBtn';
 	div.appendChild(sendBtn);
 
