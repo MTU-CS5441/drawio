@@ -87,7 +87,7 @@ Actions.prototype.init = function()
 	this.addAction('editPeerConfig', function()
 	{
 		var dlg = new PeerConfigDialog(ui);
-		ui.showDialog(dlg.container, 620, 420, true, false);
+		ui.showDialog(dlg.container, 350, 170, true, false);
 		dlg.init();
 	});
 

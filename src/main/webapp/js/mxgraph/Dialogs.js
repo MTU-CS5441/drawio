@@ -863,6 +863,7 @@ var PeerConfigDialog = function(editorUi)
 	td = document.createElement('td');
 	var inputPeerId = document.createElement("input");
 	inputPeerId.setAttribute('type', 'text');
+	inputPeerId.setAttribute('value', PeerConfigDialog.peerID);
 	td.append(inputPeerId);
 	row.appendChild(td);
 	tbody.appendChild(row);
@@ -874,6 +875,7 @@ var PeerConfigDialog = function(editorUi)
 	td = document.createElement('td');
 	var inputServerIP = document.createElement("input");
 	inputServerIP.setAttribute('type', 'text');
+	inputServerIP.setAttribute('value', PeerConfigDialog.serverIP);
 	td.append(inputServerIP);
 	row.appendChild(td);
 	tbody.appendChild(row);
@@ -885,6 +887,7 @@ var PeerConfigDialog = function(editorUi)
 	td = document.createElement('td');
 	var inputServerPort = document.createElement("input");
 	inputServerPort.setAttribute('type', 'text');
+	inputServerPort.setAttribute('value', PeerConfigDialog.serverPort);
 	td.append(inputServerPort);
 	row.appendChild(td);
 	tbody.appendChild(row);
@@ -915,7 +918,15 @@ var PeerConfigDialog = function(editorUi)
 		var serverIP = mxUtils.trim(inputServerIP.value);
 		var serverPort = mxUtils.trim(inputServerPort.value);
 
-		alert("peerID " + peerID + " serverIP " + serverIP + " serverPort " + serverPort);
+		if(peerID == PeerConfigDialog.peerID && serverIP == PeerConfigDialog.serverIP && serverPort == PeerConfigDialog.serverPort) {
+			editorUi.hideDialog();
+			return;
+		}
+		alert("new connection");
+		PeerConfigDialog.peerID = peerID
+		PeerConfigDialog.serverIP = serverIP;
+		PeerConfigDialog.serverPort = serverPort;
+		//alert("peerID " + peerID + " serverIP " + serverIP + " serverPort " + serverPort);
 
 		if(PeerConfigDialog.peer != null) {
 			PeerConfigDialog.peer.destroy();
@@ -927,7 +938,6 @@ var PeerConfigDialog = function(editorUi)
 			conn.on('open', function() {
 				//alert("Connection opened");
 				conn.on('data', function(data) {
-					alert("Recieving data");
 					editorUi.editor.graph.model.beginUpdate();
 					try
 					{
@@ -966,6 +976,9 @@ var PeerConfigDialog = function(editorUi)
 PeerConfigDialog.peerIDs = new Array();
 PeerConfigDialog.peer = null;//new Peer('peer1', {host: '141.219.195.86', port: 9111, path: '/'});
 PeerConfigDialog.editor = null;
+PeerConfigDialog.peerID = "";
+PeerConfigDialog.serverIP = "141.219.194.254";
+PeerConfigDialog.serverPort = "9111";
 
 
 
@@ -1068,7 +1081,6 @@ var EditPeerIDsDialog = function(editorUi)
 			//alert("10: " + xml);
 
 			for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
-				alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
 				var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
 				//alert("11");
 				//alert(EditPeerIDsDialog.peerIDs[i]);
@@ -1090,7 +1102,7 @@ var EditPeerIDsDialog = function(editorUi)
 	div.appendChild(okBtn);
 
 	//TODO
-	var sendBtn = mxUtils.button(mxResources.get('sendDataToPeers'), 
+	var sendBtn = mxUtils.button(mxResources.get('sendDataToPeers'),
 
 		function()
 		{
