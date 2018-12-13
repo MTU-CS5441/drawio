@@ -1023,7 +1023,7 @@ var EditPeerIDsDialog = function(editorUi)
 	{
 		EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
 		//TODO
-		mxUtils.addListener(graph, 'editingStopped', PushGraphToPeers);
+		mxUtils.addListener(editorUi.editor.graph, 'editingStopped', PushGraphToPeers);
 		editorUi.hideDialog();
 
 	});
