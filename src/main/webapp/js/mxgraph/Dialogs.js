@@ -922,7 +922,6 @@ var PeerConfigDialog = function(editorUi)
 			editorUi.hideDialog();
 			return;
 		}
-		alert("new connection");
 		PeerConfigDialog.peerID = peerID
 		PeerConfigDialog.serverIP = serverIP;
 		PeerConfigDialog.serverPort = serverPort;
