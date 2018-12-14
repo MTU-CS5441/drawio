@@ -1100,31 +1100,6 @@ var EditPeerIDsDialog = function(editorUi)
 	okBtn.className = 'geBtn gePrimaryBtn';
 	div.appendChild(okBtn);
 
-	//TODO
-	var sendBtn = mxUtils.button(mxResources.get('sendDataToPeers'),
-
-		function()
-		{
-			if(PeerConfigDialog.peer == null) {
-				return;
-			}
-			EditPeerIDsDialog.peerIDs = mxUtils.trim(textarea.value).split("\n");
-			var xml = mxUtils.getPrettyXml(editorUi.editor.getGraphXml());
-
-			for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
-				alert("Connecting to '" + EditPeerIDsDialog.peerIDs[i] + "'");
-				var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
-
-				conn.on('open', function () {
-					alert("Sending '" + xml + "'");
-					conn.send(xml);
-				});
-				conn.close();
-			}
-
-		});
-	sendBtn.className = 'geBtn';
-	div.appendChild(sendBtn);
 
 	if (!editorUi.editor.cancelFirst)
 	{
