@@ -933,9 +933,7 @@ var PeerConfigDialog = function(editorUi)
 
 		PeerConfigDialog.peer = new Peer(peerID, {host: serverIP, port: serverPort, path: '/'});
 		PeerConfigDialog.peer.on('connection', function(conn) {
-			//alert("Connection request");
 			conn.on('open', function() {
-				//alert("Connection opened");
 				conn.on('data', function(data) {
 					editorUi.editor.graph.model.beginUpdate();
 					try
@@ -1080,9 +1078,9 @@ var EditPeerIDsDialog = function(editorUi)
 			//alert("10: " + xml);
 
 			for(i = 0; i < EditPeerIDsDialog.peerIDs.length; i++) {
+        alert(EditPeerIDsDialog.peerIDs[i]);
 				var conn = PeerConfigDialog.peer.connect(EditPeerIDsDialog.peerIDs[i]);
 				//alert("11");
-				//alert(EditPeerIDsDialog.peerIDs[i]);
 				//alert(conn);
 				conn.on('open', function () {
 					//alert("Sending '" + xml + "'");
